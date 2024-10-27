@@ -1,4 +1,4 @@
-'use server';
+import 'server-only';
 
 import { env } from '@/env';
 import { PutObjectCommand } from '@aws-sdk/client-s3';

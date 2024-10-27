@@ -9,11 +9,14 @@ export default async function BillingPage() {
     allPlans = await syncPlans();
   }
 
-  console.log('Billing', allPlans);
-
   return (
     <div>
       <h1>Billing</h1>
+      <div>
+        {allPlans.map((plan) => (
+          <div key={plan.id}>{plan.name}</div>
+        ))}
+      </div>
     </div>
   );
 }

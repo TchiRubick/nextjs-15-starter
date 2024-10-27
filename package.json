@@ -13,8 +13,7 @@
     "format": "prettier --check --ignore-path .gitignore .",
     "format:fix": "prettier --write --ignore-path .gitignore .",
     "typecheck": "tsc --pretty --noEmit",
-    "ui:add": "pnpm dlx shadcn@latest add",
-    "prepare": "husky"
+    "ui:add": "pnpm dlx shadcn@latest add"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.678.0",
@@ -37,6 +36,7 @@
     "nuqs": "^2.0.4",
     "react": "19.0.0-rc-69d4b800-20241021",
     "react-dom": "19.0.0-rc-69d4b800-20241021",
+    "server-only": "^0.0.1",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.23.8"
@@ -50,17 +50,11 @@
     "eslint": "^9.13.0",
     "eslint-config-next": "15.0.1",
     "eslint-config-prettier": "^9.1.0",
-    "husky": "^9.1.6",
     "postcss": "^8",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   },
-  "packageManager": "pnpm@9.12.1+sha512.e5a7e52a4183a02d5931057f7a0dbff9d5e9ce3161e33fa68ae392125b79282a8a8a470a51dfc8a0ed86221442eb2fb57019b0990ed24fab519bf0e1bc5ccfc4",
-  "husky": {
-    "hooks": {
-      "pre-commit": "pnpm run lint && pnpm run format && pnpm run typecheck"
-    }
-  }
+  "packageManager": "pnpm@9.12.1+sha512.e5a7e52a4183a02d5931057f7a0dbff9d5e9ce3161e33fa68ae392125b79282a8a8a470a51dfc8a0ed86221442eb2fb57019b0990ed24fab519bf0e1bc5ccfc4"
 }

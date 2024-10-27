@@ -1,4 +1,4 @@
-'use server';
+import 'server-only';
 
 import { env } from '@/env';
 import {
@@ -35,7 +35,7 @@ export const syncPlans = async () => {
   if (allVariants) {
     for (const v of allVariants) {
       const variant = v.attributes;
-      console.log('variant', variant);
+
       if (variant.status === 'draft' || allVariants.length !== 1) {
         continue;
       }
