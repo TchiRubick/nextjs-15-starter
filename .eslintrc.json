@@ -2,6 +2,17 @@
   "extends": [
     "next/core-web-vitals",
     "next/typescript",
-    "plugin:@tanstack/query/recommended"
-  ]
+    "plugin:@tanstack/query/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ]
+  }
 }

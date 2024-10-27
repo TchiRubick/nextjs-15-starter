@@ -1,13 +1,12 @@
-// app/providers.tsx
-"use client";
+'use client';
 
 import {
   isServer,
   QueryClient,
   QueryClientProvider,
-} from "@tanstack/react-query";
-import { ReactQueryStreamedHydration } from "@tanstack/react-query-next-experimental";
-import { ReactNode } from "react";
+} from '@tanstack/react-query';
+import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental';
+import { ReactNode } from 'react';
 
 const makeQueryClient = () => {
   return new QueryClient({
