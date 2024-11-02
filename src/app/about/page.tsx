@@ -6,8 +6,8 @@ export default async function About() {
   return (
     <main>
       <AboutHero />
-      <section className='flex w-full flex-col items-center justify-center py-10 lg:py-20'>
-        <h4 className='font-regular text-left text-3xl tracking-tighter'>
+      <section className='flex w-full flex-col items-center justify-center py-10 md:items-center md:justify-center lg:py-20'>
+        <h4 className='font-regular text-center text-2xl tracking-tighter md:text-3xl lg:text-4xl'>
           Selon les clients, la description et les photos de cet établissement
           reflètent vraiment la réalité.
         </h4>

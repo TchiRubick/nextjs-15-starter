@@ -104,10 +104,10 @@ export const Header = () => {
             </NavigationMenuList>
           </NavigationMenu>
         </div>
-        <div className='flex lg:justify-center'>
+        <div className='flex px-4 lg:justify-center'>
           <p className='font-semibold'>TWBlocks</p>
         </div>
-        <div className='flex w-full justify-end gap-4'>
+        <div className='flex w-full justify-end gap-4 lg:px-4'>
           <Link href='/contact'>
             <Button variant='ghost' className='hidden md:inline'>
               Contact
@@ -122,7 +122,7 @@ export const Header = () => {
             {isOpen ? <X className='h-5 w-5' /> : <Menu className='h-5 w-5' />}
           </Button>
           {isOpen && (
-            <div className='container absolute right-0 top-20 flex w-full flex-col gap-8 border-t bg-background py-4 shadow-lg'>
+            <div className='container absolute right-0 top-20 flex w-full flex-col gap-8 border-t bg-background p-2 shadow-lg'>
               {navigationItems.map((item) => (
                 <div key={item.title}>
                   <div className='flex flex-col gap-2'>

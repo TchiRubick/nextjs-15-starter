@@ -58,7 +58,7 @@ export const ContactForm = () => {
           </div>
 
           <div className='flex w-full items-center justify-center'>
-            <div className='flex w-full flex-col gap-4 rounded-md border p-8'>
+            <div className='flex w-full flex-col gap-4 rounded-md p-8 md:border'>
               <p>Book a meeting</p>
               <div className='grid w-full items-center gap-1'>
                 <Label htmlFor='name'>Name</Label>
