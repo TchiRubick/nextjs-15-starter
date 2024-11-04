@@ -102,13 +102,13 @@ export const Testimonials = () => {
   }, [api, current]);
 
   return (
-    <div className='w-full py-20 lg:py-40'>
+    <div className='w-full px-4 py-20 lg:py-40'>
       <div className='container mx-auto'>
         <div className='flex flex-col gap-10'>
-          <h2 className='font-regular text-left text-3xl tracking-tighter md:text-5xl lg:max-w-xl'>
+          <h2 className='font-regular text-center text-3xl tracking-tighter md:text-5xl lg:max-w-xl lg:text-left'>
             Ce que les personnes ayant séjourné ici ont adoré
           </h2>
-          <Carousel setApi={setApi} className='w-full'>
+          <Carousel setApi={setApi} className='w-full md:px-44 lg:px-0'>
             <CarouselContent>
               {reviews.map((r) => (
                 <CarouselItem className='lg:basis-1/3' key={r.name}>

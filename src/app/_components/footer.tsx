@@ -54,7 +54,7 @@ export const Footer = () => {
   ];
 
   return (
-    <div className='w-full bg-foreground py-20 text-background lg:py-40'>
+    <div className='w-full bg-foreground px-4 py-20 text-background lg:py-40'>
       <div className='container mx-auto'>
         <div className='grid items-center gap-10 lg:grid-cols-2'>
           <div className='flex flex-col items-start gap-8'>
@@ -78,7 +78,7 @@ export const Footer = () => {
               </div>
             </div>
           </div>
-          <div className='grid items-start gap-10 lg:grid-cols-3'>
+          <div className='grid grid-cols-2 items-start gap-10 md:grid-cols-3'>
             {navigationItems.map((item) => (
               <div
                 key={item.title}

@@ -12,11 +12,22 @@ import {
 import { Menu, MoveRight, X } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
+import { title } from 'process';
 
 export const Header = () => {
   const navigationItems = [
     {
       title: 'Home',
+      href: '/',
+      description: '',
+    },
+    {
+      title: 'Sign in',
+      href: '/',
+      description: '',
+    },
+    {
+      title: 'Get started',
       href: '/',
       description: '',
     },
@@ -53,10 +64,10 @@ export const Header = () => {
 
   return (
     <header className='fixed left-0 top-0 z-40 w-full bg-background'>
-      <div className='container relative mx-auto flex min-h-20 flex-row items-center gap-4 lg:grid lg:grid-cols-3'>
+      <div className='container relative mx-auto flex min-h-10 flex-row items-center gap-4 py-0 lg:grid lg:grid-cols-3 lg:py-5'>
         <div className='hidden flex-row items-center justify-start gap-4 lg:flex'>
           <NavigationMenu className='flex items-start justify-start'>
-            <NavigationMenuList className='flex flex-row justify-start gap-4'>
+            <NavigationMenuList className='flex flex-row justify-start'>
               {navigationItems.map((item) => (
                 <NavigationMenuItem key={item.title}>
                   {item.href ? (
@@ -114,10 +125,12 @@ export const Header = () => {
             </Button>
           </Link>
           <div className='hidden border-r md:inline'></div>
-          <Button variant='outline'>Sign in</Button>
-          <Button>Get started</Button>
+          <div className='hidden gap-2 lg:flex'>
+            <Button variant='outline'>Sign in</Button>
+            <Button>Get started</Button>
+          </div>
         </div>
-        <div className='flex w-12 shrink items-end justify-end lg:hidden'>
+        <div className='flex w-12 shrink items-end justify-end pr-2 lg:hidden'>
           <Button variant='ghost' onClick={() => setOpen(!isOpen)}>
             {isOpen ? <X className='h-5 w-5' /> : <Menu className='h-5 w-5' />}
           </Button>

@@ -48,7 +48,7 @@ const questions = [
 ];
 
 export const FAQ = () => (
-  <div className='w-full py-20 lg:py-40'>
+  <div className='w-full px-4 py-20 lg:px-0 lg:py-40'>
     <div className='container mx-auto'>
       <div className='grid gap-10 lg:grid-cols-2'>
         <div className='flex flex-col gap-10'>

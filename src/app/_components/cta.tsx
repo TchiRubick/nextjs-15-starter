@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 export const CTA = () => (
   <div className='w-full py-20 lg:py-40'>
     <div className='container mx-auto'>
-      <div className='flex flex-col items-center gap-8 rounded-md bg-muted p-4 text-center lg:p-14'>
+      <div className='flex flex-col items-center gap-8 bg-muted p-4 text-center lg:rounded-md lg:p-14'>
         <div>
           <Badge>Get started</Badge>
         </div>

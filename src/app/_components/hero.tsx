@@ -27,7 +27,7 @@ export const Hero = () => {
                 than ever.
               </p>
             </div>
-            <div className='flex flex-col gap-3 sm:flex-row sm:gap-4'>
+            <div className='flex flex-col gap-3 sm:gap-4 lg:flex-row'>
               <Button
                 size='lg'
                 className='gap-2 text-sm sm:gap-4 sm:text-base'
