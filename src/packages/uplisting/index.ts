@@ -196,8 +196,10 @@ const adapter = (values: z.infer<typeof schema>) => {
 };
 
 const schemasSearchInput = z.object({
-  check_in: z.string(),
-  check_out: z.string(),
+  date_range: z.object({
+    from: z.date(),
+    to: z.date(),
+  }),
   min_price: z.number(),
   max_price: z.number(),
 });
@@ -206,9 +208,13 @@ export async function getAvailability(
   search: z.infer<typeof schemasSearchInput>
 ) {
   try {
-    const validatedSearchInput = schemasSearchInput.parse(search);
+    const { date_range, ...rest } = schemasSearchInput.parse(search);
 
-    const params = qs.stringify(validatedSearchInput);
+    const params = qs.stringify({
+      ...rest,
+      check_in: date_range.from.toISOString(),
+      check_out: date_range.to.toISOString(),
+    });
 
     const response = await fetch(
       `${env.UPLISTING_URL}/availability?${params}`,

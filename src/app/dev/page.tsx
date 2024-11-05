@@ -6,8 +6,10 @@ import Image from 'next/image';
 
 export default async function Dev() {
   const availability = await getAvailability({
-    check_in: '2025-01-01',
-    check_out: '2025-01-05',
+    date_range: {
+      from: new Date('2025-01-01'),
+      to: new Date('2025-01-05'),
+    },
     min_price: 20,
     max_price: 200,
   });
