@@ -1,7 +1,8 @@
 'use server';
 
 import { env } from '@/env';
-
+import InternalError from '@/lib/error';
+import qs from 'querystring';
 import { z } from 'zod';
 
 const schemasIncludeAddresses = z.object({
@@ -194,15 +195,39 @@ const adapter = (values: z.infer<typeof schema>) => {
   }));
 };
 
-export async function getAvailability() {
-  const response = await fetch(`${env.UPLISTING_URL}/availability`, {
-    headers: {
-      Authorization: `Basic ${env.UPLISTING_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-  });
+const schemasSearchInput = z.object({
+  check_in: z.string(),
+  check_out: z.string(),
+  min_price: z.number(),
+  max_price: z.number(),
+});
 
-  const validatedResponse = schema.parse(await response.json());
+export async function getAvailability(
+  search: z.infer<typeof schemasSearchInput>
+) {
+  try {
+    const validatedSearchInput = schemasSearchInput.parse(search);
 
-  return adapter(validatedResponse);
+    const params = qs.stringify(validatedSearchInput);
+
+    const response = await fetch(
+      `${env.UPLISTING_URL}/availability?${params}`,
+      {
+        headers: {
+          Authorization: `Basic ${env.UPLISTING_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    const validatedResponse = schema.parse(await response.json());
+
+    return adapter(validatedResponse);
+  } catch (error) {
+    console.error('UPLISTING_ERROR', error);
+    return new InternalError(
+      'Failed to fetch availability from Uplisting',
+      'UPLISTING_ERROR'
+    );
+  }
 }

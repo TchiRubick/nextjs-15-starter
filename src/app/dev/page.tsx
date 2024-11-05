@@ -1,10 +1,21 @@
 'use server';
 
+import InternalError from '@/lib/error';
 import { getAvailability } from '@packages/uplisting';
 import Image from 'next/image';
 
 export default async function Dev() {
-  const availability = await getAvailability();
+  const availability = await getAvailability({
+    check_in: '2025-01-01',
+    check_out: '2025-01-05',
+    min_price: 20,
+    max_price: 200,
+  });
+
+  if (availability instanceof InternalError) {
+    console.error('DEV_ERROR', availability.message);
+    return <div>Error: {availability.message}</div>;
+  }
 
   return (
     <main className='mt-24 flex flex-col items-center justify-center'>

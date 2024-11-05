@@ -25,10 +25,11 @@ export const AboutHero = () => (
             <p className='max-w-xl text-center text-lg leading-relaxed tracking-tight text-muted-foreground lg:text-left'>
               Situé à Bussang, à moins de 37 km du lac de Gérardmer et à 46 km
               de la gare de Belfort, le Refuges des Hauts propose un hébergement
-              avec un accès skis aux pieds. Vous bénéficierez gratuitement d&apos;une
-              connexion Wi-Fi et d&apos;un parking privé. Situé à 40 km du lac
-              Longemer, ce chalet dispose d&apos;un casino et d&apos;un jardin. Il propose
-              des chambres familiales et une aire de pique-nique.
+              avec un accès skis aux pieds. Vous bénéficierez gratuitement
+              d&apos;une connexion Wi-Fi et d&apos;un parking privé. Situé à 40
+              km du lac Longemer, ce chalet dispose d&apos;un casino et
+              d&apos;un jardin. Il propose des chambres familiales et une aire
+              de pique-nique.
             </p>
           </div>
         </div>

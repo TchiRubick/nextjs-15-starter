@@ -27,10 +27,11 @@ export default async function About() {
               Offrant une vue sur la montagne, ce chalet comprend une terrasse,
               un coin salon, une télévision par satellite à écran plat, une
               cuisine entièrement équipée avec un lave-vaisselle et un
-              micro-ondes ainsi qu&apos;une salle de bains privative pourvue d&apos;une
-              douche et d&apos;un sèche-cheveux. Un grille-pain, un réfrigérateur,
-              des plaques de cuisson, une machine à café et une bouilloire sont
-              également fournis. Le linge de lit et les serviettes sont fournis.
+              micro-ondes ainsi qu&apos;une salle de bains privative pourvue
+              d&apos;une douche et d&apos;un sèche-cheveux. Un grille-pain, un
+              réfrigérateur, des plaques de cuisson, une machine à café et une
+              bouilloire sont également fournis. Le linge de lit et les
+              serviettes sont fournis.
             </p>
             <p className='mt-4 max-w-xl text-left text-base leading-relaxed tracking-tight text-muted-foreground'>
               En été, vous pourrez utiliser le barbecue et dîner sur le balcon
@@ -44,8 +45,8 @@ export default async function About() {
               et un local à skis sont également disponibles sur place.
             </p>
             <p className='mt-4 max-w-xl text-left text-base leading-relaxed tracking-tight text-muted-foreground'>
-              L&apos;aéroport le plus proche, celui de Mulhouse-Fribourg, est situé à
-              75 km.
+              L&apos;aéroport le plus proche, celui de Mulhouse-Fribourg, est
+              situé à 75 km.
             </p>
           </div>
           <div className='flex max-w-full justify-center'>

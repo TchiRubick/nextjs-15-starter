@@ -88,6 +88,9 @@ importers:
       nuqs:
         specifier: ^2.0.4
         version: 2.0.4(next@15.0.1(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react@19.0.0-rc-69d4b800-20241021))(react@19.0.0-rc-69d4b800-20241021)
+      qs:
+        specifier: ^6.13.0
+        version: 6.13.0
       radash:
         specifier: ^12.1.0
         version: 12.1.0
@@ -4679,6 +4682,13 @@ packages:
       }
     engines: { node: '>=6' }
 
+  qs@6.13.0:
+    resolution:
+      {
+        integrity: sha512-+38qI9SOr8tfZ4QmJNplMUxqjbe7LKvvZgWdExBOmd+egZTtjLB67Gu0HRX3u/XOq7UU2Nx6nsjvS16Z9uwfpg==,
+      }
+    engines: { node: '>=0.6' }
+
   queue-microtask@1.2.3:
     resolution:
       {
@@ -8485,6 +8495,10 @@ snapshots:
       react-is: 16.13.1
 
   punycode@2.3.1: {}
+
+  qs@6.13.0:
+    dependencies:
+      side-channel: 1.0.6
 
   queue-microtask@1.2.3: {}
 

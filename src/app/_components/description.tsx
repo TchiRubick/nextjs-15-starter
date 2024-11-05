@@ -23,18 +23,20 @@ export const Description = () => (
             <p className='text-base leading-relaxed tracking-tight text-muted-foreground'>
               Situé à Bussang, à moins de 37 km du lac de Gérardmer et à 46 km
               de la gare de Belfort, le Refuges des Hauts propose un hébergement
-              avec un accès skis aux pieds. Vous bénéficierez gratuitement d&apos;une
-              connexion Wi-Fi et d&apos;un parking privé. Situé à 40 km du lac
-              Longemer, ce chalet dispose d&apos;un casino et d&apos;un jardin. Il propose
-              des chambres familiales et une aire de pique-nique.
+              avec un accès skis aux pieds. Vous bénéficierez gratuitement
+              d&apos;une connexion Wi-Fi et d&apos;un parking privé. Situé à 40
+              km du lac Longemer, ce chalet dispose d&apos;un casino et
+              d&apos;un jardin. Il propose des chambres familiales et une aire
+              de pique-nique.
               <br />
               Offrant une vue sur la montagne, ce chalet comprend une terrasse,
               un coin salon, une télévision par satellite à écran plat, une
               cuisine entièrement équipée avec un lave-vaisselle et un
-              micro-ondes ainsi qu&apos;une salle de bains privative pourvue d&apos;une
-              douche et d&apos;un sèche-cheveux. Un grille-pain, un réfrigérateur,
-              des plaques de cuisson, une machine à café et une bouilloire sont
-              également fournis. Le linge de lit et les serviettes sont fournis.
+              micro-ondes ainsi qu&apos;une salle de bains privative pourvue
+              d&apos;une douche et d&apos;un sèche-cheveux. Un grille-pain, un
+              réfrigérateur, des plaques de cuisson, une machine à café et une
+              bouilloire sont également fournis. Le linge de lit et les
+              serviettes sont fournis.
               <br />
               En été, vous pourrez utiliser le barbecue et dîner sur le balcon
               privé.
@@ -45,8 +47,8 @@ export const Description = () => (
               location de matériel de ski, un point de vente de forfaits de ski
               et un local à skis sont également disponibles sur place.
               <br />
-              L&apos;aéroport le plus proche, celui de Mulhouse-Fribourg, est situé à
-              75 km.
+              L&apos;aéroport le plus proche, celui de Mulhouse-Fribourg, est
+              situé à 75 km.
               <br />
               Les couples apprécient particulièrement l&apos;emplacement de cet
               établissement. Ils lui donnent la note de 9,8 pour un séjour à
