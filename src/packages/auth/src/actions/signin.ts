@@ -5,6 +5,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
+import InternalError from '@/lib/error';
 import { getUserByIdentifierEmailUsername } from '@packages/db/models/user';
 import { auth } from '../..';
 
@@ -55,6 +56,7 @@ const verifyPassword = async (
     if (!isValid) throw AUTH_ERRORS.INVALID_CREDENTIALS;
     return isValid;
   } catch (error) {
+    console.error('Password verification error:', error);
     throw AUTH_ERRORS.INVALID_CREDENTIALS;
   }
 };
@@ -111,5 +113,5 @@ export async function signin(input: SigninInput) {
 }
 
 // Optional: Export types and errors for use in components
-export type { SigninInput };
 export { AUTH_ERRORS };
+export type { SigninInput };

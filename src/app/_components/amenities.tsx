@@ -1,4 +1,3 @@
-import { LampContainer } from '@/components/lamp';
 import { Check } from 'lucide-react';
 
 const amenities = [

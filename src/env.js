@@ -15,6 +15,8 @@ export const env = createEnv({
     S3_BUCKET_NAME: z.string(),
     LEMONSQUEEZY_API_KEY: z.string(),
     LEMONSQUEEZY_STORE_ID: z.string(),
+    UPLISTING_API_KEY: z.string(),
+    UPLISTING_URL: z.string().url(),
   },
 
   /**
@@ -39,6 +41,8 @@ export const env = createEnv({
     S3_BUCKET_NAME: process.env.S3_BUCKET_NAME,
     LEMONSQUEEZY_API_KEY: process.env.LEMONSQUEEZY_API_KEY,
     LEMONSQUEEZY_STORE_ID: process.env.LEMONSQUEEZY_STORE_ID,
+    UPLISTING_API_KEY: process.env.UPLISTING_API_KEY,
+    UPLISTING_URL: process.env.UPLISTING_URL,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**

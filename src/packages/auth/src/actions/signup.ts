@@ -5,6 +5,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
+import InternalError from '@/lib/error';
 import {
   createUser,
   getUserByEmail,
@@ -148,5 +149,5 @@ export async function signup(input: SignupInput) {
 }
 
 // Exports
-export type { SignupInput };
 export { SIGNUP_ERRORS };
+export type { SignupInput };

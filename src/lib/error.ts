@@ -8,3 +8,5 @@ class InternalError extends Error {
     this.name = 'InternalError';
   }
 }
+
+export default InternalError;
