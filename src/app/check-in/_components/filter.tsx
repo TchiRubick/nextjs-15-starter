@@ -5,22 +5,35 @@ import { Controller, useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { addDays } from 'date-fns';
-import { useRouter } from 'next/navigation';
-import qs from 'query-string';
+import { useSearchParamState } from '@/hooks/useSearchParamState';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { format } from 'date-fns';
 import { DateRange } from 'react-day-picker';
-import { DatePickerWithRange } from './Date-Picker-With-Range';
+import { z } from 'zod';
+import {
+  defaultFilterParamValidation,
+  filterParamValidation,
+} from '../_validations';
+import { DateRangePicker } from './date-range-picker';
 
-interface DataFilterType {
-  min_price: number;
-  max_price: number;
-  date_range: {
-    from: Date;
-    to: Date;
-  };
-}
+const filterSchema = z.object({
+  min_price: z.coerce.number(),
+  max_price: z.coerce.number(),
+  date_range: z.object({
+    from: z.date(),
+    to: z.date(),
+  }),
+});
+
+type FilterSchema = z.infer<typeof filterSchema>;
 
 export const Filter = () => {
+  const [params, setParams] = useSearchParamState(
+    filterParamValidation,
+    defaultFilterParamValidation
+  );
+
+  console.log(params);
   const {
     register,
     handleSubmit,
@@ -30,19 +43,18 @@ export const Filter = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      min_price: 0,
-      max_price: 0,
+      min_price: params.min_price,
+      max_price: params.max_price,
       date_range: {
-        from: new Date(),
-        to: addDays(new Date(), 1),
+        from: new Date(params.check_in),
+        to: new Date(params.check_out),
       },
     },
     mode: 'onChange',
+    resolver: zodResolver(filterSchema),
   });
 
-  const router = useRouter();
-
-  const onSubmit = (data: DataFilterType) => {
+  const onSubmit = (data: FilterSchema) => {
     if (Number(data.min_price) > Number(data.max_price)) {
       setError('min_price', {
         type: 'manual',
@@ -51,14 +63,12 @@ export const Filter = () => {
       return;
     }
 
-    const params = qs.stringify({
+    setParams({
       min_price: data.min_price,
       max_price: data.max_price,
-      check_in: data.date_range.from.toLocaleDateString(),
-      check_out: data.date_range.to.toLocaleDateString(),
+      check_in: format(data.date_range.from, 'yyyy-MM-dd'),
+      check_out: format(data.date_range.to, 'yyyy-MM-dd'),
     });
-
-    router.push(`/check-in?${params}`);
   };
 
   const handleDateRangeChange = (range: { from: Date; to: Date }) => {
@@ -109,7 +119,7 @@ export const Filter = () => {
             name='date_range'
             control={control}
             render={({ field }) => (
-              <DatePickerWithRange
+              <DateRangePicker
                 value={field.value}
                 onDateRangeChange={
                   handleDateRangeChange as (

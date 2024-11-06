@@ -1,7 +1,7 @@
-import type { z } from 'zod';
-import { useMemo } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import qs from 'querystring';
+import { useMemo } from 'react';
+import type { z } from 'zod';
 
 export const useSearchParamState = <T extends z.ZodRawShape>(
   schemas: z.ZodObject<T>,
@@ -20,7 +20,9 @@ export const useSearchParamState = <T extends z.ZodRawShape>(
   }, [searchParams, defaultValue, schemas]);
 
   const setParamState = (newParamState: z.infer<typeof schemas>) => {
-    router.push(`${pathname}?${qs.stringify(newParamState)}`, {
+    const newParams = qs.stringify(newParamState);
+
+    router.push(`${pathname}?${newParams}`, {
       scroll: false,
     });
   };

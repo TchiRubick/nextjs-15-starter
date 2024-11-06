@@ -237,4 +237,4 @@ export const getAvailability = async (
       'UPLISTING_ERROR'
     );
   }
-}
+};

@@ -14,32 +14,35 @@ import {
 } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
 
-interface DatePickerWithRangeProps {
+interface DateRangePickerProps {
   value: DateRange | undefined;
   onDateRangeChange: (value: DateRange | undefined) => void;
   className?: string;
 }
 
-export function DatePickerWithRange({
+const today = new Date();
+
+export function DateRangePicker({
   className,
   value,
   onDateRangeChange,
-}: DatePickerWithRangeProps) {
+}: DateRangePickerProps) {
   const [date, setDate] = useState<DateRange | undefined>(value);
-  const [count, setCount] = useState<0 | 1>(0);
 
-  const today = new Date();
   const handleDateChange = (newDate: DateRange | undefined) => {
     if (date?.from && newDate?.from) {
       const updatedDate = {
         from: date.from,
-        to: newDate.to
+        to: newDate.to,
       };
 
       if (updatedDate.to && !isSameDay(updatedDate.from, updatedDate.to)) {
         setDate(updatedDate);
         onDateRangeChange(updatedDate);
-      } else if (updatedDate.to && isSameDay(updatedDate.from, updatedDate.to)) {
+      } else if (
+        updatedDate.to &&
+        isSameDay(updatedDate.from, updatedDate.to)
+      ) {
         console.log(
           'The start and end dates must be different. Please select a valid range.'
         );

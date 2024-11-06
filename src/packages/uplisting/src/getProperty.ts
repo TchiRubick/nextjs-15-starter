@@ -190,8 +190,8 @@ const getPhotos = (
   return included
     .filter((item) => ids.includes(item.id) && item.type === 'photos')
     .map((item) => item.attributes) as z.infer<
-      typeof photoSchema
-    >['attributes'][];
+    typeof photoSchema
+  >['attributes'][];
 };
 
 const getAmenities = (
@@ -201,8 +201,8 @@ const getAmenities = (
   return included
     .filter((item) => ids.includes(item.id) && item.type === 'amenities')
     .map((item) => item.attributes) as z.infer<
-      typeof amenitiesSchema
-    >['attributes'][];
+    typeof amenitiesSchema
+  >['attributes'][];
 };
 
 const getMultiUnits = (
@@ -212,8 +212,8 @@ const getMultiUnits = (
   return included
     .filter((item) => ids.includes(item.id) && item.type === 'multi_units')
     .map((item) => item.attributes) as z.infer<
-      typeof multiUnitsSchema
-    >['attributes'][];
+    typeof multiUnitsSchema
+  >['attributes'][];
 };
 
 const getPropertyFees = (
@@ -223,8 +223,8 @@ const getPropertyFees = (
   return included
     .filter((item) => ids.includes(item.id) && item.type === 'property_fees')
     .map((item) => item.attributes) as z.infer<
-      typeof propertyFeesSchema
-    >['attributes'][];
+    typeof propertyFeesSchema
+  >['attributes'][];
 };
 
 const getPropertyTaxes = (
@@ -234,8 +234,8 @@ const getPropertyTaxes = (
   return included
     .filter((item) => ids.includes(item.id) && item.type === 'property_taxes')
     .map((item) => item.attributes) as z.infer<
-      typeof propertyTaxesSchemas
-    >['attributes'][];
+    typeof propertyTaxesSchemas
+  >['attributes'][];
 };
 
 const getPropertyDiscounts = (
@@ -247,8 +247,8 @@ const getPropertyDiscounts = (
       (item) => ids.includes(item.id) && item.type === 'property_discounts'
     )
     .map((item) => item.attributes) as z.infer<
-      typeof propertyDiscountsSchema
-    >['attributes'][];
+    typeof propertyDiscountsSchema
+  >['attributes'][];
 };
 
 const getSuitability = (
