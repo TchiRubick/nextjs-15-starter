@@ -5,12 +5,15 @@ import { Controller, useForm } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
+import { useQueryState } from 'nuqs';
 import { addDays } from 'date-fns';
 import { DatePickerWithRange } from './Date-Picker-With-Range';
 import { DateRange } from 'react-day-picker';
+import { useRouter } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
+import qs from 'querystring';
 
-interface ValuesData {
+interface DataFilterType {
   min_price: number;
   max_price: number;
   date_range: {
@@ -29,43 +32,58 @@ export const Filter = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      min_price: 10,
-      max_price: 20,
+      min_price: 0,
+      max_price: 0,
       date_range: {
         from: new Date(),
         to: addDays(new Date(), 1),
       },
     },
+    mode: 'onChange',
   });
 
-  const [dateRange, setDateRange] = useState({
-    from: new Date(),
-    to: addDays(new Date(), 1),
-  });
+  const router = useRouter();
 
-  const onSubmit = (data: ValuesData) => {
+  // const [, setQuery] = useQueryState('min_price');
+  // const [, setMaxPrice] = useQueryState('max_price');
+  // const [, setFrom] = useQueryState('from');
+  // const [, setTo] = useQueryState('to');
+
+  const handSelectedDateRange = (dateRange: DateRange | undefined) => {
+    if (dateRange) {
+      // setFrom(dateRange.from ? dateRange.from.toLocaleDateString() : '');
+      // setTo(dateRange.to ? dateRange.to.toLocaleDateString() : '');
+    }
+  };
+
+  const onSubmit = (data: DataFilterType) => {
     if (Number(data.min_price) > Number(data.max_price)) {
       setError('min_price', {
         type: 'manual',
-        message: 'Minimum price cannot be greater than maximum price.',
+        message: 'Le prix minimum ne peut pas être supérieur au prix maximum.',
       });
       return;
     }
-    console.log(data);
+
+    const params = qs.stringify({
+      min_price: data.min_price,
+      max_price: data.max_price,
+      check_in: data.date_range.from.toLocaleDateString(),
+      check_out: data.date_range.to.toLocaleDateString(),
+    });
+
+    router.push(`/check-in?${params}`);
   };
 
   const handleDateRangeChange = (range: { from: Date; to: Date }) => {
-    setDateRange(range);
     setValue('date_range', range);
   };
+
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className='flex h-fit space-x-3 pt-12'
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className='flex h-fit space-x-3'>
       <div>
         <Label>
-          Min Price
+          Prix minimum
           <Input
             id='min_price'
             type='number'
@@ -75,13 +93,15 @@ export const Filter = () => {
             })}
           />
           {errors.min_price && (
-            <Label className='text-red-500'>{errors.min_price.message}</Label>
+            <Label className='absolute text-red-500'>
+              {errors.min_price.message}
+            </Label>
           )}
         </Label>
       </div>
       <div>
         <Label>
-          Max Price
+          Prix maximum
           <Input
             type='number'
             {...register('max_price', {
@@ -91,18 +111,20 @@ export const Filter = () => {
           />
         </Label>
         {errors.max_price && (
-          <Label className='text-red-500'>{errors.max_price.message}</Label>
+          <Label className='absolute text-red-500'>
+            {errors.max_price.message}
+          </Label>
         )}
       </div>
       <div>
         <Label>
-          Check-in and Check-out
+          Date d'arrivée - Date de départ
           <Controller
             name='date_range'
             control={control}
             render={({ field }) => (
               <DatePickerWithRange
-                value={dateRange}
+                value={field.value}
                 onDateRangeChange={
                   handleDateRangeChange as (
                     value: DateRange | undefined

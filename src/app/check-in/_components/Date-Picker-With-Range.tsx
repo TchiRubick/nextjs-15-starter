@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/popover';
 
 interface DatePickerWithRangeProps {
-  value?: DateRange | undefined;
+  value: DateRange | undefined;
   onDateRangeChange: (value: DateRange | undefined) => void;
   className?: string;
 }
@@ -54,7 +54,6 @@ export function DatePickerWithRange({
       <Popover>
         <PopoverTrigger asChild>
           <Button
-            id='date'
             variant={'outline'}
             className={cn(
               'w-[300px] justify-start text-left font-normal',
@@ -82,7 +81,7 @@ export function DatePickerWithRange({
             mode='range'
             defaultMonth={date?.from}
             selected={date}
-            onSelect={handleDateChange}
+            onSelect={setDate}
             numberOfMonths={2}
             disabled={{ before: today }}
             fromMonth={today}

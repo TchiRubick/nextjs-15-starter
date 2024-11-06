@@ -35,7 +35,7 @@ export default function RootLayout({
         >
           <Header />
           <NuqsAdapter>
-            <main className='container mx-auto'>{children}</main>
+            <main className='container mx-auto mt-20'>{children}</main>
           </NuqsAdapter>
           <Footer />
         </body>
