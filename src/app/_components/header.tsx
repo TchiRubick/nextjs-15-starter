@@ -23,12 +23,12 @@ export const Header = () => {
     {
       title: 'Sign in',
       href: '/',
-      description: '',
+      style: 'md:hidden inline',
     },
     {
       title: 'Get started',
       href: '/',
-      description: '',
+      style: 'md:hidden inline',
     },
     {
       title: 'À propos',
@@ -71,7 +71,10 @@ export const Header = () => {
                 <NavigationMenuItem key={item.title}>
                   {item.href ? (
                     <>
-                      <NavigationMenuLink href={item.href}>
+                      <NavigationMenuLink
+                        href={item.href}
+                        className={item.style}
+                      >
                         <Button variant='ghost'>{item.title}</Button>
                       </NavigationMenuLink>
                     </>

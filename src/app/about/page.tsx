@@ -18,8 +18,8 @@ export default async function About() {
       <AboutHero />
       <div>
         <h4 className='font-regular text-center text-2xl tracking-tighter md:text-3xl lg:text-4xl'>
-          Selon les clients, la description et les photos de cet établissement
-          reflètent vraiment la réalité.
+          Les clients confirment que la description et les photos reflètent
+          fidèlement la réalité.
         </h4>
         <section className='flex w-full flex-col-reverse items-center justify-center px-4 py-10 lg:py-20 xl:flex-row-reverse'>
           <div className='px-2'>

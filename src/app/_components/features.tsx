@@ -10,6 +10,7 @@ import {
   TreePine,
   Bike,
   Check,
+  CheckCircle,
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -21,6 +22,7 @@ export function Features() {
       description:
         'Un parking gratuit et privé est disponible sur place (sans réservation préalable).',
       items: ['Parking accessible aux personnes à mobilité réduite'],
+      background: '/parking1.jpg',
     },
     {
       icon: <Wifi className='h-6 w-6' />,
@@ -28,6 +30,7 @@ export function Features() {
       description:
         "Connexion Wi-Fi rapide gratuite : 195 Mb/s. Débit adapté au streaming 4K et aux appels vidéo sur plusieurs appareils. Le test de débit a été effectué par l'établissement.",
       items: [],
+      background: '/internet.jpg',
     },
     {
       icon: <Utensils className='h-6 w-6' />,
@@ -46,6 +49,7 @@ export function Features() {
         'Micro-ondes',
         'Réfrigérateur',
       ],
+      background: '/utensils.jpg',
     },
     {
       icon: <Tv className='h-6 w-6' />,
@@ -57,6 +61,7 @@ export function Features() {
         'Radio',
         'Télévision',
       ],
+      background: '/highTech.jpg',
     },
     {
       icon: <BedDouble className='h-6 w-6' />,
@@ -71,6 +76,7 @@ export function Features() {
         'Matériel de repassage',
         'Fer à repasser',
       ],
+      background: '/bedDouble.jpg',
     },
     {
       icon: <TreePine className='h-6 w-6' />,
@@ -86,11 +92,13 @@ export function Features() {
         'Terrasse',
         'Jardin',
       ],
+      background: '/exterior.jpg',
     },
     {
       icon: <Mountain className='h-6 w-6' />,
       title: 'Extérieur/Vues',
       items: ['Vue sur la montagne', 'Vue'],
+      background: '/mountain.jpg',
     },
     {
       icon: <Bike className='h-6 w-6' />,
@@ -108,6 +116,7 @@ export function Features() {
         { name: 'Randonnée', note: "En dehors de l'établissement" },
         { name: 'Ski' },
       ],
+      background: '/activities.jpg',
     },
     {
       icon: <Shield className='h-6 w-6' />,
@@ -118,11 +127,13 @@ export function Features() {
         'Caméras de surveillance dans les parties communes',
         'Détecteurs de fumée',
       ],
+      background: '/s.jpg',
     },
     {
       icon: <Languages className='h-6 w-6' />,
       title: 'Langues parlées',
       items: ['Anglais', 'Espagnol', 'Français'],
+      background: '/f.jpg',
     },
   ];
 
@@ -133,7 +144,14 @@ export function Features() {
       </h2>
       <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
         {amenities.map((amenity, index) => (
-          <Card key={index} className='overflow-hidden'>
+          <Card
+            key={index}
+            className='overflow-hidden hover:scale-105 hover:transition hover:duration-300 hover:ease-in-out'
+            style={{
+              backgroundImage: `url(${amenity.background})`,
+              backgroundSize: 'cover',
+            }}
+          >
             <CardHeader className='bg-primary p-4 text-primary-foreground'>
               <div className='flex items-center gap-3'>
                 {amenity.icon}
@@ -142,15 +160,18 @@ export function Features() {
             </CardHeader>
             <CardContent className='p-4'>
               {amenity.description && (
-                <p className='mb-4 text-sm text-muted-foreground'>
+                <p className='mb-4 rounded-lg bg-slate-50 bg-opacity-80 p-1 text-sm text-muted-foreground'>
                   {amenity.description}
                 </p>
               )}
               <ul className='space-y-2'>
                 {amenity.items.map((item, itemIndex) => (
-                  <li key={itemIndex} className='flex items-start gap-2'>
-                    <Check className='mt-1 h-4 w-4 flex-shrink-0 text-green-500' />
-                    <span className='text-sm'>
+                  <li
+                    key={itemIndex}
+                    className='flex w-fit items-start gap-2 rounded-full bg-slate-500 p-1 opacity-80'
+                  >
+                    <CheckCircle className='mt-1 h-4 w-4 flex-shrink-0 text-green-500' />
+                    <span className='text-sm text-white'>
                       {typeof item === 'string' ? (
                         item
                       ) : (
