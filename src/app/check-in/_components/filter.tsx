@@ -2,16 +2,14 @@
 
 import { Controller, useForm } from 'react-hook-form';
 
+import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
-import { useQueryState } from 'nuqs';
 import { addDays } from 'date-fns';
-import { DatePickerWithRange } from './Date-Picker-With-Range';
-import { DateRange } from 'react-day-picker';
 import { useRouter } from 'next/navigation';
-import { revalidatePath } from 'next/cache';
-import qs from 'querystring';
+import qs from 'query-string';
+import { DateRange } from 'react-day-picker';
+import { DatePickerWithRange } from './Date-Picker-With-Range';
 
 interface DataFilterType {
   min_price: number;
@@ -43,18 +41,6 @@ export const Filter = () => {
   });
 
   const router = useRouter();
-
-  // const [, setQuery] = useQueryState('min_price');
-  // const [, setMaxPrice] = useQueryState('max_price');
-  // const [, setFrom] = useQueryState('from');
-  // const [, setTo] = useQueryState('to');
-
-  const handSelectedDateRange = (dateRange: DateRange | undefined) => {
-    if (dateRange) {
-      // setFrom(dateRange.from ? dateRange.from.toLocaleDateString() : '');
-      // setTo(dateRange.to ? dateRange.to.toLocaleDateString() : '');
-    }
-  };
 
   const onSubmit = (data: DataFilterType) => {
     if (Number(data.min_price) > Number(data.max_price)) {
@@ -118,7 +104,7 @@ export const Filter = () => {
       </div>
       <div>
         <Label>
-          Date d'arrivée - Date de départ
+          Date d&apos;arrivée - Date de départ
           <Controller
             name='date_range'
             control={control}

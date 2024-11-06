@@ -1,11 +1,10 @@
 'use client';
 
-import { HTMLAttributes, useState } from 'react';
-import { addDays, format, isSameDay } from 'date-fns';
+import { format, isSameDay } from 'date-fns';
 import { Calendar as CalendarIcon } from 'lucide-react';
+import { useState } from 'react';
 import { DateRange } from 'react-day-picker';
 
-import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import {
@@ -13,6 +12,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
 
 interface DatePickerWithRangeProps {
   value: DateRange | undefined;
@@ -26,26 +26,27 @@ export function DatePickerWithRange({
   onDateRangeChange,
 }: DatePickerWithRangeProps) {
   const [date, setDate] = useState<DateRange | undefined>(value);
+  const [count, setCount] = useState<0 | 1>(0);
 
   const today = new Date();
-
   const handleDateChange = (newDate: DateRange | undefined) => {
-    if (newDate?.from && newDate?.to && !isSameDay(newDate.from, newDate.to)) {
+    if (date?.from && newDate?.from) {
+      const updatedDate = {
+        from: date.from,
+        to: newDate.to
+      };
+
+      if (updatedDate.to && !isSameDay(updatedDate.from, updatedDate.to)) {
+        setDate(updatedDate);
+        onDateRangeChange(updatedDate);
+      } else if (updatedDate.to && isSameDay(updatedDate.from, updatedDate.to)) {
+        console.log(
+          'The start and end dates must be different. Please select a valid range.'
+        );
+      }
+    } else {
       setDate(newDate);
       onDateRangeChange(newDate);
-      console.log(
-        `Selected range: ${format(newDate.from, 'LLL dd, y')} - ${format(newDate.to, 'LLL dd, y')}`
-      );
-    } else if (
-      newDate?.from &&
-      newDate?.to &&
-      isSameDay(newDate.from, newDate.to)
-    ) {
-      console.log(
-        'The start and end dates must be different. Please select a valid range.'
-      );
-    } else {
-      console.log('Please select both start and end dates.');
     }
   };
 
@@ -81,9 +82,11 @@ export function DatePickerWithRange({
             mode='range'
             defaultMonth={date?.from}
             selected={date}
-            onSelect={setDate}
+            onSelect={handleDateChange}
             numberOfMonths={2}
-            disabled={{ before: today }}
+            disabled={{
+              before: today,
+            }}
             fromMonth={today}
           />
         </PopoverContent>

@@ -1,18 +1,17 @@
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
+  BedDouble,
+  Bike,
   Car,
-  Wifi,
-  Utensils,
-  Tv,
+  CheckCircle,
+  Languages,
   Mountain,
   Shield,
-  Languages,
-  BedDouble,
   TreePine,
-  Bike,
-  Check,
-  CheckCircle,
+  Tv,
+  Utensils,
+  Wifi,
 } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export function Features() {
   const amenities = [

@@ -2,7 +2,8 @@
 
 import { env } from '@/env';
 import InternalError from '@/lib/error';
-import qs from 'querystring';
+import { format } from 'date-fns';
+import qs from 'query-string';
 import { z } from 'zod';
 
 const schemasIncludeAddresses = z.object({
@@ -196,25 +197,25 @@ const adapter = (values: z.infer<typeof schema>) => {
 };
 
 const schemasSearchInput = z.object({
-  date_range: z.object({
-    from: z.date(),
-    to: z.date(),
-  }),
+  check_in: z.date(),
+  check_out: z.date(),
   min_price: z.number(),
   max_price: z.number(),
 });
 
-export async function getAvailability(
+export const getAvailability = async (
   search: z.infer<typeof schemasSearchInput>
-) {
+) => {
   try {
-    const { date_range, ...rest } = schemasSearchInput.parse(search);
+    const { check_in, check_out, ...rest } = schemasSearchInput.parse(search);
 
     const params = qs.stringify({
       ...rest,
-      check_in: date_range.from.toISOString(),
-      check_out: date_range.to.toISOString(),
+      check_in: format(check_in, 'yyyy-MM-dd'),
+      check_out: format(check_out, 'yyyy-MM-dd'),
     });
+
+    console.log('UPLISTING_URL', `${env.UPLISTING_URL}/availability?${params}`);
 
     const response = await fetch(
       `${env.UPLISTING_URL}/availability?${params}`,

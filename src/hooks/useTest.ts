@@ -3,7 +3,7 @@
 import { z } from 'zod';
 
 export const useSearchParamStateGetterServer = async <T extends z.ZodRawShape>(
-  params: T,
+  params: z.infer<typeof schemas>,
   schemas: z.ZodObject<T>,
   defaultValue: z.infer<typeof schemas>
 ) => {
