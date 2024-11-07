@@ -33,34 +33,34 @@ export const Gallery = () => {
   return (
     <div>
       <div className='flex justify-center'>
-        <h1 className='  text-4xl font-semibold  md:text-6xl md:font-semibold'>
+        <h1 className='text-4xl font-semibold md:text-6xl md:font-semibold'>
           Chalets d’Exception
         </h1>
       </div>
-      <div className=' text-2xl font-regular text-center  lg:ml-24 lg:text-start md:font-regular md:mt-5 md:mb-3  md:text-3xl'>
+      <div className='font-regular md:font-regular text-center text-2xl md:mb-3 md:mt-5 md:text-3xl lg:ml-24 lg:text-start'>
         <h6>Votre Évasion entre Confort et Nature</h6>
       </div>
-    <div className=' m-auto w-4/6  md:m-auto md:w-5/6 md:columns-3 md:gap-2'>
-      <PhotoProvider>
-        {currentImages.map((item, index) => (
-          <div className='py-1' key={index}>
-            <PhotoView src={item}>
-              <Image
-                src={item}
-                alt='Picture of the author'
-                className='hover:cursor-pointer hover:shadow-md hover:shadow-slate-600'
-                loading='eager'
-                width={500}
-                height={500}
-              />
-            </PhotoView>
-          </div>
-        ))}
-      </PhotoProvider>
-      {offset + NUMBER_IMAGE_APPEAR_FIRST < images.length && (
-        <Button onClick={loadMoreImages}>Load More</Button>
-      )}
-    </div>
+      <div className='m-auto w-4/6 md:m-auto md:w-5/6 md:columns-3 md:gap-2'>
+        <PhotoProvider>
+          {currentImages.map((item, index) => (
+            <div className='py-1' key={index}>
+              <PhotoView src={item}>
+                <Image
+                  src={item}
+                  alt='Picture of the author'
+                  className='hover:cursor-pointer hover:shadow-md hover:shadow-slate-600'
+                  loading='eager'
+                  width={500}
+                  height={500}
+                />
+              </PhotoView>
+            </div>
+          ))}
+        </PhotoProvider>
+        {offset + NUMBER_IMAGE_APPEAR_FIRST < images.length && (
+          <Button onClick={loadMoreImages}>Load More</Button>
+        )}
+      </div>
     </div>
   );
 };
