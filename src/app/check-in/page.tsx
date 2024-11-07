@@ -2,13 +2,7 @@
 
 import { Filter } from './_components/filter';
 
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Carousel,
   CarouselContent,
@@ -26,7 +20,7 @@ import { useSearchParamsServerParser as searchParamsServerParser } from '@/hooks
 import InternalError from '@/lib/error';
 import { getAvailability } from '@packages/uplisting';
 import { Label } from '@radix-ui/react-label';
-import { Bath, Bed, House, MapPin, Phone, User } from 'lucide-react';
+import { Bath, Bed, House, MapPin, User } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -34,7 +28,6 @@ import {
   paramsValidation,
   type ParamsValidation,
 } from './_validations';
-import { Button } from '@/components/ui/button';
 
 const CheckInPage = async ({
   searchParams,

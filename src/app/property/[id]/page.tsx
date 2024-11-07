@@ -1,12 +1,6 @@
 'use server';
 
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Carousel,
   CarouselContent,
@@ -16,10 +10,9 @@ import {
 } from '@/components/ui/carousel';
 import InternalError from '@/lib/error';
 import { getProperty } from '@packages/uplisting';
-import { Label } from '@radix-ui/react-label';
-import { Bath, Bed, Home, House, MapPin, User } from 'lucide-react';
+import { Bath, Bed, House, MapPin, User } from 'lucide-react';
 import Image from 'next/image';
-import { iconsForAmenitiesGroup, iconsForAmenitiesName } from './icons';
+import { iconsForAmenitiesName } from './icons';
 
 const PropertyDetails = async ({
   params,
@@ -31,7 +24,7 @@ const PropertyDetails = async ({
   const property = await getProperty(id);
 
   return (
-    <main className='mt-16 flex min-h-screen flex-col items-center justify-items-start space-y-4'>
+    <main className='container mx-auto mt-16 min-h-screen px-4 lg:px-8'>
       {property instanceof InternalError && (
         <div className='flex flex-col items-center justify-center'>
           <h3 className='py-8 text-2xl font-bold'>
@@ -46,127 +39,148 @@ const PropertyDetails = async ({
         </div>
       )}
       {property && property instanceof InternalError === false && (
-        <div className='flex flex-col gap-4'>
-          <Label className='text-3xl font-bold'> {property.name} </Label>
-          <Label className='flex items-center text-muted-foreground'>
-            <MapPin className='mr-2 h-4 w-4' />
-            {property.address.street}, {property.address.city},
-            {property.address.state}, {property.address.zip_code},
-            {property.address.country}
-          </Label>
-
-          <Carousel>
-            <CarouselContent>
-              {property.photos.map((photo) => (
-                <div key={photo.url}>
-                  <CarouselItem key={photo.url}>
-                    <Image
-                      src={photo.url}
-                      alt={photo.created_at}
-                      width={5000}
-                      height={5000}
-                    />
-                  </CarouselItem>
-                </div>
-              ))}
-            </CarouselContent>
-            <CarouselNext />
-            <CarouselPrevious />
-          </Carousel>
-
-          <Card className='w-fit rounded-lg'>
-            <CardHeader></CardHeader>
-
-            <CardContent className='flex flex-row gap-3'>
-              <span className='flex items-center gap-1'>
-                <Bed className='mr-1 h-11 w-11' />
-                <span className='text-lg font-bold'>{property.rooms.beds}</span>
-                <span className='text-muted-foreground'> lit(s)</span>
-              </span>
-
-              <span className='flex items-center gap-1'>
-                <Bath className='mr-1 h-11 w-11' />
-                <span className='text-lg font-bold'>
-                  {property.rooms.bathrooms}
+        <div className='grid grid-cols-1 gap-8 lg:grid-cols-[2fr,1fr]'>
+          {/* Left Column */}
+          <div className='space-y-6'>
+            {/* Header Section */}
+            <div className='space-y-2'>
+              <h1 className='text-4xl font-bold'>{property.name}</h1>
+              <div className='flex items-center text-muted-foreground'>
+                <MapPin className='mr-2 h-4 w-4' />
+                <span>
+                  {property.address.street}, {property.address.city},
+                  {property.address.state}, {property.address.zip_code},
+                  {property.address.country}
                 </span>
-                <span className='text-muted-foreground'>salle de bain</span>
-              </span>
+              </div>
+            </div>
 
-              <span className='flex items-center gap-1'>
-                <House className='mr-1 h-11 w-11' />
-                <span className='text-lg font-bold'>
-                  {property.rooms.bedrooms}
-                </span>
-                <span className='text-muted-foreground'> chambre(s)</span>
-              </span>
+            {/* Image Carousel */}
+            <div className='overflow-hidden rounded-xl'>
+              <Carousel className='w-full'>
+                <CarouselContent>
+                  {property.photos.map((photo) => (
+                    <CarouselItem key={photo.url}>
+                      <div className='relative aspect-[16/9] w-full'>
+                        <Image
+                          src={photo.url}
+                          alt={photo.created_at}
+                          fill
+                          className='object-cover'
+                        />
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselNext className='right-4' />
+                <CarouselPrevious className='left-4' />
+              </Carousel>
+            </div>
 
-              <span className='flex items-center gap-1'>
-                <User className='mr-1 h-11 w-11' />
-                <span className='text-lg font-bold'>{property.capacity}</span>
-                <span className='text-muted-foreground'> personne(s) max</span>
-              </span>
-            </CardContent>
+            {/* Description */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Description</CardTitle>
+              </CardHeader>
+              <CardContent className='prose max-w-none'>
+                {property.description}
+              </CardContent>
+            </Card>
 
-            <CardFooter></CardFooter>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Description</CardTitle>
-            </CardHeader>
-            <CardContent>{property.description}</CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Amenities</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ul>
-                {property.amenities.map((amenity) => (
-                  <li key={`${amenity.group}-${amenity.name}`} className='flex'>
-                    <span className='mr-2 flex items-center'>
-                      {iconsForAmenitiesGroup[
-                        amenity.group as keyof typeof iconsForAmenitiesGroup
-                      ] && (
-                        <span style={{ marginRight: '8px' }}>
-                          {
-                            iconsForAmenitiesGroup[
-                              amenity.group as keyof typeof iconsForAmenitiesGroup
-                            ]
-                          }
+            {/* Amenities */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Équipements</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
+                  {property.amenities.map((amenity) => (
+                    <div
+                      key={`${amenity.group}-${amenity.name}`}
+                      className='flex items-center gap-2'
+                    >
+                      <div className='flex h-10 w-10 items-center justify-center rounded-full bg-primary/10'>
+                        {
+                          iconsForAmenitiesName[
+                            amenity.name as keyof typeof iconsForAmenitiesName
+                          ]
+                        }
+                      </div>
+                      <div className='flex flex-col'>
+                        <span className='text-sm font-medium'>
+                          {amenity.name}
                         </span>
-                      )}
-                      {amenity.group}:
-                    </span>
-                    <span className='flex items-center gap-1'>
-                      {
-                        iconsForAmenitiesName[
-                          amenity.name as keyof typeof iconsForAmenitiesName
-                        ]
-                      }
-                      {amenity.name}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card className='w-fit'>
-            <CardHeader>
-              <CardTitle> Fees </CardTitle>
-            </CardHeader>
-            <CardContent>
-              {property.property_fees.map((fee) => (
-                <div key={fee.name}>
-                  <p>{fee.name} </p>
-                  <p>{fee.amount} AED</p>
+                        <span className='text-xs text-muted-foreground'>
+                          {amenity.group}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </CardContent>
-            <CardFooter></CardFooter>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Right Column - Sticky */}
+          <div className='lg:sticky lg:top-24 lg:h-fit'>
+            {/* Property Details Card */}
+            <Card className='mb-6'>
+              <CardHeader>
+                <CardTitle>Détails du logement</CardTitle>
+              </CardHeader>
+              <CardContent className='grid grid-cols-2 gap-4'>
+                <div className='flex items-center gap-2'>
+                  <Bed className='h-5 w-5 text-primary' />
+                  <div>
+                    <p className='font-medium'>{property.rooms.beds} lit(s)</p>
+                    <p className='text-sm text-muted-foreground'>Couchages</p>
+                  </div>
+                </div>
+                <div className='flex items-center gap-2'>
+                  <Bath className='h-5 w-5 text-primary' />
+                  <div>
+                    <p className='font-medium'>{property.rooms.bathrooms}</p>
+                    <p className='text-sm text-muted-foreground'>
+                      Salle de bain
+                    </p>
+                  </div>
+                </div>
+                <div className='flex items-center gap-2'>
+                  <House className='h-5 w-5 text-primary' />
+                  <div>
+                    <p className='font-medium'>{property.rooms.bedrooms}</p>
+                    <p className='text-sm text-muted-foreground'>Chambre(s)</p>
+                  </div>
+                </div>
+                <div className='flex items-center gap-2'>
+                  <User className='h-5 w-5 text-primary' />
+                  <div>
+                    <p className='font-medium'>{property.capacity}</p>
+                    <p className='text-sm text-muted-foreground'>
+                      Voyageurs max
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Fees Card */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Frais supplémentaires</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className='space-y-3'>
+                  {property.property_fees.map((fee) => (
+                    <div key={fee.name} className='flex justify-between'>
+                      <span className='text-muted-foreground'>{fee.name}</span>
+                      <span className='font-medium'>{fee.amount} AED</span>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       )}
     </main>
