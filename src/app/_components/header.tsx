@@ -22,12 +22,12 @@ export const Header = () => {
     },
     {
       title: 'Sign in',
-      href: '/',
+      href: '/signin',
       style: 'md:hidden inline',
     },
     {
       title: 'Get started',
-      href: '/',
+      href: '/signup',
       style: 'md:hidden inline',
     },
     {
