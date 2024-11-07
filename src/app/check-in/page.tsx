@@ -26,7 +26,7 @@ import { useSearchParamsServerParser as searchParamsServerParser } from '@/hooks
 import InternalError from '@/lib/error';
 import { getAvailability } from '@packages/uplisting';
 import { Label } from '@radix-ui/react-label';
-import { Bath, Bed, House, MapPin } from 'lucide-react';
+import { Bath, Bed, House, MapPin, Phone, User } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -34,6 +34,7 @@ import {
   paramsValidation,
   type ParamsValidation,
 } from './_validations';
+import { Button } from '@/components/ui/button';
 
 const CheckInPage = async ({
   searchParams,
@@ -93,10 +94,12 @@ const CheckInPage = async ({
                   </Carousel>
                 </CardTitle>
               </CardHeader>
-              <Link href={`/check-in/${item.id}`}>
-                <CardContent className='flex flex-col space-y-3 p-2'>
-                  <Label className='text-lg font-bold'>{item.name}</Label>
-                  <TooltipProvider>
+              <TooltipProvider>
+                <Link className='-z-10' href={`/property/${item.id}`}>
+                  <CardContent className='flex flex-col p-3'>
+                    <Label className='cursor-pointer text-lg font-bold'>
+                      {item.name}
+                    </Label>
                     <Tooltip>
                       <TooltipTrigger className='flex font-serif text-sm'>
                         <MapPin className='mr-2 h-4 w-4' />
@@ -112,23 +115,84 @@ const CheckInPage = async ({
                         {item.address.country}
                       </TooltipContent>
                     </Tooltip>
-                  </TooltipProvider>
-                </CardContent>
-                <CardFooter className='flex h-fit justify-center space-x-5 pb-2 pt-6 text-sm'>
-                  <span className='flex'>
-                    <Bed className='mr-2 h-4 w-4' />{' '}
-                    <span className='font-bold'>{item.rooms.bedrooms} </span>
-                  </span>
-                  <span className='flex'>
-                    <Bath className='mr-2 h-4 w-4' />
-                    <span className='font-bold'>{item.rooms.bathrooms} </span>
-                  </span>
-                  <span className='flex'>
-                    <House className='mr-2 h-4 w-4' />
-                    <span className='font-bold'>{item.rooms.bedrooms}</span>
-                  </span>
-                </CardFooter>
-              </Link>
+                    <Label className='mt-3 flex space-x-3 text-sm'>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <span className='flex'>
+                            <Bed className='mr-1 h-4 w-4' />
+                            <span className='font-bold'>
+                              {item.rooms.beds}{' '}
+                            </span>
+                          </span>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          {item.rooms.bedrooms} lit(s)
+                        </TooltipContent>
+                      </Tooltip>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <span className='flex'>
+                            <Bath className='mr-1 h-4 w-4' />
+                            <span className='font-bold'>
+                              {item.rooms.bathrooms}
+                            </span>
+                          </span>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          {item.rooms.bathrooms} salle de bain
+                        </TooltipContent>
+                      </Tooltip>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <span className='flex'>
+                            <House className='mr-1 h-4 w-4' />
+                            <span className='font-bold'>
+                              {item.rooms.bedrooms}
+                            </span>
+                          </span>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          {item.rooms.bedrooms} chambre(s)
+                        </TooltipContent>
+                      </Tooltip>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <span className='flex'>
+                            <User className='mr-1 h-4 w-4' />
+                            <span className='font-bold'>{item.capacity}</span>
+                          </span>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          {item.capacity} personne(s) max
+                        </TooltipContent>
+                      </Tooltip>
+                    </Label>
+                  </CardContent>
+                  {/* <CardFooter className='hidden h-fit space-x-3'>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <Link href='/contact' className='z-50 w-full'>
+                          <Button className='flex w-full items-center justify-center'>
+                            <Phone className='h-4 w-4' />
+                          </Button>
+                        </Link>
+                      </TooltipTrigger>
+                      <TooltipContent>Contacter</TooltipContent>
+                    </Tooltip>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <Button
+                          variant='outline'
+                          className='flex w-full items-center justify-center'
+                        >
+                          Details
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>Voir plus de details</TooltipContent>
+                    </Tooltip>
+                  </CardFooter> */}
+                </Link>
+              </TooltipProvider>
             </Card>
           ))}
         </div>
