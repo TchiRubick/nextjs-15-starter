@@ -129,10 +129,10 @@ export const Header = () => {
           <div className='hidden border-r md:inline'></div>
           <div className='hidden gap-2 lg:flex'>
             <Link href='/signin'>
-            <Button variant='outline'>Sign in</Button>
+              <Button variant='outline'>Sign in</Button>
             </Link>
             <Link href='/signup'>
-            <Button>Get started</Button>
+              <Button>Get started</Button>
             </Link>
           </div>
         </div>

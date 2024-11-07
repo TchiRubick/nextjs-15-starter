@@ -5,7 +5,12 @@ import type { z } from 'zod';
 
 export const useSearchParamState = <T extends z.ZodRawShape>(
   schemas: z.ZodObject<T>,
-  defaultValue: z.infer<typeof schemas>
+  defaultValue: z.infer<typeof schemas>,
+  options?: {
+    reload?: boolean;
+    customPathname?: string;
+    scroll?: boolean;
+  }
 ) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -22,9 +27,11 @@ export const useSearchParamState = <T extends z.ZodRawShape>(
   const setParamState = (newParamState: z.infer<typeof schemas>) => {
     const newParams = qs.stringify(newParamState);
 
-    router.push(`${pathname}?${newParams}`, {
-      scroll: false,
+    router.push(`${options?.customPathname ?? pathname}?${newParams}`, {
+      scroll: options?.scroll ?? false,
     });
+
+    if (options?.reload) router.refresh();
   };
 
   return [paramState, setParamState] as [

@@ -45,10 +45,12 @@ export function SignupForm() {
             Sign up
           </Button>
         </div>
-        <div className="mt-4 text-center text-sm">
-            Have you already an account?{" "}
-            <Link href="/signin" className="underline">Signin</Link>
-          </div>
+        <div className='mt-4 text-center text-sm'>
+          Have you already an account?{' '}
+          <Link href='/signin' className='underline'>
+            Signin
+          </Link>
+        </div>
       </CardContent>
     </Card>
   );

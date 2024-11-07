@@ -2,8 +2,8 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselPrevious,
   CarouselNext,
+  CarouselPrevious,
 } from '@/components/ui/carousel';
 import { Check } from 'lucide-react';
 import Image from 'next/image';
@@ -66,6 +66,7 @@ export const Amenities = () => (
                     alt='amenities'
                     width={700}
                     height={900}
+                    objectFit='cover'
                   />
                 </CarouselItem>
               ))}
