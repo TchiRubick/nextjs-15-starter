@@ -49,12 +49,13 @@ const CheckInPage = async ({
     '/check-in'
   );
 
-  const availability = await getAvailability(values);
+  const availabilities = await getAvailability(values);
 
   return (
     <main className='mt-16 flex min-h-screen flex-col items-center justify-items-start space-y-4'>
       <Filter />
-      {(availability instanceof InternalError || availability.length === 0) && (
+      {(availabilities instanceof InternalError ||
+        availabilities.length === 0) && (
         <div className='flex flex-col items-center justify-center'>
           <h3 className='py-8 text-2xl font-bold'>
             Aucune disponibilité trouvée
@@ -67,9 +68,9 @@ const CheckInPage = async ({
           />
         </div>
       )}
-      {Array.isArray(availability) && availability.length > 0 && (
+      {Array.isArray(availabilities) && availabilities.length > 0 && (
         <div className='flex flex-row gap-4'>
-          {availability.map((item) => (
+          {availabilities.map((item) => (
             <Card key={item.id} className='w-64 rounded-3xl'>
               <CardHeader className='p-0'>
                 <CardTitle>
