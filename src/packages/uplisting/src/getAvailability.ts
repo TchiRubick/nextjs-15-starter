@@ -215,8 +215,6 @@ export const getAvailability = async (
       check_out: format(check_out, 'yyyy-MM-dd'),
     });
 
-    console.log('UPLISTING_URL', `${env.UPLISTING_URL}/availability?${params}`);
-
     const response = await fetch(
       `${env.UPLISTING_URL}/availability?${params}`,
       {

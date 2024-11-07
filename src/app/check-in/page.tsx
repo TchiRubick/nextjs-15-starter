@@ -2,24 +2,13 @@
 
 import { Filter } from './_components/filter';
 
-import { useSearchParamsServerParser as searchParamsServerParser } from '@/hooks/useSearchParamsServerParser';
-import InternalError from '@/lib/error';
-import { getAvailability } from '@packages/uplisting';
-import Image from 'next/image';
-import { MapPin, BedSingle, Bed, Bath, House } from 'lucide-react';
-import {
-  defaultParamsValidation,
-  paramsValidation,
-  type ParamsValidation,
-} from './_validations';
 import {
   Card,
-  CardHeader,
-  CardTitle,
   CardContent,
   CardFooter,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
-import { Label } from '@radix-ui/react-label';
 import {
   Carousel,
   CarouselContent,
@@ -33,7 +22,18 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { useSearchParamsServerParser as searchParamsServerParser } from '@/hooks/useSearchParamsServerParser';
+import InternalError from '@/lib/error';
+import { getAvailability } from '@packages/uplisting';
+import { Label } from '@radix-ui/react-label';
+import { Bath, Bed, House, MapPin } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
+import {
+  defaultParamsValidation,
+  paramsValidation,
+  type ParamsValidation,
+} from './_validations';
 
 const CheckInPage = async ({
   searchParams,
