@@ -1,34 +1,29 @@
-"use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-import { useMutationAction } from "@packages/fetch-action/index";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-
-const signinSchema = z.object({
-  identifier: z.string().min(3).max(255),
-  password: z.string().min(6).max(255),
-});
-
-type SigninInput = z.infer<typeof signinSchema>;
 
 export function Signinform() {
-  const { register, handleSubmit, formState: { errors } } = useForm<SigninInput>({
-    resolver: zodResolver(signinSchema),
-  });
-
-  // Using useMutationAction with signin
-  
-
-  const onSubmit = (data: SigninInput) => console.log(data);
+ 
+  async function createInvoice(formData: FormData) {
+    'use server'
+ 
+    const rawFormData = {
+      identifier: formData.get('identifier') as string,
+      password: formData.get('password') as string ,
+      
+    }
+    
+    return await console.log(rawFormData.identifier , rawFormData.password);
+    // mutate data
+    // revalidate cache
+  }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form action={createInvoice}>
       <Card className="mx-auto max-w-sm">
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
@@ -39,12 +34,12 @@ export function Signinform() {
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input
-                {...register("identifier")}
+                name="identifier"
                 id="identifier"
                 placeholder="m@example.com"
                 required
               />
-              {errors.identifier && <p className="text-red-500">{errors.identifier.message}</p>}
+              
             </div>
             <div className="grid gap-2">
               <div className="flex items-center">
@@ -53,8 +48,8 @@ export function Signinform() {
                   Forgot your password?
                 </Link>
               </div>
-              <Input {...register("password")} id="password" type="password" required />
-              {errors.password && <p className="text-red-500">{errors.password.message}</p>}
+              <Input name="password" id="password" type="password" required />
+              
             </div>
             <Button type="submit" className="w-full">Login</Button>
           </div>
