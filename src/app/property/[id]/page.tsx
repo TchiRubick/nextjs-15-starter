@@ -1,7 +1,23 @@
 'use server';
 
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
 import InternalError from '@/lib/error';
 import { getProperty } from '@packages/uplisting';
+import { Label } from '@radix-ui/react-label';
+import { Bath, Bed, Home, House, MapPin, User } from 'lucide-react';
 import Image from 'next/image';
 
 const PropertyDetails = async ({
@@ -30,44 +46,105 @@ const PropertyDetails = async ({
       )}
       {property && property instanceof InternalError === false && (
         <div className='flex flex-col gap-4'>
-          <ul>
-            <li>name: {property.name}</li>
-            <li>description: {property.description}</li>
-            <li>capacity: {property.capacity}</li>
-            <li>bedrooms: {property.rooms.bedrooms}</li>
-            <li>beds: {property.rooms.beds}</li>
-            <li>bathrooms: {property.rooms.bathrooms}</li>
-            <li>
-              address: {property.address.street}, {property.address.city},{' '}
-              {property.address.state}, {property.address.zip_code},{' '}
-              {property.address.country}
-            </li>
-            <li>
-              amenities:
-              <ol>
+          <Label className='text-3xl font-bold'> {property.name} </Label>
+          <Label className='flex items-center text-muted-foreground'>
+            <MapPin className='mr-2 h-4 w-4' />
+            {property.address.street}, {property.address.city},
+            {property.address.state}, {property.address.zip_code},
+            {property.address.country}
+          </Label>
+
+          <Carousel>
+            <CarouselContent>
+              {property.photos.map((photo) => (
+                <div key={photo.url}>
+                  <CarouselItem key={photo.url}>
+                    <Image
+                      src={photo.url}
+                      alt={photo.created_at}
+                      width={5000}
+                      height={5000}
+                    />
+                  </CarouselItem>
+                </div>
+              ))}
+            </CarouselContent>
+            <CarouselNext />
+            <CarouselPrevious />
+          </Carousel>
+
+          <Card className='w-fit rounded-lg'>
+            <CardHeader></CardHeader>
+
+            <CardContent className='flex flex-row gap-3'>
+              <span className='flex items-center gap-1'>
+                <Bed className='mr-1 h-11 w-11' />
+                <span className='text-lg font-bold'>{property.rooms.beds}</span>
+                <span className='text-muted-foreground'> lit(s)</span>
+              </span>
+
+              <span className='flex items-center gap-1'>
+                <Bath className='mr-1 h-11 w-11' />
+                <span className='text-lg font-bold'>
+                  {property.rooms.bathrooms}
+                </span>
+                <span className='text-muted-foreground'>salle de bain</span>
+              </span>
+
+              <span className='flex items-center gap-1'>
+                <House className='mr-1 h-11 w-11' />
+                <span className='text-lg font-bold'>
+                  {property.rooms.bedrooms}
+                </span>
+                <span className='text-muted-foreground'> chambre(s)</span>
+              </span>
+
+              <span className='flex items-center gap-1'>
+                <User className='mr-1 h-11 w-11' />
+                <span className='text-lg font-bold'>{property.capacity}</span>
+                <span className='text-muted-foreground'> personne(s) max</span>
+              </span>
+            </CardContent>
+
+            <CardFooter></CardFooter>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Description</CardTitle>
+            </CardHeader>
+            <CardContent>{property.description}</CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Amenities</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul>
                 {property.amenities.map((amenity) => (
                   <li key={`${amenity.group}-${amenity.name}`}>
                     {amenity.group}: {amenity.name}
                   </li>
                 ))}
-              </ol>
-            </li>
-            <li>
-              photos:
-              <ol>
-                {property.photos.map((photo) => (
-                  <li key={photo.url}>
-                    <Image
-                      src={photo.url}
-                      alt={photo.created_at}
-                      width={100}
-                      height={100}
-                    />
-                  </li>
-                ))}
-              </ol>
-            </li>
-          </ul>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <Card className='w-fit'>
+            <CardHeader>
+              <CardTitle> Fees </CardTitle>
+            </CardHeader>
+            <CardContent>
+              {property.property_fees.map((fee) => (
+                <div key={fee.name}>
+                  <p>{fee.name} </p>
+                  <p>{fee.amount} AED</p>
+                </div>
+              ))}
+            </CardContent>
+            <CardFooter></CardFooter>
+          </Card>
         </div>
       )}
     </main>
