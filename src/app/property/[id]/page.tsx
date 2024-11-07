@@ -10,9 +10,9 @@ import {
 } from '@/components/ui/carousel';
 import InternalError from '@/lib/error';
 import { getProperty } from '@packages/uplisting';
-import { Bath, Bed, House, MapPin, User } from 'lucide-react';
+import { Bath, Bed, Check, House, MapPin, User, X } from 'lucide-react';
 import Image from 'next/image';
-import { iconsForAmenitiesName } from './icons';
+import { iconsForAmenitiesName, iconsSuitabilty } from './icons';
 
 const PropertyDetails = async ({
   params,
@@ -78,17 +78,17 @@ const PropertyDetails = async ({
             </div>
 
             {/* Description */}
-            <Card>
+            <Card className='border-none'>
               <CardHeader>
                 <CardTitle>Description</CardTitle>
               </CardHeader>
-              <CardContent className='prose max-w-none'>
+              <CardContent className='prose max-w-none text-muted-foreground'>
                 {property.description}
               </CardContent>
             </Card>
 
             {/* Amenities */}
-            <Card>
+            <Card className='border-none'>
               <CardHeader>
                 <CardTitle>Équipements</CardTitle>
               </CardHeader>
@@ -124,7 +124,7 @@ const PropertyDetails = async ({
           {/* Right Column - Sticky */}
           <div className='lg:sticky lg:top-24 lg:h-fit'>
             {/* Property Details Card */}
-            <Card className='mb-6'>
+            <Card className='mb-6 border-none'>
               <CardHeader>
                 <CardTitle>Détails du logement</CardTitle>
               </CardHeader>
@@ -165,7 +165,7 @@ const PropertyDetails = async ({
             </Card>
 
             {/* Fees Card */}
-            <Card>
+            <Card className='border-none'>
               <CardHeader>
                 <CardTitle>Frais supplémentaires</CardTitle>
               </CardHeader>
@@ -180,7 +180,80 @@ const PropertyDetails = async ({
                 </div>
               </CardContent>
             </Card>
+
+            {/* Discount Card */}
+            {property.property_discounts.length > 0 && (
+              <Card className='border-none'>
+                <CardHeader>
+                  <CardTitle>Promotion</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className='space-y-3'>
+                    {property.property_discounts.map((discount) => (
+                      <div
+                        key={discount.name}
+                        className='flex flex-col justify-between'
+                      >
+                        <span className='text-muted-foreground'>
+                          {discount.name}
+                        </span>
+                        <span className='font-medium'>
+                          {discount.amount} AED
+                        </span>
+                        <span className='text-sm'>{discount.days}</span>
+                        <span className='text-sm text-muted-foreground'>
+                          {discount.type}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
           </div>
+
+          {/* Suitability card */}
+          <Card className='border-none'>
+            <CardHeader>
+              <CardTitle>Partinance</CardTitle>
+            </CardHeader>
+            <CardContent className='prose max-w-none text-muted-foreground'>
+              {Object.keys(property.suitability).map((key) => (
+                <p key={key} className='flex items-center gap-2'>
+                  {iconsSuitabilty[key as keyof typeof iconsSuitabilty]}
+                  {key}{' '}
+                  {property.suitability[
+                    key as keyof typeof property.suitability
+                  ] ? (
+                    <Check className='h-4 w-4 text-primary' />
+                  ) : (
+                    <X className='h-4 w-4 text-muted-foreground' />
+                  )}
+                </p>
+              ))}
+            </CardContent>
+          </Card>
+
+          {property.property_taxes.length > 0 && (
+            <Card className='border-none'>
+              <CardHeader>
+                <CardTitle>Impôts</CardTitle>
+              </CardHeader>
+              <CardContent className='prose max-w-none text-muted-foreground'>
+                <p className='flex items-center gap-2'>
+                  {property.property_taxes.map((tax) => (
+                    <div key={tax.name}>
+                      <p>{tax.name}</p>
+                      <p className='text-sm text-muted-foreground'>
+                        {tax.amount} AED
+                      </p>
+                      <span className='text-sm'>{tax.per}</span>
+                    </div>
+                  ))}
+                </p>
+              </CardContent>
+            </Card>
+          )}
         </div>
       )}
     </main>

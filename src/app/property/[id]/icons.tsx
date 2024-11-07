@@ -2,8 +2,10 @@ import {
   Anvil,
   AudioWaveform,
   Award,
+  Baby,
   BookOpenText,
   ChefHat,
+  Cigarette,
   Circle,
   CircleParking,
   Clapperboard,
@@ -25,6 +27,8 @@ import {
   Microwave,
   MountainSnow,
   PanelBottomDashed,
+  PartyPopper,
+  PawPrint,
   Phone,
   PlaneIcon,
   Presentation,
@@ -131,4 +135,11 @@ export const iconsForAmenitiesName = {
   Heating: <AudioWaveform />,
   'Free wifi': <Wifi />,
   'Fire extinguisher': <FireExtinguisher />,
+};
+
+export const iconsSuitabilty = {
+  children: <Baby />,
+  pets: <PawPrint />,
+  smoking: <Cigarette />,
+  events: <PartyPopper />,
 };
