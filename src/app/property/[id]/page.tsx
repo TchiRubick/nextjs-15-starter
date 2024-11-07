@@ -19,6 +19,7 @@ import { getProperty } from '@packages/uplisting';
 import { Label } from '@radix-ui/react-label';
 import { Bath, Bed, Home, House, MapPin, User } from 'lucide-react';
 import Image from 'next/image';
+import { iconsForAmenitiesGroup, iconsForAmenitiesName } from './icons';
 
 const PropertyDetails = async ({
   params,
@@ -123,8 +124,29 @@ const PropertyDetails = async ({
             <CardContent>
               <ul>
                 {property.amenities.map((amenity) => (
-                  <li key={`${amenity.group}-${amenity.name}`}>
-                    {amenity.group}: {amenity.name}
+                  <li key={`${amenity.group}-${amenity.name}`} className='flex'>
+                    <span className='mr-2 flex items-center'>
+                      {iconsForAmenitiesGroup[
+                        amenity.group as keyof typeof iconsForAmenitiesGroup
+                      ] && (
+                        <span style={{ marginRight: '8px' }}>
+                          {
+                            iconsForAmenitiesGroup[
+                              amenity.group as keyof typeof iconsForAmenitiesGroup
+                            ]
+                          }
+                        </span>
+                      )}
+                      {amenity.group}:
+                    </span>
+                    <span className='flex items-center gap-1'>
+                      {
+                        iconsForAmenitiesName[
+                          amenity.name as keyof typeof iconsForAmenitiesName
+                        ]
+                      }
+                      {amenity.name}
+                    </span>
                   </li>
                 ))}
               </ul>
