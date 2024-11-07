@@ -31,7 +31,16 @@ export const Gallery = () => {
   };
 
   return (
-    <div className='m-auto w-5/6 columns-3 gap-2'>
+    <div>
+      <div className='flex justify-center'>
+        <h1 className='  text-4xl font-semibold  md:text-6xl md:font-semibold'>
+          Chalets d’Exception
+        </h1>
+      </div>
+      <div className=' text-2xl font-regular text-center  lg:ml-24 lg:text-start md:font-regular md:mt-5 md:mb-3  md:text-3xl'>
+        <h6>Votre Évasion entre Confort et Nature</h6>
+      </div>
+    <div className=' m-auto w-4/6  md:m-auto md:w-5/6 md:columns-3 md:gap-2'>
       <PhotoProvider>
         {currentImages.map((item, index) => (
           <div className='py-1' key={index}>
@@ -51,6 +60,7 @@ export const Gallery = () => {
       {offset + NUMBER_IMAGE_APPEAR_FIRST < images.length && (
         <Button onClick={loadMoreImages}>Load More</Button>
       )}
+    </div>
     </div>
   );
 };
