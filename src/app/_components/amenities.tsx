@@ -27,52 +27,54 @@ const images = [
 ];
 
 export const Amenities = () => (
-  <div className='w-full py-20 lg:py-40'>
+  <div className='w-full bg-white'>
     <div className='container mx-auto'>
-      <div className='container grid grid-cols-1 items-center gap-8 rounded-lg px-5 py-8 lg:grid-cols-2 xl:border'>
-        <div className='flex flex-col gap-10'>
-          <div className='flex flex-col gap-4'>
-            <div className='flex flex-col gap-2'>
-              <h2 className='font-regular max-w-xl text-left text-3xl tracking-tighter lg:text-5xl'>
-                Équipements et services
-              </h2>
-              <p className='max-w-xl text-left text-lg leading-relaxed tracking-tight text-muted-foreground'>
-                Pour votre bien etre
-              </p>
-            </div>
-          </div>
-          <div className='grid grid-cols-1 items-start gap-6 sm:grid-cols-3 lg:grid-cols-1 lg:pl-6'>
+      <div className='grid grid-cols-1 items-start gap-24 rounded-[2rem] bg-neutral-50 p-12 lg:grid-cols-2'>
+        {/* Left Column */}
+        <div>
+          <h2 className='text-[2.75rem] font-normal leading-[1.2] tracking-tight text-neutral-900'>
+            Équipements et services
+          </h2>
+          <p className='mt-2 text-lg text-neutral-500'>
+            Pour votre bien être
+          </p>
+
+          <div className='mt-12 grid gap-4'>
             {amenities.map((amenity) => (
               <div
-                className='flex w-full flex-row items-start gap-6'
                 key={amenity}
+                className='flex items-center gap-3'
               >
-                <Check className='mt-2 h-4 w-4 text-primary' />
-                <div className='flex flex-col gap-1'>
-                  <p>{amenity}</p>
-                </div>
+                <Check className='h-5 w-5 stroke-[1.5px]' />
+                <span className='text-[15px] text-neutral-600'>{amenity}</span>
               </div>
             ))}
           </div>
         </div>
-        <div className='aspect-square rounded-md bg-muted'>
-          <Carousel>
+
+        {/* Right Column */}
+        <div className='relative aspect-[4/3] overflow-hidden rounded-[1.5rem]'>
+          <Carousel className='h-full'>
             <CarouselContent>
-              {images.map((image) => (
-                <CarouselItem key={image}>
+              {images.map((image, index) => (
+                <CarouselItem key={index}>
                   <Image
-                    className='flex aspect-square items-center justify-center rounded-md bg-muted p-6'
                     src={image}
-                    alt='amenities'
-                    width={700}
-                    height={900}
-                    objectFit='cover'
+                    alt={`Amenity image ${index + 1}`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className='object-cover'
+                    priority={index === 0}
                   />
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className='absolute left-7' />
-            <CarouselNext className='absolute right-7' />
+            <button className='absolute left-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 backdrop-blur-sm'>
+              <CarouselPrevious className='static h-5 w-5 translate-x-0 translate-y-0' />
+            </button>
+            <button className='absolute right-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 backdrop-blur-sm'>
+              <CarouselNext className='static h-5 w-5 translate-x-0 translate-y-0' />
+            </button>
           </Carousel>
         </div>
       </div>

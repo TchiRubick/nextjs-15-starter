@@ -1,71 +1,93 @@
 'use client';
 
-import { MoveRight, PhoneCall } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { MoveRight, PhoneCall } from 'lucide-react';
 import Image from 'next/image';
 
 export const Hero = () => {
   return (
-    <div className='min-h-[calc(100vh-4rem)] w-full py-12 sm:py-16 lg:py-24'>
-      <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
-        <div className='grid grid-cols-1 items-center gap-8 md:grid-cols-2 lg:gap-12'>
-          <div className='flex flex-col gap-4 sm:gap-6'>
-            <div>
-              <Badge variant='outline' className='text-sm sm:text-base'>
-                We&apos;re live!
-              </Badge>
+    <div className="relative h-[85vh] w-full overflow-hidden bg-slate-900">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <div className="relative h-full w-full">
+          {/* Image Grid */}
+          <div className="grid h-full grid-cols-2 gap-4 opacity-70">
+            <div className="relative h-full">
+              <Image
+                src="/275327112.jpg"
+                alt="Chalet en automne"
+                fill
+                className="object-cover"
+                priority
+              />
             </div>
-            <div className='flex flex-col gap-4 sm:gap-6'>
-              <h1 className='font-regular max-w-lg text-left text-3xl tracking-tighter sm:text-4xl lg:text-6xl'>
-                Refuges des Hauts
-              </h1>
-              <p className='max-w-md text-left text-base leading-relaxed tracking-tight text-muted-foreground sm:text-lg lg:text-xl'>
-                Managing a small business today is already tough. Avoid further
-                complications by ditching outdated, tedious trade methods. Our
-                goal is to streamline SMB trade, making it easier and faster
-                than ever.
-              </p>
-            </div>
-            <div className='flex flex-col gap-3 sm:gap-4 lg:flex-row'>
-              <Button
-                size='lg'
-                className='gap-2 text-sm sm:gap-4 sm:text-base'
-                variant='outline'
-              >
-                Jump on a call <PhoneCall className='h-3 w-3 sm:h-4 sm:w-4' />
-              </Button>
-              <Button size='lg' className='gap-2 text-sm sm:gap-4 sm:text-base'>
-                Sign up here <MoveRight className='h-3 w-3 sm:h-4 sm:w-4' />
-              </Button>
+            <div className="grid h-full grid-rows-2 gap-4">
+              <div className="relative">
+                <Image
+                  src="/276286339.jpg"
+                  alt="Chalet sous la neige"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+              <div className="relative">
+                <Image
+                  src="/276236891.jpg"
+                  alt="Vue hivernale"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
             </div>
           </div>
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/50 to-slate-900/90" />
+        </div>
+      </div>
 
-          <div className='hidden h-[400px] grid-cols-2 gap-4 sm:h-[500px] sm:gap-6 md:grid lg:h-[600px] lg:gap-8'>
-            <Image
-              className='aspect-square h-[180px] w-full rounded-md object-cover transition-all duration-300 hover:scale-110 sm:h-[240px] lg:h-[300px]'
-              src='/275327112.jpg'
-              alt='hero-3'
-              width={300}
-              height={300}
-              priority
-            />
-            <Image
-              className='row-span-2 h-full w-full rounded-md object-cover transition-all duration-300 hover:scale-110'
-              src='/276286339.jpg'
-              alt='hero-2'
-              width={600}
-              height={600}
-              priority
-            />
-            <Image
-              className='aspect-square h-[180px] w-full rounded-md object-cover transition-all duration-300 hover:scale-110 sm:h-[240px] lg:h-[300px]'
-              src='/276236891.jpg'
-              alt='hero-1'
-              width={300}
-              height={300}
-              priority
-            />
+      {/* Hero Content */}
+      <div className="relative z-10 mx-auto max-w-6xl px-4 pt-32">
+        <div className="mb-24 max-w-2xl">
+          <Badge
+            variant="outline"
+            className="mb-6 rounded-full border-white/20 bg-white/10 px-4 py-1 text-sm backdrop-blur-sm"
+          >
+            ✨ Nouveau sur Bussang
+          </Badge>
+
+          <h1 className="mb-6 text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
+            Refuges des{' '}
+            <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+              Hauts
+            </span>
+          </h1>
+
+          <p className="mb-8 text-lg text-white/80 sm:text-xl">
+            Vivez une expérience inoubliable dans notre chalet d'exception.
+            Une expérience unique au cœur des Vosges, alliant confort moderne et
+            authenticité de la montagne.
+          </p>
+
+          <div className="flex flex-wrap gap-4">
+            <Button
+              size="lg"
+              className="group bg-white text-slate-900 hover:bg-white/90"
+            >
+              Réserver maintenant
+              <MoveRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-white/20 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20"
+            >
+              Nous contacter
+              <PhoneCall className="ml-2 h-4 w-4" />
+            </Button>
           </div>
         </div>
       </div>

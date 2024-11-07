@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import {
   Carousel,
   CarouselApi,
   CarouselContent,
-  CarouselItem,
+  CarouselItem
 } from '@/components/ui/carousel';
+import { useEffect, useState } from 'react';
 import { ReviewCard, type ReviewCardProps } from './review-card';
 
 const reviews: ReviewCardProps[] = [
@@ -90,7 +90,7 @@ export const Testimonials = () => {
       return;
     }
 
-    setTimeout(() => {
+    const interval = setInterval(() => {
       if (api.selectedScrollSnap() + 1 === api.scrollSnapList().length) {
         setCurrent(0);
         api.scrollTo(0);
@@ -98,25 +98,59 @@ export const Testimonials = () => {
         api.scrollNext();
         setCurrent(current + 1);
       }
-    }, 4000);
+    }, 5000);
+
+    return () => clearInterval(interval);
   }, [api, current]);
 
   return (
-    <div className='w-full px-4 py-20 lg:py-40'>
-      <div className='container mx-auto'>
-        <div className='flex flex-col gap-10'>
-          <h2 className='font-regular text-center text-3xl tracking-tighter md:text-5xl lg:max-w-xl lg:text-left'>
-            Ce que les personnes ayant séjourné ici ont adoré
-          </h2>
-          <Carousel setApi={setApi} className='w-full md:px-44 lg:px-0'>
-            <CarouselContent>
-              {reviews.map((r) => (
-                <CarouselItem className='lg:basis-1/3' key={r.name}>
-                  <ReviewCard {...r} />
+    <div className='w-full bg-slate-900 py-24'>
+      <div className='container mx-auto px-4'>
+        <div className='flex flex-col gap-16'>
+          <div>
+            <h2 className='text-4xl font-medium tracking-tight text-white md:text-5xl'>
+              Ce que les personnes ayant séjourné<br />ici ont adoré
+            </h2>
+            <p className="mt-4 text-lg text-slate-400">
+              Découvrez les expériences authentiques de nos clients
+            </p>
+          </div>
+
+          <Carousel
+            setApi={setApi}
+            className='w-full'
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+          >
+            <CarouselContent className="-ml-4">
+              {reviews.map((review) => (
+                <CarouselItem
+                  key={review.name}
+                  className="pl-4 md:basis-1/2 lg:basis-1/3"
+                >
+                  <ReviewCard {...review} />
                 </CarouselItem>
               ))}
             </CarouselContent>
           </Carousel>
+
+          <div className="flex justify-center gap-1.5">
+            {reviews.map((_, index) => (
+              <button
+                key={index}
+                className={`h-1.5 rounded-full transition-all duration-300 ${index === current
+                    ? 'w-6 bg-white'
+                    : 'w-1.5 bg-slate-700'
+                  }`}
+                onClick={() => {
+                  api?.scrollTo(index);
+                  setCurrent(index);
+                }}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
