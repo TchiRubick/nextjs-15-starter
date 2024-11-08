@@ -60,7 +60,16 @@ export const Header = () => {
         {/* Desktop Navigation */}
         <div className='hidden lg:flex lg:items-center lg:gap-1'>
           {navigationItems.map((item) => (
-            <Link key={item.title} href={item.href}>
+            <Link
+              key={item.title}
+              href={item.href}
+              className={cn(
+                'border-b-2 border-transparent transition-colors duration-200',
+                item.href === window.location.pathname
+                  ? 'border-white/90 text-white'
+                  : 'hover:text-white'
+              )}
+            >
               <Button
                 variant='ghost'
                 className='text-white/90 hover:bg-white/10 hover:text-white'
