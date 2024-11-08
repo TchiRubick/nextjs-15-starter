@@ -1,5 +1,3 @@
-import 'server-only';
-
 import { hash } from '@node-rs/argon2';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -115,6 +113,7 @@ export async function signup(input: SignupInput) {
     // Validate input
     const validatedInput = validateInput(input);
     const { username, email, password } = validatedInput;
+    console.log(username, email, password);
 
     // Check for existing users
     await checkExistingUser(username, email);

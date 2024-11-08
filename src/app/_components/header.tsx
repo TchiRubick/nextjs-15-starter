@@ -91,7 +91,7 @@ export const Header = () => {
           </Link>
           <div className='hidden h-6 border-r border-white/20 md:inline-block'></div>
           <div className='hidden gap-2 lg:flex'>
-            <Link href='/signin'>
+            <Link href='/auth'>
               <Button
                 variant='ghost'
                 className='text-white/90 hover:bg-white/10 hover:text-white'
@@ -99,7 +99,7 @@ export const Header = () => {
                 Connexion
               </Button>
             </Link>
-            <Link href='/signup'>
+            <Link href='/auth/signup'>
               <Button className='bg-white text-slate-900 hover:bg-white/90'>
                 S&apos;inscrire
               </Button>
