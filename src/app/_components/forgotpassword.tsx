@@ -1,4 +1,5 @@
 'use client';
+
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -24,7 +25,7 @@ export function Forgotpassword() {
       <CardContent>
         <div className='grid gap-4'>
           <div className='grid gap-2'>
-            <Label htmlFor='email'>Email</Label>
+            <Label htmlFor='email'>Email or username</Label>
             <Input id='identifier' placeholder='m@example.com' required />
           </div>
 
@@ -33,7 +34,7 @@ export function Forgotpassword() {
           </Button>
         </div>
         <div className='mt-4 text-center text-sm'>
-          <Link href='/signup' className='underline'>
+          <Link href='/auth/signup' className='underline'>
             Back to sign in
           </Link>
         </div>

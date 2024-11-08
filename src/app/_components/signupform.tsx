@@ -23,7 +23,7 @@ export function SignupForm() {
       <CardContent>
         <div className='grid gap-4'>
           <div className='grid gap-2'>
-            <Label htmlFor='email'>User</Label>
+            <Label htmlFor='email'>Username</Label>
             <Input id='user' type='text' placeholder='user' required />
           </div>
           <div className='grid gap-2'>

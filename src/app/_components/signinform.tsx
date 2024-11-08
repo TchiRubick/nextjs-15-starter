@@ -36,7 +36,7 @@ export function Signinform() {
         <CardContent>
           <div className='grid gap-4'>
             <div className='grid gap-2'>
-              <Label htmlFor='email'>Email</Label>
+              <Label htmlFor='email'>Email or username</Label>
               <Input
                 name='identifier'
                 id='identifier'
@@ -62,7 +62,7 @@ export function Signinform() {
           </div>
           <div className='mt-4 text-center text-sm'>
             Don&apos;t have an account?{' '}
-            <Link href='/signup' className='underline'>
+            <Link href='/auth/signup' className='underline'>
               Sign up
             </Link>
           </div>
