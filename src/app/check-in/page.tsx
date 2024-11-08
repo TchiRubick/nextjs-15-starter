@@ -161,29 +161,6 @@ const CheckInPage = async ({
                       </Tooltip>
                     </Label>
                   </CardContent>
-                  {/* <CardFooter className='hidden h-fit space-x-3'>
-                    <Tooltip>
-                      <TooltipTrigger>
-                        <Link href='/contact' className='z-50 w-full'>
-                          <Button className='flex w-full items-center justify-center'>
-                            <Phone className='h-4 w-4' />
-                          </Button>
-                        </Link>
-                      </TooltipTrigger>
-                      <TooltipContent>Contacter</TooltipContent>
-                    </Tooltip>
-                    <Tooltip>
-                      <TooltipTrigger>
-                        <Button
-                          variant='outline'
-                          className='flex w-full items-center justify-center'
-                        >
-                          Details
-                        </Button>
-                      </TooltipTrigger>
-                      <TooltipContent>Voir plus de details</TooltipContent>
-                    </Tooltip>
-                  </CardFooter> */}
                 </Link>
               </TooltipProvider>
             </Card>

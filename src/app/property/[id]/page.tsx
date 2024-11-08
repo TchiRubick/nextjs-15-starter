@@ -10,9 +10,27 @@ import {
 } from '@/components/ui/carousel';
 import InternalError from '@/lib/error';
 import { getProperty } from '@packages/uplisting';
-import { Bath, Bed, Check, House, MapPin, User, X } from 'lucide-react';
+import {
+  Bath,
+  Bed,
+  Check,
+  House,
+  Mail,
+  MapPin,
+  Phone,
+  User,
+  X,
+} from 'lucide-react';
 import Image from 'next/image';
 import { iconsForAmenitiesName, iconsSuitabilty } from './icons';
+import { Button } from '@/components/ui/button';
+import {
+  TooltipProvider,
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from '@/components/ui/tooltip';
+import Link from 'next/link';
 
 const PropertyDetails = async ({
   params,
@@ -161,6 +179,25 @@ const PropertyDetails = async ({
                     </p>
                   </div>
                 </div>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <Link href='/contact' className='w-full'>
+                        <Button
+                          variant={'outline'}
+                          className='flex w-full items-center justify-center'
+                        >
+                          <Mail className='h-4 w-4' />
+                        </Button>
+                      </Link>
+                    </TooltipTrigger>
+                    <TooltipContent>Contacter maintenant</TooltipContent>
+                  </Tooltip>
+
+                  <Button className='flex w-full items-center justify-center'>
+                    Reserver
+                  </Button>
+                </TooltipProvider>
               </CardContent>
             </Card>
 
@@ -227,7 +264,7 @@ const PropertyDetails = async ({
                   ] ? (
                     <Check className='h-4 w-4 text-primary' />
                   ) : (
-                    <X className='h-4 w-4 text-muted-foreground' />
+                    <X className='h-4 w-4 text-primary' />
                   )}
                 </p>
               ))}
