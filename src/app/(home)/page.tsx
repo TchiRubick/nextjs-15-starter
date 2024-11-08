@@ -1,36 +1,76 @@
 'use server';
 
+import BlurFade from '@/components/ui/blur-fade';
+import { useSearchParamsServerParser as searchParamsServerParser } from '@/hooks/useSearchParamsServerParser';
+import { getAvailability } from '@packages/uplisting';
 import { Amenities } from '../_components/amenities';
 import { CTA } from '../_components/cta';
 import { FAQ } from '../_components/faq';
 import { Hero } from '../_components/hero';
+import { Properties } from '../_components/properties';
 import { Testimonials } from '../_components/testimonials';
-import { Filter } from '../check-in/_components/filter';
+import {
+  defaultParamsValidation,
+  paramsValidation,
+  ParamsValidation,
+} from '../check-in/_validations';
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<ParamsValidation>;
+}) {
+  const params = await searchParams;
+
+  const values = await searchParamsServerParser(
+    params,
+    paramsValidation,
+    defaultParamsValidation,
+    '/check-in'
+  );
+
+  const availabilities = await getAvailability(values);
+
   return (
-    <div className='flex w-full flex-col'>
+    <main className='flex w-full flex-col gap-20'>
       {/* Hero Section with Filter */}
-      <section className="relative min-h-screen w-full">
-        <Hero />
+      <section className='relative w-full'>
+        <BlurFade inView>
+          <Hero />
+        </BlurFade>
+      </section>
 
-        {/* Floating Filter Card */}
-        <div className="absolute left-1/2 bottom-0 w-full max-w-6xl -translate-x-1/2 translate-y-1/2 px-4">
-          <Filter />
-        </div>
+      {/* Floating Filter Card */}
+      <section className='flex justify-center'>
+        <BlurFade delay={0.5}>
+          <Properties availabilities={availabilities} />
+        </BlurFade>
       </section>
 
       {/* Testimonials Section */}
-      <section className="mt-32">
-        <Testimonials />
+      <section>
+        <BlurFade delay={0.5} inView>
+          <Testimonials />
+        </BlurFade>
       </section>
 
-      {/* Content Sections with proper spacing */}
-      <section className="mt-32 space-y-24 px-4">
-        <Amenities />
-        <CTA />
-        <FAQ />
+      <section>
+        <BlurFade delay={0.5} inView>
+          <Amenities />
+        </BlurFade>
       </section>
-    </div>
+
+      <section>
+        <BlurFade delay={0.5} inView>
+          <CTA />
+        </BlurFade>
+      </section>
+
+      <section>
+        <BlurFade delay={0.5} inView>
+          <FAQ />
+        </BlurFade>
+      </section>
+    </main>
   );
 }

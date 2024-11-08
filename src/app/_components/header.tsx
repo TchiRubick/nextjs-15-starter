@@ -49,13 +49,11 @@ export const Header = () => {
     <header
       className={cn(
         'fixed left-0 top-0 z-40 w-full transition-all duration-300',
-        isScrolled
-          ? 'bg-slate-900/90 backdrop-blur-sm'
-          : 'bg-slate-900'
+        isScrolled ? 'bg-slate-900/90 backdrop-blur-sm' : 'bg-slate-900'
       )}
     >
       <div className='container relative mx-auto flex h-20 items-center justify-between px-4'>
-        <Link href="/" className="text-xl font-semibold text-white">
+        <Link href='/' className='text-xl font-semibold text-white'>
           TWBlocks
         </Link>
 
@@ -64,8 +62,8 @@ export const Header = () => {
           {navigationItems.map((item) => (
             <Link key={item.title} href={item.href}>
               <Button
-                variant="ghost"
-                className="text-white/90 hover:bg-white/10 hover:text-white"
+                variant='ghost'
+                className='text-white/90 hover:bg-white/10 hover:text-white'
               >
                 {item.title}
               </Button>
@@ -87,13 +85,13 @@ export const Header = () => {
             <Link href='/signin'>
               <Button
                 variant='ghost'
-                className="text-white/90 hover:bg-white/10 hover:text-white"
+                className='text-white/90 hover:bg-white/10 hover:text-white'
               >
                 Connexion
               </Button>
             </Link>
             <Link href='/signup'>
-              <Button className="bg-white text-slate-900 hover:bg-white/90">
+              <Button className='bg-white text-slate-900 hover:bg-white/90'>
                 S&apos;inscrire
               </Button>
             </Link>
@@ -101,7 +99,7 @@ export const Header = () => {
 
           <Button
             variant='ghost'
-            className='lg:hidden text-white/90 hover:bg-white/10 hover:text-white'
+            className='text-white/90 hover:bg-white/10 hover:text-white lg:hidden'
             onClick={() => setOpen(!isOpen)}
           >
             {isOpen ? <X className='h-5 w-5' /> : <Menu className='h-5 w-5' />}

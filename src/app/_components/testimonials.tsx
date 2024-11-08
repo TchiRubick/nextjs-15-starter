@@ -4,7 +4,7 @@ import {
   Carousel,
   CarouselApi,
   CarouselContent,
-  CarouselItem
+  CarouselItem,
 } from '@/components/ui/carousel';
 import { useEffect, useState } from 'react';
 import { ReviewCard, type ReviewCardProps } from './review-card';
@@ -109,9 +109,11 @@ export const Testimonials = () => {
         <div className='flex flex-col gap-16'>
           <div>
             <h2 className='text-4xl font-medium tracking-tight text-white md:text-5xl'>
-              Ce que les personnes ayant séjourné<br />ici ont adoré
+              Ce que les personnes ayant séjourné
+              <br />
+              ici ont adoré
             </h2>
-            <p className="mt-4 text-lg text-slate-400">
+            <p className='mt-4 text-lg text-slate-400'>
               Découvrez les expériences authentiques de nos clients
             </p>
           </div>
@@ -120,15 +122,15 @@ export const Testimonials = () => {
             setApi={setApi}
             className='w-full'
             opts={{
-              align: "start",
+              align: 'start',
               loop: true,
             }}
           >
-            <CarouselContent className="-ml-4">
+            <CarouselContent className='-ml-4'>
               {reviews.map((review) => (
                 <CarouselItem
                   key={review.name}
-                  className="pl-4 md:basis-1/2 lg:basis-1/3"
+                  className='pl-4 md:basis-1/2 lg:basis-1/3'
                 >
                   <ReviewCard {...review} />
                 </CarouselItem>
@@ -136,14 +138,13 @@ export const Testimonials = () => {
             </CarouselContent>
           </Carousel>
 
-          <div className="flex justify-center gap-1.5">
+          <div className='flex justify-center gap-1.5'>
             {reviews.map((_, index) => (
               <button
                 key={index}
-                className={`h-1.5 rounded-full transition-all duration-300 ${index === current
-                    ? 'w-6 bg-white'
-                    : 'w-1.5 bg-slate-700'
-                  }`}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  index === current ? 'w-6 bg-white' : 'w-1.5 bg-slate-700'
+                }`}
                 onClick={() => {
                   api?.scrollTo(index);
                   setCurrent(index);
