@@ -31,6 +31,7 @@ import {
   TooltipContent,
 } from '@/components/ui/tooltip';
 import Link from 'next/link';
+import { Label } from '@/components/ui/label';
 
 const PropertyDetails = async ({
   params,
@@ -185,7 +186,7 @@ const PropertyDetails = async ({
                       <Link href='/contact' className='w-full'>
                         <Button
                           variant={'outline'}
-                          className='flex w-full items-center justify-center'
+                          className='flex w-full items-center'
                         >
                           <Mail className='h-4 w-4' />
                         </Button>
@@ -252,21 +253,24 @@ const PropertyDetails = async ({
           {/* Suitability card */}
           <Card className='border-none'>
             <CardHeader>
-              <CardTitle>Partinance</CardTitle>
+              <CardTitle>Conformité</CardTitle>
             </CardHeader>
-            <CardContent className='prose max-w-none text-muted-foreground'>
+            <CardContent className='flex gap-4'>
               {Object.keys(property.suitability).map((key) => (
-                <p key={key} className='flex items-center gap-2'>
-                  {iconsSuitabilty[key as keyof typeof iconsSuitabilty]}
-                  {key}{' '}
+                <div key={key} className='colums-4 flex items-center gap-1'>
+                  <Label>{key} </Label>
                   {property.suitability[
                     key as keyof typeof property.suitability
                   ] ? (
-                    <Check className='h-4 w-4 text-primary' />
+                    <div className='flex items-center rounded-full border border-green-500 p-1'>
+                      <Check className='h-4 w-4 text-green-500' />
+                    </div>
                   ) : (
-                    <X className='h-4 w-4 text-primary' />
+                    <div className='flex items-center rounded-full border border-red-500 p-1'>
+                      <X className='h-4 w-4 text-red-500' />
+                    </div>
                   )}
-                </p>
+                </div>
               ))}
             </CardContent>
           </Card>
