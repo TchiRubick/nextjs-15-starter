@@ -109,11 +109,9 @@ const createUserSession = async (
 
 // Main signup function
 export async function signup(input: SignupInput) {
-  try {
     // Validate input
     const validatedInput = validateInput(input);
     const { username, email, password } = validatedInput;
-    console.log(username, email, password);
 
     // Check for existing users
     await checkExistingUser(username, email);
@@ -137,14 +135,6 @@ export async function signup(input: SignupInput) {
     await createUserSession(userData.id, userData);
 
     return redirect('/');
-  } catch (error) {
-    if (error instanceof InternalError) {
-      throw error;
-    }
-
-    console.error('Signup error:', error);
-    throw new InternalError('Signup failed', 'UNKNOWN_ERROR', 500);
-  }
 }
 
 // Exports
