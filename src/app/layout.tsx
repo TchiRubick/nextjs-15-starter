@@ -5,6 +5,7 @@ import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { Suspense } from 'react';
 import { Footer } from './_components/footer';
 import { Header } from './_components/header';
+import { Loader } from './_components/loader';
 import './globals.css';
 
 const geistSans = localFont({
@@ -36,17 +37,8 @@ export default function RootLayout({
         >
           <Header />
           <NuqsAdapter>
-            <Suspense
-              fallback={
-                <div
-                  id='loading-screen'
-                  className='fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-white opacity-75'
-                >
-                  <div className='h-12 w-12 animate-spin rounded-full border-8 border-solid border-purple-500 border-t-transparent' />
-                </div>
-              }
-            >
-              <main className='mx-auto mt-20'>{children}</main>
+            <Suspense fallback={<Loader />}>
+              <main className='mx-auto min-h-screen py-24'>{children}</main>
             </Suspense>
           </NuqsAdapter>
           <Footer />

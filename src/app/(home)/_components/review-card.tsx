@@ -33,7 +33,7 @@ export const ReviewCard = ({
 
       {/* Message */}
       <blockquote className='mt-4 flex-grow text-base leading-relaxed text-slate-300'>
-        "{message}"
+        &quot;{message}&quot;
       </blockquote>
 
       {/* Footer */}

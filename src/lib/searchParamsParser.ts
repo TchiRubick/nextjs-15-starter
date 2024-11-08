@@ -1,10 +1,10 @@
-'use server';
+import 'server-only';
 
 import { redirect } from 'next/navigation';
 import queryString from 'query-string';
 import { z } from 'zod';
 
-export const useSearchParamsServerParser = async <T extends z.ZodRawShape>(
+export const searchParamsParser = async <T extends z.ZodRawShape>(
   params: z.infer<typeof schemas>,
   schemas: z.ZodObject<T>,
   defaultValue: z.infer<typeof schemas>,

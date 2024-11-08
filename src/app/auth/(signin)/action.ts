@@ -1,6 +1,6 @@
 'use server';
 
-import { signin } from "@packages/auth/src";
+import { signin } from '@packages/auth/src';
 
 const handler = async (formData: FormData) => {
   const rawFormData = {

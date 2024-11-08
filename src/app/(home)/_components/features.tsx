@@ -1,8 +1,7 @@
-import BlurFade from '@/components/ui/blur-fade';
 import { Check } from 'lucide-react';
-import { Sweeper } from './sweeper';
+import Image from 'next/image';
 
-const amenities = [
+const features = [
   'Parking Gratuit',
   'Chambres non-fumeurs',
   'Connexion Wi-Fi rapide gratuite (195 Mb/s)',
@@ -14,7 +13,7 @@ const amenities = [
   'Location de vélos',
 ];
 
-export const Amenities = () => (
+export const Features = () => (
   <div className='w-full bg-white'>
     <div className='container mx-auto'>
       <div className='grid grid-cols-1 items-start gap-24 rounded-[2rem] bg-neutral-50 p-12 lg:grid-cols-2'>
@@ -26,19 +25,22 @@ export const Amenities = () => (
           <p className='mt-2 text-lg text-neutral-500'>Pour votre bien être</p>
 
           <div className='mt-12 grid gap-4'>
-            {amenities.map((amenity) => (
-              <div key={amenity} className='flex items-center gap-3'>
+            {features.map((feature) => (
+              <div key={feature} className='flex items-center gap-3'>
                 <Check className='h-5 w-5 stroke-[1.5px]' />
-                <span className='text-[15px] text-neutral-600'>{amenity}</span>
+                <span className='text-[15px] text-neutral-600'>{feature}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Right Column */}
-        <BlurFade>
-          <Sweeper />
-        </BlurFade>
+        <Image
+          src='/illustration/undraw_barbecue_3x93.svg'
+          alt='barbecue'
+          width={700}
+          height={700}
+        />
       </div>
     </div>
   </div>

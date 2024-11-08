@@ -83,3 +83,7 @@ body {
     -moz-appearance: textfield;
   }
 }
+
+html {
+  scroll-behavior: smooth;
+}

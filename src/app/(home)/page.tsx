@@ -1,19 +1,19 @@
 'use server';
 
 import BlurFade from '@/components/ui/blur-fade';
-import { useSearchParamsServerParser as searchParamsServerParser } from '@/hooks/useSearchParamsServerParser';
+import { searchParamsParser } from '@/lib/searchParamsParser';
 import { getAvailability } from '@packages/uplisting';
-import { Amenities } from '../_components/amenities';
-import { CTA } from '../_components/cta';
-import { FAQ } from '../_components/faq';
-import { Hero } from '../_components/hero';
-import { Properties } from '../_components/properties';
-import { Testimonials } from '../_components/testimonials';
 import {
   defaultParamsValidation,
   paramsValidation,
   ParamsValidation,
-} from '../check-in/_validations';
+} from '../_components/property/_validations';
+import { Properties } from '../_components/property/properties';
+import { CTA } from './_components/cta';
+import { FAQ } from './_components/faq';
+import { Features } from './_components/features';
+import { Hero } from './_components/hero';
+import { Testimonials } from './_components/testimonials';
 
 export default async function Home({
   searchParams,
@@ -22,7 +22,7 @@ export default async function Home({
 }) {
   const params = await searchParams;
 
-  const values = await searchParamsServerParser(
+  const values = await searchParamsParser(
     params,
     paramsValidation,
     defaultParamsValidation,
@@ -40,29 +40,30 @@ export default async function Home({
         </BlurFade>
       </section>
 
-      {/* Floating Filter Card */}
-      <section className='flex justify-center'>
-        <BlurFade delay={0.5}>
-          <Properties availabilities={availabilities} />
-        </BlurFade>
-      </section>
-
-      {/* Testimonials Section */}
       <section>
         <BlurFade delay={0.5} inView>
           <Testimonials />
         </BlurFade>
       </section>
 
-      <section>
+      {/* Floating Filter Card */}
+      <section className='flex justify-center' id='properties'>
         <BlurFade delay={0.5} inView>
-          <Amenities />
+          <Properties availabilities={availabilities} />
         </BlurFade>
       </section>
 
       <section>
         <BlurFade delay={0.5} inView>
           <CTA />
+        </BlurFade>
+      </section>
+
+      {/* Testimonials Section */}
+
+      <section>
+        <BlurFade delay={0.5} inView>
+          <Features />
         </BlurFade>
       </section>
 

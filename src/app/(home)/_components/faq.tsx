@@ -7,6 +7,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { PhoneCall } from 'lucide-react';
+import Link from 'next/link';
 
 const questions = [
   {
@@ -66,9 +67,11 @@ export const FAQ = () => (
               </p>
             </div>
             <div className=''>
-              <Button className='gap-4' variant='outline'>
-                Any questions? Reach out <PhoneCall className='h-4 w-4' />
-              </Button>
+              <Link href='/contact'>
+                <Button className='gap-4' variant='outline'>
+                  Any questions? Reach out <PhoneCall className='h-4 w-4' />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

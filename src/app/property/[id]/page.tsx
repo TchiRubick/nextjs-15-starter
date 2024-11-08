@@ -1,5 +1,6 @@
 'use server';
 
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Carousel,
@@ -8,30 +9,19 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import { Label } from '@/components/ui/label';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import InternalError from '@/lib/error';
 import { getProperty } from '@packages/uplisting';
-import {
-  Bath,
-  Bed,
-  Check,
-  House,
-  Mail,
-  MapPin,
-  Phone,
-  User,
-  X,
-} from 'lucide-react';
+import { Bath, Bed, Check, House, Mail, MapPin, User, X } from 'lucide-react';
 import Image from 'next/image';
-import { iconsForAmenitiesName, iconsSuitabilty } from './icons';
-import { Button } from '@/components/ui/button';
-import {
-  TooltipProvider,
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-} from '@/components/ui/tooltip';
 import Link from 'next/link';
-import { Label } from '@/components/ui/label';
+import { iconsForAmenitiesName } from './icons';
 
 const PropertyDetails = async ({
   params,

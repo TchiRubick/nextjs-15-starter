@@ -34,7 +34,7 @@ export const Filter = ({ reload }: { reload?: boolean }) => {
     {
       reload,
       customPathname: '/',
-      scroll: true,
+      scroll: false,
     }
   );
 
@@ -44,7 +44,6 @@ export const Filter = ({ reload }: { reload?: boolean }) => {
     control,
     setError,
     setValue,
-    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -58,20 +57,6 @@ export const Filter = ({ reload }: { reload?: boolean }) => {
     mode: 'onChange',
     resolver: zodResolver(filterSchema),
   });
-
-  const values = watch();
-
-  // useEffect(() => {
-  //   console.log('prefetch');
-  //   router.prefetch(
-  //     `/check-in?${qs.stringify({
-  //       min_price: values.min_price,
-  //       max_price: values.max_price,
-  //       check_in: format(values.date_range.from, 'yyyy-MM-dd'),
-  //       check_out: format(values.date_range.to, 'yyyy-MM-dd'),
-  //     })}`
-  //   );
-  // }, [values]);
 
   const onSubmit = (data: FilterSchema) => {
     if (Number(data.min_price) > Number(data.max_price)) {
@@ -169,7 +154,7 @@ export const Filter = ({ reload }: { reload?: boolean }) => {
         <Button
           type='submit'
           size='lg'
-          className='h-12 min-w-[140px] bg-primary font-medium text-white transition-all hover:bg-primary/90 hover:shadow-lg'
+          className='h-12 min-w-[140px] bg-white font-medium text-slate-900 transition-all hover:translate-y-[-2px] hover:bg-slate-50 hover:shadow-lg active:translate-y-0'
         >
           <Search className='mr-2 h-4 w-4' />
           Rechercher

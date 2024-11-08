@@ -4,36 +4,54 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
+const navigationItems = [
+  {
+    title: 'Accueil',
+    href: '/',
+  },
+  {
+    title: 'À propos',
+    href: '/about',
+  },
+  {
+    title: 'Équipements',
+    href: '/features',
+  },
+  {
+    title: 'Environs',
+    href: '/around',
+  },
+  {
+    title: 'Gallerie',
+    href: '/pictures',
+  },
+  {
+    title: 'Contact',
+    href: '/contact',
+    mobile_only: true,
+  },
+  {
+    title: 'Connexion',
+    href: '/login',
+    mobile_only: true,
+  },
+  {
+    title: "S'inscrire",
+    href: '/signup',
+    mobile_only: true,
+  },
+];
+
+const desktopItems = navigationItems.filter((item) => !item.mobile_only);
+
 export const Header = () => {
+  const [isOpen, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const navigationItems = [
-    {
-      title: 'Accueil',
-      href: '/',
-    },
-    {
-      title: 'À propos',
-      href: '/about',
-    },
-    {
-      title: 'Réservation',
-      href: '/check-in',
-    },
-    {
-      title: 'Équipements',
-      href: '/features',
-    },
-    {
-      title: 'Environs',
-      href: '/around',
-    },
-    {
-      title: 'Photos',
-      href: '/pictures',
-    },
-  ];
+
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,7 +61,10 @@ export const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const [isOpen, setOpen] = useState(false);
+  const getClassName = (path: string) =>
+    cn('text-white/90 hover:bg-white/10 hover:text-white', {
+      'bg-white/10 text-white': pathname === path,
+    });
 
   return (
     <header
@@ -54,26 +75,14 @@ export const Header = () => {
     >
       <div className='container relative mx-auto flex h-20 items-center justify-between px-4'>
         <Link href='/' className='text-xl font-semibold text-white'>
-          TWBlocks
+          Refuges des hauts
         </Link>
 
         {/* Desktop Navigation */}
         <div className='hidden lg:flex lg:items-center lg:gap-1'>
-          {navigationItems.map((item) => (
-            <Link
-              key={item.title}
-              href={item.href}
-              className={cn(
-                'border-b-2 border-transparent transition-colors duration-200',
-                item.href === window.location.pathname
-                  ? 'border-white/90 text-white'
-                  : 'hover:text-white'
-              )}
-            >
-              <Button
-                variant='ghost'
-                className='text-white/90 hover:bg-white/10 hover:text-white'
-              >
+          {desktopItems.map((item) => (
+            <Link key={item.title} href={item.href}>
+              <Button variant='ghost' className={getClassName(item.href)}>
                 {item.title}
               </Button>
             </Link>

@@ -109,32 +109,32 @@ const createUserSession = async (
 
 // Main signup function
 export async function signup(input: SignupInput) {
-    // Validate input
-    const validatedInput = validateInput(input);
-    const { username, email, password } = validatedInput;
+  // Validate input
+  const validatedInput = validateInput(input);
+  const { username, email, password } = validatedInput;
 
-    // Check for existing users
-    await checkExistingUser(username, email);
+  // Check for existing users
+  await checkExistingUser(username, email);
 
-    // Hash password
-    const passwordHash = await hashPassword(password);
+  // Hash password
+  const passwordHash = await hashPassword(password);
 
-    // Create user
-    const [user] = await createUser({
-      username,
-      email,
-      password: passwordHash,
-    });
+  // Create user
+  const [user] = await createUser({
+    username,
+    email,
+    password: passwordHash,
+  });
 
-    if (!user) {
-      throw SIGNUP_ERRORS.CREATION_FAILED;
-    }
+  if (!user) {
+    throw SIGNUP_ERRORS.CREATION_FAILED;
+  }
 
-    // Create session
-    const { password: _password, ...userData } = user;
-    await createUserSession(userData.id, userData);
+  // Create session
+  const { password: _password, ...userData } = user;
+  await createUserSession(userData.id, userData);
 
-    return redirect('/');
+  return redirect('/');
 }
 
 // Exports

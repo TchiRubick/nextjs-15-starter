@@ -6,8 +6,11 @@ import {
   CarouselContent,
   CarouselItem,
 } from '@/components/ui/carousel';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { ReviewCard, type ReviewCardProps } from './review-card';
+import { ReviewCard, ReviewCardProps } from './review-card';
 
 const reviews: ReviewCardProps[] = [
   {
@@ -104,17 +107,39 @@ export const Testimonials = () => {
   }, [api, current]);
 
   return (
-    <div className='w-full bg-slate-900 py-24'>
+    <div className='w-full bg-white py-24'>
       <div className='container mx-auto px-4'>
-        <div className='flex flex-col gap-16'>
-          <div>
-            <h2 className='text-4xl font-medium tracking-tight text-white md:text-5xl'>
-              Ce que les personnes ayant séjourné
-              <br />
-              ici ont adoré
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className='flex flex-col gap-16'
+        >
+          <div className='text-center'>
+            <div className='mb-6 flex items-center justify-center gap-2'>
+              <span className='text-sm font-medium text-slate-600'>
+                Avis vérifiés
+              </span>
+              <Link
+                href='https://www.booking.com/hotel/fr/refuges-des-hauts.fr.html'
+                target='_blank'
+              >
+                <Image
+                  src='/Booking.com_logo.svg'
+                  alt='booking'
+                  width={100}
+                  height={100}
+                />
+              </Link>
+            </div>
+
+            <h2 className='mb-4 text-4xl font-medium tracking-tight text-slate-900 md:text-5xl'>
+              L&apos;expérience de nos hôtes
             </h2>
-            <p className='mt-4 text-lg text-slate-400'>
-              Découvrez les expériences authentiques de nos clients
+            <p className='mx-auto max-w-2xl text-lg text-slate-600'>
+              Note moyenne de{' '}
+              <span className='font-medium text-slate-900'>9,8/10</span> basée
+              sur l&apos;expérience authentique de nos clients
             </p>
           </div>
 
@@ -132,18 +157,25 @@ export const Testimonials = () => {
                   key={review.name}
                   className='pl-4 md:basis-1/2 lg:basis-1/3'
                 >
-                  <ReviewCard {...review} />
+                  <motion.div
+                    whileHover={{ y: -5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <ReviewCard {...review} />
+                  </motion.div>
                 </CarouselItem>
               ))}
             </CarouselContent>
           </Carousel>
 
-          <div className='flex justify-center gap-1.5'>
+          <div className='flex justify-center gap-2'>
             {reviews.map((_, index) => (
               <button
                 key={index}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  index === current ? 'w-6 bg-white' : 'w-1.5 bg-slate-700'
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  index === current
+                    ? 'w-8 bg-slate-900'
+                    : 'w-2 bg-slate-200 hover:bg-slate-300'
                 }`}
                 onClick={() => {
                   api?.scrollTo(index);
@@ -152,7 +184,7 @@ export const Testimonials = () => {
               />
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
