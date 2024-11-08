@@ -62,8 +62,8 @@ export const Header = () => {
   }, []);
 
   const getClassName = (path: string) =>
-    cn('text-white/90 hover:bg-white/10 hover:text-white', {
-      'bg-white/10 text-white': pathname === path,
+    cn('text-white/90 hover:text-white', {
+      'border-b-2 text-white': pathname === path,
     });
 
   return (
@@ -81,8 +81,15 @@ export const Header = () => {
         {/* Desktop Navigation */}
         <div className='hidden lg:flex lg:items-center lg:gap-1'>
           {desktopItems.map((item) => (
-            <Link key={item.title} href={item.href}>
-              <Button variant='ghost' className={getClassName(item.href)}>
+            <Link
+              key={item.title}
+              href={item.href}
+              className={getClassName(item.href)}
+            >
+              <Button
+                variant='ghost'
+                className='text-white/90 hover:bg-white/10 hover:text-white'
+              >
                 {item.title}
               </Button>
             </Link>
