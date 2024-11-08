@@ -10,11 +10,11 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import handler from './action';
+import { register } from '@/actions/auth';
 
 const SignupPage = async () => {
   return (
-    <form action={handler}>
+    <form action={register}>
       <Card className='mx-auto max-w-sm'>
         <CardHeader>
           <CardTitle className='text-2xl'>Sign up</CardTitle>
