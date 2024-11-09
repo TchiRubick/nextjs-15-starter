@@ -1,7 +1,9 @@
 'use server';
 
 import { getUser, signOut } from '@packages/auth/index';
-import { signin, signup } from "@packages/auth/src";
+import { signin, signup } from '@packages/auth/src';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 export const login = async (formData: FormData) => {
   const rawFormData = {
@@ -23,7 +25,10 @@ export const register = async (formData: FormData) => {
 };
 
 export const logout = async () => {
-  return await signOut();
+  await signOut();
+
+  revalidatePath('/');
+  redirect('/');
 };
 
 export const isLoggedIn = async () => {

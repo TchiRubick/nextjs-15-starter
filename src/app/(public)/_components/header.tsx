@@ -1,23 +1,22 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import { Menu, X } from 'lucide-react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
 import { logout } from '@/actions/auth';
-import { useQueryAction } from '@packages/fetch-action/index';
-import { isLoggedIn } from '@/actions/auth';
-import { Label } from '@/components/ui/label';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Label } from '@/components/ui/label';
+import { useSession } from '@/hooks/useSession';
+import { cn } from '@/lib/utils';
+import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
+import { Menu, X } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 const navigationItems = [
   {
@@ -62,9 +61,10 @@ const desktopItems = navigationItems.filter((item) => !item.mobile_only);
 export const Header = () => {
   const [isOpen, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { data } = useQueryAction(isLoggedIn);
 
   const pathname = usePathname();
+
+  const { data, isFetching } = useSession();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -137,7 +137,7 @@ export const Header = () => {
                   <DropdownMenuItem>
                     <Label
                       onClick={logout}
-                      className='bg-white text-slate-900 hover:bg-white/90'
+                      className='bg-white text-slate-900 hover:bg-white/90 cursor-pointer'
                     >
                       Logout
                     </Label>

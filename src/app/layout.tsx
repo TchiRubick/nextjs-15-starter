@@ -2,6 +2,8 @@ import { ReactQueryProviders } from '@/providers/react-query-provider';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
+import { Suspense } from 'react';
+import { Loader } from './(public)/_components/loader';
 import './globals.css';
 
 const geistSans = localFont({
@@ -71,12 +73,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='fr'>
+
       <ReactQueryProviders>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <NuqsAdapter>{children}</NuqsAdapter>
-        </body>
+        <Suspense fallback={<Loader />}>
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
+            <NuqsAdapter>{children}</NuqsAdapter>
+          </body>
+        </Suspense>
       </ReactQueryProviders>
     </html>
   );

@@ -104,6 +104,34 @@ export const pageGuard = async (
   }
 };
 
+
+export const adminGuard = async (
+  options: GuardOptions = DEFAULT_GUARD_OPTIONS
+) => {
+  try {
+    const { redirectPath = DEFAULT_REDIRECT_PATH, requireVerified = false } =
+      options;
+    const { session, user } = await isAuth();
+
+    if (!session || !isSessionValid(session)) {
+      redirect(redirectPath);
+    }
+
+    if (requireVerified && !user?.emailVerified) {
+      redirect('/verify-email');
+    }
+
+    if (user?.role !== 'admin') {
+      redirect('/');
+    }
+
+    return { session, user };
+  } catch (error) {
+    console.error('Page admin guard error:', error);
+    redirect(DEFAULT_REDIRECT_PATH);
+  }
+};
+
 export const getUser = async () => {
   const { user } = await isAuth();
   return user;
@@ -111,6 +139,7 @@ export const getUser = async () => {
 
 export const signOut = async () => {
   const { session } = await isAuth();
+
   if (session) {
     await auth.invalidateSession(session.id);
   }

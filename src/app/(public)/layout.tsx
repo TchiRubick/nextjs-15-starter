@@ -1,9 +1,6 @@
 import type { Metadata } from 'next';
-import { Suspense } from 'react';
 
 import { Footer } from './_components/footer';
-import { Header } from './_components/header';
-import { Loader } from './_components/loader';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,10 +13,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Suspense fallback={<Loader />}>
-      <Header />
+    <>
       <main className='mx-auto min-h-screen py-20'>{children}</main>
       <Footer />
-    </Suspense>
+    </>
   );
 }
