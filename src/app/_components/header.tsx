@@ -6,6 +6,7 @@ import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { logout } from '@/actions/auth';
 
 const navigationItems = [
   {
@@ -120,6 +121,12 @@ export const Header = () => {
                 S&apos;inscrire
               </Button>
             </Link>
+            <Button
+              onClick={logout}
+              className='bg-white text-slate-900 hover:bg-white/90'
+            >
+              Logout
+            </Button>
           </div>
 
           <Button

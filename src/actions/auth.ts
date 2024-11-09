@@ -1,5 +1,6 @@
 'use server';
 
+import { signOut } from "@packages/auth/index";
 import { signin, signup } from "@packages/auth/src";
 
 export const login = async (formData: FormData) => {
@@ -20,3 +21,8 @@ export const register = async (formData: FormData) => {
 
   return await signup(rawFormData);
 };
+
+export const logout = async () => {
+  return await signOut();
+};
+

@@ -80,34 +80,25 @@ const createAndSetSessionCookie = async (userId: string) => {
 
 // Main signin function
 export async function signin(input: SigninInput) {
-  try {
     // Validate input
-    const validatedInput = validateInput(input);
+  const validatedInput = validateInput(input);
 
-    // Get user
-    const user = await getUserByIdentifierEmailUsername(
-      validatedInput.identifier
-    );
-    if (!user) {
-      throw AUTH_ERRORS.USER_NOT_FOUND;
-    }
-
-    // Verify password
-    await verifyPassword(user.password, validatedInput.password);
-
-    // Create and set session
-    await createAndSetSessionCookie(user.id);
-
-    // Redirect on success
-    return redirect('/');
-  } catch (error) {
-    if (error instanceof InternalError) {
-      throw error;
-    }
-
-    console.error('Signin error:', error);
-    throw AUTH_ERRORS.INVALID_CREDENTIALS;
+  // Get user
+  const user = await getUserByIdentifierEmailUsername(
+    validatedInput.identifier
+  );
+  if (!user) {
+    throw AUTH_ERRORS.USER_NOT_FOUND;
   }
+
+  // Verify password
+  await verifyPassword(user.password, validatedInput.password);
+
+  // Create and set session
+  await createAndSetSessionCookie(user.id);
+
+  // Redirect on success
+  return redirect('/');
 }
 
 // Optional: Export types and errors for use in components
