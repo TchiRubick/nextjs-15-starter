@@ -33,8 +33,8 @@ export const Filter = ({ reload }: { reload?: boolean }) => {
     defaultFilterParamValidation,
     {
       reload,
-      customPathname: '/',
-      scroll: false,
+      customPathname: '/#properties',
+      scroll: true,
     }
   );
 

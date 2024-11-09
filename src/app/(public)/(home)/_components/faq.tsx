@@ -59,17 +59,18 @@ export const FAQ = () => (
             </div>
             <div className='flex flex-col gap-2'>
               <h4 className='font-regular max-w-xl text-left text-3xl tracking-tighter md:text-5xl'>
-                Frequently Asked Questions
+                Questions Fréquentes
               </h4>
               <p className='max-w-xl text-left text-lg leading-relaxed tracking-tight text-muted-foreground lg:max-w-lg'>
-                Need help with something? Here are some of the most common
-                questions we get.
+                Besoin d&apos;aide ? Voici les questions les plus fréquemment
+                posées.
               </p>
             </div>
             <div className=''>
               <Link href='/contact'>
                 <Button className='gap-4' variant='outline'>
-                  Any questions? Reach out <PhoneCall className='h-4 w-4' />
+                  Une question ? Contactez-nous{' '}
+                  <PhoneCall className='h-4 w-4' />
                 </Button>
               </Link>
             </div>

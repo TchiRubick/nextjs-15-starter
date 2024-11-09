@@ -10,6 +10,9 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  experimental: {
+    webpackMemoryOptimizations: true,
+  },
 };
 
 export default withSentryConfig(nextConfig, {
@@ -30,7 +33,7 @@ export default withSentryConfig(nextConfig, {
 
   // Automatically annotate React components to show their full name in breadcrumbs and session replay
   reactComponentAnnotation: {
-    enabled: true,
+    enabled: false,
   },
 
   // Route browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers.

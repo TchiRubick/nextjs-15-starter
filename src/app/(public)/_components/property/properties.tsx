@@ -42,14 +42,11 @@ export const Properties = async ({
       {(availabilities instanceof InternalError ||
         availabilities.length === 0) && (
         <div className='mt-12 flex flex-col items-center justify-center'>
-          <h3 className='mb-6 text-2xl font-bold text-slate-900'>
-            Aucune disponibilité trouvée
-          </h3>
           <p className='mb-8 text-slate-600'>
-            Essayez de modifier vos critères de recherche
+            Veuillez modifier vos critères de recherche
           </p>
           <Image
-            src='/illustration/undraw_empty_re_opql.svg'
+            src='/illustration/undraw_house_searching_re_stk8.svg'
             alt='no data'
             width={400}
             height={400}

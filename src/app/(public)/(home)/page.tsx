@@ -11,7 +11,6 @@ import {
 import { Properties } from '../_components/property/properties';
 import { CTA } from './_components/cta';
 import { FAQ } from './_components/faq';
-import { Features } from './_components/features';
 import { Hero } from './_components/hero';
 import { Testimonials } from './_components/testimonials';
 
@@ -35,9 +34,7 @@ export default async function Home({
     <main className='flex w-full flex-col gap-20'>
       {/* Hero Section with Filter */}
       <section className='relative w-full'>
-        <BlurFade inView>
-          <Hero />
-        </BlurFade>
+        <Hero />
       </section>
 
       <section>
@@ -61,11 +58,11 @@ export default async function Home({
 
       {/* Testimonials Section */}
 
-      <section>
+      {/* <section>
         <BlurFade delay={0.5} inView>
           <Features />
         </BlurFade>
-      </section>
+      </section> */}
 
       <section>
         <BlurFade delay={0.5} inView>
