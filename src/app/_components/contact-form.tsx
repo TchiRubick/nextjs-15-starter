@@ -57,6 +57,7 @@ export const ContactForm = () => {
                 </p>
                 <Link
                   href={`https://api.whatsapp.com/send?phone=0347804228&text=`}
+                  target={'_blank'}
                 >
                   <Button className='mt-2 w-full bg-green-500 text-white hover:bg-green-600'>
                     <Image
