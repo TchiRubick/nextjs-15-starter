@@ -7,6 +7,17 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { logout } from '@/actions/auth';
+import { useQueryAction } from '@packages/fetch-action/index';
+import { isLoggedIn } from '@/actions/auth';
+import { Label } from '@/components/ui/label';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
+import {
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 const navigationItems = [
   {
@@ -51,6 +62,7 @@ const desktopItems = navigationItems.filter((item) => !item.mobile_only);
 export const Header = () => {
   const [isOpen, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { data } = useQueryAction(isLoggedIn);
 
   const pathname = usePathname();
 
@@ -108,25 +120,47 @@ export const Header = () => {
           </Link>
           <div className='hidden h-6 border-r border-white/20 md:inline-block'></div>
           <div className='hidden gap-2 lg:flex'>
-            <Link href='/auth'>
-              <Button
-                variant='ghost'
-                className='text-white/90 hover:bg-white/10 hover:text-white'
-              >
-                Connexion
-              </Button>
-            </Link>
-            <Link href='/auth/signup'>
-              <Button className='bg-white text-slate-900 hover:bg-white/90'>
-                S&apos;inscrire
-              </Button>
-            </Link>
-            <Button
-              onClick={logout}
-              className='bg-white text-slate-900 hover:bg-white/90'
-            >
-              Logout
-            </Button>
+            {data ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Avatar className='cursor-pointer'>
+                    {data.image && <AvatarImage src={data.image} />}
+                    <AvatarFallback>
+                      {data.username && data.username[0].toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuLabel>
+                    <Label>Profil</Label>
+                  </DropdownMenuLabel>
+                  <DropdownMenuItem>
+                    <Label
+                      onClick={logout}
+                      className='bg-white text-slate-900 hover:bg-white/90'
+                    >
+                      Logout
+                    </Label>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <div>
+                <Link href='/auth'>
+                  <Button
+                    variant='ghost'
+                    className='text-white/90 hover:bg-white/10 hover:text-white'
+                  >
+                    Connexion
+                  </Button>
+                </Link>
+                <Link href='/auth/signup'>
+                  <Button className='bg-white text-slate-900 hover:bg-white/90'>
+                    S&apos;inscrire
+                  </Button>
+                </Link>
+              </div>
+            )}
           </div>
 
           <Button

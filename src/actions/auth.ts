@@ -2,6 +2,7 @@
 
 import { signOut } from "@packages/auth/index";
 import { signin, signup } from "@packages/auth/src";
+import { getUser } from "@packages/auth/index";
 
 export const login = async (formData: FormData) => {
   const rawFormData = {
@@ -24,5 +25,9 @@ export const register = async (formData: FormData) => {
 
 export const logout = async () => {
   return await signOut();
+};
+
+export const isLoggedIn = async () => {
+  return await getUser();
 };
 
