@@ -23,10 +23,10 @@ export const CTA = () => (
             nécessaire pour des vacances réussies.
           </p>
         </div>
-        <div className='flex flex-row gap-4'>
+        <div className='flex flex-col sm:flex-row w-full sm:w-auto gap-4'>
           <Link href='/contact'>
             <Button
-              className='gap-2 bg-white/10 text-white hover:bg-white/20'
+              className='w-full gap-2 bg-white/10 text-white hover:bg-white/20'
               variant='ghost'
               size='lg'
             >
@@ -35,7 +35,7 @@ export const CTA = () => (
           </Link>
           <Link href='#properties'>
             <Button
-              className='gap-2 bg-white text-slate-900 hover:bg-white/90'
+              className='w-full gap-2 bg-white text-slate-900 hover:bg-white/90'
               size='lg'
             >
               Réserver maintenant <Calendar className='h-4 w-4' />
