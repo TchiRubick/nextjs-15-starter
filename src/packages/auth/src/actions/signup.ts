@@ -1,11 +1,14 @@
 import { redirect } from 'next/navigation';
 
-import {
-  createUser
-} from '@packages/db/models/user';
+import { createUser } from '@packages/db/models/user';
 import { revalidatePath } from 'next/cache';
 import { SIGNUP_ERRORS, SignupInput } from './types';
-import { checkExistingUser, createAndSetSessionCookie, hashPassword, validateInputSignup } from './utils';
+import {
+  checkExistingUser,
+  createAndSetSessionCookie,
+  hashPassword,
+  validateInputSignup,
+} from './utils';
 
 // Main signup function
 export async function signup(input: SignupInput) {

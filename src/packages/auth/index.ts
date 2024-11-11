@@ -104,7 +104,6 @@ export const pageGuard = async (
   }
 };
 
-
 export const adminGuard = async (
   options: GuardOptions = DEFAULT_GUARD_OPTIONS
 ) => {

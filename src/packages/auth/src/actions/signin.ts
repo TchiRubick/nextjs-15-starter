@@ -3,7 +3,11 @@ import { redirect } from 'next/navigation';
 import { getUserByIdentifierEmailUsername } from '@packages/db/models/user';
 import { revalidatePath } from 'next/cache';
 import { AUTH_ERRORS, SigninInput } from './types';
-import { createAndSetSessionCookie, validateInputSignin, verifyPassword } from './utils';
+import {
+  createAndSetSessionCookie,
+  validateInputSignin,
+  verifyPassword,
+} from './utils';
 
 // Main signin function
 export async function signin(input: SigninInput) {

@@ -68,7 +68,7 @@ export const FAQ = () => (
             </div>
             <div className=''>
               <Link href='/contact'>
-                <Button className='gap-4' variant='outline'>
+                <Button className='w-full gap-4 sm:w-64' variant='outline'>
                   Une question ? Contactez-nous{' '}
                   <PhoneCall className='h-4 w-4' />
                 </Button>

@@ -46,11 +46,11 @@ export const Hero = () => {
                 randonnées en été.
               </p>
 
-              <div className='mb-8 flex flex-wrap gap-4'>
+              <div className='flex flex-col flex-wrap gap-4 sm:mb-8 sm:flex-row sm:gap-4'>
                 <Link href='#properties'>
                   <Button
                     size='lg'
-                    className='group bg-slate-900 text-white transition-all hover:bg-slate-800'
+                    className='group w-full bg-slate-900 text-white transition-all hover:bg-slate-800 sm:w-56'
                   >
                     Réserver maintenant
                     <MoveRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
@@ -61,7 +61,7 @@ export const Hero = () => {
                   <Button
                     size='lg'
                     variant='outline'
-                    className='group border-slate-200 bg-white/80 backdrop-blur-sm transition-all hover:bg-slate-50'
+                    className='group w-full border-slate-200 bg-white/80 backdrop-blur-sm transition-all hover:bg-slate-50 sm:w-56'
                   >
                     Nous contacter
                     <PhoneCall className='ml-2 h-4 w-4 transition-transform group-hover:rotate-12' />

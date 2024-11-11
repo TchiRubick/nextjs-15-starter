@@ -73,7 +73,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='fr'>
-
       <ReactQueryProviders>
         <Suspense fallback={<Loader />}>
           <body

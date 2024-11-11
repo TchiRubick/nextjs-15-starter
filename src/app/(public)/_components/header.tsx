@@ -137,7 +137,7 @@ export const Header = () => {
                   <DropdownMenuItem>
                     <Label
                       onClick={logout}
-                      className='bg-white text-slate-900 hover:bg-white/90 cursor-pointer'
+                      className='cursor-pointer bg-white text-slate-900 hover:bg-white/90'
                     >
                       Logout
                     </Label>

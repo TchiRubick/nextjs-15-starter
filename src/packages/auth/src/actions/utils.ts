@@ -1,10 +1,18 @@
-import InternalError from "@/lib/error";
-import { hash, verify } from "@node-rs/argon2";
-import { cookies } from "next/headers";
-import { auth } from "../..";
+import InternalError from '@/lib/error';
+import { hash, verify } from '@node-rs/argon2';
+import { cookies } from 'next/headers';
+import { auth } from '../..';
 
-import { getUserByEmail, getUserByUsername } from "@packages/db/models/user";
-import { AUTH_ERRORS, HASH_OPTIONS, SigninInput, signinSchema, SIGNUP_ERRORS, SignupInput, signupSchema } from "./types";
+import { getUserByEmail, getUserByUsername } from '@packages/db/models/user';
+import {
+  AUTH_ERRORS,
+  HASH_OPTIONS,
+  SigninInput,
+  signinSchema,
+  SIGNUP_ERRORS,
+  SignupInput,
+  signupSchema,
+} from './types';
 
 // Helpers
 export const validateInputSignin = (input: SigninInput) => {
