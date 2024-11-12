@@ -20,7 +20,11 @@ import { AMENITIES_QUERY_KEY } from '../static';
 
 export const AddAmenityForm = () => {
   const queryClient = useQueryClient();
-  const form = useForm<InsertAmenity>();
+  const form = useForm<InsertAmenity>({
+    defaultValues: {
+      name: '',
+    },
+  });
 
   const onSuccess = () => {
     queryClient.invalidateQueries({ queryKey: AMENITIES_QUERY_KEY });
