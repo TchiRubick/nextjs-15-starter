@@ -13,7 +13,7 @@ import { Label } from '@/components/ui/label';
 import { useSession } from '@/hooks/useSession';
 import { cn } from '@/lib/utils';
 import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
-import { Menu, X } from 'lucide-react';
+import { LogOut, Menu, Shield, Store, User, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -102,23 +102,29 @@ export const Header = () => {
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuLabel>
+                  <DropdownMenuItem className='cursor-pointer'>
+                    <User />
                     <Label>Profil</Label>
-                  </DropdownMenuLabel>
+                  </DropdownMenuItem>
                   {data.role === 'admin' ? (
-                    <DropdownMenuItem>
-                      <Link href='/'>Store</Link>
-                    </DropdownMenuItem>
+                    <Link href='/'>
+                      <DropdownMenuItem className='cursor-pointer'>
+                        <Store />
+                        Store
+                      </DropdownMenuItem>
+                    </Link>
                   ) : (
-                    <DropdownMenuItem>
+                    <DropdownMenuItem className='cursor-pointer'>
+                      <Shield />
                       <Link href='/admin/products'>Admin</Link>
                     </DropdownMenuItem>
                   )}
-                  <DropdownMenuItem>
-                    <Label
-                      onClick={handleLogout}
-                      className='cursor-pointer bg-white text-slate-900 hover:bg-white/90'
-                    >
+                  <DropdownMenuItem
+                    className='cursor-pointer'
+                    onClick={handleLogout}
+                  >
+                    <LogOut />
+                    <Label className='cursor-pointer bg-white text-slate-900 hover:bg-white/90'>
                       Logout
                     </Label>
                   </DropdownMenuItem>

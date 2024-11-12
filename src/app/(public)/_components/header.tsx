@@ -13,7 +13,7 @@ import { Label } from '@/components/ui/label';
 import { useSession } from '@/hooks/useSession';
 import { cn } from '@/lib/utils';
 import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
-import { Menu, X } from 'lucide-react';
+import { LogOut, Menu, ShieldCheck, User, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -137,19 +137,24 @@ export const Header = () => {
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuLabel>
+                  <DropdownMenuItem className='cursor-pointer'>
+                    <User />
                     <Label>Profil</Label>
-                  </DropdownMenuLabel>
+                  </DropdownMenuItem>
                   {data.role === 'admin' && (
-                    <DropdownMenuItem>
-                      <Link href='/admin/products'>Admin</Link>
-                    </DropdownMenuItem>
+                    <Link href='/admin/products'>
+                      <DropdownMenuItem className='cursor-pointer'>
+                        <ShieldCheck />
+                        Admin
+                      </DropdownMenuItem>
+                    </Link>
                   )}
-                  <DropdownMenuItem>
-                    <Label
-                      onClick={handleLogout}
-                      className='cursor-pointer bg-white text-slate-900 hover:bg-white/90'
-                    >
+                  <DropdownMenuItem
+                    className='cursor-pointer'
+                    onClick={handleLogout}
+                  >
+                    <LogOut />
+                    <Label className='cursor-pointer bg-white text-slate-900 hover:bg-white/90'>
                       Logout
                     </Label>
                   </DropdownMenuItem>
