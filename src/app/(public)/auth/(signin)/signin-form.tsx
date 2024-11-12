@@ -14,22 +14,21 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { useForm } from 'react-hook-form';
 import { Loader2 } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { toast } from '@/hooks/use-toast';
 
 import { useMutationAction } from '@packages/fetch-action/index';
 
 export const SigninForm = () => {
-  const { toast } = useToast();
   const { register, getValues, handleSubmit } = useForm();
 
-  const { mutateAsync, isPending, error } = useMutationAction(login);
+  const { mutateAsync, isPending, error, isError } = useMutationAction(login);
 
   const onSubmit = async () => {
-    if (error) {
+    if (isError) {
       toast({
         variant: 'destructive',
         title: 'Error',
-        description: error.message,
+        description: error?.message,
       });
     }
 

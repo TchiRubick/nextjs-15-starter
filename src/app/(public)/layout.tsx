@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { Footer } from './_components/footer';
+import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -15,6 +16,7 @@ export default function RootLayout({
   return (
     <>
       <main className='mx-auto min-h-screen py-20'>{children}</main>
+      <Toaster />
       <Footer />
     </>
   );

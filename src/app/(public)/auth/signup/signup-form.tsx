@@ -13,19 +13,19 @@ import { Button } from '@/components/ui/button';
 import { useForm } from 'react-hook-form';
 import { useMutationAction } from '@packages/fetch-action/index';
 import { Loader2 } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { toast } from '@/hooks/use-toast';
 
 export const SignupForm = () => {
-  const { toast } = useToast();
   const { register: namedRegister, getValues, handleSubmit } = useForm();
 
-  const { mutateAsync, isPending, error } = useMutationAction(register);
+  const { mutateAsync, isPending, error, isError } =
+    useMutationAction(register);
   const onSubmit = async () => {
-    if (error) {
+    if (isError) {
       toast({
         variant: 'destructive',
         title: 'Error',
-        description: error.message,
+        description: error?.message,
       });
     }
 
