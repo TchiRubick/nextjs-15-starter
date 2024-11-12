@@ -1,4 +1,6 @@
-import Link from 'next/link';
+'use client';
+
+import { login } from '@/actions/auth';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -9,11 +11,19 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { login } from '@/actions/auth';
 
-const SigninPage = async () => {
+import Link from 'next/link';
+
+// TODO: use pageOrphanGuard to prevent a connected user from accessing this page
+
+const SigninPage = () => {
+  const handleSignin = async (formData: FormData) => {
+    await login(formData);
+    window.location.replace('/');
+  };
+
   return (
-    <form action={login}>
+    <form action={handleSignin}>
       <Card className='mx-auto max-w-sm'>
         <CardHeader>
           <CardTitle className='text-2xl'>Login</CardTitle>

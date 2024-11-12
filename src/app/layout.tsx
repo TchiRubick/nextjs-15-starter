@@ -1,4 +1,6 @@
+import getQueryClient from '@/lib/query-client';
 import { ReactQueryProviders } from '@/providers/react-query-provider';
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
@@ -72,15 +74,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='fr'>
+    <html lang='fr' suppressHydrationWarning>
       <ReactQueryProviders>
-        <Suspense fallback={<Loader />}>
-          <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-          >
-            <NuqsAdapter>{children}</NuqsAdapter>
-          </body>
-        </Suspense>
+        <HydrationBoundary state={dehydrate(getQueryClient())}>
+          <NuqsAdapter>
+            <Suspense fallback={<Loader />}>
+              <body
+                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+              >
+                {children}
+              </body>
+            </Suspense>
+          </NuqsAdapter>
+        </HydrationBoundary>
       </ReactQueryProviders>
     </html>
   );

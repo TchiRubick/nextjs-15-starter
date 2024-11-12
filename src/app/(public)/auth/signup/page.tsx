@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import { register } from '@/actions/auth';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -10,11 +11,17 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { register } from '@/actions/auth';
 
-const SignupPage = async () => {
+// TODO: use pageOrphanGuard to prevent a connected user from accessing this page
+
+const SignupPage = () => {
+  const handleSignup = async (formData: FormData) => {
+    await register(formData);
+    window.location.replace('/');
+  };
+
   return (
-    <form action={register}>
+    <form action={handleSignup}>
       <Card className='mx-auto max-w-sm'>
         <CardHeader>
           <CardTitle className='text-2xl'>Sign up</CardTitle>

@@ -1,13 +1,13 @@
 'use client';
 
-import { Check, MoveRight } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import Link from 'next/link';
+import { Check, MoveRight } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export const ContactForm = () => {
   return (
@@ -56,7 +56,7 @@ export const ContactForm = () => {
                   We&apos;ve made it easy to use and understand.
                 </p>
                 <Link
-                  href={`https://api.whatsapp.com/send?phone=0347804228&text=`}
+                  href={`https://wa.me/0347804228`}
                   target={'_blank'}
                 >
                   <Button className='mt-2 w-full bg-green-500 text-white hover:bg-green-600'>

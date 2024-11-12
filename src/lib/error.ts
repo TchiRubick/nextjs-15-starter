@@ -1,10 +1,15 @@
+
 class InternalError extends Error {
   constructor(
-    message: string,
+    message: string | Error | unknown,
     public code: string,
     public status: number = 400
   ) {
-    super(message);
+    if (message instanceof Error) {
+      message = message.message;
+    }
+
+    super(message as string);
     this.name = 'InternalError';
   }
 }

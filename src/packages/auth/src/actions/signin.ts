@@ -1,7 +1,6 @@
-import { redirect } from 'next/navigation';
 
+import { invalidateSession } from '@/lib/invalidateSession';
 import { getUserByIdentifierEmailUsername } from '@packages/db/models/user';
-import { revalidatePath } from 'next/cache';
 import { AUTH_ERRORS, SigninInput } from './types';
 import {
   createAndSetSessionCookie,
@@ -27,8 +26,5 @@ export async function signin(input: SigninInput) {
 
   // Create and set session
   await createAndSetSessionCookie(user.id);
-
-  // Redirect on success
-  revalidatePath('/');
-  return redirect('/');
+  await invalidateSession();
 }

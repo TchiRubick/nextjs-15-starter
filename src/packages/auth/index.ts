@@ -40,6 +40,7 @@ const createAuthConfig = (): AuthConfig => ({
     id: attributes.id,
     image: attributes.image,
     emailVerified: attributes.emailVerified,
+    role: attributes.role,
   }),
 });
 
@@ -104,6 +105,19 @@ export const pageGuard = async (
   }
 };
 
+export const pageOrphanGuard = async (
+  options: GuardOptions = DEFAULT_GUARD_OPTIONS
+) => {
+  const { redirectPath = DEFAULT_REDIRECT_PATH } = options;
+  const { session, user } = await isAuth();
+
+  if (session && isSessionValid(session)) {
+    redirect(redirectPath);
+  }
+
+  return { session, user };
+};
+
 export const adminGuard = async (
   options: GuardOptions = DEFAULT_GUARD_OPTIONS
 ) => {
@@ -119,7 +133,7 @@ export const adminGuard = async (
     if (requireVerified && !user?.emailVerified) {
       redirect('/verify-email');
     }
-
+    console.log('user', user);
     if (user?.role !== 'admin') {
       redirect('/');
     }

@@ -1,6 +1,5 @@
 'use server';
 
-import BlurFade from '@/components/ui/blur-fade';
 import { searchParamsParser } from '@/lib/searchParamsParser';
 import { getAvailability } from '@packages/uplisting';
 import {
@@ -38,36 +37,27 @@ export default async function Home({
       </section>
 
       <section>
-        <BlurFade delay={0.5} inView>
-          <Testimonials />
-        </BlurFade>
+
+        <Testimonials />
+
       </section>
 
       {/* Floating Filter Card */}
       <section className='flex justify-center' id='properties'>
-        <BlurFade delay={0.5} inView>
-          <Properties availabilities={availabilities} />
-        </BlurFade>
+
+        <Properties availabilities={availabilities} />
+
       </section>
 
       <section>
-        <BlurFade delay={0.5} inView>
-          <CTA />
-        </BlurFade>
+
+        <CTA />
+
       </section>
 
-      {/* Testimonials Section */}
-
-      {/* <section>
-        <BlurFade delay={0.5} inView>
-          <Features />
-        </BlurFade>
-      </section> */}
 
       <section>
-        <BlurFade delay={0.5} inView>
-          <FAQ />
-        </BlurFade>
+        <FAQ />
       </section>
     </main>
   );

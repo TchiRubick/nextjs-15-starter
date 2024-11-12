@@ -20,43 +20,14 @@ import { useEffect, useState } from 'react';
 
 const navigationItems = [
   {
-    title: 'Accueil',
-    href: '/',
+    title: 'Products',
+    href: '/admin/products',
   },
   {
-    title: 'À propos',
-    href: '/about',
-  },
-  {
-    title: 'Équipements',
-    href: '/features',
-  },
-  {
-    title: 'Environs',
-    href: '/around',
-  },
-  {
-    title: 'Gallerie',
-    href: '/pictures',
-  },
-  {
-    title: 'Contact',
-    href: '/contact',
-    mobile_only: true,
-  },
-  {
-    title: 'Connexion',
-    href: '/login',
-    mobile_only: true,
-  },
-  {
-    title: "S'inscrire",
-    href: '/signup',
-    mobile_only: true,
-  },
+    title: 'Amenities',
+    href: '/admin/amenities',
+  }
 ];
-
-const desktopItems = navigationItems.filter((item) => !item.mobile_only);
 
 export const Header = () => {
   const [isOpen, setOpen] = useState(false);
@@ -92,13 +63,13 @@ export const Header = () => {
       )}
     >
       <div className='container relative mx-auto flex h-20 items-center justify-between px-4'>
-        <Link href='/' className='text-xl font-semibold text-white'>
-          Refuges des hauts
+        <Link href='/admin/products' className='text-xl font-semibold text-white'>
+          Admin
         </Link>
 
         {/* Desktop Navigation */}
         <div className='hidden lg:flex lg:items-center lg:gap-1'>
-          {desktopItems.map((item) => (
+          {navigationItems.map((item) => (
             <Link
               key={item.title}
               href={item.href}
@@ -116,15 +87,6 @@ export const Header = () => {
         </div>
 
         <div className='flex items-center gap-4'>
-          <Link href='/contact' prefetch>
-            <Button
-              variant='ghost'
-              className='hidden text-white/90 hover:bg-white/10 hover:text-white md:inline-flex'
-            >
-              Contact
-            </Button>
-          </Link>
-          <div className='hidden h-6 border-r border-white/20 md:inline-block'></div>
           <div className='hidden gap-2 lg:flex'>
             {data && !isFetching && (
               <DropdownMenu>

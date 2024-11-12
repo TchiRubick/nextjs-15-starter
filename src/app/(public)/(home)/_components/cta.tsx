@@ -1,11 +1,17 @@
+'use client';
+
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { motion } from 'framer-motion';
 import { Calendar, PhoneCall } from 'lucide-react';
 import Link from 'next/link';
 
 export const CTA = () => (
   <div className='w-full bg-slate-900 py-24'>
-    <div className='container mx-auto px-4'>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 2 }} className='container mx-auto px-4'>
       <div className='flex flex-col items-center gap-8 text-center'>
         <div>
           <Badge className='bg-white/10 text-white hover:bg-white/20'>
@@ -43,6 +49,6 @@ export const CTA = () => (
           </Link>
         </div>
       </div>
-    </div>
+    </motion.div>
   </div>
 );

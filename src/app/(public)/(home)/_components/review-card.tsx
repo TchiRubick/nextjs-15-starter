@@ -1,5 +1,6 @@
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
+import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
 
 export interface ReviewCardProps {
@@ -16,17 +17,19 @@ export const ReviewCard = ({
   date,
 }: ReviewCardProps) => {
   return (
-    <div className='flex h-full flex-col rounded-2xl bg-slate-800 p-6'>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }} className='flex h-full flex-col rounded-2xl bg-slate-800 p-6'>
       {/* Rating Stars */}
       <div className='flex gap-1'>
         {Array.from({ length: 5 }).map((_, i) => (
           <Star
             key={i}
-            className={`h-4 w-4 ${
-              i < rating
-                ? 'fill-yellow-400 text-yellow-400'
-                : 'fill-slate-700 text-slate-700'
-            }`}
+            className={`h-4 w-4 ${i < rating
+              ? 'fill-yellow-400 text-yellow-400'
+              : 'fill-slate-700 text-slate-700'
+              }`}
           />
         ))}
       </div>
@@ -43,6 +46,6 @@ export const ReviewCard = ({
           {format(new Date(date), 'MMMM yyyy', { locale: fr })}
         </time>
       </div>
-    </div>
+    </motion.div>
   );
 };
