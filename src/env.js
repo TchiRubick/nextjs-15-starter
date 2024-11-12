@@ -15,7 +15,6 @@ export const env = createEnv({
     S3_BUCKET_NAME: z.string(),
     UPLISTING_API_KEY: z.string(),
     UPLISTING_URL: z.string().url(),
-    SENTRY_AUTH_TOKEN: z.string(),
   },
 
   /**
@@ -40,7 +39,6 @@ export const env = createEnv({
     S3_BUCKET_NAME: process.env.S3_BUCKET_NAME,
     UPLISTING_API_KEY: process.env.UPLISTING_API_KEY,
     UPLISTING_URL: process.env.UPLISTING_URL,
-    SENTRY_AUTH_TOKEN: process.env.SENTRY_AUTH_TOKEN,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**
