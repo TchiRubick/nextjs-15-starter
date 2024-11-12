@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Card,
   CardHeader,
@@ -14,28 +16,26 @@ import { useForm } from 'react-hook-form';
 import { useMutationAction } from '@packages/fetch-action/index';
 import { Loader2 } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import { formDataBuilder } from '@/lib/formdata-builder';
 
 export const SignupForm = () => {
   const { register: namedRegister, getValues, handleSubmit } = useForm();
 
   const { mutateAsync, isPending, error, isError } =
     useMutationAction(register);
-  const onSubmit = async () => {
-    if (isError) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description: error?.message,
-      });
-    }
 
-    const formData = getValues();
-    const formDataObject = new FormData();
-
-    Object.keys(formData).forEach((key) => {
-      formDataObject.append(key, formData[key]);
+  if (isError) {
+    toast({
+      variant: 'destructive',
+      title: 'Error',
+      description: error?.message,
     });
-    await mutateAsync(formDataObject);
+  }
+
+  const onSubmit = async () => {
+    const formData = formDataBuilder(getValues);
+
+    await mutateAsync(formData);
     window.location.replace('/');
   };
 
