@@ -202,7 +202,7 @@ const PropertyDetails = async ({
                   {property.property_fees.map((fee) => (
                     <div key={fee.name} className='flex justify-between'>
                       <span className='text-muted-foreground'>{fee.name}</span>
-                      <span className='font-medium'>{fee.amount} AED</span>
+                      <span className='font-medium'>{fee.amount} EUR</span>
                     </div>
                   ))}
                 </div>
@@ -276,7 +276,7 @@ const PropertyDetails = async ({
                     <div key={tax.name}>
                       <p>{tax.name}</p>
                       <p className='text-sm text-muted-foreground'>
-                        {tax.amount} AED
+                        {tax.amount} EUR
                       </p>
                       <span className='text-sm'>{tax.per}</span>
                     </div>
