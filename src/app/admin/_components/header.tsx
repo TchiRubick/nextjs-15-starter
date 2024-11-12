@@ -105,7 +105,11 @@ export const Header = () => {
                   <DropdownMenuLabel>
                     <Label>Profil</Label>
                   </DropdownMenuLabel>
-                  {data.role === 'admin' && (
+                  {data.role === 'admin' ? (
+                    <DropdownMenuItem>
+                      <Link href='/'>Store</Link>
+                    </DropdownMenuItem>
+                  ) : (
                     <DropdownMenuItem>
                       <Link href='/admin/products'>Admin</Link>
                     </DropdownMenuItem>
