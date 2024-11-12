@@ -210,17 +210,19 @@ export const CreateProductForm = () => {
           />
         </div>
 
+        <MultiSelect
+          placeholder='Select amenities'
+          options={[
+            { value: 'option1', label: 'Option 1' },
+            { value: 'option2', label: 'Option 2' },
+          ]}
+          onValueChange={(values) => console.log(values)}
+        />
+
         <Button type='submit' disabled={isPending}>
           {isPending ? 'Creating...' : 'Create Product'}
         </Button>
       </form>
-      <MultiSelect
-        options={[
-          { value: 'option1', label: 'Option 1' },
-          { value: 'option2', label: 'Option 2' },
-        ]}
-        onValueChange={(values) => console.log(values)}
-      />
     </Form>
   );
 };

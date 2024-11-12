@@ -8,14 +8,14 @@ import { Product } from '../schema';
 // Schemas
 // ============================================================================
 export const zInsertProduct = createInsertSchema(Product, {
-  name: z.string().min(1, "Product name is required"),
-  description: z.string().min(1, "Description is required"),
-  price: z.number().positive("Price must be greater than 0"),
+  name: z.string().min(1, 'Product name is required'),
+  description: z.string().min(1, 'Description is required'),
+  price: z.number().positive('Price must be greater than 0'),
   status: z.enum(['draft', 'published']).default('draft'),
   bed: z.number().int().min(0).default(0),
   bath: z.number().int().min(0).default(0),
   maxPerson: z.number().int().min(0).default(0),
-  room: z.number().int().positive("Room number is required"),
+  room: z.number().int().positive('Room number is required'),
 });
 
 export const zSelectProduct = createSelectSchema(Product);
@@ -38,15 +38,15 @@ export const getProductById = async (id: number) =>
     with: {
       amenities: {
         with: {
-          amenity: true
-        }
+          amenity: true,
+        },
       },
       images: {
         with: {
-          image: true
-        }
-      }
-    }
+          image: true,
+        },
+      },
+    },
   });
 
 export const getAllProducts = async () =>
@@ -54,15 +54,15 @@ export const getAllProducts = async () =>
     with: {
       amenities: {
         with: {
-          amenity: true
-        }
+          amenity: true,
+        },
       },
       images: {
         with: {
-          image: true
-        }
-      }
-    }
+          image: true,
+        },
+      },
+    },
   });
 
 export const createProduct = async (input: InsertProduct) =>
@@ -80,13 +80,13 @@ export const getPublishedProducts = async () =>
     with: {
       amenities: {
         with: {
-          amenity: true
-        }
+          amenity: true,
+        },
       },
       images: {
         with: {
-          image: true
-        }
-      }
-    }
+          image: true,
+        },
+      },
+    },
   });
