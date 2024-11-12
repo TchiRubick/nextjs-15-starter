@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import {
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Label } from '@/components/ui/label';
@@ -52,7 +51,7 @@ export const Header = () => {
 
   const handleLogout = async () => {
     await logout();
-    window.location.reload();
+    window.location.replace('/');
   };
 
   return (
