@@ -79,8 +79,14 @@ export const ProductAmenity = pgTable('product_amenity', (t) => ({
 
 export const ProductImage = pgTable('product_image', (t) => ({
   id: t.serial('id').primaryKey(),
-  productId: t.integer('product_id').notNull().references(() => Product.id),
-  imageId: t.integer('image_id').notNull().references(() => Image.id),
+  productId: t
+    .integer('product_id')
+    .notNull()
+    .references(() => Product.id),
+  imageId: t
+    .integer('image_id')
+    .notNull()
+    .references(() => Image.id),
 }));
 
 // ============================================================================
