@@ -63,7 +63,7 @@ export const AddAmenityForm = () => {
             <FormItem>
               <FormLabel>Nom de l&apos;équipement</FormLabel>
               <FormControl>
-                <Input placeholder='Ex: WiFi, Parking...' {...field} />
+                <Input placeholder='Ex: WiFi, Parking...' {...field} required />
               </FormControl>
               <FormMessage />
             </FormItem>
