@@ -1,8 +1,5 @@
-
 import { invalidateSession } from '@/lib/invalidateSession';
-import {
-  createUser
-} from '@packages/db/models/user';
+import { createUser } from '@packages/db/models/user';
 import { SIGNUP_ERRORS, SignupInput } from './types';
 import {
   checkExistingUser,

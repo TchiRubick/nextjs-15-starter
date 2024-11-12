@@ -29,9 +29,9 @@ export const AddAmenityForm = () => {
 
     toast({
       title: 'Succès',
-      description: 'L\'équipement a été ajouté avec succès',
+      description: "L'équipement a été ajouté avec succès",
     });
-  }
+  };
 
   const onError = (error: Error) => {
     toast({
@@ -39,12 +39,9 @@ export const AddAmenityForm = () => {
       title: 'Erreur',
       description: error.message,
     });
-  }
+  };
 
-  const { mutate, isPending } = useCreateAmenity(
-    onSuccess,
-    onError
-  );
+  const { mutate, isPending } = useCreateAmenity(onSuccess, onError);
 
   const onSubmit = (data: InsertAmenity) => {
     mutate(data);
@@ -52,21 +49,21 @@ export const AddAmenityForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
         <FormField
           control={form.control}
-          name="name"
+          name='name'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nom de l'équipement</FormLabel>
+              <FormLabel>Nom de l&apos;équipement</FormLabel>
               <FormControl>
-                <Input placeholder="Ex: WiFi, Parking..." {...field} />
+                <Input placeholder='Ex: WiFi, Parking...' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit" disabled={isPending}>
+        <Button type='submit' disabled={isPending}>
           {isPending ? 'Ajout en cours...' : 'Ajouter'}
         </Button>
       </form>

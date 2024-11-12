@@ -55,10 +55,7 @@ export const ContactForm = () => {
                 <p className='text-sm text-muted-foreground'>
                   We&apos;ve made it easy to use and understand.
                 </p>
-                <Link
-                  href={`https://wa.me/0347804228`}
-                  target={'_blank'}
-                >
+                <Link href={`https://wa.me/0347804228`} target={'_blank'}>
                   <Button className='mt-2 w-full bg-green-500 text-white hover:bg-green-600'>
                     <Image
                       src={'/svg/whatsapp-svgrepo-com.svg'}

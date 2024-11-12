@@ -26,7 +26,7 @@ const navigationItems = [
   {
     title: 'Amenities',
     href: '/admin/amenities',
-  }
+  },
 ];
 
 export const Header = () => {
@@ -63,7 +63,10 @@ export const Header = () => {
       )}
     >
       <div className='container relative mx-auto flex h-20 items-center justify-between px-4'>
-        <Link href='/admin/products' className='text-xl font-semibold text-white'>
+        <Link
+          href='/admin/products'
+          className='text-xl font-semibold text-white'
+        >
           Admin
         </Link>
 
@@ -110,7 +113,7 @@ export const Header = () => {
                   <DropdownMenuItem>
                     <Label
                       onClick={handleLogout}
-                      className='bg-white text-slate-900 hover:bg-white/90 cursor-pointer'
+                      className='cursor-pointer bg-white text-slate-900 hover:bg-white/90'
                     >
                       Logout
                     </Label>
@@ -135,7 +138,9 @@ export const Header = () => {
                 </Link>
               </div>
             )}
-            {isFetching && <div className='h-6 w-6 rounded-full bg-white/10 animate-pulse'></div>}
+            {isFetching && (
+              <div className='h-6 w-6 animate-pulse rounded-full bg-white/10'></div>
+            )}
           </div>
 
           <Button

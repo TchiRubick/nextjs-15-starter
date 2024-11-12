@@ -31,7 +31,9 @@ export const Properties = ({
     <motion.main
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1 }} className='container mx-auto flex flex-col items-center space-y-8 px-4 py-12'>
+      transition={{ duration: 1 }}
+      className='container mx-auto flex flex-col items-center space-y-8 px-4 py-12'
+    >
       <div className='text-center'>
         <h2 className='mb-4 text-4xl font-medium tracking-tight text-slate-900 md:text-5xl'>
           Réserver votre séjour
@@ -45,19 +47,19 @@ export const Properties = ({
 
       {(availabilities instanceof InternalError ||
         availabilities.length === 0) && (
-          <div className='mt-12 flex flex-col items-center justify-center'>
-            <p className='mb-8 text-slate-600'>
-              Veuillez modifier vos critères de recherche
-            </p>
-            <Image
-              src='/illustration/undraw_house_searching_re_stk8.svg'
-              alt='no data'
-              width={400}
-              height={400}
-              className='opacity-80'
-            />
-          </div>
-        )}
+        <div className='mt-12 flex flex-col items-center justify-center'>
+          <p className='mb-8 text-slate-600'>
+            Veuillez modifier vos critères de recherche
+          </p>
+          <Image
+            src='/illustration/undraw_house_searching_re_stk8.svg'
+            alt='no data'
+            width={400}
+            height={400}
+            className='opacity-80'
+          />
+        </div>
+      )}
 
       {Array.isArray(availabilities) && availabilities.length > 0 && (
         <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3'>

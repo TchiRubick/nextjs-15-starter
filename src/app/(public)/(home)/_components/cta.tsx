@@ -11,7 +11,9 @@ export const CTA = () => (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 2 }} className='container mx-auto px-4'>
+      transition={{ duration: 2 }}
+      className='container mx-auto px-4'
+    >
       <div className='flex flex-col items-center gap-8 text-center'>
         <div>
           <Badge className='bg-white/10 text-white hover:bg-white/20'>
@@ -29,7 +31,7 @@ export const CTA = () => (
             nécessaire pour des vacances réussies.
           </p>
         </div>
-        <div className='flex flex-col sm:flex-row w-full sm:w-auto gap-4'>
+        <div className='flex w-full flex-col gap-4 sm:w-auto sm:flex-row'>
           <Link href='/contact'>
             <Button
               className='w-full gap-2 bg-white/10 text-white hover:bg-white/20'

@@ -7,5 +7,5 @@ export const useSession = () => {
   return useQuery({
     queryKey: ['user', 'session', pathname],
     queryFn: () => isLoggedIn(),
-  })
+  });
 };

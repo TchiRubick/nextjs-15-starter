@@ -1,9 +1,11 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createAmenityAction } from "../action";
-import { AMENITIES_QUERY_KEY } from "../static";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { createAmenityAction } from '../action';
+import { AMENITIES_QUERY_KEY } from '../static';
 
-
-export const useCreateAmenity = (onSuccess: () => void, onError: (error: Error) => void) => {
+export const useCreateAmenity = (
+  onSuccess: () => void,
+  onError: (error: Error) => void
+) => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -15,5 +17,5 @@ export const useCreateAmenity = (onSuccess: () => void, onError: (error: Error) 
     onError: (error) => {
       onError(error);
     },
-  })
-}
+  });
+};

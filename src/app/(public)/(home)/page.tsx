@@ -37,24 +37,17 @@ export default async function Home({
       </section>
 
       <section>
-
         <Testimonials />
-
       </section>
 
       {/* Floating Filter Card */}
       <section className='flex justify-center' id='properties'>
-
         <Properties availabilities={availabilities} />
-
       </section>
 
       <section>
-
         <CTA />
-
       </section>
-
 
       <section>
         <FAQ />

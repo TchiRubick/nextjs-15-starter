@@ -3,5 +3,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <main className='mx-auto min-h-screen py-20 container'>{children}</main>;
+  return (
+    <main className='container mx-auto min-h-screen py-20'>{children}</main>
+  );
 }

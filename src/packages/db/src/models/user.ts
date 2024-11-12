@@ -66,10 +66,7 @@ export const createUser = async (input: InsertUser) =>
  * Update an existing user
  */
 export const updateUser = async (id: string, input: UpdateUser) =>
-  db.update(User)
-    .set(input)
-    .where(eq(User.id, id))
-    .returning();
+  db.update(User).set(input).where(eq(User.id, id)).returning();
 
 /**
  * Delete a user

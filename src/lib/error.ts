@@ -1,4 +1,3 @@
-
 class InternalError extends Error {
   constructor(
     message: string | Error | unknown,

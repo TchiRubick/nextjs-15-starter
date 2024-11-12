@@ -172,10 +172,11 @@ export const Testimonials = () => {
             {reviews.map((_, index) => (
               <button
                 key={index}
-                className={`h-2 rounded-full transition-all duration-300 ${index === current
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  index === current
                     ? 'w-8 bg-slate-900'
                     : 'w-2 bg-slate-200 hover:bg-slate-300'
-                  }`}
+                }`}
                 onClick={() => {
                   api?.scrollTo(index);
                   setCurrent(index);

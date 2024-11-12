@@ -20,8 +20,8 @@ const TermsOfService = () => {
 
       <p className='mt-6'>
         You agree to use the site only for lawful purposes and in a way that
-        does not infringe the rights of, restrict, or inhibit anyone else's use
-        and enjoyment of the site.
+        does not infringe the rights of, restrict, or inhibit anyone else&apos;s
+        use and enjoyment of the site.
       </p>
 
       <h2 className='mt-12 text-2xl font-bold'>Intellectual Property</h2>

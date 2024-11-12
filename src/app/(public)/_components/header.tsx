@@ -148,7 +148,7 @@ export const Header = () => {
                   <DropdownMenuItem>
                     <Label
                       onClick={handleLogout}
-                      className='bg-white text-slate-900 hover:bg-white/90 cursor-pointer'
+                      className='cursor-pointer bg-white text-slate-900 hover:bg-white/90'
                     >
                       Logout
                     </Label>
@@ -173,7 +173,9 @@ export const Header = () => {
                 </Link>
               </div>
             )}
-            {isFetching && <div className='h-6 w-6 rounded-full bg-white/10 animate-pulse'></div>}
+            {isFetching && (
+              <div className='h-6 w-6 animate-pulse rounded-full bg-white/10'></div>
+            )}
           </div>
 
           <Button

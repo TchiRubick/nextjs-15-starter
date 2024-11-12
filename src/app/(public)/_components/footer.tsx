@@ -73,7 +73,9 @@ export const Footer = () => {
                 <p>France</p>
               </div>
               <div className='flex max-w-lg flex-col text-left text-sm leading-relaxed tracking-tight text-background/75'>
-                <Link href='/terms-of-service'>conditions d'utilisation</Link>
+                <Link href='/terms-of-service'>
+                  conditions d&apos;utilisation
+                </Link>
                 <Link href='/privacy-policy'>Politique de confidentialité</Link>
               </div>
             </div>
