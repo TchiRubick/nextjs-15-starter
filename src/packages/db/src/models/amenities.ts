@@ -17,6 +17,8 @@ export const zUpdateAmenity = zInsertAmenity.pick({
   name: true,
 });
 
+export const amenities = zInsertAmenity.shape
+
 // ============================================================================
 // Types
 // ============================================================================

@@ -1,5 +1,6 @@
 "use client";
 
+import { AMENITIES_QUERY_KEY } from "@/app/admin/amenities/static";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -12,17 +13,24 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
-import { type InsertProduct } from "@/packages/db/src/models/products";
+import { CreateProduct } from "@/types";
 import { useMutationAction } from "@packages/fetch-action/index";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { PRODUCTS_QUERY_KEY } from "../../static";
-import { createProductAction } from "../action";
+import { createProductAction, getAmenitiesAction } from "../action";
 
 export const CreateProductForm = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
+
+  const { data: amenities } = useQuery({
+    queryKey: AMENITIES_QUERY_KEY,
+    queryFn: getAmenitiesAction,
+  });
+
+  console.log(amenities);
 
   const { mutateAsync, isPending } = useMutationAction(createProductAction, {
     onSuccess: () => {
@@ -41,7 +49,7 @@ export const CreateProductForm = () => {
     },
   });
 
-  const form = useForm<InsertProduct>({
+  const form = useForm<CreateProduct>({
     defaultValues: {
       name: "",
       description: "",
@@ -54,7 +62,7 @@ export const CreateProductForm = () => {
     },
   });
 
-  const onSubmit = async (data: InsertProduct) => {
+  const onSubmit = async (data: CreateProduct) => {
     await mutateAsync(data);
   };
 
