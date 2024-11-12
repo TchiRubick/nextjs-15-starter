@@ -20,7 +20,7 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className='relative z-10 mx-auto max-w-6xl px-4 pt-32'
+            className='relative z-10 mx-auto max-w-6xl px-4'
           >
             <div className='mb-24 max-w-2xl'>
               <div className='w-fit'>
