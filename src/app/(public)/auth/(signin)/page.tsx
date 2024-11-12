@@ -1,11 +1,13 @@
 import { pageOrphanGuard } from '@packages/auth/index';
 import { SigninForm } from './signin-form';
 
-// TODO: use pageOrphanGuard to prevent a connected user from accessing this page
-
 const SigninPage = async () => {
-  await pageOrphanGuard();
-  return <SigninForm />;
+  // await pageOrphanGuard();
+  return (
+    <div className='flex justify-center pt-28'>
+      <SigninForm />
+    </div>
+  );
 };
 
 export default SigninPage;

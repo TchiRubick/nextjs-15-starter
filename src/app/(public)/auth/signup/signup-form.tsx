@@ -9,16 +9,38 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { register } from '@/actions/auth';
 import Link from 'next/link';
-import { Button } from 'react-day-picker';
+import { Button } from '@/components/ui/button';
+import { useForm } from 'react-hook-form';
+import { useMutationAction } from '@packages/fetch-action/index';
+import { Loader2 } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 export const SignupForm = () => {
-  const handleSignup = async (formData: FormData) => {
-    await register(formData);
+  const { toast } = useToast();
+  const { register: namedRegister, getValues, handleSubmit } = useForm();
+
+  const { mutateAsync, isPending, error } = useMutationAction(register);
+  const onSubmit = async () => {
+    if (error) {
+      toast({
+        variant: 'destructive',
+        title: 'Error',
+        description: error.message,
+      });
+    }
+
+    const formData = getValues();
+    const formDataObject = new FormData();
+
+    Object.keys(formData).forEach((key) => {
+      formDataObject.append(key, formData[key]);
+    });
+    await mutateAsync(formDataObject);
     window.location.replace('/');
   };
 
   return (
-    <form action={handleSignup}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Card className='mx-auto max-w-sm'>
         <CardHeader>
           <CardTitle className='text-2xl'>Sign up</CardTitle>
@@ -31,11 +53,11 @@ export const SignupForm = () => {
             <div className='grid gap-2'>
               <Label htmlFor='user'>Username</Label>
               <Input
-                id='user'
+                id='username'
                 type='text'
                 placeholder='user'
                 required
-                name='username'
+                {...namedRegister('username')}
               />
             </div>
             <div className='grid gap-2'>
@@ -45,17 +67,22 @@ export const SignupForm = () => {
                 type='email'
                 placeholder='m@example.com'
                 required
-                name='email'
+                {...namedRegister('email')}
               />
             </div>
             <div className='grid gap-2'>
               <div className='flex items-center'>
                 <Label htmlFor='password'>Password</Label>
               </div>
-              <Input id='password' type='password' required name='password' />
+              <Input
+                id='password'
+                type='password'
+                required
+                {...namedRegister('password')}
+              />
             </div>
-            <Button type='submit' className='w-full'>
-              Sign up
+            <Button type='submit' className='w-full' disabled={isPending}>
+              {isPending ? <Loader2 className='animate-spin' /> : 'Sign up'}
             </Button>
           </div>
           <div className='mt-4 text-center text-sm'>

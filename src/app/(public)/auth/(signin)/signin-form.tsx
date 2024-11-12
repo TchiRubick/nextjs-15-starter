@@ -11,17 +11,42 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import Link from 'next/link';
-import { Button } from 'react-day-picker';
+import { Button } from '@/components/ui/button';
+import { useForm } from 'react-hook-form';
+import { Loader2 } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
+
+import { useMutationAction } from '@packages/fetch-action/index';
 
 export const SigninForm = () => {
-  const handleSignin = async (formData: FormData) => {
-    await login(formData);
+  const { toast } = useToast();
+  const { register, getValues, handleSubmit } = useForm();
+
+  const { mutateAsync, isPending, error } = useMutationAction(login);
+
+  const onSubmit = async () => {
+    if (error) {
+      toast({
+        variant: 'destructive',
+        title: 'Error',
+        description: error.message,
+      });
+    }
+
+    const formData = getValues();
+    const formDataObject = new FormData();
+
+    Object.keys(formData).forEach((key) => {
+      formDataObject.append(key, formData[key]);
+    });
+
+    await mutateAsync(formDataObject);
     window.location.replace('/');
   };
 
   return (
-    <form action={handleSignin}>
-      <Card className='mx-auto max-w-sm'>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Card>
         <CardHeader>
           <CardTitle className='text-2xl'>Login</CardTitle>
           <CardDescription>
@@ -33,10 +58,9 @@ export const SigninForm = () => {
             <div className='grid gap-2'>
               <Label htmlFor='email'>Email or username</Label>
               <Input
-                name='identifier'
+                {...register('identifier')}
                 id='identifier'
                 placeholder='m@example.com'
-                required
               />
             </div>
             <div className='grid gap-2'>
@@ -49,10 +73,16 @@ export const SigninForm = () => {
                   Forgot your password?
                 </Link>
               </div>
-              <Input name='password' id='password' type='password' required />
+              <Input
+                {...register('password')}
+                id='password'
+                type='password'
+                placeholder='password'
+              />
             </div>
-            <Button type='submit' className='w-full'>
-              Login
+
+            <Button type='submit' className='w-full' disabled={isPending}>
+              {isPending ? <Loader2 className='mr-2 animate-spin' /> : 'Login'}
             </Button>
           </div>
           <div className='mt-4 text-center text-sm'>
