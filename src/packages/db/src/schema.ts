@@ -62,9 +62,25 @@ export const Product = pgTable('product', (t) => ({
   bath: t.integer('bath'),
   maxPerson: t.integer('max_person'),
   room: t.integer('room').notNull(),
-  // References
-  amenities: t.integer('amenities').references(() => Amenity.id),
-  images: t.integer('images').references(() => Image.id),
+}));
+
+// Ajout de la table de jointure
+export const ProductAmenity = pgTable('product_amenity', (t) => ({
+  id: t.serial('id').primaryKey(),
+  productId: t
+    .integer('product_id')
+    .notNull()
+    .references(() => Product.id),
+  amenityId: t
+    .integer('amenity_id')
+    .notNull()
+    .references(() => Amenity.id),
+}));
+
+export const ProductImage = pgTable('product_image', (t) => ({
+  id: t.serial('id').primaryKey(),
+  productId: t.integer('product_id').notNull().references(() => Product.id),
+  imageId: t.integer('image_id').notNull().references(() => Image.id),
 }));
 
 // ============================================================================
@@ -72,26 +88,23 @@ export const Product = pgTable('product', (t) => ({
 // ============================================================================
 export const Schedule = pgTable('schedule', (t) => ({
   id: t.serial('id').primaryKey(),
-  productId: t.integer('productId').notNull(),
-  startDate: t.timestamp('startDate', { withTimezone: true, mode: 'date' }),
-  endDate: t.timestamp('endDate', { withTimezone: true, mode: 'date' }),
-}));
-
-export const UserSchedule = pgTable('user_schedule', (t) => ({
-  id: t.serial('id').primaryKey(),
+  productId: t
+    .integer('product_id')
+    .notNull()
+    .references(() => Product.id),
   userId: t
     .text('user_id')
     .notNull()
     .references(() => User.id),
-  scheduleId: t.integer('scheduleId').notNull(),
+  startDate: t.timestamp('start_date', { withTimezone: true, mode: 'date' }),
+  endDate: t.timestamp('end_date', { withTimezone: true, mode: 'date' }),
 }));
 
 // ============================================================================
 // Relations
 // ============================================================================
-export const SessionRelations = relations(Session, ({ one, many }) => ({
+export const SessionRelations = relations(Session, ({ one }) => ({
   user: one(User, { fields: [Session.userId], references: [User.id] }),
-  schedules: many(UserSchedule),
 }));
 
 export const ScheduleRelations = relations(Schedule, ({ one }) => ({
@@ -99,10 +112,49 @@ export const ScheduleRelations = relations(Schedule, ({ one }) => ({
     fields: [Schedule.productId],
     references: [Product.id],
   }),
+  user: one(User, {
+    fields: [Schedule.userId],
+    references: [User.id],
+  }),
+}));
+
+export const AmenityRelations = relations(Amenity, ({ many }) => ({
+  productAmenities: many(ProductAmenity),
+}));
+
+export const ImageRelations = relations(Image, ({ many }) => ({
+  productImages: many(ProductImage),
+}));
+
+export const ProductAmenityRelations = relations(ProductAmenity, ({ one }) => ({
+  product: one(Product, {
+    fields: [ProductAmenity.productId],
+    references: [Product.id],
+  }),
+  amenity: one(Amenity, {
+    fields: [ProductAmenity.amenityId],
+    references: [Amenity.id],
+  }),
+}));
+
+export const ProductImageRelations = relations(ProductImage, ({ one }) => ({
+  product: one(Product, {
+    fields: [ProductImage.productId],
+    references: [Product.id],
+  }),
+  image: one(Image, {
+    fields: [ProductImage.imageId],
+    references: [Image.id],
+  }),
 }));
 
 export const ProductRelations = relations(Product, ({ many }) => ({
-  amenities: many(Amenity),
-  images: many(Image),
+  amenities: many(ProductAmenity),
+  images: many(ProductImage),
   schedules: many(Schedule),
+}));
+
+export const UserRelations = relations(User, ({ many }) => ({
+  schedules: many(Schedule),
+  sessions: many(Session),
 }));
