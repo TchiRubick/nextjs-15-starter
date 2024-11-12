@@ -16,6 +16,7 @@ export async function signin(input: SigninInput) {
   const user = await getUserByIdentifierEmailUsername(
     validatedInput.identifier
   );
+
   if (!user) {
     throw AUTH_ERRORS.USER_NOT_FOUND;
   }

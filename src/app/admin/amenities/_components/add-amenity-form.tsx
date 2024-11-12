@@ -11,20 +11,19 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { toast } from '@/hooks/use-toast';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { InsertAmenity, zInsertAmenity } from '@packages/db/models/amenities';
+import { InsertAmenity } from '@packages/db/models/amenities';
+import { useMutationAction } from '@packages/fetch-action/index';
+import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
-import { useCreateAmenity } from '../hooks/useCreateAmenity';
+import { createAmenityAction } from '../action';
+import { AMENITIES_QUERY_KEY } from '../static';
 
 export const AddAmenityForm = () => {
-  const form = useForm<InsertAmenity>({
-    resolver: zodResolver(zInsertAmenity),
-    defaultValues: {
-      name: '',
-    },
-  });
+  const queryClient = useQueryClient();
+  const form = useForm<InsertAmenity>();
 
   const onSuccess = () => {
+    queryClient.invalidateQueries({ queryKey: AMENITIES_QUERY_KEY });
     form.reset();
 
     toast({
@@ -41,10 +40,13 @@ export const AddAmenityForm = () => {
     });
   };
 
-  const { mutate, isPending } = useCreateAmenity(onSuccess, onError);
+  const { mutateAsync, isPending } = useMutationAction(createAmenityAction, {
+    onSuccess,
+    onError,
+  });
 
-  const onSubmit = (data: InsertAmenity) => {
-    mutate(data);
+  const onSubmit = async (data: InsertAmenity) => {
+    await mutateAsync(data);
   };
 
   return (

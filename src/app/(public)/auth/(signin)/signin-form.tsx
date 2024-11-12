@@ -1,6 +1,7 @@
 'use client';
 
 import { login } from '@/actions/auth';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -10,12 +11,12 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { useForm } from 'react-hook-form';
-import { Loader2 } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import { Loader2 } from 'lucide-react';
+import Link from 'next/link';
+import { useForm } from 'react-hook-form';
 
+import { formDataBuilder } from '@/lib/formdata-builder';
 import { useMutationAction } from '@packages/fetch-action/index';
 
 export const SigninForm = () => {
@@ -23,23 +24,18 @@ export const SigninForm = () => {
 
   const { mutateAsync, isPending, error, isError } = useMutationAction(login);
 
-  const onSubmit = async () => {
-    if (isError) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description: error?.message,
-      });
-    }
-
-    const formData = getValues();
-    const formDataObject = new FormData();
-
-    Object.keys(formData).forEach((key) => {
-      formDataObject.append(key, formData[key]);
+  if (isError) {
+    toast({
+      variant: 'destructive',
+      title: 'Error',
+      description: error?.message,
     });
+  }
 
-    await mutateAsync(formDataObject);
+  const onSubmit = async () => {
+    const formData = formDataBuilder(getValues);
+
+    await mutateAsync(formData);
     window.location.replace('/');
   };
 
