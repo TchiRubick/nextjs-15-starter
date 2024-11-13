@@ -32,8 +32,6 @@ export const CreateProductForm = () => {
     queryFn: getAmenitiesAction,
   });
 
-  console.log(amenities);
-
   const { mutateAsync, isPending } = useMutationAction(createProductAction, {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: PRODUCTS_QUERY_KEY });
@@ -65,7 +63,8 @@ export const CreateProductForm = () => {
   });
 
   const onSubmit = async (data: CreateProduct) => {
-    await mutateAsync(data);
+    const selectAmenities = form.getValues('amenities');
+    await mutateAsync(data, selectAmenities);
   };
 
   return (
@@ -211,15 +210,27 @@ export const CreateProductForm = () => {
           />
         </div>
 
-        <MultiSelect
-          placeholder='Select amenities'
-          options={
-            amenities?.map((amenity) => ({
-              label: amenity.name,
-              value: String(amenity.id),
-            })) ?? []
-          }
-          onValueChange={(values) => console.log(values)}
+        <FormField
+          name='amenities'
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Amenities</FormLabel>
+              <FormControl>
+                <MultiSelect
+                  placeholder='Select amenities'
+                  options={
+                    amenities?.map((amenity) => ({
+                      label: amenity.name,
+                      value: String(amenity.id),
+                    })) ?? []
+                  }
+                  onValueChange={field.onChange}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
 
         <Button type='submit' disabled={isPending}>

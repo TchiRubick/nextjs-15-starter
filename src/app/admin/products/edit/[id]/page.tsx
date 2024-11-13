@@ -1,4 +1,6 @@
+import { Input } from '@/components/ui/input';
 import { getOneProductAction } from '../../action';
+import { Textarea } from '@/components/ui/textarea';
 
 const EditProduct = async ({ params }: { params: Promise<{ id: number }> }) => {
   const { id } = await params;
@@ -8,22 +10,18 @@ const EditProduct = async ({ params }: { params: Promise<{ id: number }> }) => {
     <div className='flex items-center py-4'>
       <div className='flex flex-col'>
         <h2 className='text-2xl font-bold'>Edit Product</h2>
-        <p>Product name: {product?.name}</p>
-        <p>Product description: {product?.description}</p>
-        <p>Product price: {product?.price}</p>
+        <Input name='name' defaultValue={product?.name} />
+        <Textarea name='description' defaultValue={product?.description} />
+        <Input
+          name='price'
+          type='number'
+          defaultValue={product?.price}
+          min={0}
+        />
+        <Input name='room' type='number' defaultValue={product?.room} />
         <p>
-          Product amenities:{' '}
-          {product?.amenities.map((amenity) => (
-            <div key={amenity.amenity.id}>{amenity.amenity.name}</div>
-          ))}
+          amenities: {product?.amenities.map((amenity) => amenity.amenity.name)}
         </p>
-        <p>
-          Product rooms: {product?.room} bedrooms, {product?.bed} beds,
-          {product?.bath} bathrooms
-        </p>
-        <p>Product max person: {product?.maxPerson}</p>
-        <p>Product status: {product?.status}</p>
-        <p>Product image: {product?.images.map((image) => image.imageId)}</p>
       </div>
     </div>
   );
