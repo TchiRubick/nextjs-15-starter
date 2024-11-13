@@ -21,6 +21,7 @@ import { useForm } from 'react-hook-form';
 import { PRODUCTS_QUERY_KEY } from '../../static';
 import { createProductAction, getAmenitiesAction } from '../action';
 import { MultiSelect } from '@/app/admin/_components/multi-select';
+import { Loader2 } from 'lucide-react';
 
 export const CreateProductForm = () => {
   const queryClient = useQueryClient();
@@ -212,15 +213,17 @@ export const CreateProductForm = () => {
 
         <MultiSelect
           placeholder='Select amenities'
-          options={[
-            { value: 'option1', label: 'Option 1' },
-            { value: 'option2', label: 'Option 2' },
-          ]}
+          options={
+            amenities?.map((amenity) => ({
+              label: amenity.name,
+              value: String(amenity.id),
+            })) ?? []
+          }
           onValueChange={(values) => console.log(values)}
         />
 
         <Button type='submit' disabled={isPending}>
-          {isPending ? 'Creating...' : 'Create Product'}
+          {isPending ? <Loader2 className='animate-spin' /> : 'Create Product'}
         </Button>
       </form>
     </Form>
