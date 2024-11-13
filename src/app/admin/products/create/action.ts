@@ -9,7 +9,8 @@ import {
 import { createProductAmenity } from '@packages/db/models/product-amenity';
 
 export const createProductAction = async (
-  data: InsertProduct, amenityId: number[]
+  data: InsertProduct,
+  amenityId: number[]
 ) => {
   const [product] = await createProduct(data);
 
@@ -17,7 +18,7 @@ export const createProductAction = async (
     amenityId.map(async (id) => {
       await createProductAmenity({ productId: product.id, amenityId: id });
     })
-  )
+  );
   return product;
 };
 

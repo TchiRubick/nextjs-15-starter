@@ -1,6 +1,10 @@
 'use server';
 
-import { getAllProducts } from '@packages/db/models/products';
+import {
+  getAllProducts,
+  UpdateProduct,
+  updateProduct,
+} from '@packages/db/models/products';
 import { getProductById } from '@packages/db/models/products';
 
 export const getAllProductsAction = async () => {
@@ -11,4 +15,13 @@ export const getAllProductsAction = async () => {
 export const getOneProductAction = async (id: number) => {
   const product = await getProductById(id);
   return product;
+};
+
+export const updateProductAction = async (
+  id: number,
+  data: UpdateProduct & { amenities: number[] }
+) => {
+  const products = await updateProduct(id, data);
+
+  return products;
 };

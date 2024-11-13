@@ -56,4 +56,8 @@ export const updateProductAmenity = async (
   id: number,
   input: UpdateProductAmenity
 ) =>
-  db.update(ProductAmenity).set(input).where(eq(ProductAmenity.id, id)).returning();
+  db
+    .update(ProductAmenity)
+    .set(input)
+    .where(eq(ProductAmenity.id, id))
+    .returning();

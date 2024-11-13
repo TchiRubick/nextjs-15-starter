@@ -20,7 +20,7 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { PRODUCTS_QUERY_KEY } from '../../static';
 import { createProductAction, getAmenitiesAction } from '../action';
-import { MultiSelect } from '@/app/admin/_components/multi-select';
+import { MultiSelect } from '@/components/multi-select';
 import { Loader2 } from 'lucide-react';
 
 export const CreateProductForm = () => {
