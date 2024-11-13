@@ -154,7 +154,7 @@ export const Filter = ({ reload }: { reload?: boolean }) => {
         <Button
           type='submit'
           size='lg'
-          className='h-12 w-full min-w-[140px] bg-white font-medium text-slate-900 transition-all hover:translate-y-[-2px] hover:bg-slate-50 hover:shadow-lg active:translate-y-0 sm:w-48'
+          className='h-12 w-full sm:w-full lg:w-[48px] min-w-[140px] bg-white font-medium text-slate-900 transition-all hover:translate-y-[-2px] hover:bg-slate-50 hover:shadow-lg active:translate-y-0'
         >
           <Search className='mr-2 h-4 w-4' />
           Rechercher
