@@ -1,9 +1,13 @@
+"use client"
+
+import { Profile } from "../_components/profile";
 
 
-export default async function ProfilePage() {
+
+export default  function ProfilePage() {
   return (
     <div>
-      ffgfg
+      <Profile/>
     </div>
   );
 }
