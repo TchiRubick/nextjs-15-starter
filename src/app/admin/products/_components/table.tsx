@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { ColumnDef } from '@tanstack/react-table';
 import { getAllProductsAction } from '../action';
 import { PRODUCTS_QUERY_KEY } from '../static';
+import Link from 'next/link';
 
 const columns: ColumnDef<ProductSelect>[] = [
   {
@@ -23,6 +24,26 @@ const columns: ColumnDef<ProductSelect>[] = [
   {
     accessorKey: 'status',
     header: 'Status',
+  },
+  {
+    accessorKey: 'action',
+    header: 'Action',
+    cell: ({ row }) => (
+      <div className='flex items-center gap-2'>
+        <Link
+          href={`/admin/products/edit/${row.original.id}`}
+          className='text-blue-500 hover:underline'
+        >
+          Edit
+        </Link>
+        <Link
+          href={`/admin/products/delete/${row.original.id}`}
+          className='text-red-500 hover:underline'
+        >
+          Delete
+        </Link>
+      </div>
+    ),
   },
 ];
 
