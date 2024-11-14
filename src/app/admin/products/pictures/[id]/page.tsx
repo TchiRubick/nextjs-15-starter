@@ -5,7 +5,7 @@ const PicturesProduct = async ({ params }: { params: Promise<{ id: number }> }) 
 
   return (
     <div className='flex flex-col items-center justify-center py-4 pt-28'>
-      <ImageUploader />
+      <ImageUploader id={Number(id)} />
     </div>
   );
 };

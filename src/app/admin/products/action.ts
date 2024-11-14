@@ -1,10 +1,13 @@
 'use server';
 
+import { env } from '@/env';
 import { upload } from '@/packages/s3';
+import { createMassImage } from '@packages/db/models/image';
 import {
   createMassProductAmenity,
   deleteProductAmenity,
 } from '@packages/db/models/product-amenity';
+import { createMassProductImage } from '@packages/db/models/product-image';
 import {
   getAllProducts,
   getProductById,
@@ -53,4 +56,12 @@ export const uploadProductPicture = async (id: number, files: File[]) => {
 
     names.push(safename);
   });
+
+  const images = await createMassImage(names.map((name) => ({ url: name, bucket: env.MINIO_BUCKET_NAME })));
+
+  await createMassProductImage(
+    images.map((image) => ({ productId: id, imageId: image.id }))
+  );
+
+  return images;
 };

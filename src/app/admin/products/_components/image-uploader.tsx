@@ -5,11 +5,23 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { getSize } from "@/lib/file";
+import { useMutationAction } from "@packages/fetch-action/index";
+import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import { ChangeEventHandler, useMemo, useState } from "react";
+import { uploadProductPicture } from "../action";
 
-export const ImageUploader = () => {
+export const ImageUploader = ({ id }: { id: number }) => {
   const [files, setFiles] = useState<File[]>([]);
+
+  const { mutateAsync, isPending } = useMutationAction(uploadProductPicture, {
+    onSuccess: () => {
+      console.log('success');
+    },
+    onError: () => {
+      console.log('error');
+    }
+  });
 
   const handleImageSelected: ChangeEventHandler<HTMLInputElement> = (e) => {
     if (e.target.files === null) {
@@ -28,8 +40,13 @@ export const ImageUploader = () => {
 
   const previews = useMemo(() => files.map((f) => URL.createObjectURL(f)), [files]);
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    mutateAsync(id, files);
+  }
+
   return (
-    <form className="grid w-full items-center gap-1.5">
+    <form className="grid w-full items-center gap-1.5" onSubmit={handleSubmit}>
       <Label htmlFor="picture">Picture</Label>
       <Input id="picture" type="file" accept="image/jpeg,image/png,image/webp" multiple max={2} onChange={handleImageSelected} />
       <p>Total files size: {`${totalSize.value}${totalSize.suffix}`}</p>
@@ -41,7 +58,11 @@ export const ImageUploader = () => {
           </Card>
         ))}
       </div>
-      <Button disabled={totalSize.value >= 5 && totalSize.suffix === 'mb'}>Submit</Button>
+      <Button disabled={(totalSize.value >= 5 && totalSize.suffix === 'mb') || isPending}>{isPending ? (
+        <Loader2 className='animated-spin' />
+      ) : (
+        'Enregistrer'
+      )}</Button>
     </form>
   )
 }
