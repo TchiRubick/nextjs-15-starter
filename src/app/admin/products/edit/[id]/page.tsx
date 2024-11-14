@@ -30,7 +30,7 @@ const EditProduct = async ({ params }: { params: Promise<{ id: number }> }) => {
 
   return (
     <div className='flex items-center justify-center py-4 pt-28'>
-      <EditProductForm product={adaptedProduct} />
+      <EditProductForm product={adaptedProduct} productId={id} />
     </div>
   );
 };

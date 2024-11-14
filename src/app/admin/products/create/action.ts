@@ -3,11 +3,9 @@
 import { getAllAmenities } from '@packages/db/models/amenities';
 import {
   createProduct,
-  UpdateProduct,
-  updateProduct,
   type InsertProduct,
 } from '@packages/db/models/products';
-import { createProductAmenity } from '@packages/db/models/product-amenity';
+import { createMassProductAmenity } from '@packages/db/models/product-amenity';
 
 export const createProductAction = async (
   data: InsertProduct,
@@ -15,19 +13,12 @@ export const createProductAction = async (
 ) => {
   const [product] = await createProduct(data);
 
-  amenityId.map(async (id) => {
-    await createProductAmenity({ productId: product.id, amenityId: id });
-  });
-
-  return product;
+  await createMassProductAmenity(amenityId.map((amenityId) => (
+    { productId: product.id, amenityId }
+  )));
 };
 
 export const getAmenitiesAction = async () => {
   const amenities = await getAllAmenities();
   return amenities;
-};
-
-export const updateProductAction = async (id: number, data: UpdateProduct) => {
-  const products = await updateProduct(id, data);
-  return products;
 };

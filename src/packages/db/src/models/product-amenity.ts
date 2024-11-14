@@ -49,15 +49,8 @@ export const getProductAmenityByAmenityId = async (amenityId: number) =>
 export const getAllProductAmenities = async () =>
   db.query.ProductAmenity.findMany();
 
-export const createProductAmenity = async (input: InsertProductAmenity) =>
-  db.insert(ProductAmenity).values([input]).returning();
+export const deleteProductAmenity = async (id: number) =>
+  db.delete(ProductAmenity).where(eq(ProductAmenity.productId, id)).returning();
 
-export const updateProductAmenity = async (
-  id: number,
-  input: UpdateProductAmenity
-) =>
-  db
-    .update(ProductAmenity)
-    .set(input)
-    .where(eq(ProductAmenity.id, id))
-    .returning();
+export const createMassProductAmenity = async (input: InsertProductAmenity[]) =>
+  db.insert(ProductAmenity).values(input).returning();
