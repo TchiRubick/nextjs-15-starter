@@ -1,5 +1,6 @@
 'use server';
 
+import { upload } from '@/packages/s3';
 import {
   createMassProductAmenity,
   deleteProductAmenity,
@@ -36,4 +37,20 @@ export const updateProductAction = async (
   }
 
   return product;
+};
+
+export const uploadProductPicture = async (id: number, files: File[]) => {
+  const names: string[] = [];
+
+  files.forEach(async (file) => {
+    const arrayBuffer = await file.arrayBuffer();
+
+    const buffer = new Uint8Array(arrayBuffer);
+
+    const safename = file.name.replace(/[^A-Z0-9]+/ig, "_");
+
+    await upload(safename, Buffer.from(buffer));
+
+    names.push(safename);
+  });
 };

@@ -12,9 +12,7 @@ export const upload = async (name: string, body: Buffer) => {
     });
   }
 
-  const safename = name.replaceAll(' ', '-');
-
-  return await s3.putObject(env.MINIO_BUCKET_NAME, safename, body, undefined, {
+  return await s3.putObject(env.MINIO_BUCKET_NAME, name, body, undefined, {
     'Content-type': 'image',
   });
 };

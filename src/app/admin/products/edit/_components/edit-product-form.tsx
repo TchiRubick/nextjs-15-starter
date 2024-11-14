@@ -21,7 +21,7 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
-import { CreateProduct } from '@/types';
+import { EditProduct } from '@/types';
 import { useMutationAction } from '@packages/fetch-action/index';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { ArrowLeft, Loader2 } from 'lucide-react';
@@ -79,7 +79,7 @@ export const EditProductForm = ({ product, productId }: Props) => {
     }
   );
 
-  const onSubmit = async (data: CreateProduct) => {
+  const onSubmit = async (data: EditProduct) => {
     const updatedData = {
       ...data,
       amenities: (data?.amenities ?? []).map(Number),
