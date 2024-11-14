@@ -10,5 +10,8 @@ export const uploadImage = async (files: FileList) => {
 
   const buffer = new Uint8Array(arrayBuffer);
 
-  return await s3Upload(file.name, buffer);
+  const result = await s3Upload(file.name, Buffer.from(buffer));
+
+  console.log(result);
+  return result;
 };

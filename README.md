@@ -2,6 +2,25 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+### Docker environment
+
+copy `.env.example` to `.env` and fill in the values.
+
+Prefilled values from `.env.example` are already in sync with the docker containers. You just need to fill the empty one for your development environment.
+
+Then start the docker containers:
+
+```bash
+docker-compose up -d
+```
+
+### Install dependencies
+
+```bash
+pnpm install
+```
+
+### Run the project
 First, run the development server:
 
 ```bash
@@ -10,11 +29,28 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Services
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### DB studio
 
-## Code quality
+Run the following command to start the DB studio:
+
+```bash
+pnpm db:studio
+```
+
+Open [https://local.drizzle.studio](https://local.drizzle.studio) with your browser to see the DB navigator.
+
+### Minio
+
+Open [http://localhost:9001](http://localhost:9001) with your browser to see the Minio console.
+
+The credentials are:
+
+- username: `minio`
+- password: `password`
+
+## Pre-commit
 
 Please ensure that all the following commands pass before committing your changes.
 
@@ -26,7 +62,7 @@ pnpm format:fix
 pnpm typecheck
 ```
 
-## Unused files: _in Beta_ so **use carefully**
+## Experimental features
 
 Run the following command to check for unused files:
 
@@ -34,17 +70,26 @@ Run the following command to check for unused files:
 pnpm knip
 ```
 
-## Learn More
+## Editor configuration
 
-To learn more about Next.js, take a look at the following resources:
+### VSCODE
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```json
+{
+  ...
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always",
+    "source.organizeImports": "always",
+    "source.addMissingImports": "always"
+  },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.suggest.autoImports": true,
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+  "editor.tabSize": 2,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  ...
+}
+```

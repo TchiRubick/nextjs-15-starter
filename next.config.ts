@@ -7,7 +7,15 @@ const nextConfig: NextConfig = {
       {
         hostname: 'cdn.filestackcontent.com',
       },
+      {
+        hostname: 'localhost',
+      },
     ],
+  },
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '5mb',
+    },
   },
 };
 

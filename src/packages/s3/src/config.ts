@@ -1,13 +1,13 @@
 import 'server-only';
 
 import { env } from '@/env';
-import { S3Client } from '@aws-sdk/client-s3';
+import * as Minio from "minio";
 
-export const s3 = new S3Client({
-  credentials: {
-    accessKeyId: env.S3_APP_ID,
-    secretAccessKey: env.S3_APP_KEY,
-  },
-  endpoint: env.S3_BUCKET_URL,
-  region: 'eu-central-003',
+export const s3 = new Minio.Client({
+  accessKey: env.MINIO_ACCESS_KEY,
+  secretKey: env.MINIO_SECRET_KEY,
+  port: 9000,
+  region: env.MINIO_REGION,
+  endPoint: env.MINIO_DOMAIN,
+  useSSL: env.MINIO_SSL === 'true',
 });

@@ -9,10 +9,14 @@ export const env = createEnv({
   server: {
     NODE_ENV: z.enum(['development', 'test', 'production']),
     DATABASE_URL: z.string().url(),
-    S3_APP_ID: z.string(),
-    S3_APP_KEY: z.string(),
-    S3_BUCKET_URL: z.string().url(),
-    S3_BUCKET_NAME: z.string(),
+
+    MINIO_ACCESS_KEY: z.string(),
+    MINIO_SECRET_KEY: z.string(),
+    MINIO_BUCKET_NAME: z.string(),
+    MINIO_REGION: z.string(),
+    MINIO_DOMAIN: z.string(),
+    MINIO_SSL: z.literal('true').nullable().optional(),
+
     UPLISTING_API_KEY: z.string(),
     UPLISTING_URL: z.string().url(),
   },
@@ -33,10 +37,14 @@ export const env = createEnv({
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
     DATABASE_URL: process.env.DATABASE_URL,
-    S3_APP_ID: process.env.S3_APP_ID,
-    S3_APP_KEY: process.env.S3_APP_KEY,
-    S3_BUCKET_URL: process.env.S3_BUCKET_URL,
-    S3_BUCKET_NAME: process.env.S3_BUCKET_NAME,
+
+    MINIO_ACCESS_KEY: process.env.MINIO_ACCESS_KEY,
+    MINIO_SECRET_KEY: process.env.MINIO_SECRET_KEY,
+    MINIO_BUCKET_NAME: process.env.MINIO_BUCKET_NAME,
+    MINIO_REGION: process.env.MINIO_REGION,
+    MINIO_DOMAIN: process.env.MINIO_DOMAIN,
+    MINIO_SSL: process.env.MINIO_SSL,
+
     UPLISTING_API_KEY: process.env.UPLISTING_API_KEY,
     UPLISTING_URL: process.env.UPLISTING_URL,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,

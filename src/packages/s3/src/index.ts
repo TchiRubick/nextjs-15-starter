@@ -1,17 +1,23 @@
 import 'server-only';
 
 import { env } from '@/env';
-import { PutObjectCommand } from '@aws-sdk/client-s3';
 import { s3 } from './config';
 
 export const upload = async (
   name: string,
-  body: PutObjectCommand['input']['Body']
-) =>
-  s3.send(
-    new PutObjectCommand({
-      Bucket: env.S3_BUCKET_NAME,
-      Key: name,
-      Body: body,
-    })
-  );
+  body: Buffer
+) => {
+  const existBucket = await s3.bucketExists(env.MINIO_BUCKET_NAME);
+
+  if (!existBucket) {
+    await s3.makeBucket(env.MINIO_BUCKET_NAME, env.MINIO_REGION, {
+      ObjectLocking: false,
+    });
+  }
+
+  const safename = name.replaceAll(' ', '-')
+
+  return await s3.putObject(env.MINIO_BUCKET_NAME, safename, body, undefined, {
+    'Content-type': 'image',
+  });
+}
