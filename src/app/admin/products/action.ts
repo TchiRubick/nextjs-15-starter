@@ -1,6 +1,9 @@
 'use server';
 
-import { createMassProductAmenity, deleteProductAmenity } from '@packages/db/models/product-amenity';
+import {
+  createMassProductAmenity,
+  deleteProductAmenity,
+} from '@packages/db/models/product-amenity';
 import {
   getAllProducts,
   UpdateProduct,
@@ -18,10 +21,15 @@ export const getOneProductAction = async (id: number) => {
   return product;
 };
 
-export const updateProductAction = async (id: number, data: UpdateProduct & { amenities: number[] }) => {
+export const updateProductAction = async (
+  id: number,
+  data: UpdateProduct & { amenities: number[] }
+) => {
   await updateProduct(id, data);
 
   await deleteProductAmenity(id);
 
-  await createMassProductAmenity( data.amenities.map((amenityId) => ({ productId: id, amenityId })));
+  await createMassProductAmenity(
+    data.amenities.map((amenityId) => ({ productId: id, amenityId }))
+  );
 };

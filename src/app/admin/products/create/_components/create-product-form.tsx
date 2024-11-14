@@ -63,7 +63,7 @@ export const CreateProductForm = () => {
   });
 
   const onSubmit = async (data: CreateProduct) => {
-    const selectAmenities = form.getValues('amenities');
+    const selectAmenities = data.amenities.map(Number);
     await mutateAsync(data, selectAmenities);
   };
 

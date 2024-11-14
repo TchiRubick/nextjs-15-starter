@@ -11,7 +11,6 @@ import { getAmenitiesAction } from '../../create/action';
 import { useMutationAction } from '@packages/fetch-action/index';
 import { updateProductAction } from '../../action';
 import { toast } from '@/hooks/use-toast';
-import { UpdateProduct } from '@packages/db/models/products';
 import { ArrowLeft, Loader2 } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import {
@@ -30,6 +29,7 @@ import {
 } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import Link from 'next/link';
+import { CreateProduct } from '@/types';
 
 interface Props {
   productId: number;
@@ -74,10 +74,10 @@ export const EditProductForm = ({ product, productId }: Props) => {
     }
   );
 
-  const onSubmit = async (data: UpdateProduct) => {
-    const updatedData = { ...data, amenities: product.amenities.map(Number) };
+  const onSubmit = async (data: CreateProduct) => {
+    const updatedData = { ...data, amenities: data.amenities.map(Number) };
+
     await mutateAsync(productId, updatedData);
-    console.log('Data updated', updatedData.amenities);
 
     redirect('/admin/products');
   };
@@ -85,6 +85,7 @@ export const EditProductForm = ({ product, productId }: Props) => {
   return (
     <div>
       <Link
+        prefetch
         href='/admin/products'
         className='fixed left-4 top-24 flex gap-2 hover:animate-bounce hover:gap-3'
       >

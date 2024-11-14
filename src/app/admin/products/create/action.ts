@@ -13,9 +13,9 @@ export const createProductAction = async (
 ) => {
   const [product] = await createProduct(data);
 
-  await createMassProductAmenity(amenityId.map((amenityId) => (
-    { productId: product.id, amenityId }
-  )));
+  await createMassProductAmenity(
+    amenityId.map((amenityId) => ({ productId: product.id, amenityId }))
+  );
 };
 
 export const getAmenitiesAction = async () => {
