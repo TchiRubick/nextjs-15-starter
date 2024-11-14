@@ -50,7 +50,7 @@ export const getAllProductAmenities = async () =>
   db.query.ProductAmenity.findMany();
 
 export const createProductAmenity = async (input: InsertProductAmenity) =>
-  db.insert(ProductAmenity).values(input).returning();
+  db.insert(ProductAmenity).values([input]).returning();
 
 export const updateProductAmenity = async (
   id: number,

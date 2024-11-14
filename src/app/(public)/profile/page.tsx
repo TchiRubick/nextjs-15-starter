@@ -1,13 +1,11 @@
-"use client"
+'use client';
 
-import { Profile } from "../_components/profile";
+import { Profile } from '../_components/profile';
 
-
-
-export default  function ProfilePage() {
+export default function ProfilePage() {
   return (
     <div>
-      <Profile/>
+      <Profile />
     </div>
   );
 }
