@@ -1,6 +1,10 @@
-import { ImageUploader } from "../../_components/image-uploader";
+import { ImageUploader } from '../../_components/image-uploader';
 
-const PicturesProduct = async ({ params }: { params: Promise<{ id: number }> }) => {
+const PicturesProduct = async ({
+  params,
+}: {
+  params: Promise<{ id: number }>;
+}) => {
   const { id } = await params;
 
   return (

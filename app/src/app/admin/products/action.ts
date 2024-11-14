@@ -45,19 +45,21 @@ export const updateProductAction = async (
 export const uploadProductPicture = async (id: number, files: File[]) => {
   const names: string[] = [];
 
-  files.forEach(async (file) => {
+  for (const file of files) {
     const arrayBuffer = await file.arrayBuffer();
 
     const buffer = new Uint8Array(arrayBuffer);
 
-    const safename = file.name.replace(/[^A-Z0-9]+/ig, "_");
+    const safename = file.name.replace(/[^A-Z0-9]+/gi, '_');
 
     await upload(safename, Buffer.from(buffer));
 
     names.push(safename);
-  });
+  }
 
-  const images = await createMassImage(names.map((name) => ({ url: name, bucket: env.MINIO_BUCKET_NAME })));
+  const images = await createMassImage(
+    names.map((name) => ({ url: name, bucket: env.MINIO_BUCKET_NAME }))
+  );
 
   await createMassProductImage(
     images.map((image) => ({ productId: id, imageId: image.id }))

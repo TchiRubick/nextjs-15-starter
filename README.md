@@ -2,7 +2,15 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-### Docker environment
+### Environment folder
+
+Move into environment folder:
+
+```bash
+cd environment
+```
+
+#### Docker environment
 
 copy `.env.example` to `.env` and fill in the values.
 
@@ -14,19 +22,27 @@ Then start the docker containers:
 docker-compose up -d
 ```
 
-### Install dependencies
+### App folder
+
+Move into app folder:
+
+```bash
+cd app
+```
+
+#### Install dependencies
 
 ```bash
 pnpm install
 ```
 
-### Push database schemas
+#### Push database schemas
 
 ```bash
 pnpm db:push
 ```
 
-### Run the project
+#### Run the project
 
 First, run the development server:
 
@@ -36,10 +52,30 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Install shadcnUI components
+#### Install shadcnUI components
 
 ```bash
 pnpm ui:add
+```
+
+#### Pre-commit
+
+Please ensure that all the following commands pass before committing your changes.
+
+```bash
+pnpm lint:fix
+
+pnpm format:fix
+
+pnpm typecheck
+```
+
+#### Experimental features
+
+Run the following command to check for unused files:
+
+```bash
+pnpm knip
 ```
 
 ## Services
@@ -62,26 +98,6 @@ The credentials are:
 
 - username: `minio`
 - password: `password`
-
-## Pre-commit
-
-Please ensure that all the following commands pass before committing your changes.
-
-```bash
-pnpm lint:fix
-
-pnpm format:fix
-
-pnpm typecheck
-```
-
-## Experimental features
-
-Run the following command to check for unused files:
-
-```bash
-pnpm knip
-```
 
 ## Editor configuration
 
