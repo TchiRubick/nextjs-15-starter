@@ -1,7 +1,7 @@
 import 'server-only';
 
 import { env } from '@/env';
-import * as Minio from "minio";
+import * as Minio from 'minio';
 
 export const s3 = new Minio.Client({
   accessKey: env.MINIO_ACCESS_KEY,

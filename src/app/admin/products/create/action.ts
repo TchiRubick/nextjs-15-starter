@@ -1,21 +1,25 @@
 'use server';
 
 import { getAllAmenities } from '@packages/db/models/amenities';
+import { createMassProductAmenity } from '@packages/db/models/product-amenity';
 import {
   createProduct,
   type InsertProduct,
 } from '@packages/db/models/products';
-import { createMassProductAmenity } from '@packages/db/models/product-amenity';
 
 export const createProductAction = async (
   data: InsertProduct,
-  amenityId: number[]
+  amenityIds: number[]
 ) => {
   const [product] = await createProduct(data);
 
-  await createMassProductAmenity(
-    amenityId.map((amenityId) => ({ productId: product.id, amenityId }))
-  );
+  if (amenityIds.length > 0) {
+    await createMassProductAmenity(
+      amenityIds.map((amenityId) => ({ productId: product.id, amenityId }))
+    );
+  }
+
+  return product;
 };
 
 export const getAmenitiesAction = async () => {

@@ -1,25 +1,8 @@
 'use client';
 
-import { MultiSelect } from '@/components/multi-select';
 import { AMENITIES_QUERY_KEY } from '@/app/admin/amenities/static';
+import { MultiSelect } from '@/components/multi-select';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { useQuery } from '@tanstack/react-query';
-import { Controller, useForm } from 'react-hook-form';
-import { getAmenitiesAction } from '../../create/action';
-import { useMutationAction } from '@packages/fetch-action/index';
-import { updateProductAction } from '../../action';
-import { toast } from '@/hooks/use-toast';
-import { ArrowLeft, Loader2 } from 'lucide-react';
-import { redirect } from 'next/navigation';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import {
   Card,
   CardContent,
@@ -27,9 +10,27 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import Link from 'next/link';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import { toast } from '@/hooks/use-toast';
 import { CreateProduct } from '@/types';
+import { useMutationAction } from '@packages/fetch-action/index';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { ArrowLeft, Loader2 } from 'lucide-react';
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
+import { Controller, useForm } from 'react-hook-form';
+import { updateProductAction } from '../../action';
+import { getAmenitiesAction } from '../../create/action';
+import { PRODUCTS_QUERY_KEY } from '../../static';
 
 interface Props {
   productId: number;
@@ -51,6 +52,8 @@ export const EditProductForm = ({ product, productId }: Props) => {
     defaultValues: product,
   });
 
+  const queryClient = useQueryClient();
+
   const { data: amenities } = useQuery({
     queryKey: AMENITIES_QUERY_KEY,
     queryFn: getAmenitiesAction,
@@ -60,6 +63,8 @@ export const EditProductForm = ({ product, productId }: Props) => {
     updateProductAction,
     {
       onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: PRODUCTS_QUERY_KEY });
+
         toast({
           title: 'Product updated successfully',
         });
@@ -75,7 +80,10 @@ export const EditProductForm = ({ product, productId }: Props) => {
   );
 
   const onSubmit = async (data: CreateProduct) => {
-    const updatedData = { ...data, amenities: data.amenities.map(Number) };
+    const updatedData = {
+      ...data,
+      amenities: (data?.amenities ?? []).map(Number),
+    };
 
     await mutateAsync(productId, updatedData);
 

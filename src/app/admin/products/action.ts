@@ -6,10 +6,10 @@ import {
 } from '@packages/db/models/product-amenity';
 import {
   getAllProducts,
+  getProductById,
   UpdateProduct,
   updateProduct,
 } from '@packages/db/models/products';
-import { getProductById } from '@packages/db/models/products';
 
 export const getAllProductsAction = async () => {
   const products = await getAllProducts();
@@ -25,11 +25,15 @@ export const updateProductAction = async (
   id: number,
   data: UpdateProduct & { amenities: number[] }
 ) => {
-  await updateProduct(id, data);
+  const [product] = await updateProduct(id, data);
 
   await deleteProductAmenity(id);
 
-  await createMassProductAmenity(
-    data.amenities.map((amenityId) => ({ productId: id, amenityId }))
-  );
+  if (data.amenities.length > 0) {
+    await createMassProductAmenity(
+      data.amenities.map((amenityId) => ({ productId: id, amenityId }))
+    );
+  }
+
+  return product;
 };

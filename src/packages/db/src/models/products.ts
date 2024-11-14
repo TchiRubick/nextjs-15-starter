@@ -63,6 +63,7 @@ export const getAllProducts = async () =>
         },
       },
     },
+    orderBy: (product, { asc }) => asc(product.id),
   });
 
 export const createProduct = async (input: InsertProduct) =>

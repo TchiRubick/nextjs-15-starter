@@ -1,6 +1,7 @@
 'use client';
 
 import { AMENITIES_QUERY_KEY } from '@/app/admin/amenities/static';
+import { MultiSelect } from '@/components/multi-select';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -16,12 +17,11 @@ import { toast } from '@/hooks/use-toast';
 import { CreateProduct } from '@/types';
 import { useMutationAction } from '@packages/fetch-action/index';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { PRODUCTS_QUERY_KEY } from '../../static';
 import { createProductAction, getAmenitiesAction } from '../action';
-import { MultiSelect } from '@/components/multi-select';
-import { Loader2 } from 'lucide-react';
 
 export const CreateProductForm = () => {
   const queryClient = useQueryClient();
@@ -63,7 +63,7 @@ export const CreateProductForm = () => {
   });
 
   const onSubmit = async (data: CreateProduct) => {
-    const selectAmenities = data.amenities.map(Number);
+    const selectAmenities = (data?.amenities ?? []).map(Number);
     await mutateAsync(data, selectAmenities);
   };
 

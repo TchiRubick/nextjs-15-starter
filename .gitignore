@@ -43,5 +43,7 @@ next-env.d.ts
 # Sentry Config File
 .env.sentry-build-plugin
 
-/minio_data
-/postgres_data
+# Docker volumes
+
+/minio_data/
+/postgres_data/
