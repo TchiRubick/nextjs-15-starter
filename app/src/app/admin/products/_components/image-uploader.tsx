@@ -1,5 +1,6 @@
 'use client';
 
+import { uploadProductPicture } from '@/actions/product.action';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -9,7 +10,6 @@ import { useMutationAction } from '@packages/fetch-action/index';
 import { Loader2 } from 'lucide-react';
 import Image from 'next/image';
 import { ChangeEventHandler, useMemo, useState } from 'react';
-import { uploadProductPicture } from '../action';
 
 export const ImageUploader = ({ id }: { id: number }) => {
   const [files, setFiles] = useState<File[]>([]);

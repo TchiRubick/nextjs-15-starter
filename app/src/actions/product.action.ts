@@ -3,6 +3,7 @@
 import { env } from '@/env';
 import { getImageStorage } from '@/lib/get-image-storage';
 import { upload } from '@/packages/s3';
+import { isAuth } from '@packages/auth/index';
 import { createMassImage } from '@packages/db/models/image';
 import {
   createMassProductAmenity,
@@ -10,11 +11,15 @@ import {
 } from '@packages/db/models/product-amenity';
 import { createMassProductImage } from '@packages/db/models/product-image';
 import {
+  createProduct,
   getAllProducts,
+  getProductByFliter,
   getProductById,
+  InsertProduct,
   UpdateProduct,
   updateProduct,
 } from '@packages/db/models/products';
+import { z } from 'zod';
 
 export const getAllProductsAction = async () => {
   const products = await getAllProducts();
@@ -43,7 +48,28 @@ export const updateProductAction = async (
   return product;
 };
 
+export const createProductAction = async (
+  data: InsertProduct,
+  amenityIds: number[]
+) => {
+  const [product] = await createProduct(data);
+
+  if (amenityIds.length > 0) {
+    await createMassProductAmenity(
+      amenityIds.map((amenityId) => ({ productId: product.id, amenityId }))
+    );
+  }
+
+  return product;
+};
+
 export const uploadProductPicture = async (id: number, files: File[]) => {
+  const { session } = await isAuth();
+
+  if (!session) {
+    throw new Error('User not logged in');
+  }
+
   const names: string[] = [];
 
   for (const file of files) {
@@ -72,7 +98,25 @@ export const uploadProductPicture = async (id: number, files: File[]) => {
   return images;
 };
 
-export const getImageUrl = async (name: string) => {
-  const url = getImageStorage(name);
-  return url;
+const schemasSearchInput = z.object({
+  check_in: z.date(),
+  check_out: z.date(),
+  min_price: z.number(),
+  max_price: z.number(),
+});
+
+export const getFilteredProperties = async (
+  search: z.infer<typeof schemasSearchInput>
+) => {
+  const filter = schemasSearchInput.parse(search);
+
+  const products = await getProductByFliter(filter);
+
+  return products;
+};
+
+export const getPropertyById = async (id: number) => {
+  const product = await getProductById(id);
+
+  return product;
 };

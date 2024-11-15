@@ -1,11 +1,11 @@
 'use server';
 
+import { getPropertyById } from '@/actions/product.action';
 import { EuroIcon } from 'lucide-react';
 import Image from 'next/image';
 import { ImageGallery } from './_components/image-gallery';
 import { PropertyFeatures } from './_components/property-feature';
 import { PropertySidebar } from './_components/property-sidebar';
-import { getPropertyById } from './actions';
 
 const PropertyDetails = async ({
   params,

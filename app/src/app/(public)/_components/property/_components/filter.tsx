@@ -11,7 +11,7 @@ import DatePicker, { DateObject } from 'react-multi-date-picker';
 import 'react-multi-date-picker/styles/layouts/mobile.css';
 import { z } from 'zod';
 import {
-  defaultFilterParamValidation,
+  defaultPropertyFilterParam,
   filterParamValidation,
 } from '../_validations';
 
@@ -26,7 +26,7 @@ type FilterSchema = z.infer<typeof filterSchema>;
 export const Filter = ({ reload }: { reload?: boolean }) => {
   const [params, setParams] = useSearchParamState(
     filterParamValidation,
-    defaultFilterParamValidation,
+    defaultPropertyFilterParam,
     {
       reload,
       customPathname: '/#properties',

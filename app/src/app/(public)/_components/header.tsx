@@ -1,6 +1,6 @@
 'use client';
 
-import { logout } from '@/actions/auth';
+import { logout } from '@/actions/auth.action';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {

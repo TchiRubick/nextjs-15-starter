@@ -1,22 +1,22 @@
 'use client';
 
+import { register } from '@/actions/auth.action';
+import { Button } from '@/components/ui/button';
 import {
   Card,
+  CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
-  CardDescription,
-  CardContent,
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { register } from '@/actions/auth';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { useForm } from 'react-hook-form';
-import { useMutationAction } from '@packages/fetch-action/index';
-import { Loader2 } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 import { formDataBuilder } from '@/lib/formdata-builder';
+import { useMutationAction } from '@packages/fetch-action/index';
+import { Loader2 } from 'lucide-react';
+import Link from 'next/link';
+import { useForm } from 'react-hook-form';
 
 export const SignupForm = () => {
   const { register: namedRegister, getValues, handleSubmit } = useForm();

@@ -1,5 +1,6 @@
 'use client';
 
+import { createAmenityAction } from '@/actions/amenity.action';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -15,7 +16,6 @@ import { InsertAmenity } from '@packages/db/models/amenities';
 import { useMutationAction } from '@packages/fetch-action/index';
 import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
-import { createAmenityAction } from '../action';
 import { AMENITIES_QUERY_KEY } from '../static';
 
 export const AddAmenityForm = () => {

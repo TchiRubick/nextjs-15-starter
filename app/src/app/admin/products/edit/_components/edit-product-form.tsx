@@ -1,5 +1,7 @@
 'use client';
 
+import { getAllAmenitiesAction } from '@/actions/amenity.action';
+import { updateProductAction } from '@/actions/product.action';
 import { AMENITIES_QUERY_KEY } from '@/app/admin/amenities/static';
 import { MultiSelect } from '@/components/multi-select';
 import { Button } from '@/components/ui/button';
@@ -28,8 +30,6 @@ import { ArrowLeft, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
-import { updateProductAction } from '../../action';
-import { getAmenitiesAction } from '../../create/action';
 import { PRODUCTS_QUERY_KEY } from '../../static';
 
 interface Props {
@@ -56,7 +56,7 @@ export const EditProductForm = ({ product, productId }: Props) => {
 
   const { data: amenities } = useQuery({
     queryKey: AMENITIES_QUERY_KEY,
-    queryFn: getAmenitiesAction,
+    queryFn: getAllAmenitiesAction,
   });
 
   const { mutateAsync, isPending, error } = useMutationAction(

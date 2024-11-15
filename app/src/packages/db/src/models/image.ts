@@ -17,8 +17,6 @@ export const zUpdateImage = zInsertImage.pick({
   url: true,
 });
 
-export const amenities = zInsertImage.shape;
-
 // ============================================================================
 // Types
 // ============================================================================
@@ -29,11 +27,6 @@ export type ImageSelect = z.infer<typeof zSelectImage>;
 // ============================================================================
 // Queries
 // ============================================================================
-export const getImageById = async (id: number) =>
-  db.query.Image.findFirst({
-    where: (Image, { eq }) => eq(Image.id, id),
-  });
-
 export const createImage = async (input: InsertImage) =>
   db.insert(Image).values(input).returning();
 

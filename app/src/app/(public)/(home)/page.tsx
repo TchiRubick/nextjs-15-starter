@@ -3,7 +3,7 @@
 import { searchParamsParser } from '@/lib/searchParamsParser';
 
 import {
-  defaultParamsValidation,
+  defaultPropertyParam,
   paramsValidation,
   ParamsValidation,
 } from '../_components/property/_validations';
@@ -24,7 +24,7 @@ export default async function Home({
   const values = await searchParamsParser(
     params,
     paramsValidation,
-    defaultParamsValidation,
+    defaultPropertyParam,
     '/check-in'
   );
 

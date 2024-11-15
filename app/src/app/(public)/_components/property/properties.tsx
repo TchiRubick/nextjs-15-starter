@@ -9,6 +9,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 
+import { getFilteredProperties } from '@/actions/product.action';
 import {
   Tooltip,
   TooltipContent,
@@ -20,7 +21,6 @@ import { Bath, Bed, House, User } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Filter } from './_components/filter';
-import { getFilteredProperties } from './actions';
 
 export const Properties = ({
   products,

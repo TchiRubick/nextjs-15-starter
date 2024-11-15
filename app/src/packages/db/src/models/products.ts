@@ -72,26 +72,6 @@ export const createProduct = async (input: InsertProduct) =>
 export const updateProduct = async (id: number, input: UpdateProduct) =>
   db.update(Product).set(input).where(eq(Product.id, id)).returning();
 
-export const deleteProduct = async (id: number) =>
-  db.delete(Product).where(eq(Product.id, id)).returning();
-
-export const getPublishedProducts = async () =>
-  db.query.Product.findMany({
-    where: (product, { eq }) => eq(product.status, 'published'),
-    with: {
-      amenities: {
-        with: {
-          amenity: true,
-        },
-      },
-      images: {
-        with: {
-          image: true,
-        },
-      },
-    },
-  });
-
 type ProductFilter = {
   min_price: number;
   max_price: number;
@@ -101,8 +81,11 @@ export const getProductByFliter = async (filter: ProductFilter) => {
   const { min_price, max_price } = filter;
 
   return db.query.Product.findMany({
-    where: (product, { gte, lte }) =>
-      gte(product.price, min_price) && lte(product.price, max_price),
+    where: (product, { gte, lte, and }) =>
+      and(
+        gte(product.price, min_price) && lte(product.price, max_price),
+        eq(product.status, 'published')
+      ),
     with: {
       amenities: {
         with: {

@@ -1,4 +1,4 @@
-import { isLoggedIn } from '@/actions/auth';
+import { isLoggedIn } from '@/actions/auth.action';
 import { useQuery } from '@tanstack/react-query';
 import { usePathname } from 'next/navigation';
 

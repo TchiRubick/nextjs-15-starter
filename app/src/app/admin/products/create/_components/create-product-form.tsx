@@ -1,5 +1,7 @@
 'use client';
 
+import { getAllAmenitiesAction } from '@/actions/amenity.action';
+import { createProductAction } from '@/actions/product.action';
 import { AMENITIES_QUERY_KEY } from '@/app/admin/amenities/static';
 import { MultiSelect } from '@/components/multi-select';
 import { Button } from '@/components/ui/button';
@@ -21,7 +23,6 @@ import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { PRODUCTS_QUERY_KEY } from '../../static';
-import { createProductAction, getAmenitiesAction } from '../action';
 
 export const CreateProductForm = () => {
   const queryClient = useQueryClient();
@@ -29,7 +30,7 @@ export const CreateProductForm = () => {
 
   const { data: amenities } = useQuery({
     queryKey: AMENITIES_QUERY_KEY,
-    queryFn: getAmenitiesAction,
+    queryFn: getAllAmenitiesAction,
   });
 
   const { mutateAsync, isPending } = useMutationAction(createProductAction, {
