@@ -8,8 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import InternalError from '@/lib/error';
-import { getAvailability } from '@packages/uplisting/src/getAvailability';
+
 import {
   Tooltip,
   TooltipContent,
@@ -21,11 +20,12 @@ import { Bath, Bed, House, User } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Filter } from './_components/filter';
+import { getFilteredProperties } from './actions';
 
 export const Properties = ({
-  availabilities,
+  products,
 }: {
-  availabilities: Awaited<ReturnType<typeof getAvailability>>;
+  products: Awaited<ReturnType<typeof getFilteredProperties>>;
 }) => {
   return (
     <motion.main
@@ -43,10 +43,9 @@ export const Properties = ({
         </p>
       </div>
 
-      <Filter />
+      <Filter reload />
 
-      {(availabilities instanceof InternalError ||
-        availabilities.length === 0) && (
+      {products.length === 0 && (
         <div className='mt-12 flex flex-col items-center justify-center'>
           <p className='mb-8 text-slate-600'>
             Veuillez modifier vos critères de recherche
@@ -61,12 +60,12 @@ export const Properties = ({
         </div>
       )}
 
-      {Array.isArray(availabilities) && availabilities.length > 0 && (
+      {products.length > 0 && (
         <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3'>
-          {availabilities.map((item) => (
+          {products.map((product) => (
             <Link
-              key={item.id}
-              href={`/property/${item.id}`}
+              key={product.id}
+              href={`/property/${product.id}`}
               className='group block w-full transition-transform hover:-translate-y-1'
             >
               <Card className='h-full overflow-hidden border-none bg-white shadow-md transition-shadow hover:shadow-xl'>
@@ -74,12 +73,12 @@ export const Properties = ({
                   <CardTitle>
                     <Carousel className='w-full'>
                       <CarouselContent>
-                        {item.photos.map((photo) => (
-                          <CarouselItem key={photo.url}>
+                        {product.images.map((image) => (
+                          <CarouselItem key={image.id}>
                             <div className='relative aspect-[4/3] w-full overflow-hidden'>
                               <Image
-                                src={photo.url}
-                                alt={photo.created_at}
+                                src={image.image.url}
+                                alt={image.image.url}
                                 fill
                                 className='object-cover transition-transform group-hover:scale-105'
                               />
@@ -97,21 +96,21 @@ export const Properties = ({
                   <div className='mb-4 space-y-3'>
                     <div>
                       <h3 className='mb-2 text-xl font-semibold text-slate-900'>
-                        {item.name}
+                        {product.name}
                       </h3>
                     </div>
 
                     <p className='line-clamp-2 text-sm text-slate-600'>
-                      {item.description}
+                      {product.description}
                     </p>
 
                     <div className='flex flex-wrap gap-2'>
-                      {item.amenities.slice(0, 2).map((amenity) => (
+                      {product.amenities.slice(0, 2).map((amenity) => (
                         <span
-                          key={amenity.group}
+                          key={amenity.amenity.name}
                           className='rounded-full bg-slate-100 px-2 py-1 text-xs text-slate-600'
                         >
-                          {amenity.values[0]}
+                          {amenity.amenity.name}
                         </span>
                       ))}
                     </div>
@@ -123,23 +122,21 @@ export const Properties = ({
                         <TooltipTrigger className='flex flex-col items-center gap-1'>
                           <Bed className='h-4 w-4 text-slate-600' />
                           <span className='text-sm font-medium'>
-                            {item.rooms.beds}
+                            {product.bed}
                           </span>
                         </TooltipTrigger>
-                        <TooltipContent>
-                          {item.rooms.beds} lit(s)
-                        </TooltipContent>
+                        <TooltipContent>{product.bed} lit(s)</TooltipContent>
                       </Tooltip>
 
                       <Tooltip>
                         <TooltipTrigger className='flex flex-col items-center gap-1'>
                           <Bath className='h-4 w-4 text-slate-600' />
                           <span className='text-sm font-medium'>
-                            {item.rooms.bathrooms}
+                            {product.bath}
                           </span>
                         </TooltipTrigger>
                         <TooltipContent>
-                          {item.rooms.bathrooms} salle(s) de bain
+                          {product.bath} salle(s) de bain
                         </TooltipContent>
                       </Tooltip>
 
@@ -147,11 +144,11 @@ export const Properties = ({
                         <TooltipTrigger className='flex flex-col items-center gap-1'>
                           <House className='h-4 w-4 text-slate-600' />
                           <span className='text-sm font-medium'>
-                            {item.rooms.bedrooms}
+                            {product.room}
                           </span>
                         </TooltipTrigger>
                         <TooltipContent>
-                          {item.rooms.bedrooms} chambre(s)
+                          {product.room} chambre(s)
                         </TooltipContent>
                       </Tooltip>
 
@@ -159,11 +156,11 @@ export const Properties = ({
                         <TooltipTrigger className='flex flex-col items-center gap-1'>
                           <User className='h-4 w-4 text-slate-600' />
                           <span className='text-sm font-medium'>
-                            {item.capacity}
+                            {product.maxPerson}
                           </span>
                         </TooltipTrigger>
                         <TooltipContent>
-                          {item.capacity} personne(s) max
+                          {product.maxPerson} personne(s) max
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
@@ -175,7 +172,7 @@ export const Properties = ({
                     </div>
                     <div className='flex items-baseline gap-1 font-medium'>
                       <span className='text-sm italic text-slate-600'>
-                        Devis: {item.currency}
+                        Nuite: {product.price} Euros
                       </span>
                     </div>
                   </div>

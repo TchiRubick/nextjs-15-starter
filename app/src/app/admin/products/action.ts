@@ -59,7 +59,10 @@ export const uploadProductPicture = async (id: number, files: File[]) => {
   }
 
   const images = await createMassImage(
-    names.map((name) => ({ url: name, bucket: env.MINIO_BUCKET_NAME }))
+    names.map((name) => ({
+      url: getImageStorage(name),
+      bucket: env.MINIO_BUCKET_NAME,
+    }))
   );
 
   await createMassProductImage(

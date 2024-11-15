@@ -140,6 +140,9 @@ importers:
       react-hook-form:
         specifier: ^7.53.1
         version: 7.53.1(react@19.0.0-rc-69d4b800-20241021)
+      react-multi-date-picker:
+        specifier: ^4.5.2
+        version: 4.5.2(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react@19.0.0-rc-69d4b800-20241021)
       react-photo-view:
         specifier: ^1.2.6
         version: 1.2.6(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react@19.0.0-rc-69d4b800-20241021)
@@ -3191,6 +3194,12 @@ packages:
     resolution: {integrity: sha512-b0Zcf09AhqKS83btmUeYBS8tFK7XL2e3RvLmZcm0sTdF1/UUlHSsjXdCcWNxe7yfmAlPve5ym0DmKGtTzP6kVQ==}
     engines: {node: '>=14.18.0'}
 
+  react-date-object@2.1.9:
+    resolution:
+      {
+        integrity: sha512-BHxD/quWOTo9fLKV/cfL/M31ePoj4a1JaJ/CnOf8Ndg3mrkh4x9wEMMkCfTrzduxDOgU8ZgR8uarhqI5G71sTg==,
+      }
+
   react-day-picker@8.10.1:
     resolution: {integrity: sha512-TMx7fNbhLk15eqcMt+7Z7S2KF7mfTId/XJDjKE8f+IUcFn0l08/kI4FiYTL/0yuOLmEcbR4Fwe3GJf/NiiMnPA==}
     peerDependencies:
@@ -3202,6 +3211,15 @@ packages:
     peerDependencies:
       react: 19.0.0-rc-69d4b800-20241021
 
+  react-element-popper@2.1.7:
+    resolution:
+      {
+        integrity: sha512-tuM2OxKlW32h+6uFSK6EENHPeZ2OGgOipHfOAl+VLWEv9/j3QkSGbD+ADX3A9uJlmq24i37n28RjJmAbGTfpEg==,
+      }
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+
   react-hook-form@7.53.1:
     resolution: {integrity: sha512-6aiQeBda4zjcuaugWvim9WsGqisoUk+etmFEsSUMm451/Ic8L/UAb7sRtMj3V+Hdzm6mMjU1VhiSzYUZeBm0Vg==}
     engines: {node: '>=18.0.0'}
@@ -3210,6 +3228,15 @@ packages:
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+
+  react-multi-date-picker@4.5.2:
+    resolution:
+      {
+        integrity: sha512-FgWjZB3Z6IA6XpcWiLPk85PwcRUhOiYhKK42o5k672gD/n2I6rzPfQ8bUrldOIiF/Z7FfOCdH7a6FeubzqteLg==,
+      }
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
 
   react-photo-view@1.2.6:
     resolution: {integrity: sha512-Fq17yxkMIv0oFp7HOJr39HgCZRP6A9K5T5rixJ4flSUYT2OO3V8vNxEExjhIKgIrfmTu+mDnHYEsI9RRWi1JHw==}
@@ -6612,6 +6639,8 @@ snapshots:
 
   radash@12.1.0: {}
 
+  react-date-object@2.1.9: {}
+
   react-day-picker@8.10.1(date-fns@4.1.0)(react@19.0.0-rc-69d4b800-20241021):
     dependencies:
       date-fns: 4.1.0
@@ -6622,11 +6651,23 @@ snapshots:
       react: 19.0.0-rc-69d4b800-20241021
       scheduler: 0.25.0-rc-69d4b800-20241021
 
+  react-element-popper@2.1.7(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react@19.0.0-rc-69d4b800-20241021):
+    dependencies:
+      react: 19.0.0-rc-69d4b800-20241021
+      react-dom: 19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021)
+
   react-hook-form@7.53.1(react@19.0.0-rc-69d4b800-20241021):
     dependencies:
       react: 19.0.0-rc-69d4b800-20241021
 
   react-is@16.13.1: {}
+
+  react-multi-date-picker@4.5.2(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react@19.0.0-rc-69d4b800-20241021):
+    dependencies:
+      react: 19.0.0-rc-69d4b800-20241021
+      react-date-object: 2.1.9
+      react-dom: 19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021)
+      react-element-popper: 2.1.7(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react@19.0.0-rc-69d4b800-20241021)
 
   react-photo-view@1.2.6(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react@19.0.0-rc-69d4b800-20241021):
     dependencies:

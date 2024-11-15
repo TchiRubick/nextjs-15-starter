@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { Suspense } from 'react';
+import 'react-multi-date-picker/styles/colors/green.css';
 import { Loader } from './(public)/_components/loader';
 import './globals.css';
 

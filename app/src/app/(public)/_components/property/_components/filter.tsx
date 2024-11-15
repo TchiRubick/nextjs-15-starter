@@ -5,24 +5,20 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useSearchParamState } from '@/hooks/useSearchParamState';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { format } from 'date-fns';
 import { Search } from 'lucide-react';
-import { DateRange } from 'react-day-picker';
 import { Controller, useForm } from 'react-hook-form';
+import DatePicker, { DateObject } from 'react-multi-date-picker';
+import 'react-multi-date-picker/styles/layouts/mobile.css';
 import { z } from 'zod';
 import {
   defaultFilterParamValidation,
   filterParamValidation,
 } from '../_validations';
-import { DateRangePicker } from './date-range-picker';
 
 const filterSchema = z.object({
   min_price: z.coerce.number(),
   max_price: z.coerce.number(),
-  date_range: z.object({
-    from: z.date(),
-    to: z.date(),
-  }),
+  date_range: z.tuple([z.instanceof(DateObject), z.instanceof(DateObject)]),
 });
 
 type FilterSchema = z.infer<typeof filterSchema>;
@@ -34,7 +30,7 @@ export const Filter = ({ reload }: { reload?: boolean }) => {
     {
       reload,
       customPathname: '/#properties',
-      scroll: true,
+      scroll: false,
     }
   );
 
@@ -43,16 +39,15 @@ export const Filter = ({ reload }: { reload?: boolean }) => {
     handleSubmit,
     control,
     setError,
-    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: {
       min_price: params.min_price,
       max_price: params.max_price,
-      date_range: {
-        from: new Date(params.check_in),
-        to: new Date(params.check_out),
-      },
+      date_range: [
+        new DateObject(params.check_in),
+        new DateObject(params.check_out),
+      ] as [DateObject, DateObject],
     },
     mode: 'onChange',
     resolver: zodResolver(filterSchema),
@@ -70,13 +65,9 @@ export const Filter = ({ reload }: { reload?: boolean }) => {
     setParams({
       min_price: data.min_price,
       max_price: data.max_price,
-      check_in: format(data.date_range.from, 'yyyy-MM-dd'),
-      check_out: format(data.date_range.to, 'yyyy-MM-dd'),
+      check_in: data.date_range[0].format('YYYY-MM-DD'),
+      check_out: data.date_range[1].format('YYYY-MM-DD'),
     });
-  };
-
-  const handleDateRangeChange = (range: { from: Date; to: Date }) => {
-    setValue('date_range', range);
   };
 
   return (
@@ -137,14 +128,12 @@ export const Filter = ({ reload }: { reload?: boolean }) => {
             name='date_range'
             control={control}
             render={({ field }) => (
-              <DateRangePicker
-                className='h-12 w-full rounded-md border-0 bg-white/10 text-white focus:ring-2 focus:ring-primary'
+              <DatePicker
                 value={field.value}
-                onDateRangeChange={
-                  handleDateRangeChange as (
-                    value: DateRange | undefined
-                  ) => void
-                }
+                onChange={field.onChange}
+                range
+                className='green rmdp-mobile'
+                inputClass='h-12 border-0 bg-white/10 pl-8 text-white placeholder:text-slate-400 focus:ring-2 focus:ring-primary rounded-md'
               />
             )}
           />

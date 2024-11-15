@@ -1,12 +1,13 @@
 'use server';
 
 import { searchParamsParser } from '@/lib/searchParamsParser';
-import { getAvailability } from '@packages/uplisting';
+
 import {
   defaultParamsValidation,
   paramsValidation,
   ParamsValidation,
 } from '../_components/property/_validations';
+import { getFilteredProperties } from '../_components/property/actions';
 import { Properties } from '../_components/property/properties';
 import { CTA } from './_components/cta';
 import { FAQ } from './_components/faq';
@@ -27,7 +28,7 @@ export default async function Home({
     '/check-in'
   );
 
-  const availabilities = await getAvailability(values);
+  const products = await getFilteredProperties(values);
 
   return (
     <main className='flex w-full flex-col gap-20'>
@@ -42,7 +43,7 @@ export default async function Home({
 
       {/* Floating Filter Card */}
       <section className='flex justify-center' id='properties'>
-        <Properties availabilities={availabilities} />
+        <Properties products={products} />
       </section>
 
       <section>

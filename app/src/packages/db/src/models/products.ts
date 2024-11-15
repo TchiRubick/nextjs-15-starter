@@ -91,3 +91,29 @@ export const getPublishedProducts = async () =>
       },
     },
   });
+
+type ProductFilter = {
+  min_price: number;
+  max_price: number;
+};
+
+export const getProductByFliter = async (filter: ProductFilter) => {
+  const { min_price, max_price } = filter;
+
+  return db.query.Product.findMany({
+    where: (product, { gte, lte }) =>
+      gte(product.price, min_price) && lte(product.price, max_price),
+    with: {
+      amenities: {
+        with: {
+          amenity: true,
+        },
+      },
+      images: {
+        with: {
+          image: true,
+        },
+      },
+    },
+  });
+};
