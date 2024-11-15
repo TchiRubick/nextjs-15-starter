@@ -13,35 +13,26 @@ import { ArrowLeft, ArrowRight, Plus } from 'lucide-react';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { useState } from 'react';
 import { ImageUploader } from '../../_components/image-uploader';
+import { getImageUrl } from '../../action';
 
-const staticImages = [
-  '/e.jpg',
-  '/e1.jpg',
-  '/f.jpg',
-  '/m.jpg',
-  '/m1.jpg',
-  '/s.jpg',
-  '/internet.jpg',
-  '/parking.jpg',
-  '/parking1.jpg',
-  '/bedDouble.jpg',
-  '/activities.jpg',
-];
+interface Props {
+  id: number;
+  urls: string[];
+}
 
-export const PicturesSection = ({ id }: { id: number }) => {
-  const [selectedImage, setSelectedImage] = useState(staticImages[1]);
+export const PicturesSection = ({ id, urls }: Props) => {
+  const [selectedImage, setSelectedImage] = useState(urls[1]);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   const handleNext = () => {
-    const nextIndex = (selectedImageIndex + 1) % staticImages.length;
-    setSelectedImage(staticImages[nextIndex]);
+    const nextIndex = (selectedImageIndex + 1) % urls.length;
+    setSelectedImage(urls[nextIndex]);
     setSelectedImageIndex(nextIndex);
   };
 
   const handlePrev = () => {
-    const prevIndex =
-      (selectedImageIndex - 1 + staticImages.length) % staticImages.length;
-    setSelectedImage(staticImages[prevIndex]);
+    const prevIndex = (selectedImageIndex - 1 + urls.length) % urls.length;
+    setSelectedImage(urls[prevIndex]);
     setSelectedImageIndex(prevIndex);
   };
 
@@ -85,7 +76,7 @@ export const PicturesSection = ({ id }: { id: number }) => {
         }}
       >
         <div className='flex w-max space-x-4 p-4'>
-          {staticImages.map((image, index) => (
+          {urls.map((image, index) => (
             <figure key={index} className='shrink-0'>
               <div className='mr-4 overflow-hidden rounded-md shadow-2xl'>
                 <div className='relative shadow-lg'>
@@ -112,7 +103,7 @@ export const PicturesSection = ({ id }: { id: number }) => {
             <DialogTrigger asChild>
               <Button
                 variant='secondary'
-                className='mt-5 h-[100px] w-[100px] rounded-full border-2 border-dashed border-slate-900/55 hover:animate-spin'
+                className='mt-5 h-[100px] w-[100px] rounded-full border-2 border-dashed border-slate-900/55 transition delay-1000 duration-1000 hover:animate-spin'
               >
                 <Plus />
               </Button>

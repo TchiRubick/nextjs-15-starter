@@ -1,6 +1,7 @@
 'use server';
 
 import { env } from '@/env';
+import { getImageStorage } from '@/lib/get-image-storage';
 import { upload } from '@/packages/s3';
 import { createMassImage } from '@packages/db/models/image';
 import {
@@ -67,3 +68,8 @@ export const uploadProductPicture = async (id: number, files: File[]) => {
 
   return images;
 };
+
+export const getImageUrl = async (name: string) => {
+  const url = getImageStorage(name);
+  return url;
+}
