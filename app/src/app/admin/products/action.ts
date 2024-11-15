@@ -75,4 +75,4 @@ export const uploadProductPicture = async (id: number, files: File[]) => {
 export const getImageUrl = async (name: string) => {
   const url = getImageStorage(name);
   return url;
-}
+};

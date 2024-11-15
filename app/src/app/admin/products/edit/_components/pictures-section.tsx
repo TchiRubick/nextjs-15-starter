@@ -1,6 +1,7 @@
 'use client';
 
-import Image from 'next/image';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -8,12 +9,10 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import { Button } from '@/components/ui/button';
 import { ArrowLeft, ArrowRight, Plus } from 'lucide-react';
-import { AspectRatio } from '@/components/ui/aspect-ratio';
+import Image from 'next/image';
 import { useState } from 'react';
 import { ImageUploader } from '../../_components/image-uploader';
-import { getImageUrl } from '../../action';
 
 interface Props {
   id: number;
