@@ -3,6 +3,7 @@ import getQueryClient from '@/lib/query-client';
 import { getOneProductAction } from '../../action';
 import { getAmenitiesAction } from '../../create/action';
 import { EditProductForm } from '../_components/edit-product-form';
+import { PicturesSection } from '../_components/pictures-section';
 
 const EditProduct = async ({ params }: { params: Promise<{ id: number }> }) => {
   const { id } = await params;
@@ -30,6 +31,7 @@ const EditProduct = async ({ params }: { params: Promise<{ id: number }> }) => {
 
   return (
     <div className='flex flex-col items-center justify-center py-4 pt-28'>
+      <PicturesSection id={id} />
       <EditProductForm product={adaptedProduct} productId={id} />
     </div>
   );
