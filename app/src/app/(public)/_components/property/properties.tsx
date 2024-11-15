@@ -35,7 +35,7 @@ export const Properties = ({
       className='container mx-auto flex flex-col items-center space-y-8 px-4 py-12'
     >
       <div className='text-center'>
-        <h2 className='mb-4 text-4xl font-medium tracking-tight text-slate-900 md:text-5xl'>
+        <h2 className='mb-4 text-4xl font-semibold tracking-tight text-foreground md:text-7xl'>
           Réserver votre séjour
         </h2>
         <p className='text-lg text-slate-600'>

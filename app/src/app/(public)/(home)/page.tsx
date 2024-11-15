@@ -2,12 +2,12 @@
 
 import { searchParamsParser } from '@/lib/searchParamsParser';
 
+import { getFilteredProperties } from '@/actions/product.action';
 import {
   defaultPropertyParam,
   paramsValidation,
   ParamsValidation,
 } from '../_components/property/_validations';
-import { getFilteredProperties } from '../_components/property/actions';
 import { Properties } from '../_components/property/properties';
 import { CTA } from './_components/cta';
 import { FAQ } from './_components/faq';
@@ -31,15 +31,14 @@ export default async function Home({
   const products = await getFilteredProperties(values);
 
   return (
-    <main className='flex w-full flex-col gap-20'>
+    <main className='flex w-full flex-col gap-16'>
       {/* Hero Section with Filter */}
       <section className='relative w-full'>
         <Hero />
-      </section>
-
-      <section>
         <Testimonials />
       </section>
+
+      <section></section>
 
       {/* Floating Filter Card */}
       <section className='flex justify-center' id='properties'>

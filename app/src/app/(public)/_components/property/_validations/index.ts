@@ -1,10 +1,15 @@
 import { addDays } from 'date-fns';
 import { z } from 'zod';
 
-const DEFAULT_TODAY = new Date();
+const DEFAULT_TODAY = new Date(new Date().setHours(0, 0, 0, 0));
 const DEFAULT_TOMORROW = addDays(DEFAULT_TODAY, 1);
-const DEFAULT_TODAY_STRING = DEFAULT_TODAY.toISOString().split('T')[0];
-const DEFAULT_TOMORROW_STRING = DEFAULT_TOMORROW.toISOString().split('T')[0];
+const DEFAULT_TODAY_STRING = DEFAULT_TODAY.toLocaleDateString('fr-Fr'); // YYYY-MM-DD format
+const DEFAULT_TOMORROW_STRING = DEFAULT_TOMORROW.toLocaleDateString('fr-FR');
+
+const PRICE_DEFAULTS = {
+  MIN: 30,
+  MAX: 100,
+} as const;
 
 export const paramsValidation = z.object({
   check_in: z
@@ -17,8 +22,8 @@ export const paramsValidation = z.object({
     .optional()
     .default(DEFAULT_TOMORROW_STRING)
     .transform((v) => new Date(v)),
-  max_price: z.coerce.number().default(100),
-  min_price: z.coerce.number().default(30),
+  max_price: z.coerce.number().default(PRICE_DEFAULTS.MAX),
+  min_price: z.coerce.number().default(PRICE_DEFAULTS.MIN),
 });
 
 export const filterParamValidation = z.object({

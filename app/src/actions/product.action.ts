@@ -13,7 +13,7 @@ import { createMassProductImage } from '@packages/db/models/product-image';
 import {
   createProduct,
   getAllProducts,
-  getProductByFliter,
+  getProductByFilter,
   getProductById,
   InsertProduct,
   UpdateProduct,
@@ -110,7 +110,7 @@ export const getFilteredProperties = async (
 ) => {
   const filter = schemasSearchInput.parse(search);
 
-  const products = await getProductByFliter(filter);
+  const products = await getProductByFilter(filter);
 
   return products;
 };

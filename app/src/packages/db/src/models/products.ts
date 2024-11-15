@@ -77,7 +77,7 @@ type ProductFilter = {
   max_price: number;
 };
 
-export const getProductByFliter = async (filter: ProductFilter) => {
+export const getProductByFilter = async (filter: ProductFilter) => {
   const { min_price, max_price } = filter;
 
   return db.query.Product.findMany({
