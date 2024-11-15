@@ -4,6 +4,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogTitle,
   DialogTrigger,
@@ -36,14 +37,14 @@ export const PicturesSection = ({ id, urls }: Props) => {
   };
 
   return (
-    <div className='mx-auto w-[90vw] pt-6 sm:w-[60vw] sm:px-4 md:w-[40vw]'>
-      <AspectRatio className='flex h-full flex-col items-center justify-between'>
+    <div className='mx-auto mt-4 flex h-[500px] w-[1000px] md:px-0'>
+      <AspectRatio className='h-[500px] items-center rounded-md shadow-md'>
         <div className='relative h-full w-full'>
           <Image
             src={selectedImage}
             alt='Selected Image'
             fill={true}
-            className='m-auto max-h-[95%] max-w-full shadow-md transition-opacity duration-75'
+            className='m-auto max-h-full max-w-full rounded-md shadow-md transition-opacity duration-75'
             onLoad={(event) => {
               const target = event.target as HTMLImageElement;
               target.classList.remove('opacity-0');
@@ -66,25 +67,18 @@ export const PicturesSection = ({ id, urls }: Props) => {
         </div>
       </AspectRatio>
 
-      <ScrollArea
-        className='mt-2 overflow-hidden whitespace-nowrap rounded-md shadow-inner'
-        style={{
-          backgroundColor: 'var(--background)',
-          backdropFilter: 'blur(10px)',
-          borderColor: 'var(--border)',
-        }}
-      >
-        <div className='flex w-max space-x-4 p-4'>
+      <ScrollArea className='h-[500px] overflow-hidden rounded-md shadow-inner'>
+        <div className='flex h-fit w-fit flex-col space-y-4 p-4'>
           {urls.map((image, index) => (
             <figure key={index} className='shrink-0'>
-              <div className='mr-4 overflow-hidden rounded-md shadow-2xl'>
+              <div className='rounded-md'>
                 <div className='relative shadow-lg'>
                   <Image
                     src={image}
                     alt={'Image ' + (index + 1)}
                     className='aspect-square h-fit w-fit cursor-pointer object-cover opacity-0 transition-opacity duration-100'
-                    width={100}
-                    height={100}
+                    width={200}
+                    height={200}
                     onClick={() => {
                       setSelectedImage(image);
                       setSelectedImageIndex(index);
@@ -102,7 +96,7 @@ export const PicturesSection = ({ id, urls }: Props) => {
             <DialogTrigger asChild>
               <Button
                 variant='secondary'
-                className='mt-5 h-[100px] w-[100px] rounded-full border-2 border-dashed border-slate-900/55 transition delay-1000 duration-1000 hover:animate-spin'
+                className='border-2 border-dashed border-slate-900/55'
               >
                 <Plus />
               </Button>
@@ -114,7 +108,7 @@ export const PicturesSection = ({ id, urls }: Props) => {
           </Dialog>
         </div>
         <ScrollBar
-          orientation='horizontal'
+          orientation='vertical'
           className='scrollbar-thumb scrollbar-track'
         />
       </ScrollArea>
