@@ -5,20 +5,6 @@ import { getAmenitiesAction } from '../../create/action';
 import { EditProductForm } from '../_components/edit-product-form';
 import { PicturesSection } from '../_components/pictures-section';
 
-const staticImages = [
-  '/e.jpg',
-  '/e1.jpg',
-  '/f.jpg',
-  '/m.jpg',
-  '/m1.jpg',
-  '/s.jpg',
-  '/internet.jpg',
-  '/parking.jpg',
-  '/parking1.jpg',
-  '/bedDouble.jpg',
-  '/activities.jpg',
-];
-
 const EditProduct = async ({ params }: { params: Promise<{ id: number }> }) => {
   const { id } = await params;
   const queryClient = getQueryClient();
@@ -44,8 +30,11 @@ const EditProduct = async ({ params }: { params: Promise<{ id: number }> }) => {
   };
 
   return (
-    <div className='flex flex-col items-center justify-center py-4 pt-28'>
-      <PicturesSection id={id} urls={staticImages} />
+    <div>
+      <PicturesSection
+        id={id}
+        urls={product?.images.map((i) => i.image.url) ?? []}
+      />
       <EditProductForm product={adaptedProduct} productId={id} />
     </div>
   );
