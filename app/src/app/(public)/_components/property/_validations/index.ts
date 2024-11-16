@@ -26,13 +26,11 @@ export const paramsValidation = z
     max_price: z.coerce.number().default(PRICE_DEFAULTS.MAX),
     min_price: z.coerce.number().default(PRICE_DEFAULTS.MIN),
   })
-  .refine((data) => data.check_in > data.check_out, {
+  .refine((data) => data.check_in < data.check_out, {
     message: 'La date de début doit être inférieure à la date de fin',
-    path: ['check_in'],
   })
-  .refine((data) => data.max_price < data.min_price, {
+  .refine((data) => data.max_price > data.min_price, {
     message: 'Le prix maximum doit être supérieur au prix minimum',
-    path: ['max_price'],
   });
 
 export const filterParamValidation = z.object({

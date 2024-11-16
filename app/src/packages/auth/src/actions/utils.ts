@@ -1,4 +1,3 @@
-import InternalError from '@/lib/error';
 import { hash, verify } from '@node-rs/argon2';
 import { cookies } from 'next/headers';
 import { auth } from '../..';
@@ -22,7 +21,7 @@ export const validateInputSignin = (input: SigninInput) => {
     const errorMessage = result.error.errors
       .map((err) => err.message)
       .join(', ');
-    throw new InternalError(errorMessage, 'VALIDATION_ERROR');
+    throw new Error(errorMessage);
   }
 
   return result.data;
@@ -57,7 +56,7 @@ export const createAndSetSessionCookie = async (userId: string) => {
     return session;
   } catch (error) {
     console.error('Session creation error:', error);
-    throw new InternalError('Failed to create session', 'SESSION_ERROR');
+    throw new Error('Failed to create session');
   }
 };
 
@@ -68,7 +67,7 @@ export const validateInputSignup = (input: SignupInput) => {
     const errorMessage = result.error.errors
       .map((err) => err.message)
       .join(', ');
-    throw new InternalError(errorMessage, 'VALIDATION_FAILED');
+    throw new Error(errorMessage);
   }
 
   return result.data;
@@ -89,6 +88,6 @@ export const hashPassword = async (password: string): Promise<string> => {
     return await hash(password, HASH_OPTIONS);
   } catch (error) {
     console.error('Password hashing error:', error);
-    throw new InternalError('Password processing failed', 'HASH_FAILED', 500);
+    throw new Error('Password processing failed');
   }
 };

@@ -18,11 +18,15 @@ export default async function Home({
 }) {
   const params = await searchParams;
 
-  const { data } = paramsValidation.safeParse(params);
+  const result = paramsValidation.safeParse(params);
 
-  const products = await getFilteredPropertiesQuery(
-    data ?? defaultPropertyParam
-  );
+  if (!result.success) {
+    console.error('Invalid search params:', result.error);
+  }
+
+  const data = result.success ? result.data : defaultPropertyParam;
+
+  const products = await getFilteredPropertiesQuery(data);
 
   return (
     <main className='home-page flex w-full flex-col gap-16'>

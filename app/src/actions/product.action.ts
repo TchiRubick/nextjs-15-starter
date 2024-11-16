@@ -161,9 +161,15 @@ export const uploadProductImageAdminMutation = async (
     const names: string[] = [];
 
     for (const file of files) {
+      if (!file.type.startsWith('image/')) {
+        throw new Error(
+          `Invalid file type: ${file.type}. Only image files are allowed.`
+        );
+      }
+
       const arrayBuffer = await file.arrayBuffer();
       const buffer = new Uint8Array(arrayBuffer);
-      const safename = file.name.replace(/[^A-Z0-9]+/gi, '_');
+      const safename = `${Date.now()}_${crypto.randomUUID()}`;
 
       await upload(safename, Buffer.from(buffer));
       names.push(safename);

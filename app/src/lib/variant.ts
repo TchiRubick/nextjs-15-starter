@@ -1,11 +1,23 @@
 type Direction = 'up' | 'down' | 'left' | 'right';
 
+const OFFSET = 40;
+
+const getAxisOffset = (direction: Direction, axis: 'x' | 'y'): number => {
+  if (axis === 'x' && (direction === 'left' || direction === 'right')) {
+    return direction === 'left' ? OFFSET : -OFFSET;
+  }
+  if (axis === 'y' && (direction === 'up' || direction === 'down')) {
+    return direction === 'up' ? OFFSET : -OFFSET;
+  }
+  return 0;
+};
+
 export const fadeIn = (direction: Direction, delay: number) => {
   return {
     hidden: {
-      y: direction === 'up' ? 40 : direction === 'down' ? -40 : 0,
+      y: getAxisOffset(direction, 'y'),
       opacity: 0,
-      x: direction === 'left' ? 40 : direction === 'right' ? -40 : 0,
+      x: getAxisOffset(direction, 'x'),
     },
     show: {
       y: 0,
