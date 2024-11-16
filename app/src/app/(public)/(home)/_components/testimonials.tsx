@@ -107,7 +107,7 @@ export const Testimonials = () => {
   }, [api, current]);
 
   return (
-    <div className='bg-testimonials w-full bg-white py-24'>
+    <div className='bg-testimonials w-full py-24'>
       <div className='container mx-auto px-4'>
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -1,6 +1,6 @@
 'use client';
 
-import { uploadProductPicture } from '@/actions/product.action';
+import { uploadProductImageAdminMutation } from '@/actions/product.action';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -14,14 +14,17 @@ import { ChangeEventHandler, useMemo, useState } from 'react';
 export const ImageUploader = ({ id }: { id: number }) => {
   const [files, setFiles] = useState<File[]>([]);
 
-  const { mutateAsync, isPending } = useMutationAction(uploadProductPicture, {
-    onSuccess: () => {
-      console.log('success');
-    },
-    onError: () => {
-      console.log('error');
-    },
-  });
+  const { mutateAsync, isPending } = useMutationAction(
+    uploadProductImageAdminMutation,
+    {
+      onSuccess: () => {
+        console.log('success');
+      },
+      onError: () => {
+        console.log('error');
+      },
+    }
+  );
 
   const handleImageSelected: ChangeEventHandler<HTMLInputElement> = (e) => {
     if (e.target.files === null) {

@@ -5,11 +5,14 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { useSession } from '@/hooks/useSession';
 import { Check, MoveRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export const ContactForm = () => {
+  const { data } = useSession();
+
   return (
     <div className='w-full py-20 lg:py-40'>
       <div className='container mx-auto max-w-6xl'>
@@ -69,16 +72,16 @@ export const ContactForm = () => {
             </div>
           </div>
 
-          <div className='flex w-full items-center justify-center'>
+          <div className='flex w-full items-center justify-center bg-white'>
             <div className='flex w-full flex-col gap-4 rounded-md p-8 md:border'>
               <p>Book a meeting</p>
               <div className='grid w-full items-center gap-1'>
                 <Label htmlFor='name'>Name</Label>
-                <Input id='name' type='text' />
+                <Input id='name' type='text' defaultValue={data?.username} />
               </div>
               <div className='grid w-full items-center gap-1'>
                 <Label htmlFor='email'>Email</Label>
-                <Input id='email' type='email' />
+                <Input id='email' type='email' defaultValue={data?.email} />
               </div>
               <div className='grid w-full items-center gap-1'>
                 <Label htmlFor='object'>Objet</Label>

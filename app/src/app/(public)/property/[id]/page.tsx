@@ -1,6 +1,6 @@
 'use server';
 
-import { getPropertyById } from '@/actions/product.action';
+import { getProductQuery } from '@/actions/product.action';
 import { EuroIcon } from 'lucide-react';
 import Image from 'next/image';
 import { ImageGallery } from './_components/image-gallery';
@@ -14,7 +14,7 @@ const PropertyDetails = async ({
 }) => {
   const { id } = await params;
 
-  const property = await getPropertyById(Number(id));
+  const property = await getProductQuery(Number(id));
 
   if (!property)
     return (

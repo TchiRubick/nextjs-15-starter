@@ -29,7 +29,7 @@ export type AmenitySelect = z.infer<typeof zSelectAmenity>;
 // ============================================================================
 // Queries
 // ============================================================================
-export const getAllAmenities = async () => db.query.Amenity.findMany();
+export const getAmenities = async () => db.query.Amenity.findMany();
 
 export const createAmenity = async (input: InsertAmenity) =>
   db.insert(Amenity).values(input).returning();

@@ -1,6 +1,6 @@
 'use client';
 
-import { register } from '@/actions/auth.action';
+import { registerMutation } from '@/actions/auth.action';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -22,7 +22,7 @@ export const SignupForm = () => {
   const { register: namedRegister, getValues, handleSubmit } = useForm();
 
   const { mutateAsync, isPending, error, isError } =
-    useMutationAction(register);
+    useMutationAction(registerMutation);
 
   if (isError) {
     toast({

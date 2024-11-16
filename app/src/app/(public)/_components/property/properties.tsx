@@ -9,7 +9,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 
-import { getFilteredProperties } from '@/actions/product.action';
+import { getFilteredPropertiesQuery } from '@/actions/product.action';
 import {
   Tooltip,
   TooltipContent,
@@ -25,7 +25,7 @@ import { Filter } from './_components/filter';
 export const Properties = ({
   products,
 }: {
-  products: Awaited<ReturnType<typeof getFilteredProperties>>;
+  products: Awaited<ReturnType<typeof getFilteredPropertiesQuery>>;
 }) => {
   return (
     <motion.main

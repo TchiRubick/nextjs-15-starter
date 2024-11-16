@@ -49,7 +49,7 @@ export const getProductById = async (id: number) =>
     },
   });
 
-export const getAllProducts = async () =>
+export const getProducts = async () =>
   db.query.Product.findMany({
     with: {
       amenities: {
@@ -77,13 +77,14 @@ type ProductFilter = {
   max_price: number;
 };
 
-export const getProductByFilter = async (filter: ProductFilter) => {
+export const getProductsByFilter = async (filter: ProductFilter) => {
   const { min_price, max_price } = filter;
 
   return db.query.Product.findMany({
     where: (product, { gte, lte, and }) =>
       and(
-        gte(product.price, min_price) && lte(product.price, max_price),
+        gte(product.price, min_price),
+        lte(product.price, max_price),
         eq(product.status, 'published')
       ),
     with: {

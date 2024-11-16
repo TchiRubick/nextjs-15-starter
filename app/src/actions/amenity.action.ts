@@ -1,37 +1,58 @@
 'use server';
 
-import InternalError from '@/lib/error';
+import { isLoggedInAdminOrThrow } from '@packages/auth/index';
 import {
-  AmenitySelect,
   createAmenity,
   deleteAmenity,
-  getAllAmenities,
+  getAmenities,
   InsertAmenity,
 } from '@packages/db/models/amenities';
 
-export const getAllAmenitiesAction = async () => {
-  const amenities = await getAllAmenities();
-  return amenities;
-};
+// ============================================================================
+// Amenity Actions
+// ============================================================================
 
-export const createAmenityAction = async (
-  data: InsertAmenity
-): Promise<AmenitySelect | InternalError> => {
+/**
+ * Retrieves all amenities.
+ * @returns An array of amenities or an empty array if an error occurs.
+ */
+export const getAmenitiesQuery = async () => {
   try {
-    const [amenity] = await createAmenity(data);
-    return amenity;
+    return await getAmenities();
   } catch (error) {
-    return new InternalError(error, 'CREATION_FAILED');
+    console.error(error);
+    return [];
   }
 };
 
-export const deleteAmenityAction = async (
-  id: number
-): Promise<AmenitySelect | InternalError> => {
+/**
+ * Creates a new amenity.
+ * @param data - The data for the new amenity.
+ * @returns The created amenity or an error if creation fails.
+ */
+export const createAmenityAdminMutation = async (data: InsertAmenity) => {
   try {
+    await isLoggedInAdminOrThrow();
+    const [amenity] = await createAmenity(data);
+    return amenity;
+  } catch (error) {
+    console.error(error);
+    return error as unknown as Error;
+  }
+};
+
+/**
+ * Deletes an amenity by ID.
+ * @param id - The ID of the amenity to delete.
+ * @returns The deleted amenity or an error if deletion fails.
+ */
+export const deleteAmenityAdminMutation = async (id: number) => {
+  try {
+    await isLoggedInAdminOrThrow();
     const [amenity] = await deleteAmenity(id);
     return amenity;
   } catch (error) {
-    return new InternalError(error, 'DELETION_FAILED');
+    console.error(error);
+    return error as unknown as Error;
   }
 };

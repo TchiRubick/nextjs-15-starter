@@ -1,6 +1,6 @@
 'use client';
 
-import { createAmenityAction } from '@/actions/amenity.action';
+import { createAmenityAdminMutation } from '@/actions/amenity.action';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -44,10 +44,13 @@ export const AddAmenityForm = () => {
     });
   };
 
-  const { mutateAsync, isPending } = useMutationAction(createAmenityAction, {
-    onSuccess,
-    onError,
-  });
+  const { mutateAsync, isPending } = useMutationAction(
+    createAmenityAdminMutation,
+    {
+      onSuccess,
+      onError,
+    }
+  );
 
   const onSubmit = async (data: InsertAmenity) => {
     await mutateAsync(data);

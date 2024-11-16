@@ -4,6 +4,8 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background: url('/side-wave_background.svg') no-repeat center center;
+  background-size: cover;
 }
 
 @layer base {
@@ -100,12 +102,19 @@ html {
   }
 }
 
-.bg-hero {
-  animation: breath 20s linear infinite;
-  background: url('/275327112.jpg') center center no-repeat;
-  background-size: 10%;
+@media (prefers-reduced-motion: reduce) {
+  .bg-hero {
+    animation: none;
+  }
 }
 
+.bg-hero {
+  animation: breath 20s linear infinite;
+  will-change: background-size;
+  background: url('/275327112.jpg') center center no-repeat;
+  background-size: 100% auto;
+}
+/*
 .bg-testimonials {
   background: url('/testimonials-background.png') center center no-repeat;
-}
+} */

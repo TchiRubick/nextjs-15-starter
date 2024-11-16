@@ -1,7 +1,7 @@
 'use client';
 
-import { getAllAmenitiesAction } from '@/actions/amenity.action';
-import { createProductAction } from '@/actions/product.action';
+import { getAmenitiesQuery } from '@/actions/amenity.action';
+import { createProductAdminMutation } from '@/actions/product.action';
 import { AMENITIES_QUERY_KEY } from '@/app/admin/amenities/static';
 import { MultiSelect } from '@/components/multi-select';
 import { Button } from '@/components/ui/button';
@@ -30,25 +30,28 @@ export const CreateProductForm = () => {
 
   const { data: amenities } = useQuery({
     queryKey: AMENITIES_QUERY_KEY,
-    queryFn: getAllAmenitiesAction,
+    queryFn: getAmenitiesQuery,
   });
 
-  const { mutateAsync, isPending } = useMutationAction(createProductAction, {
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: PRODUCTS_QUERY_KEY });
+  const { mutateAsync, isPending } = useMutationAction(
+    createProductAdminMutation,
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: PRODUCTS_QUERY_KEY });
 
-      toast({
-        title: 'Product created successfully',
-      });
+        toast({
+          title: 'Product created successfully',
+        });
 
-      router.push('/admin/products');
-    },
-    onError: () => {
-      toast({
-        title: 'Failed to create product',
-      });
-    },
-  });
+        router.push('/admin/products');
+      },
+      onError: () => {
+        toast({
+          title: 'Failed to create product',
+        });
+      },
+    }
+  );
 
   const form = useForm<CreateProduct>({
     defaultValues: {

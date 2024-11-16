@@ -1,12 +1,9 @@
 'use server';
 
-import { searchParamsParser } from '@/lib/searchParamsParser';
-
-import { getFilteredProperties } from '@/actions/product.action';
+import { getFilteredPropertiesQuery } from '@/actions/product.action';
 import {
   defaultPropertyParam,
   paramsValidation,
-  ParamsValidation,
 } from '../_components/property/_validations';
 import { Properties } from '../_components/property/properties';
 import { CTA } from './_components/cta';
@@ -17,21 +14,18 @@ import { Testimonials } from './_components/testimonials';
 export default async function Home({
   searchParams,
 }: {
-  searchParams: Promise<ParamsValidation>;
+  searchParams: Promise<unknown>;
 }) {
   const params = await searchParams;
 
-  const values = await searchParamsParser(
-    params,
-    paramsValidation,
-    defaultPropertyParam,
-    '/check-in'
+  const { data } = paramsValidation.safeParse(params);
+
+  const products = await getFilteredPropertiesQuery(
+    data ?? defaultPropertyParam
   );
 
-  const products = await getFilteredProperties(values);
-
   return (
-    <main className='flex w-full flex-col gap-16'>
+    <main className='home-page flex w-full flex-col gap-16'>
       {/* Hero Section with Filter */}
       <section className='relative w-full'>
         <Hero />

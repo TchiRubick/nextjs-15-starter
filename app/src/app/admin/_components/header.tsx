@@ -1,6 +1,6 @@
 'use client';
 
-import { logout } from '@/actions/auth.action';
+import { logoutMutation } from '@/actions/auth.action';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -50,7 +50,7 @@ export const Header = () => {
     });
 
   const handleLogout = async () => {
-    await logout();
+    await logoutMutation();
     window.location.replace('/');
   };
 

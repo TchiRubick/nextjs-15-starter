@@ -1,7 +1,7 @@
 'use client';
 
-import { getAllAmenitiesAction } from '@/actions/amenity.action';
-import { updateProductAction } from '@/actions/product.action';
+import { getAmenitiesQuery } from '@/actions/amenity.action';
+import { updateProductAdminMutation } from '@/actions/product.action';
 import { AMENITIES_QUERY_KEY } from '@/app/admin/amenities/static';
 import { MultiSelect } from '@/components/multi-select';
 import { Button } from '@/components/ui/button';
@@ -56,11 +56,11 @@ export const EditProductForm = ({ product, productId }: Props) => {
 
   const { data: amenities } = useQuery({
     queryKey: AMENITIES_QUERY_KEY,
-    queryFn: getAllAmenitiesAction,
+    queryFn: getAmenitiesQuery,
   });
 
   const { mutateAsync, isPending, error } = useMutationAction(
-    updateProductAction,
+    updateProductAdminMutation,
     {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: PRODUCTS_QUERY_KEY });

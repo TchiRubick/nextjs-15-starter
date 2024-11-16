@@ -7,7 +7,10 @@ class InternalError extends Error {
     if (message instanceof Error) {
       message = message.message;
     }
-
+    console.info('----------------------');
+    console.warn('INTERNAL ERROR EXCEPTION');
+    console.error(code, message);
+    console.info('----------------------');
     super(message as string);
     this.name = 'InternalError';
   }

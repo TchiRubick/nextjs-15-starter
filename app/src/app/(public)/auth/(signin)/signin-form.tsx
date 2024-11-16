@@ -1,6 +1,6 @@
 'use client';
 
-import { login } from '@/actions/auth.action';
+import { loginMutation } from '@/actions/auth.action';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -22,7 +22,8 @@ import { useMutationAction } from '@packages/fetch-action/index';
 export const SigninForm = () => {
   const { register, getValues, handleSubmit } = useForm();
 
-  const { mutateAsync, isPending, error, isError } = useMutationAction(login);
+  const { mutateAsync, isPending, error, isError } =
+    useMutationAction(loginMutation);
 
   if (isError) {
     toast({
