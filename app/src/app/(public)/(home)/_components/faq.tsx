@@ -7,6 +7,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { PhoneCall } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 const questions = [
@@ -75,6 +76,12 @@ export const FAQ = () => (
               </Link>
             </div>
           </div>
+          <Image
+            alt='FAQ'
+            src='/illustration/undraw_faq_re_31cw.svg'
+            width={400}
+            height={400}
+          />
         </div>
         <Accordion type='single' collapsible className='w-full'>
           {questions.map((question, index) => (

@@ -1,7 +1,7 @@
+import { getAmenitiesQuery } from '@/actions/amenity.action';
+import { getProductQuery } from '@/actions/product.action';
 import { AMENITIES_QUERY_KEY } from '@/app/admin/amenities/static';
 import getQueryClient from '@/lib/query-client';
-import { getOneProductAction } from '../../action';
-import { getAmenitiesAction } from '../../create/action';
 import { EditProductForm } from '../_components/edit-product-form';
 import { PicturesSection } from '../_components/pictures-section';
 
@@ -10,10 +10,10 @@ const EditProduct = async ({ params }: { params: Promise<{ id: number }> }) => {
   const queryClient = getQueryClient();
 
   const [product] = await Promise.all([
-    getOneProductAction(id),
+    getProductQuery(id),
     queryClient.prefetchQuery({
       queryKey: AMENITIES_QUERY_KEY,
-      queryFn: getAmenitiesAction,
+      queryFn: getAmenitiesQuery,
     }),
   ]);
 

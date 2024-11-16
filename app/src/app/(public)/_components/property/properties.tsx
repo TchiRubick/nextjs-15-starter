@@ -9,6 +9,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 
+import { getFilteredPropertiesQuery } from '@/actions/product.action';
 import {
   Tooltip,
   TooltipContent,
@@ -20,12 +21,11 @@ import { Bath, Bed, House, User } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Filter } from './_components/filter';
-import { getFilteredProperties } from './actions';
 
 export const Properties = ({
   products,
 }: {
-  products: Awaited<ReturnType<typeof getFilteredProperties>>;
+  products: Awaited<ReturnType<typeof getFilteredPropertiesQuery>>;
 }) => {
   return (
     <motion.main
@@ -35,7 +35,7 @@ export const Properties = ({
       className='container mx-auto flex flex-col items-center space-y-8 px-4 py-12'
     >
       <div className='text-center'>
-        <h2 className='mb-4 text-4xl font-medium tracking-tight text-slate-900 md:text-5xl'>
+        <h2 className='mb-4 text-4xl font-semibold tracking-tight text-foreground md:text-7xl'>
           Réserver votre séjour
         </h2>
         <p className='text-lg text-slate-600'>

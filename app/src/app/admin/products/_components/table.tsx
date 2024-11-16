@@ -4,11 +4,12 @@ import { DataTable } from '@/components/data-table';
 import { ProductSelect } from '@packages/db/models/products';
 import { useQuery } from '@tanstack/react-query';
 import { ColumnDef } from '@tanstack/react-table';
-import { getAllProductsAction } from '../action';
-import { PRODUCTS_QUERY_KEY } from '../static';
-import Link from 'next/link';
-import { Edit2 } from 'lucide-react';
+
+import { getProductsQuery } from '@/actions/product.action';
 import { Button } from '@/components/ui/button';
+import { Edit2 } from 'lucide-react';
+import Link from 'next/link';
+import { PRODUCTS_QUERY_KEY } from '../static';
 
 const columns: ColumnDef<ProductSelect>[] = [
   {
@@ -65,7 +66,7 @@ const columns: ColumnDef<ProductSelect>[] = [
 export const Table = () => {
   const { data, isFetching } = useQuery({
     queryKey: PRODUCTS_QUERY_KEY,
-    queryFn: getAllProductsAction,
+    queryFn: getProductsQuery,
   });
 
   return (

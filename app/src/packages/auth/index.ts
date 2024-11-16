@@ -150,6 +150,20 @@ export const getUser = async () => {
   return user;
 };
 
+export const isLoggedInAdminOrThrow = async () => {
+  const { user } = await isAuth();
+
+  if (!user) {
+    throw new Error('User not logged in');
+  }
+
+  if (user.role !== 'admin') {
+    throw new Error('User not admin');
+  }
+
+  return user;
+};
+
 export const signOut = async () => {
   const { session } = await isAuth();
 

@@ -19,9 +19,9 @@ export const ReviewCard = ({
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      whileInView={{ opacity: 1, y: 35 }}
       transition={{ duration: 1 }}
-      className='flex h-full flex-col rounded-2xl bg-slate-800 p-6'
+      className='flex h-full flex-col rounded-2xl border-[1px] border-green-700 bg-primary/20 p-6 backdrop-blur-sm'
     >
       {/* Rating Stars */}
       <div className='flex gap-1'>
@@ -38,14 +38,14 @@ export const ReviewCard = ({
       </div>
 
       {/* Message */}
-      <blockquote className='mt-4 flex-grow text-base leading-relaxed text-slate-300'>
+      <blockquote className='mt-4 flex-grow text-base leading-relaxed text-gray-600'>
         &quot;{message}&quot;
       </blockquote>
 
       {/* Footer */}
-      <div className='mt-6 flex items-center justify-between border-t border-slate-700 pt-4'>
-        <span className='text-base font-medium text-white'>{name}</span>
-        <time className='text-sm text-slate-400'>
+      <div className='mt-6 flex items-center justify-between border-t border-green-950 pt-4'>
+        <span className='text-base font-medium text-gray-600'>{name}</span>
+        <time className='text-sm italic text-gray-600'>
           {format(new Date(date), 'MMMM yyyy', { locale: fr })}
         </time>
       </div>

@@ -1,7 +1,7 @@
 'use server';
 
-import { NearbyPlaces } from '../_components/nearby-places';
 import { Titles } from '../_components/titles';
+import { NearbyPlaces } from './_components/nearby-places';
 
 export default async function AroundPage() {
   return (

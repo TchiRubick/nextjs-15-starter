@@ -107,13 +107,13 @@ export const Testimonials = () => {
   }, [api, current]);
 
   return (
-    <div className='w-full bg-white py-24'>
+    <div className='bg-testimonials w-full py-24'>
       <div className='container mx-auto px-4'>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className='flex flex-col gap-16'
+          className='flex min-h-72 flex-col gap-2 py-11'
         >
           <div className='text-center'>
             <div className='mb-6 flex items-center justify-center gap-2'>
@@ -133,7 +133,7 @@ export const Testimonials = () => {
               </Link>
             </div>
 
-            <h2 className='mb-4 text-4xl font-medium tracking-tight text-slate-900 md:text-5xl'>
+            <h2 className='mb-4 text-5xl font-semibold tracking-tight text-foreground md:text-7xl'>
               L&apos;expérience de nos hôtes
             </h2>
             <p className='mx-auto max-w-2xl text-lg text-slate-600'>
@@ -155,7 +155,7 @@ export const Testimonials = () => {
               {reviews.map((review) => (
                 <CarouselItem
                   key={review.name}
-                  className='pl-4 md:basis-1/2 lg:basis-1/3'
+                  className='py-4 pl-4 md:basis-1/2 lg:basis-1/3'
                 >
                   <motion.div
                     whileHover={{ y: -5 }}

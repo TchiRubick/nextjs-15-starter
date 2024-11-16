@@ -29,23 +29,10 @@ export type AmenitySelect = z.infer<typeof zSelectAmenity>;
 // ============================================================================
 // Queries
 // ============================================================================
-export const getAmenityById = async (id: number) =>
-  db.query.Amenity.findFirst({
-    where: (amenity, { eq }) => eq(amenity.id, id),
-  });
-
-export const getAmenityByName = async (name: string) =>
-  db.query.Amenity.findFirst({
-    where: (amenity, { eq }) => eq(amenity.name, name),
-  });
-
-export const getAllAmenities = async () => db.query.Amenity.findMany();
+export const getAmenities = async () => db.query.Amenity.findMany();
 
 export const createAmenity = async (input: InsertAmenity) =>
   db.insert(Amenity).values(input).returning();
-
-export const updateAmenity = async (id: number, input: UpdateAmenity) =>
-  db.update(Amenity).set(input).where(eq(Amenity.id, id)).returning();
 
 export const deleteAmenity = async (id: number) =>
   db.delete(Amenity).where(eq(Amenity.id, id)).returning();

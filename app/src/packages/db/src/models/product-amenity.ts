@@ -31,24 +31,6 @@ export type ProductAmenitySelect = z.infer<typeof zSelectProductAmenity>;
 // ============================================================================
 // Queries
 // ============================================================================
-export const getProductAmenityById = async (id: number) =>
-  db.query.ProductAmenity.findFirst({
-    where: (productAmenity, { eq }) => eq(productAmenity.id, id),
-  });
-
-export const getProductAmenityByProductId = async (productId: number) =>
-  db.query.ProductAmenity.findMany({
-    where: (productAmenity, { eq }) => eq(productAmenity.productId, productId),
-  });
-
-export const getProductAmenityByAmenityId = async (amenityId: number) =>
-  db.query.ProductAmenity.findMany({
-    where: (productAmenity, { eq }) => eq(productAmenity.amenityId, amenityId),
-  });
-
-export const getAllProductAmenities = async () =>
-  db.query.ProductAmenity.findMany();
-
 export const deleteProductAmenity = async (id: number) =>
   db.delete(ProductAmenity).where(eq(ProductAmenity.productId, id)).returning();
 

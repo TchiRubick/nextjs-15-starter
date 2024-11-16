@@ -1,5 +1,6 @@
 'use client';
 
+import { uploadProductImageAdminMutation } from '@/actions/product.action';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -9,19 +10,21 @@ import { useMutationAction } from '@packages/fetch-action/index';
 import { Loader2 } from 'lucide-react';
 import Image from 'next/image';
 import { ChangeEventHandler, useMemo, useState } from 'react';
-import { uploadProductPicture } from '../action';
 
 export const ImageUploader = ({ id }: { id: number }) => {
   const [files, setFiles] = useState<File[]>([]);
 
-  const { mutateAsync, isPending } = useMutationAction(uploadProductPicture, {
-    onSuccess: () => {
-      console.log('success');
-    },
-    onError: () => {
-      console.log('error');
-    },
-  });
+  const { mutateAsync, isPending } = useMutationAction(
+    uploadProductImageAdminMutation,
+    {
+      onSuccess: () => {
+        console.log('success');
+      },
+      onError: () => {
+        console.log('error');
+      },
+    }
+  );
 
   const handleImageSelected: ChangeEventHandler<HTMLInputElement> = (e) => {
     if (e.target.files === null) {

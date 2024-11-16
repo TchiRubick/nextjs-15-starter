@@ -1,5 +1,9 @@
 'use client';
 
+import {
+  deleteAmenityAdminMutation,
+  getAmenitiesQuery,
+} from '@/actions/amenity.action';
 import { DataTable } from '@/components/data-table';
 import { Button } from '@/components/ui/button';
 import {
@@ -17,7 +21,6 @@ import { DialogTrigger } from '@radix-ui/react-dialog';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { ColumnDef } from '@tanstack/react-table';
 import { Loader2, Trash2 } from 'lucide-react';
-import { deleteAmenityAction, getAllAmenitiesAction } from '../action';
 import { AMENITIES_QUERY_KEY } from '../static';
 
 const columns = (
@@ -73,10 +76,12 @@ export const Table = () => {
 
   const { data, isFetching } = useQuery({
     queryKey: AMENITIES_QUERY_KEY,
-    queryFn: getAllAmenitiesAction,
+    queryFn: getAmenitiesQuery,
   });
 
-  const { mutateAsync, isPending } = useMutationAction(deleteAmenityAction);
+  const { mutateAsync, isPending } = useMutationAction(
+    deleteAmenityAdminMutation
+  );
 
   const onRemove = async (id: number) => {
     await mutateAsync(id);

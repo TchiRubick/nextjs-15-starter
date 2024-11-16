@@ -1,13 +1,10 @@
 'use server';
 
-import { searchParamsParser } from '@/lib/searchParamsParser';
-
+import { getFilteredPropertiesQuery } from '@/actions/product.action';
 import {
-  defaultParamsValidation,
+  defaultPropertyParam,
   paramsValidation,
-  ParamsValidation,
 } from '../_components/property/_validations';
-import { getFilteredProperties } from '../_components/property/actions';
 import { Properties } from '../_components/property/properties';
 import { CTA } from './_components/cta';
 import { FAQ } from './_components/faq';
@@ -17,29 +14,29 @@ import { Testimonials } from './_components/testimonials';
 export default async function Home({
   searchParams,
 }: {
-  searchParams: Promise<ParamsValidation>;
+  searchParams: Promise<unknown>;
 }) {
   const params = await searchParams;
 
-  const values = await searchParamsParser(
-    params,
-    paramsValidation,
-    defaultParamsValidation,
-    '/check-in'
-  );
+  const result = paramsValidation.safeParse(params);
 
-  const products = await getFilteredProperties(values);
+  if (!result.success) {
+    console.error('Invalid search params:', result.error);
+  }
+
+  const data = result.success ? result.data : defaultPropertyParam;
+
+  const products = await getFilteredPropertiesQuery(data);
 
   return (
-    <main className='flex w-full flex-col gap-20'>
+    <main className='home-page flex w-full flex-col gap-16'>
       {/* Hero Section with Filter */}
       <section className='relative w-full'>
         <Hero />
-      </section>
-
-      <section>
         <Testimonials />
       </section>
+
+      <section></section>
 
       {/* Floating Filter Card */}
       <section className='flex justify-center' id='properties'>

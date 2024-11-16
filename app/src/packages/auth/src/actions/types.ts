@@ -1,7 +1,5 @@
 import { z } from 'zod';
 
-import InternalError from '@/lib/error';
-
 export const signinSchema = z.object({
   identifier: z
     .string()
@@ -17,12 +15,9 @@ export type SigninInput = z.infer<typeof signinSchema>;
 
 // Constants
 export const AUTH_ERRORS = {
-  INVALID_CREDENTIALS: new InternalError(
-    'Invalid credentials',
-    'INVALID_CREDENTIALS'
-  ),
-  VALIDATION_ERROR: new InternalError('Validation error', 'VALIDATION_ERROR'),
-  USER_NOT_FOUND: new InternalError('User not found', 'USER_NOT_FOUND'),
+  INVALID_CREDENTIALS: new Error('Invalid credentials'),
+  VALIDATION_ERROR: new Error('Validation error'),
+  USER_NOT_FOUND: new Error('User not found'),
 } as const;
 
 export const signupSchema = z.object({
@@ -45,17 +40,10 @@ export type SignupInput = z.infer<typeof signupSchema>;
 
 // Constants
 export const SIGNUP_ERRORS = {
-  USERNAME_TAKEN: new InternalError('Username already taken', 'USERNAME_TAKEN'),
-  EMAIL_TAKEN: new InternalError('Email already taken', 'EMAIL_TAKEN'),
-  CREATION_FAILED: new InternalError(
-    'Failed to create user',
-    'CREATION_FAILED',
-    500
-  ),
-  VALIDATION_FAILED: new InternalError(
-    'Validation failed',
-    'VALIDATION_FAILED'
-  ),
+  USERNAME_TAKEN: new Error('Username already taken'),
+  EMAIL_TAKEN: new Error('Email already taken'),
+  CREATION_FAILED: new Error('Failed to create user'),
+  VALIDATION_FAILED: new Error('Validation failed'),
 } as const;
 
 export const HASH_OPTIONS = {

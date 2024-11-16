@@ -11,7 +11,7 @@ import DatePicker, { DateObject } from 'react-multi-date-picker';
 import 'react-multi-date-picker/styles/layouts/mobile.css';
 import { z } from 'zod';
 import {
-  defaultFilterParamValidation,
+  defaultPropertyFilterParam,
   filterParamValidation,
 } from '../_validations';
 
@@ -26,7 +26,7 @@ type FilterSchema = z.infer<typeof filterSchema>;
 export const Filter = ({ reload }: { reload?: boolean }) => {
   const [params, setParams] = useSearchParamState(
     filterParamValidation,
-    defaultFilterParamValidation,
+    defaultPropertyFilterParam,
     {
       reload,
       customPathname: '/#properties',
@@ -73,7 +73,7 @@ export const Filter = ({ reload }: { reload?: boolean }) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='mx-auto w-full max-w-6xl rounded-xl bg-slate-900 p-6 shadow-xl'
+      className='mx-auto rounded-xl bg-emerald-950 p-6 shadow-xl'
     >
       <div className='flex flex-wrap items-end gap-6'>
         {/* Price Range */}
@@ -83,12 +83,12 @@ export const Filter = ({ reload }: { reload?: boolean }) => {
           </Label>
           <div className='flex gap-3'>
             <div className='relative flex-1'>
-              <span className='absolute left-3 top-1/2 -translate-y-1/2 text-slate-400'>
+              <span className='absolute left-3 top-1/2 -translate-y-1/2 text-white'>
                 €
               </span>
               <Input
                 id='min_price'
-                className='h-12 border-0 bg-white/10 pl-8 text-white placeholder:text-slate-400 focus:ring-2 focus:ring-primary'
+                className='h-12 border-0 bg-white/30 pl-8 text-white placeholder:text-slate-400 focus:ring-2 focus:ring-primary'
                 type='number'
                 placeholder='Min'
                 {...register('min_price', {
@@ -98,11 +98,11 @@ export const Filter = ({ reload }: { reload?: boolean }) => {
               />
             </div>
             <div className='relative flex-1'>
-              <span className='absolute left-3 top-1/2 -translate-y-1/2 text-slate-400'>
+              <span className='absolute left-3 top-1/2 -translate-y-1/2 text-white'>
                 €
               </span>
               <Input
-                className='h-12 border-0 bg-white/10 pl-8 text-white placeholder:text-slate-400 focus:ring-2 focus:ring-primary'
+                className='h-12 border-0 bg-white/30 pl-8 text-white placeholder:text-slate-400 focus:ring-2 focus:ring-primary'
                 type='number'
                 placeholder='Max'
                 {...register('max_price', {
@@ -120,7 +120,7 @@ export const Filter = ({ reload }: { reload?: boolean }) => {
         </div>
 
         {/* Date Range */}
-        <div className='min-w-[300px] flex-[2]'>
+        <div>
           <Label className='mb-2 block text-sm font-medium text-white/80'>
             Dates du séjour
           </Label>
@@ -133,7 +133,7 @@ export const Filter = ({ reload }: { reload?: boolean }) => {
                 onChange={field.onChange}
                 range
                 className='green rmdp-mobile'
-                inputClass='h-12 border-0 bg-white/10 pl-8 text-white placeholder:text-slate-400 focus:ring-2 focus:ring-primary rounded-md'
+                inputClass='h-12 border-0 bg-white/30 cursor-pointer pl-8 text-white placeholder:text-slate-400 focus:ring-2 focus:ring-primary rounded-md'
               />
             )}
           />
@@ -143,7 +143,7 @@ export const Filter = ({ reload }: { reload?: boolean }) => {
         <Button
           type='submit'
           size='lg'
-          className='h-12 w-full min-w-[140px] bg-white font-medium text-slate-900 transition-all hover:translate-y-[-2px] hover:bg-slate-50 hover:shadow-lg active:translate-y-0 sm:w-full lg:w-[48px]'
+          className='h-12 w-full min-w-[140px] border-foreground/20 bg-slate-100 text-primary/90 transition-all hover:translate-y-[-2px] hover:bg-slate-200 hover:shadow-lg active:translate-y-0 sm:w-full lg:w-[48px]'
         >
           <Search className='mr-2 h-4 w-4' />
           Rechercher
