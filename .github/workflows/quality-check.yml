@@ -1,0 +1,43 @@
+name: Test Action
+
+on:
+  - push
+  - pull_request
+  - workflow_dispatch
+
+jobs:
+  test_default_inputs:
+    name: Test with default inputs
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        pnpm:
+          - 9.13.2
+        os:
+          - ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run the action
+        uses: ./app
+        with:
+          version: 9.13.2
+
+      - name: 'Test: which'
+        run: which pnpm; which pnpx
+
+      - name: 'Install dependencies'
+        run: pnpm install
+
+      - name: 'Lint check'
+        run: pnpm lint
+
+      - name: 'Format check'
+        run: pnpm format
+
+      - name: 'Typecheck'
+        run: pnpm typecheck
