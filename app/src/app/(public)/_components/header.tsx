@@ -31,14 +31,6 @@ const navigationItems = [
     href: '/properties',
   },
   {
-    title: 'Équipements',
-    href: '/features',
-  },
-  {
-    title: 'Environs',
-    href: '/around',
-  },
-  {
     title: 'Gallerie',
     href: '/pictures',
   },
