@@ -128,16 +128,13 @@ export function Features() {
 
   return (
     <div className='container mx-auto px-4 py-8'>
-      <h2 className='font-regular mb-10 text-left text-3xl tracking-tighter md:text-5xl lg:max-w-xl'>
-        Équipements et services
-      </h2>
       <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
         {amenities.map((amenity, index) => (
           <Card
             key={index}
             className='overflow-hidden hover:scale-105 hover:transition hover:duration-300 hover:ease-in-out'
           >
-            <CardHeader className='bg-primary p-4 text-primary-foreground'>
+            <CardHeader className='bg-emerald-950/90 text-xl p-4 text-primary-foreground'>
               <div className='flex items-center gap-3'>
                 {amenity.icon}
                 <CardTitle>{amenity.title}</CardTitle>
