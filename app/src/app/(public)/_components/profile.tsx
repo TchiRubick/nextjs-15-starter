@@ -49,7 +49,7 @@ export function Profile() {
             </Avatar>
           </CardTitle>
           <CardDescription className='self-center'>
-            Usernameexemple
+            {data?.username}
           </CardDescription>
         </CardHeader>
         <CardContent>
