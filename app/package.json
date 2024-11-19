@@ -65,6 +65,7 @@
     "react-multi-date-picker": "^4.5.2",
     "react-photo-view": "^1.2.6",
     "server-only": "^0.0.1",
+    "swiper": "^11.1.15",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^1.1.1",
