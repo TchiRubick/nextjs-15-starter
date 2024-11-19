@@ -3,17 +3,16 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useSearchParamState } from '@/hooks/useSearchParamState';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Search } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import qs from 'query-string';
 import { Controller, useForm } from 'react-hook-form';
 import DatePicker, { DateObject } from 'react-multi-date-picker';
 import 'react-multi-date-picker/styles/layouts/mobile.css';
 import { z } from 'zod';
-import {
-  defaultPropertyFilterParam,
-  filterParamValidation,
-} from '../_validations';
+
+export const LOCAL_STORAGE_KEY = 'property-filter';
 
 const filterSchema = z.object({
   min_price: z.coerce.number(),
@@ -23,16 +22,27 @@ const filterSchema = z.object({
 
 type FilterSchema = z.infer<typeof filterSchema>;
 
-export const Filter = ({ reload }: { reload?: boolean }) => {
-  const [params, setParams] = useSearchParamState(
-    filterParamValidation,
-    defaultPropertyFilterParam,
-    {
-      reload,
-      customPathname: '/properties',
-      scroll: true,
-    }
-  );
+export const Filter = ({
+  defaultValues,
+}: {
+  defaultValues: {
+    min_price: number;
+    max_price: number;
+    check_in: Date;
+    check_out: Date;
+  };
+}) => {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const formDefaultValue = {
+    min_price: defaultValues.min_price,
+    max_price: defaultValues.max_price,
+    date_range: [
+      new DateObject(defaultValues.check_in),
+      new DateObject(defaultValues.check_out),
+    ] as [DateObject, DateObject],
+  };
 
   const {
     register,
@@ -41,14 +51,7 @@ export const Filter = ({ reload }: { reload?: boolean }) => {
     setError,
     formState: { errors },
   } = useForm({
-    defaultValues: {
-      min_price: params.min_price,
-      max_price: params.max_price,
-      date_range: [
-        new DateObject(params.check_in),
-        new DateObject(params.check_out),
-      ] as [DateObject, DateObject],
-    },
+    defaultValues: formDefaultValue,
     mode: 'onChange',
     resolver: zodResolver(filterSchema),
   });
@@ -62,12 +65,18 @@ export const Filter = ({ reload }: { reload?: boolean }) => {
       return;
     }
 
-    setParams({
+    const newParams = qs.stringify({
       min_price: data.min_price,
       max_price: data.max_price,
       check_in: data.date_range[0].format('YYYY-MM-DD'),
       check_out: data.date_range[1].format('YYYY-MM-DD'),
     });
+
+    router.push(`${pathname}?${newParams}`, {
+      scroll: false,
+    });
+
+    router.refresh();
   };
 
   return (

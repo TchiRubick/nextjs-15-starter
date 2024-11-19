@@ -1,20 +1,33 @@
 'use server';
 
 import { getProductQuery } from '@/actions/product.action';
-import { EuroIcon } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import { Calendar, EuroIcon, MessageSquare } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
+import qs from 'query-string';
 import { ImageGallery } from '../_components/image-gallery';
 import { PropertyFeatures } from '../_components/property-feature';
-import { PropertySidebar } from '../_components/property-sidebar';
 
 const PropertyDetails = async ({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{
+    check_in?: string;
+    check_out?: string;
+  }>;
 }) => {
   const { id } = await params;
 
-  const property = await getProductQuery(Number(id));
+  const propertyId = Number(id);
+
+  const property = await getProductQuery(propertyId);
+
+  const urlParameters = await searchParams;
 
   if (!property)
     return (
@@ -80,7 +93,25 @@ const PropertyDetails = async ({
           </div>
 
           <div className='lg:col-span-1'>
-            <PropertySidebar />
+            <Card className='sticky top-24 p-6'>
+              <div className='space-y-4'>
+                <Link
+                  href={`/properties/schedule/${id}?${qs.stringify(urlParameters)}`}
+                >
+                  <Button className='w-full' size='lg'>
+                    <Calendar className='mr-2 h-4 w-4' />
+                    Book
+                  </Button>
+                </Link>
+                <Separator />
+                <Link href='/contact'>
+                  <Button variant='outline' className='w-full' size='lg'>
+                    <MessageSquare className='mr-2 h-4 w-4' />
+                    Contact
+                  </Button>
+                </Link>
+              </div>
+            </Card>
           </div>
         </div>
       </div>

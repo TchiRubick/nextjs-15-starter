@@ -19,7 +19,7 @@ import { useForm } from 'react-hook-form';
 import { formDataBuilder } from '@/lib/formdata-builder';
 import { useMutationAction } from '@packages/fetch-action/index';
 
-export const SigninForm = () => {
+export const SigninForm = ({ callbackUrl }: { callbackUrl?: string }) => {
   const { register, getValues, handleSubmit } = useForm();
 
   const { mutateAsync, isPending, error, isError } =
@@ -37,7 +37,7 @@ export const SigninForm = () => {
     const formData = formDataBuilder(getValues);
 
     await mutateAsync(formData);
-    window.location.replace('/');
+    window.location.replace(callbackUrl ?? '/');
   };
 
   return (
@@ -83,7 +83,7 @@ export const SigninForm = () => {
           </div>
           <div className='mt-4 text-center text-sm'>
             Don&apos;t have an account?{' '}
-            <Link href='/auth/signup' className='underline'>
+            <Link href={`/auth/signup?callbackUrl=${callbackUrl}`}>
               Sign up
             </Link>
           </div>

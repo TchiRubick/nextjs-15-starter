@@ -18,7 +18,7 @@ import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
-export const SignupForm = () => {
+export const SignupForm = ({ callbackUrl }: { callbackUrl?: string }) => {
   const { register: namedRegister, getValues, handleSubmit } = useForm();
 
   const { mutateAsync, isPending, error, isError } =
@@ -36,7 +36,7 @@ export const SignupForm = () => {
     const formData = formDataBuilder(getValues);
 
     await mutateAsync(formData);
-    window.location.replace('/');
+    window.location.replace(callbackUrl ?? '/');
   };
 
   return (
@@ -87,7 +87,10 @@ export const SignupForm = () => {
           </div>
           <div className='mt-4 text-center text-sm'>
             Have you already an account?{' '}
-            <Link href='/auth' className='underline'>
+            <Link
+              href={`/auth?callbackUrl=${callbackUrl}`}
+              className='text-blue-500'
+            >
               Signin
             </Link>
           </div>

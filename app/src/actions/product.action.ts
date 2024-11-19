@@ -3,7 +3,10 @@
 import { env } from '@/env';
 import { getImageStorage } from '@/lib/get-image-storage';
 import { upload } from '@/packages/s3';
-import { isLoggedInAdminOrThrow } from '@packages/auth/index';
+import {
+  isLoggedInAdminOrThrow,
+  isLoggedInOrThrow,
+} from '@packages/auth/index';
 import { db } from '@packages/db';
 import { createMassImage, deleteImageByUrl } from '@packages/db/models/image';
 import {
@@ -16,10 +19,12 @@ import {
   getProductById,
   getProducts,
   getProductsByFilter,
+  getProductValidity,
   InsertProduct,
   UpdateProduct,
   updateProduct,
 } from '@packages/db/models/products';
+import { createSchedule } from '@packages/db/models/schedule';
 import { z } from 'zod';
 // ============================================================================
 // Product Retrieval Actions
@@ -198,4 +203,34 @@ export const deleteImage = async (url: string) => {
   const imageDeleted = await deleteImageByUrl(url);
 
   return imageDeleted;
+};
+
+export const scheduleProductMutation = async (
+  id: number,
+  start: Date,
+  end: Date
+) => {
+  const isValid = await getProductValidity(id, start, end);
+  const { id: userId } = await isLoggedInOrThrow();
+
+  if (!isValid) {
+    throw new Error('Invalid schedule');
+  }
+
+  return db.transaction(async () => {
+    const product = await getProductById(id);
+
+    if (!product) {
+      throw new Error('Product not found');
+    }
+
+    const [schedule] = await createSchedule({
+      userId,
+      productId: product.id,
+      startDate: start,
+      endDate: end,
+    });
+
+    return schedule;
+  });
 };
