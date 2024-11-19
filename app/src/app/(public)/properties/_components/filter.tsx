@@ -29,8 +29,8 @@ export const Filter = ({ reload }: { reload?: boolean }) => {
     defaultPropertyFilterParam,
     {
       reload,
-      customPathname: '/#properties',
-      scroll: false,
+      customPathname: '/properties',
+      scroll: true,
     }
   );
 

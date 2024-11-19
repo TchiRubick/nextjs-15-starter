@@ -37,7 +37,7 @@ export const Hero = () => {
               </p>
 
               <div className='flex flex-col flex-wrap justify-center gap-4 sm:mt-20 sm:flex-row sm:gap-4'>
-                <Link href='#properties'>
+                <Link href='/properties'>
                   <Button
                     size='lg'
                     className='group w-full bg-primary text-white transition-all hover:bg-emerald-700 sm:h-14 sm:w-72'
