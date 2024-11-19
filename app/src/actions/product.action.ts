@@ -19,12 +19,14 @@ import {
   getProductById,
   getProducts,
   getProductsByFilter,
-  getProductValidity,
   InsertProduct,
   UpdateProduct,
   updateProduct,
 } from '@packages/db/models/products';
-import { createSchedule } from '@packages/db/models/schedule';
+import {
+  createSchedule,
+  getProductAvailability,
+} from '@packages/db/models/schedule';
 import { z } from 'zod';
 // ============================================================================
 // Product Retrieval Actions
@@ -210,8 +212,9 @@ export const scheduleProductMutation = async (
   start: Date,
   end: Date
 ) => {
-  const isValid = await getProductValidity(id, start, end);
   const { id: userId } = await isLoggedInOrThrow();
+
+  const isValid = await getProductAvailability(id, start, end);
 
   if (!isValid) {
     throw new Error('Invalid schedule');

@@ -44,3 +44,20 @@ export const createSchedule = async (input: InsertSchedule) =>
 
 export const deleteSchedule = async (id: number) =>
   db.delete(Schedule).where(eq(Schedule.id, id)).returning();
+
+export const getProductAvailability = async (
+  id: number,
+  start: Date,
+  end: Date
+) => {
+  const schedules = await db.query.Schedule.findMany({
+    where: (schedule, { eq, and, gt, lt }) =>
+      and(
+        eq(schedule.productId, id),
+        gt(schedule.endDate, start),
+        lt(schedule.startDate, end)
+      ),
+  });
+
+  return schedules.length === 0;
+};

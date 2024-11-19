@@ -5,7 +5,7 @@ import { TODAY, TOMORROW } from '@/lib/date';
 import { isAuth } from '@packages/auth/index';
 import { redirect } from 'next/navigation';
 import qs from 'query-string';
-import { ScheduleForm } from './_componentts/schedule-form';
+import { ScheduleForm } from './_components/schedule-form';
 
 const SchedulePage = async ({
   params,
@@ -31,6 +31,10 @@ const SchedulePage = async ({
   };
 
   const propertyId = Number(id);
+
+  if (isNaN(propertyId)) {
+    redirect('/properties');
+  }
 
   const property = await getProductQuery(propertyId);
 

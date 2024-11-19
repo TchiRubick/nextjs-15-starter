@@ -7,6 +7,7 @@ import { Separator } from '@/components/ui/separator';
 import { Calendar, EuroIcon, MessageSquare } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import qs from 'query-string';
 import { ImageGallery } from '../_components/image-gallery';
 import { PropertyFeatures } from '../_components/property-feature';
@@ -26,6 +27,10 @@ const PropertyDetails = async ({
   const propertyId = Number(id);
 
   const property = await getProductQuery(propertyId);
+
+  if (isNaN(propertyId)) {
+    redirect('/properties');
+  }
 
   const urlParameters = await searchParams;
 

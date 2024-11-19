@@ -54,6 +54,7 @@ export const ScheduleForm = ({
             onChange={field.onChange}
             range
             className='green'
+            minDate={new Date()}
             inputClass='text-emerald-950 h-12 border-2 cursor-pointer pl-8 placeholder:text-slate-500 focus:ring-2 focus:ring-primary rounded-md'
           />
         )}

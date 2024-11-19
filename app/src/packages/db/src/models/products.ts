@@ -101,21 +101,3 @@ export const getProductsByFilter = async (filter: ProductFilter) => {
     },
   });
 };
-
-export const getProductValidity = async (
-  id: number,
-  start: Date,
-  end: Date
-) => {
-  const product = await db.query.Product.findFirst({
-    with: {
-      schedules: {
-        where: (schedule, { and, gte, lte }) =>
-          and(gte(schedule.startDate, start), lte(schedule.endDate, end)),
-      },
-    },
-    where: (product, { eq }) => eq(product.id, id),
-  });
-
-  return product?.schedules.length === 0 ? true : false;
-};
