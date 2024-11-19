@@ -33,7 +33,7 @@ const EditProduct = async ({ params }: { params: Promise<{ id: number }> }) => {
     <div>
       <PicturesSection
         id={id}
-        urls={product?.images.map((i) => i.image.url) ?? []}
+        urls={product?.images.map((i) => i.image.url) || []}
       />
       <EditProductForm product={adaptedProduct} productId={id} />
     </div>

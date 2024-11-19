@@ -95,8 +95,11 @@ export const ImageUploaderModal = ({ id }: { id: number }) => {
           <i>Max Total file size: 5MB</i>
           <div className='grid grid-cols-1 gap-1.5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
             {previews.map((preview, index) => (
-              <div className='grid grid-cols-3 items-center justify-center gap-2'>
-                <Card key={preview} className='h-20 w-20 rounded-sm'>
+              <div
+                key={index}
+                className='grid grid-cols-3 items-center justify-center gap-2'
+              >
+                <Card className='h-20 w-20 rounded-sm'>
                   <Image
                     src={preview}
                     alt={`Preview ${index}`}

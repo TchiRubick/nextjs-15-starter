@@ -74,7 +74,7 @@ export const ProductAmenity = pgTable('product_amenity', (t) => ({
   amenityId: t
     .integer('amenity_id')
     .notNull()
-    .references(() => Amenity.id),
+    .references(() => Amenity.id, { onDelete: 'cascade' }),
 }));
 
 export const ProductImage = pgTable('product_image', (t) => ({
@@ -86,7 +86,7 @@ export const ProductImage = pgTable('product_image', (t) => ({
   imageId: t
     .integer('image_id')
     .notNull()
-    .references(() => Image.id),
+    .references(() => Image.id, { onDelete: 'cascade' }),
 }));
 
 // ============================================================================

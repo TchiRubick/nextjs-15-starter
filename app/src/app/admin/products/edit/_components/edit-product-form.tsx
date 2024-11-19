@@ -91,7 +91,7 @@ export const EditProductForm = ({ product, productId }: Props) => {
   };
 
   return (
-    <div>
+    <div className='mt-10'>
       <Link
         prefetch
         href='/admin/products'

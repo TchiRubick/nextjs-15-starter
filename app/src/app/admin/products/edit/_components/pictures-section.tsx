@@ -3,10 +3,12 @@
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Button } from '@/components/ui/button';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import { ArrowLeft, ArrowRight, Trash2 } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Loader2, Trash2 } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 import { ImageUploaderModal } from '../../_components/input-uploader-modal';
+import { useMutationAction } from '@packages/fetch-action/index';
+import { deleteImage } from '@/actions/product.action';
 
 interface Props {
   id: number;
@@ -17,6 +19,7 @@ export const PicturesSection = ({ id, urls }: Props) => {
   const [selectedImage, setSelectedImage] = useState(urls[0]);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const { mutateAsync, isPending } = useMutationAction(deleteImage);
 
   const handleNext = () => {
     const nextIndex = (selectedImageIndex + 1) % urls.length;
@@ -36,6 +39,10 @@ export const PicturesSection = ({ id, urls }: Props) => {
 
   const handleMouseLeave = () => {
     setIsHovered(false);
+  };
+
+  const handleRemove = async () => {
+    await mutateAsync(selectedImage);
   };
 
   return (
@@ -66,15 +73,19 @@ export const PicturesSection = ({ id, urls }: Props) => {
                 <Button
                   variant='destructive'
                   className='z-50'
-                  onClick={() => console.log('Delete')}
+                  onClick={() => handleRemove()}
                 >
-                  <Trash2 />
+                  {isPending ? (
+                    <Loader2 className='animated-spin' />
+                  ) : (
+                    <Trash2 />
+                  )}
                 </Button>
               </div>
             </div>
           )}
           <Image
-            src={selectedImage}
+            src={selectedImage || '/no-picture.jpg'}
             alt='Selected Image'
             fill={true}
             className='m-auto max-h-full max-w-full rounded-md shadow-md transition-opacity duration-75'
