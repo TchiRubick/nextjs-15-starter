@@ -27,6 +27,10 @@ const navigationItems = [
     href: '/about',
   },
   {
+    title: 'Réservations',
+    href: '/properties',
+  },
+  {
     title: 'Équipements',
     href: '/features',
   },

@@ -3,9 +3,9 @@
 import { getProductQuery } from '@/actions/product.action';
 import { EuroIcon } from 'lucide-react';
 import Image from 'next/image';
-import { ImageGallery } from './_components/image-gallery';
-import { PropertyFeatures } from './_components/property-feature';
-import { PropertySidebar } from './_components/property-sidebar';
+import { ImageGallery } from '../_components/image-gallery';
+import { PropertyFeatures } from '../_components/property-feature';
+import { PropertySidebar } from '../_components/property-sidebar';
 
 const PropertyDetails = async ({
   params,
