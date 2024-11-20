@@ -1,4 +1,6 @@
 'use client';
+import { ScrollBar } from '@/components/ui/scroll-area';
+import { ScrollArea, Scrollbar } from '@radix-ui/react-scroll-area';
 import {
   BedDouble,
   Bike,
@@ -127,38 +129,66 @@ export function Features() {
     },
   ];
 
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number>(0); // Défaut : index 0
+  const [Active, setActive] = useState<number>(0); // Défaut : index 0
+
+  const activeList = (index: number) => {
+    setActive(index);
+    setHoveredIndex(index);
+  };
+
+  const DisableList = () => {
+    setHoveredIndex(Active); // Revenir à l'élément actif
+  };
 
   return (
     <div className='container mx-auto px-4 py-8'>
       <div className='grid grid-cols-2 mt-5'>
         {/* Liste des titres */}
-        <div  style={{ maxHeight: '300px', overflowY: 'auto', border: '1px solid #ccc' }}>
-          {amenities.map((tableau, index) => (
-            <ul>
-              <div
-                key={index}
-                className='flex flex-col my-8'
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-
-              >
-                <span className=''>{tableau.title}</span>
-              </div>
-            </ul>
-          ))}
+        <div className='flex h-[600px] w-full max-w-4xl gap-8 rounded-lg border bg-white p-8'>
+        <div className="w-64 shrink-0">
+        <ScrollArea className="h-[500px]">
+            <div className="pr-4">
+              {amenities.map((tableau, index) => (
+                <ul key={index}>
+                  <div
+                    className={`mb-2 w-full rounded-lg px-4 py-3 text-left transition-colors ${hoveredIndex === index ? 'bg-red-900 text-white' : ''
+                      }`}
+                    onMouseEnter={() => activeList(index)}
+                    onMouseLeave={DisableList}
+                  >
+                    <span className='text-2xl py-6'>{tableau.title}</span>
+                  </div>
+                </ul>
+              ))}
+            </div>
+          </ScrollArea>
         </div>
-
+        </div>
         {/* Liste des items pour l'élément survolé */}
         <div>
           {hoveredIndex !== null && (
             <div className='flex flex-col'>
-              {amenities[hoveredIndex].items.map((item, index) => (
-                <div key={index} className='flex items-center my-5 gap-2'>
-                  <CheckCircle className='h-5 w-5 text-green-500' />
-                  <span className='text-sm'>{typeof item === 'string' ? item : item.name}</span>
+              {amenities[hoveredIndex].items.length > 0 ? (
+                amenities[hoveredIndex].items.map((item, index) => (
+                  <div key={index} className='flex items-center ml-4 mb-5 gap-2'>
+                    <CheckCircle className='h-12 w-12 px-2 text-green-500' />
+                    <span className='text-2xl'>
+                      {typeof item === 'string' ? item : item.name}
+                    </span>
+                  </div>
+                ))
+              ) : (
+                <div className='flex'>
+                  <div className='ml-4'>
+                    <CheckCircle className='h-12 w-12 px-2 text-green-500' />
+                    <span className='text-xl'>
+                      {amenities[hoveredIndex].description}
+                    </span>
+                  </div>
                 </div>
-              ))}
+
+              )}
             </div>
           )}
         </div>
