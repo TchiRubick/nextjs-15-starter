@@ -164,6 +164,16 @@ export const isLoggedInAdminOrThrow = async () => {
   return user;
 };
 
+export const isLoggedInOrThrow = async () => {
+  const { user } = await isAuth();
+
+  if (!user) {
+    throw new Error('User not logged in');
+  }
+
+  return user;
+};
+
 export const signOut = async () => {
   const { session } = await isAuth();
 
