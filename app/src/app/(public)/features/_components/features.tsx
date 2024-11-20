@@ -15,7 +15,7 @@ import {
 import { useState } from 'react';
 
 export function Features() {
-  const amenities =[
+  const amenities = [
     {
       icon: <Car className='h-6 w-6' />,
       title: 'Parking',
@@ -133,17 +133,19 @@ export function Features() {
     <div className='container mx-auto px-4 py-8'>
       <div className='grid grid-cols-2 mt-5'>
         {/* Liste des titres */}
-        <div>
+        <div  style={{ maxHeight: '300px', overflowY: 'auto', border: '1px solid #ccc' }}>
           {amenities.map((tableau, index) => (
-            <div
-              key={index}
-              className='flex flex-col m-3'
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-              
-            >
-              <span className=''>{tableau.title}</span>
-            </div>
+            <ul>
+              <div
+                key={index}
+                className='flex flex-col my-8'
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+
+              >
+                <span className=''>{tableau.title}</span>
+              </div>
+            </ul>
           ))}
         </div>
 
@@ -152,7 +154,7 @@ export function Features() {
           {hoveredIndex !== null && (
             <div className='flex flex-col'>
               {amenities[hoveredIndex].items.map((item, index) => (
-                <div key={index} className='flex items-center gap-2'>
+                <div key={index} className='flex items-center my-5 gap-2'>
                   <CheckCircle className='h-5 w-5 text-green-500' />
                   <span className='text-sm'>{typeof item === 'string' ? item : item.name}</span>
                 </div>
