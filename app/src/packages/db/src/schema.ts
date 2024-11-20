@@ -6,6 +6,11 @@ import { pgEnum, pgTable } from 'drizzle-orm/pg-core';
 // ============================================================================
 export const UserRole = pgEnum('user_role', ['customer', 'admin']);
 export const ProductStatus = pgEnum('product_status', ['draft', 'published']);
+export const ScheduleStatus = pgEnum('schedule_status', [
+  'validated',
+  'pending',
+  'refused',
+]);
 
 // ============================================================================
 // Authentication & User Management
@@ -18,6 +23,11 @@ export const User = pgTable('user', (t) => ({
   username: t.varchar({ length: 255 }).notNull(),
   password: t.varchar({ length: 255 }).notNull(),
   email: t.varchar({ length: 255 }).notNull(),
+  address: t.varchar({ length: 255 }),
+  phone: t.varchar({ length: 255 }),
+  city: t.varchar({ length: 255 }),
+  country: t.varchar({ length: 255 }),
+  zipCode: t.varchar({ length: 255 }),
   emailVerified: t.timestamp({ mode: 'date', withTimezone: true }),
   image: t.varchar({ length: 255 }),
   role: UserRole().default('customer'),
@@ -102,8 +112,13 @@ export const Schedule = pgTable('schedule', (t) => ({
     .text('user_id')
     .notNull()
     .references(() => User.id),
-  startDate: t.timestamp('start_date', { withTimezone: true, mode: 'date' }),
-  endDate: t.timestamp('end_date', { withTimezone: true, mode: 'date' }),
+  startDate: t
+    .timestamp('start_date', { withTimezone: true, mode: 'date' })
+    .notNull(),
+  endDate: t
+    .timestamp('end_date', { withTimezone: true, mode: 'date' })
+    .notNull(),
+  status: ScheduleStatus().notNull().default('pending'),
 }));
 
 // ============================================================================

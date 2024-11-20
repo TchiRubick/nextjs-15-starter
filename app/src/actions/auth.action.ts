@@ -3,6 +3,7 @@
 import { invalidateSession } from '@/lib/invalidateSession';
 import { getUser, signOut } from '@packages/auth/index';
 import { signin, signup } from '@packages/auth/src';
+import { SignupInput } from '@packages/auth/src/actions/types';
 import { revalidatePath } from 'next/cache';
 
 // ============================================================================
@@ -33,19 +34,8 @@ export const loginMutation = async (formData: FormData) => {
  * @param formData - The form data containing user registration details.
  * @returns The result of the sign-up operation or an error.
  */
-export const registerMutation = async (formData: FormData) => {
-  try {
-    const rawFormData = {
-      username: formData.get('username') as string,
-      email: formData.get('email') as string,
-      password: formData.get('password') as string,
-    };
-
-    return await signup(rawFormData);
-  } catch (error) {
-    console.error(error);
-    return error as unknown as Error;
-  }
+export const registerMutation = async (formData: SignupInput) => {
+  return await signup(formData);
 };
 
 /**

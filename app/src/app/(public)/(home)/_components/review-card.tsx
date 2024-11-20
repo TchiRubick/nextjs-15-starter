@@ -21,7 +21,7 @@ export const ReviewCard = ({
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 35 }}
       transition={{ duration: 1 }}
-      className='flex h-full flex-col rounded-2xl border-[1px] border-green-700 bg-primary/20 p-6 backdrop-blur-sm'
+      className='flex h-[260px] sm:h-[260px] md:h-[328px] flex-col rounded-2xl border-[1px] border-green-700 bg-primary/20 p-6 backdrop-blur-sm'
     >
       {/* Rating Stars */}
       <div className='flex gap-1'>

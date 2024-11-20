@@ -151,11 +151,11 @@ export const Testimonials = () => {
               loop: true,
             }}
           >
-            <CarouselContent className='-ml-4'>
+            <CarouselContent className='-ml-4 h-[368px] sm:h-[368px] md:h-[450px]'>
               {reviews.map((review) => (
                 <CarouselItem
                   key={review.name}
-                  className='py-4 pl-4 md:basis-1/2 lg:basis-1/3'
+                  className=' py-4 pl-4 md:basis-1/2 lg:basis-1/3'
                 >
                   <motion.div
                     whileHover={{ y: -5 }}

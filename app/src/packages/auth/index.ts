@@ -35,12 +35,17 @@ const createAuthConfig = (): AuthConfig => ({
     },
   },
   getUserAttributes: (attributes) => ({
+    id: attributes.id,
     email: attributes.email,
     username: attributes.username,
-    id: attributes.id,
     image: attributes.image,
     emailVerified: attributes.emailVerified,
     role: attributes.role,
+    address: attributes.address,
+    phone: attributes.phone,
+    city: attributes.city,
+    country: attributes.country,
+    zipCode: attributes.zipCode,
   }),
 });
 

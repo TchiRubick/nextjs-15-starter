@@ -12,7 +12,11 @@ import {
 export async function signup(input: SignupInput) {
   // Validate input
   const validatedInput = validateInputSignup(input);
-  const { username, email, password } = validatedInput;
+
+  const { username, email, password, phone, address, city, country, zipCode } =
+    validatedInput;
+
+  console.log('validatedInput', validatedInput);
 
   // Check for existing users
   await checkExistingUser(username, email);
@@ -24,6 +28,11 @@ export async function signup(input: SignupInput) {
   const [user] = await createUser({
     username,
     email,
+    phone,
+    address,
+    city,
+    country,
+    zipCode,
     password: passwordHash,
   });
 
