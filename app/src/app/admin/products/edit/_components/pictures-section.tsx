@@ -2,17 +2,13 @@
 
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import { ArrowLeft, ArrowRight, Plus } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Loader2, Trash2 } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
-import { ImageUploader } from '../../_components/image-uploader';
+import { ImageUploaderModal } from '../../_components/input-uploader-modal';
+import { useMutationAction } from '@packages/fetch-action/index';
+import { deleteImage } from '@/actions/product.action';
 
 interface Props {
   id: number;
@@ -20,8 +16,10 @@ interface Props {
 }
 
 export const PicturesSection = ({ id, urls }: Props) => {
-  const [selectedImage, setSelectedImage] = useState(urls[1]);
+  const [selectedImage, setSelectedImage] = useState(urls[0]);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const { mutateAsync, isPending } = useMutationAction(deleteImage);
 
   const handleNext = () => {
     const nextIndex = (selectedImageIndex + 1) % urls.length;
@@ -35,12 +33,59 @@ export const PicturesSection = ({ id, urls }: Props) => {
     setSelectedImageIndex(prevIndex);
   };
 
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
+  const handleRemove = async () => {
+    await mutateAsync(selectedImage);
+  };
+
   return (
     <div className='mx-auto mt-4 flex h-[500px] w-[1000px] md:px-0'>
-      <AspectRatio className='h-[500px] items-center rounded-md shadow-md'>
+      <AspectRatio
+        className='h-[500px] items-center rounded-md shadow-md'
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
         <div className='relative h-full w-full'>
+          {isHovered && (
+            <div className='absolute inset-0 z-10 mb-3 flex items-end justify-center gap-2'>
+              <Button
+                variant='secondary'
+                className='z-50 cursor-pointer rounded-full'
+                onClick={handlePrev}
+              >
+                <ArrowLeft />
+              </Button>
+              <Button
+                variant='secondary'
+                className='z-50 cursor-pointer rounded-full'
+                onClick={handleNext}
+              >
+                <ArrowRight />
+              </Button>
+              <div className='absolute inset-0 z-10 ml-1 mt-1 flex h-fit w-fit items-start'>
+                <Button
+                  variant='destructive'
+                  className='z-50'
+                  onClick={() => handleRemove()}
+                >
+                  {isPending ? (
+                    <Loader2 className='animated-spin' />
+                  ) : (
+                    <Trash2 />
+                  )}
+                </Button>
+              </div>
+            </div>
+          )}
           <Image
-            src={selectedImage}
+            src={selectedImage || '/no-picture.jpg'}
             alt='Selected Image'
             fill={true}
             className='m-auto max-h-full max-w-full rounded-md shadow-md transition-opacity duration-75'
@@ -49,20 +94,6 @@ export const PicturesSection = ({ id, urls }: Props) => {
               target.classList.remove('opacity-0');
             }}
           />
-          <Button
-            variant='secondary'
-            className='absolute left-4 top-64 cursor-pointer rounded-full'
-            onClick={handlePrev}
-          >
-            <ArrowLeft />
-          </Button>
-          <Button
-            variant='secondary'
-            className='absolute right-4 top-64 cursor-pointer rounded-full'
-            onClick={handleNext}
-          >
-            <ArrowRight />
-          </Button>
         </div>
       </AspectRatio>
 
@@ -91,20 +122,7 @@ export const PicturesSection = ({ id, urls }: Props) => {
               </div>
             </figure>
           ))}
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button
-                variant='secondary'
-                className='border-2 border-dashed border-slate-900/55'
-              >
-                <Plus />
-              </Button>
-            </DialogTrigger>
-            <DialogContent className='flex flex-col items-center justify-center'>
-              <DialogTitle>Ajouter des photos</DialogTitle>
-              <ImageUploader id={id} />
-            </DialogContent>
-          </Dialog>
+          <ImageUploaderModal id={id} />
         </div>
         <ScrollBar
           orientation='vertical'

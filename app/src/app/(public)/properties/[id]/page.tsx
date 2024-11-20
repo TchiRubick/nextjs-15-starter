@@ -1,20 +1,50 @@
 'use server';
 
 import { getProductQuery } from '@/actions/product.action';
-import { EuroIcon } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import { TODAY, TOMORROW } from '@/lib/date';
+import { EuroIcon, MessageSquare } from 'lucide-react';
 import Image from 'next/image';
-import { ImageGallery } from './_components/image-gallery';
-import { PropertyFeatures } from './_components/property-feature';
-import { PropertySidebar } from './_components/property-sidebar';
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
+import { ImageGallery } from '../_components/image-gallery';
+import { PropertyFeatures } from '../_components/property-feature';
+import { ScheduleForm } from './_components/schedule-form';
 
 const PropertyDetails = async ({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{
+    check_in?: string;
+    check_out?: string;
+  }>;
 }) => {
   const { id } = await params;
 
-  const property = await getProductQuery(Number(id));
+  const propertyId = Number(id);
+
+  const property = await getProductQuery(propertyId);
+
+  if (isNaN(propertyId)) {
+    redirect('/properties');
+  }
+
+  if (!property) {
+    redirect(`/properties`);
+  }
+
+  const urlParameters = await searchParams;
+
+  const formValues = {
+    check_in: urlParameters.check_in ? new Date(urlParameters.check_in) : TODAY,
+    check_out: urlParameters.check_out
+      ? new Date(urlParameters.check_out)
+      : TOMORROW,
+  };
 
   if (!property)
     return (
@@ -80,7 +110,18 @@ const PropertyDetails = async ({
           </div>
 
           <div className='lg:col-span-1'>
-            <PropertySidebar />
+            <Card className='sticky top-24 p-6'>
+              <div className='space-y-4'>
+                <ScheduleForm id={propertyId} formValues={formValues} />
+                <Separator />
+                <Link href='/contact'>
+                  <Button variant='outline' className='w-full' size='lg'>
+                    <MessageSquare className='mr-2 h-4 w-4' />
+                    Contact
+                  </Button>
+                </Link>
+              </div>
+            </Card>
           </div>
         </div>
       </div>
