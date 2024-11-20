@@ -19,6 +19,10 @@ import { useEffect, useState } from 'react';
 
 const navigationItems = [
   {
+    title: 'Booking',
+    href: '/admin/schedules',
+  },
+  {
     title: 'Products',
     href: '/admin/products',
   },
