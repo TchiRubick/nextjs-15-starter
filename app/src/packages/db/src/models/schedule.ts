@@ -25,7 +25,7 @@ export const zUpdateSchedule = zInsertSchedule.pick({
   productId: true,
 });
 
-export const schedules = zInsertSchedule.shape;
+export const zScheduleStatus = zSelectSchedule.shape.status;
 
 // ============================================================================
 // Types
@@ -33,11 +33,22 @@ export const schedules = zInsertSchedule.shape;
 export type InsertSchedule = z.infer<typeof zInsertSchedule>;
 export type UpdateSchedule = z.infer<typeof zUpdateSchedule>;
 export type ScheduleSelect = z.infer<typeof zSelectSchedule>;
-
+export type ScheduleStatus = z.infer<typeof zScheduleStatus>;
 // ============================================================================
 // Queries
 // ============================================================================
-export const getSchedules = async () => db.query.Schedule.findMany();
+export const getSchedules = async () =>
+  db.query.Schedule.findMany({
+    with: {
+      product: true,
+      user: {
+        columns: {
+          email: true,
+          username: true,
+        },
+      },
+    },
+  });
 
 export const createSchedule = async (input: InsertSchedule) =>
   db.insert(Schedule).values(input).returning();
@@ -60,4 +71,17 @@ export const getProductAvailability = async (
   });
 
   return schedules.length === 0;
+};
+
+export const updateScheduleStatus = async (
+  id: number,
+  status: ScheduleStatus
+) => {
+  const schedule = await db
+    .update(Schedule)
+    .set({ status })
+    .where(eq(Schedule.id, id))
+    .returning();
+
+  return schedule;
 };
