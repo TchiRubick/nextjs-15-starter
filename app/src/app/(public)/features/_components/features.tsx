@@ -1,9 +1,9 @@
-"use client"
+'use client';
 
-import * as React from "react"
-import { ScrollArea } from "@/components/ui/scroll-area"
+import * as React from 'react';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import {
-  Check, BedDouble,
+  BedDouble,
   Bike,
   Car,
   CheckCircle,
@@ -14,16 +14,8 @@ import {
   Tv,
   Utensils,
   Wifi,
-} from 'lucide-react'
-import { Card, CardContent } from "@/components/ui/card"
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"
-// Sample data structure
+} from 'lucide-react';
+
 const amenities = [
   {
     icon: <Car className='h-6 w-6' />,
@@ -37,7 +29,7 @@ const amenities = [
     title: 'Internet',
     description:
       "Connexion Wi-Fi rapide gratuite : 195 Mb/s. Débit adapté au streaming 4K et aux appels vidéo sur plusieurs appareils. Le test de débit a été effectué par l'établissement.",
-    items: ["WiFi gratuit", "Haut débit", "Ethernet"],
+    items: ['WiFi gratuit', 'Haut débit', 'Ethernet'],
   },
   {
     icon: <Utensils className='h-6 w-6' />,
@@ -136,25 +128,26 @@ const amenities = [
   },
 ];
 
-
-
 export function Features() {
-  const [activeIndex, setActiveIndex] = React.useState(2) // Default to Cuisine
+  const [activeIndex, setActiveIndex] = React.useState(2); // Default to Cuisine
 
   return (
-    <div className="flex  w-full h-screen">
-      <div className="flex h-screen gap-8 rounded-lg p-8">
-        <div className="w-1/3 max-w-2xl shrink-0 pl-16">
-          <h2 className="mb-4 text-2xl sm:text-4xl font-semibold">Catégories</h2>
-          <ScrollArea className="h-screen">
-            <div className="pr-4">
+    <div className='flex h-screen w-full'>
+      <div className='flex h-screen gap-8 rounded-lg p-8'>
+        <div className='w-1/3 max-w-2xl shrink-0 pl-16'>
+          <h2 className='mb-4 text-2xl font-semibold sm:text-4xl'>
+            Catégories
+          </h2>
+          <ScrollArea className='h-screen'>
+            <div className='pr-4'>
               {amenities.map((category, index) => (
                 <button
                   key={index}
-                  className={`mb-2 w-56 rounded-lg px-4 py-3 text-left text-2xl transition-colors ${activeIndex === index
-                    ? "bg-primary text-primary-foreground"
-                    : "hover:bg-muted"
-                    }`}
+                  className={`mb-2 w-56 rounded-lg px-4 py-3 text-left text-2xl transition-colors ${
+                    activeIndex === index
+                      ? 'bg-primary text-primary-foreground'
+                      : 'hover:bg-muted'
+                  }`}
                   onClick={() => setActiveIndex(index)}
                 >
                   {category.title}
@@ -164,18 +157,18 @@ export function Features() {
           </ScrollArea>
         </div>
 
-        <div className="flex-1 w-2/3 ml-28">
-          <h2 className="mb-4 text-2xl sm:text-4xl font-semibold">
+        <div className='ml-28 w-2/3 flex-1'>
+          <h2 className='mb-4 text-2xl font-semibold sm:text-4xl'>
             {amenities[activeIndex].title}
           </h2>
-          <ScrollArea className="h-[700px]">
-            <div className="grid gap-2 pr-4">
+          <ScrollArea className='h-[700px]'>
+            <div className='grid gap-2 pr-4'>
               {amenities[activeIndex].items.map((item, i) => (
                 <div
                   key={i}
-                  className="flex items-center gap-2 mb-4 text-2xl rounded-lg bg-emerald-200/15 px-4 py-2"
+                  className='mb-4 flex items-center gap-2 rounded-lg bg-emerald-200/15 px-4 py-2 text-2xl'
                 >
-                  <CheckCircle className="h-4 w-4 text-primary" />
+                  <CheckCircle className='h-4 w-4 text-primary' />
                   <span>{typeof item === 'string' ? item : item.name}</span>
                 </div>
               ))}
@@ -184,6 +177,5 @@ export function Features() {
         </div>
       </div>
     </div>
-
-  )
+  );
 }

@@ -1,6 +1,5 @@
 'use server';
 
-import { Titles } from '../_components/titles';
 import { Features } from './_components/features';
 
 export default async function FeaturesPage() {

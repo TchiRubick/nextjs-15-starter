@@ -155,7 +155,7 @@ export const Testimonials = () => {
               {reviews.map((review) => (
                 <CarouselItem
                   key={review.name}
-                  className=' py-4 pl-4 md:basis-1/2 lg:basis-1/3'
+                  className='py-4 pl-4 md:basis-1/2 lg:basis-1/3'
                 >
                   <motion.div
                     whileHover={{ y: -5 }}
