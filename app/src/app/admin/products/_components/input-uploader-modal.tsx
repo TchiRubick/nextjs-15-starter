@@ -18,6 +18,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { redirect } from 'next/navigation';
 
 export const ImageUploaderModal = ({ id }: { id: number }) => {
   const [files, setFiles] = useState<File[]>([]);
@@ -30,6 +31,7 @@ export const ImageUploaderModal = ({ id }: { id: number }) => {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: PRODUCTS_QUERY_KEY });
         setDialogOpen(false);
+        setFiles([]);
       },
       onError: () => {
         console.log('error');
@@ -61,6 +63,7 @@ export const ImageUploaderModal = ({ id }: { id: number }) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutateAsync(id, files);
+    redirect(`/admin/products/edit/${id}`);
   };
 
   return (
