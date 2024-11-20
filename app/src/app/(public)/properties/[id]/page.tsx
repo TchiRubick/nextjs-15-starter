@@ -4,13 +4,14 @@ import { getProductQuery } from '@/actions/product.action';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Calendar, EuroIcon, MessageSquare } from 'lucide-react';
+import { TODAY, TOMORROW } from '@/lib/date';
+import { EuroIcon, MessageSquare } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import qs from 'query-string';
 import { ImageGallery } from '../_components/image-gallery';
 import { PropertyFeatures } from '../_components/property-feature';
+import { ScheduleForm } from './_components/schedule-form';
 
 const PropertyDetails = async ({
   params,
@@ -32,7 +33,18 @@ const PropertyDetails = async ({
     redirect('/properties');
   }
 
+  if (!property) {
+    redirect(`/properties`);
+  }
+
   const urlParameters = await searchParams;
+
+  const formValues = {
+    check_in: urlParameters.check_in ? new Date(urlParameters.check_in) : TODAY,
+    check_out: urlParameters.check_out
+      ? new Date(urlParameters.check_out)
+      : TOMORROW,
+  };
 
   if (!property)
     return (
@@ -100,14 +112,7 @@ const PropertyDetails = async ({
           <div className='lg:col-span-1'>
             <Card className='sticky top-24 p-6'>
               <div className='space-y-4'>
-                <Link
-                  href={`/properties/schedule/${id}?${qs.stringify(urlParameters)}`}
-                >
-                  <Button className='w-full' size='lg'>
-                    <Calendar className='mr-2 h-4 w-4' />
-                    Book
-                  </Button>
-                </Link>
+                <ScheduleForm id={propertyId} formValues={formValues} />
                 <Separator />
                 <Link href='/contact'>
                   <Button variant='outline' className='w-full' size='lg'>

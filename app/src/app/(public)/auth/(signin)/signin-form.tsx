@@ -37,6 +37,7 @@ export const SigninForm = ({ callbackUrl }: { callbackUrl?: string }) => {
     const formData = formDataBuilder(getValues);
 
     await mutateAsync(formData);
+    console.log(callbackUrl);
     window.location.replace(callbackUrl ?? '/');
   };
 
