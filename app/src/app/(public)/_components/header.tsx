@@ -132,12 +132,14 @@ export const Header = () => {
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuItem className='cursor-pointer'>
-                    <User />
-                    <Label>Profil</Label>
-                  </DropdownMenuItem>
+                  <Link prefetch href='/profile'>
+                    <DropdownMenuItem className='cursor-pointer'>
+                      <User />
+                      <Label>Profil</Label>
+                    </DropdownMenuItem>
+                  </Link>
                   {data.role === 'admin' && (
-                    <Link href='/admin/products'>
+                    <Link prefetch href='/admin/products'>
                       <DropdownMenuItem className='cursor-pointer'>
                         <ShieldCheck />
                         Admin
