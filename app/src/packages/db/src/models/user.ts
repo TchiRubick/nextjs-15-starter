@@ -10,6 +10,11 @@ import { User } from '../schema';
 export const zInsertUser = createInsertSchema(User, {
   username: z.string().min(1),
   email: z.string().email().readonly(),
+  phone: z.string().min(10),
+  address: z.string().min(5),
+  city: z.string().min(4),
+  country: z.string().min(4),
+  zipCode: z.string().min(2),
   password: z.string().min(6),
 });
 
