@@ -36,5 +36,5 @@ export const createMassImage = async (input: InsertImage[]) =>
 export const updateImage = async (id: number, input: UpdateImage) =>
   db.update(Image).set(input).where(eq(Image.id, id)).returning();
 
-export const deleteImage = async (id: number) =>
-  db.delete(Image).where(eq(Image.id, id)).returning();
+export const deleteImageByUrl = async (url: string) =>
+  db.delete(Image).where(eq(Image.url, url)).returning();

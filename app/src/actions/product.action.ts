@@ -5,7 +5,7 @@ import { getImageStorage } from '@/lib/get-image-storage';
 import { upload } from '@/packages/s3';
 import { isLoggedInAdminOrThrow } from '@packages/auth/index';
 import { db } from '@packages/db';
-import { createMassImage } from '@packages/db/models/image';
+import { createMassImage, deleteImageByUrl } from '@packages/db/models/image';
 import {
   createMassProductAmenity,
   deleteProductAmenity,
@@ -21,7 +21,6 @@ import {
   updateProduct,
 } from '@packages/db/models/products';
 import { z } from 'zod';
-
 // ============================================================================
 // Product Retrieval Actions
 // ============================================================================
@@ -193,4 +192,10 @@ export const uploadProductImageAdminMutation = async (
     console.error(error);
     return error as unknown as Error;
   }
+};
+
+export const deleteImage = async (url: string) => {
+  const imageDeleted = await deleteImageByUrl(url);
+
+  return imageDeleted;
 };
