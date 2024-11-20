@@ -34,6 +34,11 @@ export const signupSchema = z.object({
     .string()
     .min(6, 'Password must be at least 6 characters')
     .max(255, 'Password must be less than 255 characters'),
+  phone: z.string().min(10, 'Phone number must be at least 10 characters'),
+  address: z.string().min(5, 'Address must be at least 5 characters'),
+  city: z.string().min(4, 'City must be at least 4 characters'),
+  country: z.string().min(4, 'Country must be at least 4 characters'),
+  zipCode: z.string().min(2, 'Zip code must be at least 2 characters'),
 });
 
 export type SignupInput = z.infer<typeof signupSchema>;
