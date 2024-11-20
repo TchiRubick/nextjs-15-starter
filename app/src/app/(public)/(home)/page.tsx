@@ -2,6 +2,8 @@ import { CTA } from './_components/cta';
 import { FAQ } from './_components/faq';
 import { Hero } from './_components/hero';
 import { Testimonials } from './_components/testimonials';
+import FeaturesPage from '../features/page';
+import AroundPage from '../around/page';
 
 export default function Home() {
   return (
@@ -13,7 +15,12 @@ export default function Home() {
       <section>
         <Testimonials />
       </section>
-
+      <section>
+        <FeaturesPage />
+      </section>
+      <section>
+        <AroundPage />
+      </section>
       <section>
         <CTA />
       </section>

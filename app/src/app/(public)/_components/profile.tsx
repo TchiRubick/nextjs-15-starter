@@ -20,8 +20,7 @@ export function Profile() {
   const { data } = useSession();
   const { register, getValues, handleSubmit } = useForm();
 
-  const { mutateAsync, error, isError } =
-    useMutationAction(userUpdate);
+  const { mutateAsync, error, isError } = useMutationAction(userUpdate);
 
   if (isError) {
     toast({
@@ -40,47 +39,53 @@ export function Profile() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-    <div className='flex justify-center pt-20 sm:pt-40'>
-      <Card className='flex flex-col sm:flex-row sm:gap-5'>
-        <CardHeader className='self-center'>
-          <CardTitle className='text-2xl'>
-            <Avatar className='h-40 w-40'>
-              <AvatarImage src='/gallery/p.jpg' width={500} height={500} />
-            </Avatar>
-          </CardTitle>
-          <CardDescription className='self-center'>
-            Usernameexemple
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className='grid gap-4 sm:pt-10'>
-            <div className='flex flex-row gap-2'>
-              <Label htmlFor='email' className='self-center'>
-                UserName:
-              </Label>
-              <Input id='username' placeholder='username' required defaultValue={data?.username} {...register('username')} />
-            </div>
-            <div className='grid gap-2'>
+      <div className='flex justify-center pt-20 sm:pt-40'>
+        <Card className='flex flex-col sm:flex-row sm:gap-5'>
+          <CardHeader className='self-center'>
+            <CardTitle className='text-2xl'>
+              <Avatar className='h-40 w-40'>
+                <AvatarImage src='/gallery/p.jpg' width={500} height={500} />
+              </Avatar>
+            </CardTitle>
+            <CardDescription className='self-center'>
+              Usernameexemple
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className='grid gap-4 sm:pt-10'>
               <div className='flex flex-row gap-2'>
                 <Label htmlFor='email' className='self-center'>
-                  Email:
+                  UserName:
                 </Label>
                 <Input
                   id='username'
-                  placeholder='email@gmail.com'
-                  value={data?.email}
+                  placeholder='username'
                   required
-                  disabled
+                  defaultValue={data?.username}
+                  {...register('username')}
                 />
               </div>
+              <div className='grid gap-2'>
+                <div className='flex flex-row gap-2'>
+                  <Label htmlFor='email' className='self-center'>
+                    Email:
+                  </Label>
+                  <Input
+                    id='username'
+                    placeholder='email@gmail.com'
+                    value={data?.email}
+                    required
+                    disabled
+                  />
+                </div>
+              </div>
+              <Button type='submit' className='w-full'>
+                Save
+              </Button>
             </div>
-            <Button type='submit' className='w-full'>
-              Save
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+          </CardContent>
+        </Card>
+      </div>
     </form>
   );
 }
