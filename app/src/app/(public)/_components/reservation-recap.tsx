@@ -16,6 +16,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { format } from 'date-fns';
 
 export const ReservationRecap = () => {
   const { data } = useSession();
@@ -34,6 +35,9 @@ export const ReservationRecap = () => {
               <div>
                 <TooltipProvider>
                   <Tooltip>
+                    <Label className='text-muted-foreground'>
+                      Numero de réservation:{' '}
+                    </Label>
                     <TooltipTrigger asChild>
                       <Badge
                         className={`${
@@ -42,8 +46,10 @@ export const ReservationRecap = () => {
                             : schedule.status === 'validated'
                               ? 'bg-green-500'
                               : 'bg-red-500'
-                        } mt-2 h-4 w-4 cursor-pointer rounded-full p-1`}
-                      ></Badge>
+                        } mt-2 h-4 w-4 cursor-pointer items-center rounded-full p-1`}
+                      >
+                        {schedule.id}
+                      </Badge>
                     </TooltipTrigger>
                     <TooltipContent
                       className={`${
@@ -65,13 +71,13 @@ export const ReservationRecap = () => {
                 <p className='text-muted-foreground'>
                   Debuter le{' '}
                   <Label className='font-bold text-primary'>
-                    {schedule.startDate.toLocaleString()}
+                    {format(schedule.startDate, ' d MMM, yyyy')}
                   </Label>
                 </p>
                 <p className='mt-2 text-muted-foreground'>
                   Terminer le{' '}
                   <Label className='font-bold text-primary'>
-                    {schedule.endDate.toLocaleString()}
+                    {format(schedule.endDate, 'd MMM, yyyy')}
                   </Label>
                 </p>
               </div>
