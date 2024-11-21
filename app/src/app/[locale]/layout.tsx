@@ -1,4 +1,5 @@
 import getQueryClient from '@/lib/query-client';
+import { LangueProvider } from '@/providers/langue-provider';
 import { ReactQueryProviders } from '@/providers/react-query-provider';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import type { Metadata } from 'next';
@@ -69,24 +70,29 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }>) {
+  const { locale } = await params;
   return (
     <html lang='fr' suppressHydrationWarning>
       <ReactQueryProviders>
         <HydrationBoundary state={dehydrate(getQueryClient())}>
-          <NuqsAdapter>
-            <Suspense fallback={<Loader />}>
-              <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-              >
-                {children}
-              </body>
-            </Suspense>
-          </NuqsAdapter>
+          <LangueProvider locale={locale}>
+            <NuqsAdapter>
+              <Suspense fallback={<Loader />}>
+                <body
+                  className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+                >
+                  {children}
+                </body>
+              </Suspense>
+            </NuqsAdapter>
+          </LangueProvider>
         </HydrationBoundary>
       </ReactQueryProviders>
     </html>
