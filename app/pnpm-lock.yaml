@@ -115,6 +115,9 @@ importers:
       next:
         specifier: ^15.0.1
         version: 15.0.1(@opentelemetry/api@1.9.0)(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react@19.0.0-rc-69d4b800-20241021)
+      next-international:
+        specifier: ^1.3.1
+        version: 1.3.1
       nuqs:
         specifier: ^2.0.4
         version: 2.0.4(next@15.0.1(@opentelemetry/api@1.9.0)(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react@19.0.0-rc-69d4b800-20241021))(react@19.0.0-rc-69d4b800-20241021)
@@ -3754,6 +3757,12 @@ packages:
       }
     engines: { node: '>= 0.4' }
 
+  international-types@0.8.1:
+    resolution:
+      {
+        integrity: sha512-tajBCAHo4I0LIFlmQ9ZWfjMWVyRffzuvfbXCd6ssFt5u1Zw15DN0UBpVTItXdNa1ls+cpQt3Yw8+TxsfGF8JcA==,
+      }
+
   invariant@2.2.4:
     resolution:
       {
@@ -4295,6 +4304,12 @@ packages:
     resolution:
       {
         integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==,
+      }
+
+  next-international@1.3.1:
+    resolution:
+      {
+        integrity: sha512-ydU9jQe+4MohMWltbZae/yuWeKhmp0QKQqJNNi8WCCMwrly03qfMAHw/tWbT2qgAlG++CxF5jMXmGQZgOHeVOw==,
       }
 
   next@15.0.1:
@@ -8166,6 +8181,8 @@ snapshots:
       hasown: 2.0.2
       side-channel: 1.0.6
 
+  international-types@0.8.1: {}
+
   invariant@2.2.4:
     dependencies:
       loose-envify: 1.4.0
@@ -8459,6 +8476,12 @@ snapshots:
   nanoid@3.3.7: {}
 
   natural-compare@1.4.0: {}
+
+  next-international@1.3.1:
+    dependencies:
+      client-only: 0.0.1
+      international-types: 0.8.1
+      server-only: 0.0.1
 
   next@15.0.1(@opentelemetry/api@1.9.0)(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react@19.0.0-rc-69d4b800-20241021):
     dependencies:

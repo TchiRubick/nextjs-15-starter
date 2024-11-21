@@ -1,6 +1,6 @@
 import { getAmenitiesQuery } from '@/actions/amenity.action';
 import { getProductQuery } from '@/actions/product.action';
-import { AMENITIES_QUERY_KEY } from '@/app/admin/amenities/static';
+import { AMENITIES_QUERY_KEY } from '@/app/[locale]/admin/amenities/static';
 import getQueryClient from '@/lib/query-client';
 import { EditProductForm } from '../_components/edit-product-form';
 import { PicturesSection } from '../_components/pictures-section';

@@ -1,22 +1,22 @@
 'use client';
 
-import { Separator } from '@/components/ui/separator';
-import { useQuery } from '@tanstack/react-query';
 import { getScheduleByUserIdQuery } from '@/actions/schedule.action';
-import { SCHEDULES_QUERY_KEY } from '@/app/admin/schedules/static';
-import { useSession } from '@/hooks/useSession';
-import { Label } from '@/components/ui/label';
+import { SCHEDULES_QUERY_KEY } from '@/app/[locale]/admin/schedules/static';
 import { Badge } from '@/components/ui/badge';
-import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { MoveRight } from 'lucide-react';
+import { Label } from '@/components/ui/label';
+import { Separator } from '@/components/ui/separator';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { useSession } from '@/hooks/useSession';
+import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
+import { MoveRight } from 'lucide-react';
+import Link from 'next/link';
 
 export const ReservationRecap = () => {
   const { data } = useSession();

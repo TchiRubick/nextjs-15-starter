@@ -2,7 +2,7 @@
 
 import { getAmenitiesQuery } from '@/actions/amenity.action';
 import { updateProductAdminMutation } from '@/actions/product.action';
-import { AMENITIES_QUERY_KEY } from '@/app/admin/amenities/static';
+import { AMENITIES_QUERY_KEY } from '@/app/[locale]/admin/amenities/static';
 import { MultiSelect } from '@/components/multi-select';
 import { Button } from '@/components/ui/button';
 import {

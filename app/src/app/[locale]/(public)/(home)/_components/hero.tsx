@@ -2,11 +2,13 @@
 
 import { Button } from '@/components/ui/button';
 import { fadeIn } from '@/lib/variant';
+import { useScopedI18n } from '@/locales/client';
 import { motion } from 'framer-motion';
 import { MoveRight, PhoneCall, Snowflake, Star, Wifi } from 'lucide-react';
 import Link from 'next/link';
 
 export const Hero = () => {
+  const t = useScopedI18n('landing');
   return (
     <div className='bg-hero relative h-screen w-full bg-cover bg-center transition-all duration-1000'>
       <div className='absolute inset-0 flex items-center justify-center bg-black bg-opacity-50'>
@@ -42,7 +44,7 @@ export const Hero = () => {
                     size='lg'
                     className='group w-full bg-primary text-white transition-all hover:bg-emerald-700 sm:h-14 sm:w-72'
                   >
-                    <span className='text-xl'>Réserver maintenant</span>
+                    <span className='text-xl'>{t('book')}</span>
 
                     <MoveRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
                   </Button>
