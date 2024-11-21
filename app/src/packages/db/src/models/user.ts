@@ -26,6 +26,9 @@ export const zUpdateUser = zInsertUser.pick({
   username: true,
   phone: true,
   address: true,
+  city: true,
+  country: true,
+  zipCode: true,
 });
 
 // ============================================================================
