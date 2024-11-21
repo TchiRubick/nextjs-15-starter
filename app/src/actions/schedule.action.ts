@@ -1,6 +1,7 @@
 'use server';
 
 import {
+  getScheduleByUserId,
   getSchedules,
   ScheduleStatus,
   updateScheduleStatus,
@@ -19,4 +20,13 @@ export const updateScheduleStatusMutation = async (
   const [schedule] = await updateScheduleStatus(id, status);
 
   return schedule;
+};
+
+export const getScheduleByUserIdQuery = async (userId: string) => {
+  try {
+    return await getScheduleByUserId(userId);
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 };

@@ -85,3 +85,11 @@ export const updateScheduleStatus = async (
 
   return schedule;
 };
+
+export const getScheduleByUserId = async (userId: string) => {
+  const schedules = await db.query.Schedule.findMany({
+    where: (schedule, { eq }) => eq(schedule.userId, userId),
+  });
+
+  return schedules;
+};
