@@ -23,7 +23,9 @@ export const DetailsProfileForm = ({
         title: 'Success',
         description: 'Profile updated successfully',
       });
-      forceClose && forceClose();
+      if (forceClose) {
+        forceClose();
+      }
     },
     onError: (error) => {
       toast({
