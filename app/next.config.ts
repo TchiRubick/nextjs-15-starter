@@ -10,6 +10,9 @@ const nextConfig: NextConfig = {
       {
         hostname: 'localhost',
       },
+      {
+        hostname: 'bucket-production-b82f.up.railway.app',
+      },
     ],
   },
   experimental: {

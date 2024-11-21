@@ -16,6 +16,7 @@ export const env = createEnv({
     MINIO_REGION: z.string(),
     MINIO_DOMAIN: z.string(),
     MINIO_SSL: z.literal('true').nullable().optional(),
+    MINIO_PORT: z.coerce.number().optional(),
 
     UPLISTING_API_KEY: z.string(),
     UPLISTING_URL: z.string().url(),
@@ -44,6 +45,7 @@ export const env = createEnv({
     MINIO_REGION: process.env.MINIO_REGION,
     MINIO_DOMAIN: process.env.MINIO_DOMAIN,
     MINIO_SSL: process.env.MINIO_SSL,
+    MINIO_PORT: process.env.MINIO_PORT,
 
     UPLISTING_API_KEY: process.env.UPLISTING_API_KEY,
     UPLISTING_URL: process.env.UPLISTING_URL,
