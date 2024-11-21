@@ -42,25 +42,23 @@ export const ReservationRecap = () => {
                     </Label>
                     <TooltipTrigger asChild>
                       <Badge
-                        className={`${
-                          schedule.status === 'pending'
-                            ? 'bg-yellow-500'
-                            : schedule.status === 'validated'
-                              ? 'bg-green-500'
-                              : 'bg-red-500'
-                        } mt-2 h-4 w-4 cursor-pointer items-center rounded-full p-1`}
+                        className={`${schedule.status === 'pending'
+                          ? 'bg-yellow-500'
+                          : schedule.status === 'validated'
+                            ? 'bg-green-500'
+                            : 'bg-red-500'
+                          } mt-2 h-4 w-4 cursor-pointer items-center rounded-full p-1`}
                       >
                         {schedule.id}
                       </Badge>
                     </TooltipTrigger>
                     <TooltipContent
-                      className={`${
-                        schedule.status === 'pending'
-                          ? 'bg-yellow-500'
-                          : schedule.status === 'validated'
-                            ? 'bg-green-500'
-                            : 'bg-red-500'
-                      }`}
+                      className={`${schedule.status === 'pending'
+                        ? 'bg-yellow-500'
+                        : schedule.status === 'validated'
+                          ? 'bg-green-500'
+                          : 'bg-red-500'
+                        }`}
                     >
                       {schedule.status === 'pending'
                         ? tReservationRecap('pending')
