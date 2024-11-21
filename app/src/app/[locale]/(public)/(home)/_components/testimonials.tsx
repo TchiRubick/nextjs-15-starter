@@ -6,6 +6,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from '@/components/ui/carousel';
+import { useScopedI18n } from '@/locales/client';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -22,7 +23,7 @@ const reviews: ReviewCardProps[] = [
   {
     name: 'Simone',
     message:
-      'Le chalet est magnifique matériau exceptionnel endroit magnifique vu sur Bussang. \nNous avons apprécié le calme l exposition ensoleillée tout était parfait',
+      'Le chalet est magnifique, matériau exceptionnel, endroit magnifique, vu sur Bussang.',
     rating: 5,
     date: '2024-08-09',
   },
@@ -85,6 +86,7 @@ const reviews: ReviewCardProps[] = [
 ];
 
 export const Testimonials = () => {
+  const tTestimonials = useScopedI18n('testimonials');
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
 
@@ -118,7 +120,7 @@ export const Testimonials = () => {
           <div className='text-center'>
             <div className='mb-6 flex items-center justify-center gap-2'>
               <span className='text-sm font-medium text-slate-600'>
-                Avis vérifiés
+                {tTestimonials('verifiedReviews')}
               </span>
               <Link
                 href='https://www.booking.com/hotel/fr/refuges-des-hauts.fr.html'
@@ -134,12 +136,10 @@ export const Testimonials = () => {
             </div>
 
             <h2 className='mb-4 text-5xl font-semibold tracking-tight text-foreground md:text-7xl'>
-              L&apos;expérience de nos hôtes
+              {tTestimonials('experience')}
             </h2>
             <p className='mx-auto max-w-2xl text-lg text-slate-600'>
-              Note moyenne de{' '}
-              <span className='font-medium text-slate-900'>9,8/10</span> basée
-              sur l&apos;expérience authentique de nos clients
+              {tTestimonials('averageRating', { rating: '9.8' })}
             </p>
           </div>
 
@@ -152,9 +152,9 @@ export const Testimonials = () => {
             }}
           >
             <CarouselContent className='-ml-4 h-[368px] sm:h-[368px] md:h-[450px]'>
-              {reviews.map((review) => (
+              {reviews.map((review, index) => (
                 <CarouselItem
-                  key={review.name}
+                  key={index}
                   className='py-4 pl-4 md:basis-1/2 lg:basis-1/3'
                 >
                   <motion.div

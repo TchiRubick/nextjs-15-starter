@@ -38,7 +38,7 @@ export const ReviewCard = ({
       </div>
 
       {/* Message */}
-      <blockquote className='mt-4 flex-grow text-base leading-relaxed text-gray-600'>
+      <blockquote className='mt-4 flex-grow leading-relaxed text-gray-600'>
         &quot;{message}&quot;
       </blockquote>
 
