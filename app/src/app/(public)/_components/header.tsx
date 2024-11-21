@@ -11,11 +11,23 @@ import {
 import { Label } from '@/components/ui/label';
 import { useSession } from '@/hooks/useSession';
 import { cn } from '@/lib/utils';
-import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
+import { DropdownMenu } from '@/components/ui/dropdown-menu';
+import { Separator } from '@/components/ui/separator';
 import { LogOut, Menu, ShieldCheck, User, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { DetailsProfileForm } from './details-profile-form';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+import { ReservationRecap } from './reservation-recap';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const navigationItems = [
   {
@@ -132,25 +144,53 @@ export const Header = () => {
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <Link prefetch href='/profile'>
-                    <DropdownMenuItem className='cursor-pointer'>
-                      <User />
-                      <Label>Profil</Label>
-                    </DropdownMenuItem>
-                  </Link>
+                  <Sheet>
+                    <SheetTrigger asChild className='w-full'>
+                      <Label className='flex h-7 cursor-pointer items-center gap-2 pl-1 hover:bg-slate-100'>
+                        <User className='h-5 w-5' />
+                        Profil
+                      </Label>
+                    </SheetTrigger>
+                    <SheetContent>
+                      <ScrollArea className='h-full w-full overflow-hidden'>
+                        <SheetHeader>
+                          <SheetTitle>Modifier votre profil</SheetTitle>
+                          <SheetDescription>
+                            Modifiez vos informations personnelles et vos
+                            informations d&apos;adresse.
+                          </SheetDescription>
+                        </SheetHeader>
+                        <DetailsProfileForm />
+                        {data.role === 'customer' && (
+                          <div>
+                            <SheetTitle>
+                              Récapitulatif de vos réservations
+                            </SheetTitle>
+                            <SheetDescription>
+                              Vous pouvez consulter ici votre récapitulatif de
+                              vos réservations.
+                            </SheetDescription>
+                            <ReservationRecap />
+                          </div>
+                        )}
+                      </ScrollArea>
+                    </SheetContent>
+                  </Sheet>
+                  <Separator />
                   {data.role === 'admin' && (
                     <Link prefetch href='/admin/products'>
                       <DropdownMenuItem className='cursor-pointer'>
-                        <ShieldCheck />
+                        <ShieldCheck className='h-6 w-6' />
                         Admin
                       </DropdownMenuItem>
                     </Link>
                   )}
+                  <Separator />
                   <DropdownMenuItem
                     className='cursor-pointer'
                     onClick={handleLogout}
                   >
-                    <LogOut />
+                    <LogOut className='h-6 w-6' />
                     <Label className='cursor-pointer bg-white text-slate-900 hover:bg-white/90'>
                       Logout
                     </Label>

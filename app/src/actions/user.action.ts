@@ -1,4 +1,5 @@
 'use server';
+
 import { updateUser } from '@packages/db/models/user';
 
 export const userUpdate = async (id: string, formData: FormData) => {
@@ -7,9 +8,11 @@ export const userUpdate = async (id: string, formData: FormData) => {
   }
 
   const username = formData.get('username');
+
   if (!username || typeof username !== 'string' || !username.trim()) {
     throw new Error('Username is required');
   }
+
   try {
     const rawFormData = {
       username: username.trim(),

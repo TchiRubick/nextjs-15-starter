@@ -24,6 +24,8 @@ export const zSelectUser = createSelectSchema(User).omit({
 
 export const zUpdateUser = zInsertUser.pick({
   username: true,
+  phone: true,
+  address: true,
 });
 
 // ============================================================================
