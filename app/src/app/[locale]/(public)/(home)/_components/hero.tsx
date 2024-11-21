@@ -8,7 +8,9 @@ import { MoveRight, PhoneCall, Snowflake, Star, Wifi } from 'lucide-react';
 import Link from 'next/link';
 
 export const Hero = () => {
-  const t = useScopedI18n('landing');
+  const tButton = useScopedI18n('button');
+  const tHero = useScopedI18n('hero');
+
   return (
     <div className='bg-hero relative h-screen w-full bg-cover bg-center transition-all duration-1000'>
       <div className='absolute inset-0 flex items-center justify-center bg-black bg-opacity-50'>
@@ -32,10 +34,7 @@ export const Hero = () => {
               </h1>
 
               <p className='my-14 text-center text-lg text-slate-300 sm:text-xl'>
-                Découvrez notre chalet d&apos;exception à Bussang, au cœur des
-                Vosges. Profitez d&apos;une vue imprenable sur la montagne,
-                d&apos;un accès direct aux pistes en hiver et de superbes
-                randonnées en été.
+                {tHero('description')}
               </p>
 
               <div className='flex flex-col flex-wrap justify-center gap-4 sm:mt-20 sm:flex-row sm:gap-4'>
@@ -44,7 +43,7 @@ export const Hero = () => {
                     size='lg'
                     className='group w-full bg-primary text-white transition-all hover:bg-emerald-700 sm:h-14 sm:w-72'
                   >
-                    <span className='text-xl'>{t('book')}</span>
+                    <span className='text-xl'>{tButton('book')}</span>
 
                     <MoveRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
                   </Button>
@@ -56,7 +55,7 @@ export const Hero = () => {
                     className='group w-full border-foreground/20 bg-slate-300 text-primary/90 hover:bg-slate-400 sm:h-14 sm:w-72'
                   >
                     <span className='text-xl text-slate-900'>
-                      Nous contacter
+                      {tButton('contact')}
                     </span>
                     <PhoneCall className='ml-2 h-4 w-4 transition-transform group-hover:rotate-12' />
                   </Button>
@@ -68,20 +67,19 @@ export const Hero = () => {
               >
                 <span className='flex items-center gap-1.5'>
                   <Star className='h-4 w-4 text-yellow-400' />
-                  Note couples : 9,8/10
+                  {tHero('rating')}
                 </span>
                 <span className='flex items-center gap-1.5'>
                   <Snowflake className='h-4 w-4' />
-                  Location de ski
+                  {tHero('skiRental')}
                 </span>
                 <span className='flex items-center gap-1.5'>
                   <Wifi className='h-4 w-4' />
-                  WiFi gratuit
+                  {tHero('freeWifi')}
                 </span>
               </div>
             </div>
           </motion.div>
-          {/* ----------------------------------------------------------------------------------------------------------------------- */}
         </div>
       </div>
     </div>
