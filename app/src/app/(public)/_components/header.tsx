@@ -68,7 +68,7 @@ const desktopItems = navigationItems.filter((item) => !item.mobile_only);
 export const Header = () => {
   const [isOpen, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [SheetOpen, setSheetOpen] = useState(false);
+  const [sheetOpen, setSheetOpen] = useState(false);
 
   const pathname = usePathname();
 
@@ -145,7 +145,7 @@ export const Header = () => {
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <Sheet open={SheetOpen} onOpenChange={setSheetOpen}>
+                  <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
                     <SheetTrigger asChild className='w-full'>
                       <Label className='flex h-7 cursor-pointer items-center gap-2 pl-1 hover:bg-slate-100'>
                         <User className='h-5 w-5' />

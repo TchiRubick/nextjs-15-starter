@@ -2,11 +2,11 @@ import { useSession } from '@/hooks/useSession';
 import { Button } from '@/components/ui/button';
 import { useForm } from 'react-hook-form';
 import { useMutationAction } from '@packages/fetch-action/index';
-import { formDataBuilder } from '@/lib/formdata-builder';
 import { toast } from '@/hooks/use-toast';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { userUpdate } from '@/actions/user.action';
+import { UpdateUser } from '@packages/db/models/user';
 
 export const DetailsProfileForm = ({
   forceClose,
@@ -14,7 +14,7 @@ export const DetailsProfileForm = ({
   forceClose?: () => void;
 }) => {
   const { data } = useSession();
-  const { register, getValues, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<UpdateUser>();
 
   const { mutateAsync } = useMutationAction(userUpdate, {
     onSuccess: () => {
@@ -23,7 +23,7 @@ export const DetailsProfileForm = ({
         title: 'Success',
         description: 'Profile updated successfully',
       });
-      forceClose?.();
+      forceClose && forceClose();
     },
     onError: (error) => {
       toast({
@@ -34,11 +34,8 @@ export const DetailsProfileForm = ({
     },
   });
 
-  const onSubmit = async () => {
-    const formData = formDataBuilder(getValues);
-
-    await mutateAsync(formData);
-    forceClose?.();
+  const onSubmit = async (data: UpdateUser) => {
+    await mutateAsync(data);
     window.location.reload();
   };
 
@@ -80,6 +77,7 @@ export const DetailsProfileForm = ({
             placeholder='telephone'
             defaultValue={data?.phone ?? ''}
             className='col-span-3'
+            {...register('phone')}
           />
         </div>
         <div className='grid grid-cols-4 items-center gap-4'>
@@ -91,6 +89,7 @@ export const DetailsProfileForm = ({
             placeholder='adresse'
             defaultValue={data?.address ?? ''}
             className='col-span-3'
+            {...register('address')}
           />
         </div>
         <div className='grid grid-cols-4 items-center gap-4'>
@@ -102,6 +101,7 @@ export const DetailsProfileForm = ({
             placeholder='Pays'
             defaultValue={data?.country ?? ''}
             className='col-span-3'
+            {...register('country')}
           />
         </div>
         <div className='grid grid-cols-4 items-center gap-4'>
@@ -113,6 +113,7 @@ export const DetailsProfileForm = ({
             placeholder='Paris'
             defaultValue={data?.city ?? ''}
             className='col-span-3'
+            {...register('city')}
           />
         </div>
         <div className='grid grid-cols-4 items-center gap-4'>
@@ -124,6 +125,7 @@ export const DetailsProfileForm = ({
             placeholder='75001'
             defaultValue={data?.zipCode ?? ''}
             className='col-span-3'
+            {...register('zipCode')}
           />
         </div>
         <Button type='submit' className='w-full'>
