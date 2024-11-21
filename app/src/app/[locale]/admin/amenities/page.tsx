@@ -7,7 +7,7 @@ export default async function AmenitiesPage() {
 
   return (
     <div>
-      <h2 className='text-2xl font-bold'>Amenities</h2>
+      <h2 className='text-2xl font-bold text-slate-100'>Amenities</h2>
       <div className='mt-4 flex gap-4'>
         <div className='w-full'>
           <Table />

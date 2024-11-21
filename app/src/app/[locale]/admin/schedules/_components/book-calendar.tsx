@@ -16,9 +16,18 @@ import { toast } from '@/hooks/use-toast';
 import { ScheduleStatus } from '@packages/db/models/schedule';
 import { useMutationAction } from '@packages/fetch-action/index';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { ChevronLeft, ChevronRight, Clock } from 'lucide-react';
-import { useState } from 'react';
+import {
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  Clock,
+  Mail,
+  PhoneCall,
+  X,
+} from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { DayCell } from './day-cell';
+import Link from 'next/link';
 
 const colors: Record<ScheduleStatus, string> = {
   pending: 'bg-yellow-200 hover:bg-yellow-300',
@@ -28,6 +37,7 @@ const colors: Record<ScheduleStatus, string> = {
 
 export const BookCalendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [isSticky, setIsSticky] = useState(false);
   const [selectedAvailability, setSelectedAvailability] = useState<
     Awaited<ReturnType<typeof getSchedulesQuery>>[number] | null
   >(null);
@@ -36,6 +46,23 @@ export const BookCalendar = () => {
     queryKey: ['schedules'],
     queryFn: getSchedulesQuery,
   });
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      if (scrollTop > 50) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const { mutateAsync: updateScheduleStatus } = useMutationAction(
     updateScheduleStatusMutation,
@@ -138,8 +165,10 @@ export const BookCalendar = () => {
 
   return (
     <>
-      <Card className='w-full max-w-4xl'>
-        <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-4'>
+      <Card className='mx-auto mt-20 w-full max-w-2xl lg:max-w-4xl'>
+        <CardHeader
+          className={`relative flex flex-row items-center justify-between space-y-0 pb-4 ${isSticky ? 'sticky top-16 z-20 bg-slate-50' : ''}`}
+        >
           <CardTitle>
             Week of {formatDate(getStartOfWeek(currentDate))}
           </CardTitle>
@@ -161,7 +190,7 @@ export const BookCalendar = () => {
           </div>
         </CardHeader>
         <CardContent>
-          <div className='grid grid-cols-7 gap-2'>
+          <div className='grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7'>
             {generateWeekDays().map((day) => (
               <div key={day.toISOString()} className='rounded-lg border'>
                 <div className='border-b bg-gray-50 p-2 text-center'>
@@ -208,23 +237,44 @@ export const BookCalendar = () => {
               <div className='border-t pt-2'>
                 <h5>Contact info:</h5>
                 <p className='text-sm text-gray-600'>
-                  {selectedAvailability.user.email}
+                  <Link
+                    href={`mailto:${selectedAvailability.user.email}`}
+                    target='_blank'
+                    className='flex items-center gap-2'
+                  >
+                    <Mail className='h-4 w-4' />
+                    {selectedAvailability.user.email}
+                  </Link>
+                </p>
+                <p className='text-sm text-gray-600'>
+                  <Link
+                    href={`tel:${selectedAvailability.user.phone}`}
+                    target='_blank'
+                    className='flex items-center gap-2'
+                  >
+                    <PhoneCall className='h-4 w-4' />
+                    {selectedAvailability.user.phone}
+                  </Link>
                 </p>
               </div>
-              <div className='border-t pt-2'>
-                <h5>Validation:</h5>
+              <div className='flex items-center gap-2 border-t pt-2'>
+                {selectedAvailability.status === 'pending' && (
+                  <Button
+                    onClick={() =>
+                      handleStatusChange(selectedAvailability.id, 'validated')
+                    }
+                  >
+                    <Check className='h-4 w-4' />
+                    Approuver
+                  </Button>
+                )}
                 <Button
-                  onClick={() =>
-                    handleStatusChange(selectedAvailability.id, 'validated')
-                  }
-                >
-                  Approuver
-                </Button>
-                <Button
+                  variant='destructive'
                   onClick={() =>
                     handleStatusChange(selectedAvailability.id, 'refused')
                   }
                 >
+                  <X className='h-4 w-4' />
                   Refuser
                 </Button>
               </div>
