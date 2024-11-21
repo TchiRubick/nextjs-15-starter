@@ -17,6 +17,7 @@ import { useMutationAction } from '@packages/fetch-action/index';
 import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { AMENITIES_QUERY_KEY } from '../static';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const AddAmenityForm = () => {
   const queryClient = useQueryClient();
@@ -57,25 +58,40 @@ export const AddAmenityForm = () => {
   };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
-        <FormField
-          control={form.control}
-          name='name'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Nom de l&apos;équipement</FormLabel>
-              <FormControl>
-                <Input placeholder='Ex: WiFi, Parking...' {...field} required />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type='submit' disabled={isPending}>
-          {isPending ? 'Ajout en cours...' : 'Ajouter'}
-        </Button>
-      </form>
-    </Form>
+    <Card className='border-none'>
+      <CardHeader>
+        <CardTitle className='text-center text-2xl'>
+          Ajouter un nouvel équipement
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
+            <FormField
+              control={form.control}
+              name='name'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className='text-muted-foreground'>
+                    Nom de l&apos;équipement
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder='Ex: WiFi, Parking...'
+                      {...field}
+                      required
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type='submit' disabled={isPending}>
+              {isPending ? 'Ajout en cours...' : 'Ajouter'}
+            </Button>
+          </form>
+        </Form>
+      </CardContent>
+    </Card>
   );
 };
