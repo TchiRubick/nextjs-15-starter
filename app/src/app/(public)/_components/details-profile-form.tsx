@@ -8,7 +8,11 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { userUpdate } from '@/actions/user.action';
 
-export const DetailsProfileForm = () => {
+export const DetailsProfileForm = ({
+  forceClose,
+}: {
+  forceClose?: () => void;
+}) => {
   const { data } = useSession();
   const { register, getValues, handleSubmit } = useForm();
 
@@ -19,6 +23,7 @@ export const DetailsProfileForm = () => {
         title: 'Success',
         description: 'Profile updated successfully',
       });
+      forceClose?.();
     },
     onError: (error) => {
       toast({
@@ -32,8 +37,9 @@ export const DetailsProfileForm = () => {
   const onSubmit = async () => {
     const formData = formDataBuilder(getValues);
 
-    await mutateAsync(data?.id as string, formData);
-    window.location.replace('/profile');
+    await mutateAsync(formData);
+    forceClose?.();
+    window.location.reload();
   };
 
   return (

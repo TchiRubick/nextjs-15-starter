@@ -68,6 +68,7 @@ const desktopItems = navigationItems.filter((item) => !item.mobile_only);
 export const Header = () => {
   const [isOpen, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [SheetOpen, setSheetOpen] = useState(false);
 
   const pathname = usePathname();
 
@@ -144,7 +145,7 @@ export const Header = () => {
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <Sheet>
+                  <Sheet open={SheetOpen} onOpenChange={setSheetOpen}>
                     <SheetTrigger asChild className='w-full'>
                       <Label className='flex h-7 cursor-pointer items-center gap-2 pl-1 hover:bg-slate-100'>
                         <User className='h-5 w-5' />
@@ -160,19 +161,19 @@ export const Header = () => {
                             informations d&apos;adresse.
                           </SheetDescription>
                         </SheetHeader>
-                        <DetailsProfileForm />
-                        {data.role === 'customer' && (
-                          <div>
-                            <SheetTitle>
-                              Récapitulatif de vos réservations
-                            </SheetTitle>
-                            <SheetDescription>
-                              Vous pouvez consulter ici votre récapitulatif de
-                              vos réservations.
-                            </SheetDescription>
-                            <ReservationRecap />
-                          </div>
-                        )}
+                        <DetailsProfileForm
+                          forceClose={() => setSheetOpen(false)}
+                        />
+                        <div>
+                          <SheetTitle>
+                            Récapitulatif de vos réservations
+                          </SheetTitle>
+                          <SheetDescription>
+                            Vous pouvez consulter ici votre récapitulatif de vos
+                            réservations.
+                          </SheetDescription>
+                          <ReservationRecap />
+                        </div>
                       </ScrollArea>
                     </SheetContent>
                   </Sheet>

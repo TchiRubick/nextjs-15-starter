@@ -85,12 +85,14 @@ export const ReservationRecap = () => {
             <Label className='text-center'>
               Vous n&apos;avez pas encore de réservations
             </Label>
-            <Link href='/properties' prefetch>
-              <Button className='group w-full bg-primary text-white transition-all hover:bg-emerald-700 sm:h-14 sm:w-72'>
-                <span className='text-xl'>Réserver maintenant</span>
-                <MoveRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
-              </Button>
-            </Link>
+            <div className='flex justify-center'>
+              <Link href='/properties' prefetch>
+                <Button className='group w-full bg-primary text-white transition-all hover:bg-emerald-700 sm:h-14 sm:w-72'>
+                  <span className='text-xl'>Réserver maintenant</span>
+                  <MoveRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       )}
