@@ -39,10 +39,7 @@ export const Header = () => {
       title: tHeader('home'),
       href: '/',
     },
-    {
-      title: tHeader('about'),
-      href: '/about',
-    },
+
     {
       title: tHeader('reservations'),
       href: '/properties',
@@ -50,6 +47,10 @@ export const Header = () => {
     {
       title: tHeader('gallery'),
       href: '/pictures',
+    },
+    {
+      title: tHeader('about'),
+      href: '/about',
     },
     {
       title: tHeader('contact'),
