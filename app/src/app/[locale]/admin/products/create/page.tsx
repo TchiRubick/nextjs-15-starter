@@ -6,9 +6,6 @@ export default async function AdminPage() {
 
   return (
     <div>
-      <div className='flex items-center justify-between py-4'>
-        <h2 className='text-2xl font-bold'>Create Product</h2>
-      </div>
       <CreateProductForm />
     </div>
   );

@@ -6,8 +6,7 @@ export default async function AmenitiesPage() {
   await adminGuard();
 
   return (
-    <div>
-      <h2 className='text-2xl font-bold'>Amenities</h2>
+    <div className='w-full px-2'>
       <div className='mt-4 flex gap-4'>
         <div className='w-full'>
           <Table />

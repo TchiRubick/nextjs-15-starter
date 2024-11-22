@@ -23,6 +23,7 @@ import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { PRODUCTS_QUERY_KEY } from '../../static';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 export const CreateProductForm = () => {
   const queryClient = useQueryClient();
@@ -72,175 +73,184 @@ export const CreateProductForm = () => {
   };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
-        <FormField
-          control={form.control}
-          name='name'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input placeholder='Product name' {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+    <Card>
+      <CardHeader></CardHeader>
+      <CardContent>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
+            <FormField
+              control={form.control}
+              name='name'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder='Product name' {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-        <FormField
-          control={form.control}
-          name='description'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Description</FormLabel>
-              <FormControl>
-                <Textarea placeholder='Product description' {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+            <FormField
+              control={form.control}
+              name='description'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Description</FormLabel>
+                  <FormControl>
+                    <Textarea placeholder='Product description' {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-        <FormField
-          control={form.control}
-          name='price'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Price</FormLabel>
-              <FormControl>
-                <Input
-                  onFocus={(e) =>
-                    e.target.value === '0' && (e.target.value = '')
-                  }
-                  type='number'
-                  placeholder='0'
-                  {...field}
-                  onChange={(e) => field.onChange(Number(e.target.value))}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+            <FormField
+              control={form.control}
+              name='price'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Price</FormLabel>
+                  <FormControl>
+                    <Input
+                      onFocus={(e) =>
+                        e.target.value === '0' && (e.target.value = '')
+                      }
+                      type='number'
+                      placeholder='0'
+                      {...field}
+                      onChange={(e) => field.onChange(Number(e.target.value))}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-        <div className='grid grid-cols-2 gap-4'>
-          <FormField
-            control={form.control}
-            name='room'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Rooms</FormLabel>
-                <FormControl>
-                  <Input
-                    onFocus={(e) =>
-                      e.target.value === '0' && (e.target.value = '')
-                    }
-                    type='number'
-                    min={1}
-                    {...field}
-                    onChange={(e) => field.onChange(Number(e.target.value))}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+            <div className='grid grid-cols-2 gap-4'>
+              <FormField
+                control={form.control}
+                name='room'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Rooms</FormLabel>
+                    <FormControl>
+                      <Input
+                        onFocus={(e) =>
+                          e.target.value === '0' && (e.target.value = '')
+                        }
+                        type='number'
+                        min={1}
+                        {...field}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-          <FormField
-            control={form.control}
-            name='bed'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Beds</FormLabel>
-                <FormControl>
-                  <Input
-                    onFocus={(e) =>
-                      e.target.value === '0' && (e.target.value = '')
-                    }
-                    type='number'
-                    min={0}
-                    value={field.value ?? ''}
-                    onChange={(e) => field.onChange(Number(e.target.value))}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+              <FormField
+                control={form.control}
+                name='bed'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Beds</FormLabel>
+                    <FormControl>
+                      <Input
+                        onFocus={(e) =>
+                          e.target.value === '0' && (e.target.value = '')
+                        }
+                        type='number'
+                        min={0}
+                        value={field.value ?? ''}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-          <FormField
-            control={form.control}
-            name='bath'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Bathrooms</FormLabel>
-                <FormControl>
-                  <Input
-                    onFocus={(e) =>
-                      e.target.value === '0' && (e.target.value = '')
-                    }
-                    type='number'
-                    min={0}
-                    value={field.value ?? ''}
-                    onChange={(e) => field.onChange(Number(e.target.value))}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+              <FormField
+                control={form.control}
+                name='bath'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Bathrooms</FormLabel>
+                    <FormControl>
+                      <Input
+                        onFocus={(e) =>
+                          e.target.value === '0' && (e.target.value = '')
+                        }
+                        type='number'
+                        min={0}
+                        value={field.value ?? ''}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-          <FormField
-            control={form.control}
-            name='maxPerson'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Max Persons</FormLabel>
-                <FormControl>
-                  <Input
-                    onFocus={(e) =>
-                      e.target.value === '0' && (e.target.value = '')
-                    }
-                    type='number'
-                    min={0}
-                    value={field.value ?? ''}
-                    onChange={(e) => field.onChange(Number(e.target.value))}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+              <FormField
+                control={form.control}
+                name='maxPerson'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Max Persons</FormLabel>
+                    <FormControl>
+                      <Input
+                        onFocus={(e) =>
+                          e.target.value === '0' && (e.target.value = '')
+                        }
+                        type='number'
+                        min={0}
+                        value={field.value ?? ''}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
-        <FormField
-          name='amenities'
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Amenities</FormLabel>
-              <FormControl>
-                <MultiSelect
-                  placeholder='Select amenities'
-                  options={
-                    amenities?.map((amenity) => ({
-                      label: amenity.name,
-                      value: String(amenity.id),
-                    })) ?? []
-                  }
-                  onValueChange={field.onChange}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+            <FormField
+              name='amenities'
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Amenities</FormLabel>
+                  <FormControl>
+                    <MultiSelect
+                      placeholder='Select amenities'
+                      options={
+                        amenities?.map((amenity) => ({
+                          label: amenity.name,
+                          value: String(amenity.id),
+                        })) ?? []
+                      }
+                      onValueChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-        <Button type='submit' disabled={isPending}>
-          {isPending ? <Loader2 className='animate-spin' /> : 'Create Product'}
-        </Button>
-      </form>
-    </Form>
+            <Button type='submit' disabled={isPending}>
+              {isPending ? (
+                <Loader2 className='animate-spin' />
+              ) : (
+                'Create Product'
+              )}
+            </Button>
+          </form>
+        </Form>
+      </CardContent>
+    </Card>
   );
 };

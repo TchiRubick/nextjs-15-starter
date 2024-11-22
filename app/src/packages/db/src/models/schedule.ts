@@ -45,6 +45,7 @@ export const getSchedules = async () =>
         columns: {
           email: true,
           username: true,
+          phone: true,
         },
       },
     },
