@@ -2,20 +2,10 @@
 
 import { scheduleProductMutation } from '@/actions/product.action';
 import { Button } from '@/components/ui/button';
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from '@/components/ui/drawer';
 import { Label } from '@/components/ui/label';
 import { useSession } from '@/hooks/useSession';
-import { useScopedI18n } from '@/locales/client';
 import { useMutationAction } from '@packages/fetch-action/index';
+import { toast } from '@/hooks/use-toast';
 import { format } from 'date-fns';
 import { Calendar, Loader2 } from 'lucide-react';
 import { redirect } from 'next/navigation';
@@ -23,6 +13,18 @@ import qs from 'query-string';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import DatePicker, { DateObject } from 'react-multi-date-picker';
+import { useScopedI18n } from '@/locales/client';
+
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 
 export const ScheduleForm = ({
   formValues,
@@ -36,7 +38,7 @@ export const ScheduleForm = ({
 }) => {
   const { data: session, isFetching } = useSession();
 
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isSheetOpen, setisSheetOpen] = useState(false);
   const tScheduleForm = useScopedI18n('scheduleForm');
 
   const formDefaultValue = {
@@ -46,11 +48,22 @@ export const ScheduleForm = ({
     ] as [DateObject, DateObject],
   };
 
-  const { mutateAsync, error, isError, isPending } = useMutationAction(
+  const { mutateAsync, error, isPending } = useMutationAction(
     scheduleProductMutation,
     {
       onSuccess() {
-        setIsDrawerOpen(false);
+        setisSheetOpen(false);
+        toast({
+          title: 'date de séjour modifier avec succès',
+        });
+      },
+
+      onError: () => {
+        toast({
+          variant: 'destructive',
+          title: 'modification à échouer',
+          description: error?.message,
+        });
       },
     }
   );
@@ -76,34 +89,38 @@ export const ScheduleForm = ({
       );
     }
 
-    setIsDrawerOpen(open);
+    setisSheetOpen(open);
   };
 
   return (
     <div>
-      <Drawer
-        onOpenChange={handleOpenChange}
-        open={isDrawerOpen}
-        onClose={() => setIsDrawerOpen(false)}
-      >
-        <DrawerTrigger asChild>
+      <Sheet onOpenChange={handleOpenChange} open={isSheetOpen}>
+        <SheetTrigger asChild>
           <Button className='w-full' size='lg' disabled={isFetching}>
             <Calendar className='mr-2 h-4 w-4' />
             {tScheduleForm('bookButton')}
           </Button>
-        </DrawerTrigger>
-
-        <DrawerContent>
-          <div className='mx-auto w-full max-w-sm'>
-            <DrawerHeader>
-              <DrawerTitle>{tScheduleForm('drawerTitle')}</DrawerTitle>
-              <DrawerDescription>
-                {tScheduleForm('drawerDescription')}
-              </DrawerDescription>
-            </DrawerHeader>
+        </SheetTrigger>
+        <SheetContent>
+          <SheetHeader>
+            <SheetTitle>{tScheduleForm('drawerTitle')}</SheetTitle>
+            <SheetDescription>{tScheduleForm('drawerDescription')}</SheetDescription>
+          </SheetHeader>
+            <div className='flex flex-row items-center'>
+              <Label htmlFor='nom' className='text-right'>
+                Nom:
+              </Label>
+              <h1 className='font-bold'>Chalet</h1>
+            </div>
             <div>
-              <Label className='mb-2 block text-sm font-medium text-emerald-950'>
-                {tScheduleForm('dateRangeLabel')}
+              <Label htmlFor='prixtotal' >
+                Prix total de vos séjour:
+              </Label>
+              <h1>150 EUR</h1>
+            </div>
+            <div className='flex flex-col gap-y-2'>
+              <Label htmlFor='date'>
+              {tScheduleForm('dateRangeLabel')}
               </Label>
               <Controller
                 name='date_range'
@@ -113,35 +130,35 @@ export const ScheduleForm = ({
                     value={field.value}
                     onChange={field.onChange}
                     range
-                    className='green'
+                    className=''
                     minDate={new Date()}
-                    inputClass='text-emerald-950 h-12 border-2 cursor-pointer pl-8 placeholder:text-slate-500 focus:ring-2 focus:ring-primary rounded-md'
+                    inputClass=' w-full  text-emerald-950 h-12 w-full  border-2 cursor-pointer pl-8 placeholder:text-slate-500 focus:ring-2 focus:ring-primary rounded-md'
                   />
                 )}
               />
-              <p>{isError && error?.message}</p>
             </div>
-            <DrawerFooter>
-              <Button
-                type='submit'
-                onClick={handleSubmit(onSubmit)}
-                disabled={isPending}
-              >
-                {isPending ? (
+          
+          <SheetFooter className='mt-3 flex flex-col'>
+            <Button
+              type='submit'
+              onClick={handleSubmit(onSubmit)}
+              disabled={isPending}
+              className='w-full'
+            >
+              {isPending ? (
                   <Loader2 className='animated-spin' />
                 ) : (
                   tScheduleForm('saveButton')
                 )}
-              </Button>
-              <DrawerClose asChild>
-                <Button variant='outline'>
-                  {tScheduleForm('cancelButton')}
-                </Button>
-              </DrawerClose>
-            </DrawerFooter>
-          </div>
-        </DrawerContent>
-      </Drawer>
+            </Button>
+          </SheetFooter>
+          <SheetClose asChild className='mt-3'>
+            <Button variant='outline' className='w-full'>
+              {tScheduleForm('cancelButton')}
+            </Button>
+          </SheetClose>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 };
