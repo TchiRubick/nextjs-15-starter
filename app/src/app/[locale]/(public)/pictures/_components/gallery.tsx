@@ -11,9 +11,10 @@ import 'react-photo-view/dist/react-photo-view.css';
 const NUMBER_IMAGE_APPEAR_FIRST = 15;
 
 type props = {
-   images: ImageSelect[]}
+  images: ImageSelect[];
+};
 
-export const Gallery = ({images}: props) => {
+export const Gallery = ({ images }: props) => {
   const [offset, setOffset] = useState(0);
   const tGallery = useScopedI18n('gallery');
   const loadMoreImages = () => {

@@ -40,5 +40,5 @@ export const deleteImageByUrl = async (url: string) =>
   db.delete(Image).where(eq(Image.url, url)).returning();
 
 export const getAllUrlImage = async () => {
-   return db.select().from(Image);
-} 
+  return db.select().from(Image);
+};
