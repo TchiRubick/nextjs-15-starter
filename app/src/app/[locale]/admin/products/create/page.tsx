@@ -5,7 +5,7 @@ export default async function AdminPage() {
   await adminGuard();
 
   return (
-    <div>
+    <div className='w-full px-2'>
       <CreateProductForm />
     </div>
   );

@@ -114,7 +114,15 @@ export const BookCalendar = () => {
   };
 
   const formatDayName = (date: Date) => {
-    const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    const days = [
+      'Lundi',
+      'Mardi',
+      'Mercredi',
+      'Jeudi',
+      'Vendredi',
+      'Samedi',
+      'Dimanche',
+    ];
     let day = date.getDay();
     day = day === 0 ? 6 : day - 1;
     return days[day];
@@ -170,7 +178,7 @@ export const BookCalendar = () => {
           className={`relative flex flex-row items-center justify-between space-y-0 pb-4 ${isSticky ? 'sticky top-16 z-20 bg-slate-50' : ''}`}
         >
           <CardTitle>
-            Week of {formatDate(getStartOfWeek(currentDate))}
+            Semaine de {formatDate(getStartOfWeek(currentDate))}
           </CardTitle>
           <div className='flex items-center space-x-2'>
             <Button
@@ -225,12 +233,12 @@ export const BookCalendar = () => {
               <div className='space-y-2'>
                 <div className='flex items-center gap-2 text-gray-600'>
                   <Clock className='h-4 w-4' />
-                  <span className='font-medium'>Start:</span>
+                  <span className='font-medium'>Debuter le:</span>
                   <span>{formatDate(selectedAvailability.startDate)}</span>
                 </div>
                 <div className='flex items-center gap-2 text-gray-600'>
                   <Clock className='h-4 w-4' />
-                  <span className='font-medium'>End:</span>
+                  <span className='font-medium'>Terminer le:</span>
                   <span>{formatDate(selectedAvailability.endDate)}</span>
                 </div>
               </div>

@@ -11,7 +11,7 @@ export default async function AdminPage() {
       <div className='flex items-center justify-end py-4'>
         <Link href='/admin/products/create' prefetch>
           <Button className='bg-slate-100 text-slate-900 hover:bg-slate-200 hover:text-slate-900'>
-            Create Product
+            Creer un chalet
           </Button>
         </Link>
       </div>
