@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { TODAY, TOMORROW } from '@/lib/date';
+import { getScopedI18n } from '@/locales/server';
 import { EuroIcon, MessageSquare } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -46,12 +47,14 @@ const PropertyDetails = async ({
       : TOMORROW,
   };
 
+  const tPropertyDetails = await getScopedI18n('propertyDetails');
+
   if (!property)
     return (
       <main className='container mx-auto mt-16 min-h-screen px-4 lg:px-8'>
         <div className='flex flex-col items-center justify-center'>
           <h3 className='py-8 text-2xl font-bold'>
-            Aucune disponibilité trouvée
+            {tPropertyDetails('noAvailability')}
           </h3>
           <Image
             src='/illustration/undraw_empty_re_opql.svg'
@@ -75,7 +78,8 @@ const PropertyDetails = async ({
                 <h1 className='mb-2 text-4xl font-bold'>{property.name}</h1>
                 <p className='flex items-center text-2xl font-semibold text-primary'>
                   <EuroIcon className='mr-2 h-4 w-4' />
-                  {property.price.toLocaleString()}
+                  {property.price.toLocaleString()}{' '}
+                  {tPropertyDetails('currency')}
                 </p>
               </div>
             </div>
@@ -88,14 +92,18 @@ const PropertyDetails = async ({
             />
 
             <div className='mb-8'>
-              <h2 className='mb-4 text-2xl font-semibold'>Description</h2>
+              <h2 className='mb-4 text-2xl font-semibold'>
+                {tPropertyDetails('descriptionTitle')}
+              </h2>
               <p className='leading-relaxed text-muted-foreground'>
                 {property.description}
               </p>
             </div>
 
             <div>
-              <h2 className='mb-4 text-2xl font-semibold'>Amenities</h2>
+              <h2 className='mb-4 text-2xl font-semibold'>
+                {tPropertyDetails('amenitiesTitle')}
+              </h2>
               <div className='grid grid-cols-2 gap-4 md:grid-cols-3'>
                 {property.amenities.map((amenity) => (
                   <div
@@ -117,7 +125,7 @@ const PropertyDetails = async ({
                 <Link href='/contact'>
                   <Button variant='outline' className='w-full' size='lg'>
                     <MessageSquare className='mr-2 h-4 w-4' />
-                    Contact
+                    {tPropertyDetails('contact')}
                   </Button>
                 </Link>
               </div>

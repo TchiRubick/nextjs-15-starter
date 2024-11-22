@@ -17,10 +17,12 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
 import { formDataBuilder } from '@/lib/formdata-builder';
+import { useScopedI18n } from '@/locales/client';
 import { useMutationAction } from '@packages/fetch-action/index';
 
 export const SigninForm = ({ callbackUrl }: { callbackUrl?: string }) => {
   const { register, getValues, handleSubmit } = useForm();
+  const tAuth = useScopedI18n('auth');
 
   const { mutateAsync, isPending, error, isError } =
     useMutationAction(loginMutation);
@@ -28,7 +30,7 @@ export const SigninForm = ({ callbackUrl }: { callbackUrl?: string }) => {
   if (isError) {
     toast({
       variant: 'destructive',
-      title: 'Error',
+      title: tAuth('error'),
       description: error?.message,
     });
   }
@@ -45,15 +47,13 @@ export const SigninForm = ({ callbackUrl }: { callbackUrl?: string }) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <Card>
         <CardHeader>
-          <CardTitle className='text-2xl'>Login</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
-          </CardDescription>
+          <CardTitle className='text-2xl'>{tAuth('login')}</CardTitle>
+          <CardDescription>{tAuth('loginDescription')}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className='grid gap-4'>
             <div className='grid gap-2'>
-              <Label htmlFor='email'>Email or username</Label>
+              <Label htmlFor='email'>{tAuth('emailOrUsername')}</Label>
               <Input
                 {...register('identifier')}
                 id='identifier'
@@ -62,12 +62,12 @@ export const SigninForm = ({ callbackUrl }: { callbackUrl?: string }) => {
             </div>
             <div className='grid gap-2'>
               <div className='flex items-center'>
-                <Label htmlFor='password'>Password</Label>
+                <Label htmlFor='password'>{tAuth('password')}</Label>
                 <Link
                   href='forgotpassword'
                   className='ml-auto inline-block text-sm underline'
                 >
-                  Forgot your password?
+                  {tAuth('forgotPassword')}
                 </Link>
               </div>
               <Input
@@ -79,13 +79,17 @@ export const SigninForm = ({ callbackUrl }: { callbackUrl?: string }) => {
             </div>
 
             <Button type='submit' className='w-full' disabled={isPending}>
-              {isPending ? <Loader2 className='mr-2 animate-spin' /> : 'Login'}
+              {isPending ? (
+                <Loader2 className='mr-2 animate-spin' />
+              ) : (
+                tAuth('login')
+              )}
             </Button>
           </div>
           <div className='mt-4 text-center text-sm'>
-            Don&apos;t have an account?{' '}
+            {tAuth('signUpPrompt')}
             <Link href={`/auth/signup?callbackUrl=${callbackUrl}`}>
-              Sign up
+              {tAuth('signUp')}
             </Link>
           </div>
         </CardContent>

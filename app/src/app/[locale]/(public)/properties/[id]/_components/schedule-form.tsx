@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/drawer';
 import { Label } from '@/components/ui/label';
 import { useSession } from '@/hooks/useSession';
+import { useScopedI18n } from '@/locales/client';
 import { useMutationAction } from '@packages/fetch-action/index';
 import { format } from 'date-fns';
 import { Calendar, Loader2 } from 'lucide-react';
@@ -36,6 +37,7 @@ export const ScheduleForm = ({
   const { data: session, isFetching } = useSession();
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const tScheduleForm = useScopedI18n('scheduleForm');
 
   const formDefaultValue = {
     date_range: [
@@ -87,19 +89,21 @@ export const ScheduleForm = ({
         <DrawerTrigger asChild>
           <Button className='w-full' size='lg' disabled={isFetching}>
             <Calendar className='mr-2 h-4 w-4' />
-            Book
+            {tScheduleForm('bookButton')}
           </Button>
         </DrawerTrigger>
 
         <DrawerContent>
           <div className='mx-auto w-full max-w-sm'>
             <DrawerHeader>
-              <DrawerTitle>Book</DrawerTitle>
-              <DrawerDescription>Book ton sejour</DrawerDescription>
+              <DrawerTitle>{tScheduleForm('drawerTitle')}</DrawerTitle>
+              <DrawerDescription>
+                {tScheduleForm('drawerDescription')}
+              </DrawerDescription>
             </DrawerHeader>
             <div>
               <Label className='mb-2 block text-sm font-medium text-emerald-950'>
-                Dates de votre séjour
+                {tScheduleForm('dateRangeLabel')}
               </Label>
               <Controller
                 name='date_range'
@@ -126,11 +130,13 @@ export const ScheduleForm = ({
                 {isPending ? (
                   <Loader2 className='animated-spin' />
                 ) : (
-                  'Enregistrer'
+                  tScheduleForm('saveButton')
                 )}
               </Button>
               <DrawerClose asChild>
-                <Button variant='outline'>Cancel</Button>
+                <Button variant='outline'>
+                  {tScheduleForm('cancelButton')}
+                </Button>
               </DrawerClose>
             </DrawerFooter>
           </div>

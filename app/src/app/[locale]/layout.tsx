@@ -80,9 +80,9 @@ export default async function RootLayout({
   const { locale } = await params;
   return (
     <html lang='fr' suppressHydrationWarning>
-      <ReactQueryProviders>
-        <HydrationBoundary state={dehydrate(getQueryClient())}>
-          <LangueProvider locale={locale}>
+      <LangueProvider locale={locale}>
+        <ReactQueryProviders>
+          <HydrationBoundary state={dehydrate(getQueryClient())}>
             <NuqsAdapter>
               <Suspense fallback={<Loader />}>
                 <body
@@ -92,9 +92,9 @@ export default async function RootLayout({
                 </body>
               </Suspense>
             </NuqsAdapter>
-          </LangueProvider>
-        </HydrationBoundary>
-      </ReactQueryProviders>
+          </HydrationBoundary>
+        </ReactQueryProviders>
+      </LangueProvider>
     </html>
   );
 }

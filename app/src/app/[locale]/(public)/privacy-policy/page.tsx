@@ -1,11 +1,3 @@
-import { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'Privacy Policy | Refuges des Hauts',
-  description:
-    'Learn more about our privacy policy and how we handle your personal data.',
-};
-
 const PrivacyPolicy = () => {
   return (
     <main className='container mx-auto py-20 lg:py-40'>

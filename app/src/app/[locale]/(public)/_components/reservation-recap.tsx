@@ -13,12 +13,14 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { useSession } from '@/hooks/useSession';
+import { useScopedI18n } from '@/locales/client';
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { MoveRight } from 'lucide-react';
 import Link from 'next/link';
 
 export const ReservationRecap = () => {
+  const tReservationRecap = useScopedI18n('reservationRecap');
   const { data } = useSession();
   const userId = data?.id as string;
   const { data: schedules } = useQuery({
@@ -36,7 +38,7 @@ export const ReservationRecap = () => {
                 <TooltipProvider>
                   <Tooltip>
                     <Label className='text-muted-foreground'>
-                      Numero de réservation:{' '}
+                      {tReservationRecap('reservationNumber')}:
                     </Label>
                     <TooltipTrigger asChild>
                       <Badge
@@ -61,21 +63,21 @@ export const ReservationRecap = () => {
                       }`}
                     >
                       {schedule.status === 'pending'
-                        ? 'En attente'
+                        ? tReservationRecap('pending')
                         : schedule.status === 'validated'
-                          ? 'Validée'
-                          : 'Annulée'}
+                          ? tReservationRecap('validated')
+                          : tReservationRecap('canceled')}
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
                 <p className='text-muted-foreground'>
-                  Debuter le{' '}
+                  {tReservationRecap('startDate')}
                   <Label className='font-bold text-primary'>
-                    {format(schedule.startDate, ' d MMM, yyyy')}
+                    {format(schedule.startDate, 'd MMM, yyyy')}
                   </Label>
                 </p>
                 <p className='mt-2 text-muted-foreground'>
-                  Terminer le{' '}
+                  {tReservationRecap('endDate')}
                   <Label className='font-bold text-primary'>
                     {format(schedule.endDate, 'd MMM, yyyy')}
                   </Label>
@@ -89,12 +91,14 @@ export const ReservationRecap = () => {
         <div className='flex flex-col gap-2'>
           <div className='flex flex-col gap-2'>
             <Label className='text-center'>
-              Vous n&apos;avez pas encore de réservations
+              {tReservationRecap('noReservations')}
             </Label>
             <div className='flex justify-center'>
               <Link href='/properties' prefetch>
                 <Button className='group w-full bg-primary text-white transition-all hover:bg-emerald-700 sm:h-14 sm:w-72'>
-                  <span className='text-xl'>Réserver maintenant</span>
+                  <span className='text-xl'>
+                    {tReservationRecap('bookNow')}
+                  </span>
                   <MoveRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
                 </Button>
               </Link>
