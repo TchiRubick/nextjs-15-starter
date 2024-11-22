@@ -2,32 +2,20 @@
 
 import { Button } from '@/components/ui/button';
 import { useScopedI18n } from '@/locales/client';
+import { ImageSelect } from '@packages/db/models/image';
 import Image from 'next/image';
 import { useState } from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 
-const images = [
-  '/gallery/p.jpg',
-  '/gallery/p1.jpg',
-  '/gallery/p2.jpg',
-  '/gallery/p3.jpg',
-  '/gallery/p4.jpg',
-  '/gallery/p5.jpg',
-  '/gallery/p6.jpg',
-  '/gallery/p7.jpg',
-  '/gallery/p8.jpg',
-  '/gallery/p9.jpg',
-];
-
 const NUMBER_IMAGE_APPEAR_FIRST = 15;
 
-export const Gallery = () => {
+type props = {
+   images: ImageSelect[]}
+
+export const Gallery = ({images}: props) => {
   const [offset, setOffset] = useState(0);
   const tGallery = useScopedI18n('gallery');
-
-  const currentImages = images.slice(0, offset + NUMBER_IMAGE_APPEAR_FIRST);
-
   const loadMoreImages = () => {
     setOffset((prevOffset) => prevOffset + NUMBER_IMAGE_APPEAR_FIRST);
   };
@@ -44,11 +32,11 @@ export const Gallery = () => {
       </div>
       <div className='m-auto w-4/6 md:m-auto md:w-5/6 md:columns-3 md:gap-2'>
         <PhotoProvider>
-          {currentImages.map((item, index) => (
+          {images.map((item, index) => (
             <div className='py-1' key={index}>
-              <PhotoView src={item}>
+              <PhotoView src={item.url}>
                 <Image
-                  src={item}
+                  src={item.url}
                   alt={tGallery('imageAlt')}
                   className='hover:cursor-pointer hover:shadow-md hover:shadow-slate-600'
                   loading='eager'
