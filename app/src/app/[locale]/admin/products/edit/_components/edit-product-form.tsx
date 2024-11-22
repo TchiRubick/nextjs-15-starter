@@ -26,8 +26,7 @@ import { toast } from '@/hooks/use-toast';
 import { EditProduct } from '@/types';
 import { useMutationAction } from '@packages/fetch-action/index';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { ArrowLeft, Loader2 } from 'lucide-react';
-import Link from 'next/link';
+import { Loader2 } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
 import { PRODUCTS_QUERY_KEY } from '../../static';
@@ -92,13 +91,6 @@ export const EditProductForm = ({ product, productId }: Props) => {
 
   return (
     <div className='mt-10'>
-      <Link
-        prefetch
-        href='/admin/products'
-        className='fixed left-4 top-24 flex gap-2 hover:animate-bounce hover:gap-3'
-      >
-        <ArrowLeft /> Retour
-      </Link>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Card className='w-full border-none'>
           <CardHeader>

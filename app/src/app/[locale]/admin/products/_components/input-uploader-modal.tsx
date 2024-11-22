@@ -18,7 +18,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { redirect } from 'next/navigation';
+import { toast } from '@/hooks/use-toast';
 
 export const ImageUploaderModal = ({ id }: { id: number }) => {
   const [files, setFiles] = useState<File[]>([]);
@@ -32,9 +32,19 @@ export const ImageUploaderModal = ({ id }: { id: number }) => {
         queryClient.invalidateQueries({ queryKey: PRODUCTS_QUERY_KEY });
         setDialogOpen(false);
         setFiles([]);
+        toast({
+          variant: 'default',
+          title: 'Succès',
+          description: 'Image téléchargée avec succès',
+        });
+        window.location.pathname = `/admin/products/edit/${id}`;
       },
       onError: () => {
-        console.log('error');
+        toast({
+          variant: 'destructive',
+          title: 'Erreur',
+          description: 'Une erreur est survenue',
+        });
         setDialogOpen(true);
       },
     }
@@ -63,7 +73,6 @@ export const ImageUploaderModal = ({ id }: { id: number }) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutateAsync(id, files);
-    redirect(`/admin/products/edit/${id}`);
   };
 
   return (
@@ -88,6 +97,7 @@ export const ImageUploaderModal = ({ id }: { id: number }) => {
           </DialogTitle>
           <Input
             id='picture'
+            className='cursor-pointer'
             type='file'
             accept='image/jpeg,image/png,image/webp'
             multiple
@@ -115,7 +125,6 @@ export const ImageUploaderModal = ({ id }: { id: number }) => {
               </div>
             ))}
           </div>
-
           <Button
             disabled={
               (totalSize.value >= 5 && totalSize.suffix === 'mb') || isPending
