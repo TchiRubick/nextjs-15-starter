@@ -40,10 +40,5 @@ export const deleteImageByUrl = async (url: string) =>
   db.delete(Image).where(eq(Image.url, url)).returning();
 
 export const getAllUrlImage = async () => {
-<<<<<<< HEAD
-  return db.select().from(Image);
-};
-=======
    return db.select().from(Image);
 } 
->>>>>>> 5cb7d4e (chore : add getImage)
