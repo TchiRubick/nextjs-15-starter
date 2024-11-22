@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/carousel';
 import { TODAY, TOMORROW } from '@/lib/date';
 import { stringToNumber } from '@/lib/number';
+import { getScopedI18n } from '@/locales/server';
 import {
   Tooltip,
   TooltipContent,
@@ -33,6 +34,7 @@ export default async function Properties({
   }>;
 }) {
   const param = await searchParams;
+  const tProperties = await getScopedI18n('properties');
 
   const payload = {
     min_price:
@@ -57,18 +59,16 @@ export default async function Properties({
   return (
     <div className='container mx-auto mt-16 flex flex-col gap-8 text-center'>
       <h2 className='mb-4 text-4xl font-semibold tracking-tight text-foreground md:text-7xl'>
-        Réserver votre séjour
+        {tProperties('bookingTitle')}
       </h2>
-      <p className='text-lg text-slate-600'>
-        Découvrez nos chalets disponibles et trouvez votre havre de paix
-      </p>
+      <p className='text-lg text-slate-600'>{tProperties('description')}</p>
 
       <Filter defaultValues={payload} />
 
       {properties.length === 0 && (
         <div className='mt-12 flex flex-col items-center justify-center'>
           <p className='mb-8 font-semibold text-slate-600'>
-            Veuillez modifier vos critères de recherche
+            {tProperties('noResults')}
           </p>
           <Image
             src='/illustration/undraw_house_searching_re_stk8.svg'
@@ -144,7 +144,9 @@ export default async function Properties({
                               {product.bed}
                             </span>
                           </TooltipTrigger>
-                          <TooltipContent>{product.bed} lit(s)</TooltipContent>
+                          <TooltipContent>
+                            {tProperties('beds', { count: product.bed })}
+                          </TooltipContent>
                         </Tooltip>
 
                         <Tooltip>
@@ -155,7 +157,7 @@ export default async function Properties({
                             </span>
                           </TooltipTrigger>
                           <TooltipContent>
-                            {product.bath} salle(s) de bain
+                            {tProperties('baths', { count: product.bath })}
                           </TooltipContent>
                         </Tooltip>
 
@@ -167,7 +169,7 @@ export default async function Properties({
                             </span>
                           </TooltipTrigger>
                           <TooltipContent>
-                            {product.room} chambre(s)
+                            {tProperties('rooms', { count: product.room })}
                           </TooltipContent>
                         </Tooltip>
 
@@ -179,7 +181,9 @@ export default async function Properties({
                             </span>
                           </TooltipTrigger>
                           <TooltipContent>
-                            {product.maxPerson} personne(s) max
+                            {tProperties('maxPersons', {
+                              count: product.maxPerson,
+                            })}
                           </TooltipContent>
                         </Tooltip>
                       </TooltipProvider>
@@ -187,11 +191,11 @@ export default async function Properties({
 
                     <div className='flex items-center justify-between border-t border-slate-100 pt-4'>
                       <div className='text-sm italic text-slate-600'>
-                        Check-in à partir de 15h
+                        {tProperties('checkInTime')}
                       </div>
                       <div className='flex items-baseline gap-1 font-medium'>
                         <span className='text-sm italic text-slate-600'>
-                          Nuite: {product.price} Euros
+                          {tProperties('nightlyRate', { price: product.price })}
                         </span>
                       </div>
                     </div>

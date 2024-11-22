@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useScopedI18n } from '@/locales/client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Search } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
@@ -34,6 +35,7 @@ export const Filter = ({
 }) => {
   const pathname = usePathname();
   const router = useRouter();
+  const tFilter = useScopedI18n('filter');
 
   const formDefaultValue = {
     min_price: defaultValues.min_price,
@@ -60,7 +62,7 @@ export const Filter = ({
     if (Number(data.min_price) > Number(data.max_price)) {
       setError('min_price', {
         type: 'manual',
-        message: 'Le prix minimum ne peut pas être supérieur au prix maximum.',
+        message: tFilter('minPriceError'),
       });
       return;
     }
@@ -88,7 +90,7 @@ export const Filter = ({
         {/* Price Range */}
         <div className='min-w-[200px] flex-1'>
           <Label className='mb-2 block text-sm font-medium text-white/80'>
-            Prix par nuit
+            {tFilter('priceLabel')}
           </Label>
           <div className='flex gap-3'>
             <div className='relative flex-1'>
@@ -99,9 +101,9 @@ export const Filter = ({
                 id='min_price'
                 className='h-12 border-0 bg-white/30 pl-8 text-white placeholder:text-slate-400 focus:ring-2 focus:ring-primary'
                 type='number'
-                placeholder='Min'
+                placeholder={tFilter('minPlaceholder')}
                 {...register('min_price', {
-                  required: 'Prix minimum requis',
+                  required: tFilter('minPriceRequired'),
                   min: 0,
                 })}
               />
@@ -113,9 +115,9 @@ export const Filter = ({
               <Input
                 className='h-12 border-0 bg-white/30 pl-8 text-white placeholder:text-slate-400 focus:ring-2 focus:ring-primary'
                 type='number'
-                placeholder='Max'
+                placeholder={tFilter('maxPlaceholder')}
                 {...register('max_price', {
-                  required: 'Prix maximum requis',
+                  required: tFilter('maxPriceRequired'),
                   min: 0,
                 })}
               />
@@ -131,7 +133,7 @@ export const Filter = ({
         {/* Date Range */}
         <div>
           <Label className='mb-2 block text-sm font-medium text-white/80'>
-            Dates du séjour
+            {tFilter('dateRangeLabel')}
           </Label>
           <Controller
             name='date_range'
@@ -155,7 +157,7 @@ export const Filter = ({
           className='h-12 w-full min-w-[140px] border-foreground/20 bg-slate-100 text-primary/90 transition-all hover:translate-y-[-2px] hover:bg-slate-200 hover:shadow-lg active:translate-y-0 sm:w-full lg:w-[48px]'
         >
           <Search className='mr-2 h-4 w-4' />
-          Rechercher
+          {tFilter('searchButton')}
         </Button>
       </div>
 

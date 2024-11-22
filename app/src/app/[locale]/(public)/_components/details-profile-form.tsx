@@ -1,12 +1,13 @@
-import { useSession } from '@/hooks/useSession';
+import { userUpdate } from '@/actions/user.action';
 import { Button } from '@/components/ui/button';
-import { useForm } from 'react-hook-form';
-import { useMutationAction } from '@packages/fetch-action/index';
-import { toast } from '@/hooks/use-toast';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { userUpdate } from '@/actions/user.action';
+import { toast } from '@/hooks/use-toast';
+import { useSession } from '@/hooks/useSession';
+import { useScopedI18n } from '@/locales/client';
 import { UpdateUser } from '@packages/db/models/user';
+import { useMutationAction } from '@packages/fetch-action/index';
+import { useForm } from 'react-hook-form';
 
 export const DetailsProfileForm = ({
   forceClose,
@@ -15,13 +16,14 @@ export const DetailsProfileForm = ({
 }) => {
   const { data } = useSession();
   const { register, handleSubmit } = useForm<UpdateUser>();
+  const tDetailsProfile = useScopedI18n('detailsProfile');
 
   const { mutateAsync } = useMutationAction(userUpdate, {
     onSuccess: () => {
       toast({
         variant: 'default',
-        title: 'Success',
-        description: 'Profile updated successfully',
+        title: tDetailsProfile('successTitle'),
+        description: tDetailsProfile('successDescription'),
       });
       if (forceClose) {
         forceClose();
@@ -30,7 +32,7 @@ export const DetailsProfileForm = ({
     onError: (error) => {
       toast({
         variant: 'destructive',
-        title: 'Error',
+        title: tDetailsProfile('errorTitle'),
         description: error?.message,
       });
     },
@@ -46,11 +48,11 @@ export const DetailsProfileForm = ({
       <div className='grid gap-4 py-4'>
         <div className='grid grid-cols-4 items-center gap-4'>
           <Label htmlFor='username' className='self-center'>
-            UserName:
+            {tDetailsProfile('usernameLabel')}
           </Label>
           <Input
             id='username'
-            placeholder='username'
+            placeholder={tDetailsProfile('usernamePlaceholder')}
             className='col-span-3'
             required
             defaultValue={data?.username}
@@ -60,11 +62,11 @@ export const DetailsProfileForm = ({
 
         <div className='grid grid-cols-4 items-center gap-4'>
           <Label htmlFor='email' className='self-center'>
-            Email:
+            {tDetailsProfile('emailLabel')}
           </Label>
           <Input
             id='email'
-            placeholder='email@gmail.com'
+            placeholder={tDetailsProfile('emailPlaceholder')}
             className='col-span-3'
             value={data?.email}
             readOnly
@@ -72,11 +74,11 @@ export const DetailsProfileForm = ({
         </div>
         <div className='grid grid-cols-4 items-center gap-4'>
           <Label htmlFor='telephone' className='self-center'>
-            Téléphone:
+            {tDetailsProfile('phoneLabel')}
           </Label>
           <Input
             id='telephone'
-            placeholder='telephone'
+            placeholder={tDetailsProfile('phonePlaceholder')}
             defaultValue={data?.phone ?? ''}
             className='col-span-3'
             {...register('phone')}
@@ -84,11 +86,11 @@ export const DetailsProfileForm = ({
         </div>
         <div className='grid grid-cols-4 items-center gap-4'>
           <Label htmlFor='adresse' className='self-center'>
-            Adresse:
+            {tDetailsProfile('addressLabel')}
           </Label>
           <Input
             id='adresse'
-            placeholder='adresse'
+            placeholder={tDetailsProfile('addressPlaceholder')}
             defaultValue={data?.address ?? ''}
             className='col-span-3'
             {...register('address')}
@@ -96,11 +98,11 @@ export const DetailsProfileForm = ({
         </div>
         <div className='grid grid-cols-4 items-center gap-4'>
           <Label htmlFor='country' className='self-center'>
-            Pays:
+            {tDetailsProfile('countryLabel')}
           </Label>
           <Input
             id='country'
-            placeholder='Pays'
+            placeholder={tDetailsProfile('countryPlaceholder')}
             defaultValue={data?.country ?? ''}
             className='col-span-3'
             {...register('country')}
@@ -108,11 +110,11 @@ export const DetailsProfileForm = ({
         </div>
         <div className='grid grid-cols-4 items-center gap-4'>
           <Label htmlFor='city' className='self-center'>
-            Ville:
+            {tDetailsProfile('cityLabel')}
           </Label>
           <Input
             id='city'
-            placeholder='Paris'
+            placeholder={tDetailsProfile('cityPlaceholder')}
             defaultValue={data?.city ?? ''}
             className='col-span-3'
             {...register('city')}
@@ -120,18 +122,18 @@ export const DetailsProfileForm = ({
         </div>
         <div className='grid grid-cols-4 items-center gap-4'>
           <Label htmlFor='zipCode' className='self-center'>
-            Code postal:
+            {tDetailsProfile('zipCodeLabel')}
           </Label>
           <Input
             id='zipCode'
-            placeholder='75001'
+            placeholder={tDetailsProfile('zipCodePlaceholder')}
             defaultValue={data?.zipCode ?? ''}
             className='col-span-3'
             {...register('zipCode')}
           />
         </div>
         <Button type='submit' className='w-full'>
-          Enregistrer
+          {tDetailsProfile('saveButton')}
         </Button>
       </div>
     </form>

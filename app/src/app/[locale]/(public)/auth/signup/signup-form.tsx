@@ -13,6 +13,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from '@/hooks/use-toast';
+import { useScopedI18n } from '@/locales/client';
 import { SignupInput } from '@packages/auth/src/actions/types';
 import { useMutationAction } from '@packages/fetch-action/index';
 import { Loader2 } from 'lucide-react';
@@ -21,6 +22,7 @@ import { useForm } from 'react-hook-form';
 
 export const SignupForm = ({ callbackUrl }: { callbackUrl?: string }) => {
   const { register: namedRegister, handleSubmit } = useForm<SignupInput>();
+  const tAuth = useScopedI18n('auth');
 
   const { mutateAsync, isPending } = useMutationAction(registerMutation, {
     onSuccess() {
@@ -29,7 +31,7 @@ export const SignupForm = ({ callbackUrl }: { callbackUrl?: string }) => {
     onError(error) {
       toast({
         variant: 'destructive',
-        title: 'Error',
+        title: tAuth('error'),
         description: error?.message,
       });
     },
@@ -43,16 +45,14 @@ export const SignupForm = ({ callbackUrl }: { callbackUrl?: string }) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <Card className='mx-auto'>
         <CardHeader>
-          <CardTitle className='text-2xl'>Sign up</CardTitle>
-          <CardDescription>
-            Enter your username, email and password below to create your account
-          </CardDescription>
+          <CardTitle className='text-2xl'>{tAuth('signUp')}</CardTitle>
+          <CardDescription>{tAuth('signUpDescription')}</CardDescription>
         </CardHeader>
         <CardContent className='grid gap-4'>
           <div className='grid grid-cols-2 gap-4'>
             <div>
               <div className='mt-3 grid gap-2'>
-                <Label htmlFor='user'>Username</Label>
+                <Label htmlFor='user'>{tAuth('username')}</Label>
                 <Input
                   id='username'
                   type='text'
@@ -62,7 +62,7 @@ export const SignupForm = ({ callbackUrl }: { callbackUrl?: string }) => {
                 />
               </div>
               <div className='mt-3 grid gap-2'>
-                <Label htmlFor='email'>Email</Label>
+                <Label htmlFor='email'>{tAuth('email')}</Label>
                 <Input
                   id='email'
                   type='email'
@@ -73,7 +73,7 @@ export const SignupForm = ({ callbackUrl }: { callbackUrl?: string }) => {
               </div>
               <div className='mt-3 grid gap-2'>
                 <div className='flex items-center'>
-                  <Label htmlFor='password'>Password</Label>
+                  <Label htmlFor='password'>{tAuth('password')}</Label>
                 </div>
                 <Input
                   id='password'
@@ -85,16 +85,16 @@ export const SignupForm = ({ callbackUrl }: { callbackUrl?: string }) => {
             </div>
             <div>
               <div className='mt-3 grid gap-2'>
-                <Label htmlFor='address'>Address</Label>
+                <Label htmlFor='address'>{tAuth('address')}</Label>
                 <Input
                   id='address'
                   type='text'
-                  placeholder='Address'
+                  placeholder={tAuth('address')}
                   {...namedRegister('address')}
                 />
               </div>
               <div className='mt-3 grid gap-2'>
-                <Label htmlFor='phone'>Numero du telephone</Label>
+                <Label htmlFor='phone'>{tAuth('phone')}</Label>
                 <Input
                   id='phone'
                   {...namedRegister('phone')}
@@ -103,7 +103,7 @@ export const SignupForm = ({ callbackUrl }: { callbackUrl?: string }) => {
                 />
               </div>
               <div className='mt-3 grid gap-2'>
-                <Label htmlFor='zipCode'>Code postal</Label>
+                <Label htmlFor='zipCode'>{tAuth('zipCode')}</Label>
                 <Input
                   id='zipCode'
                   type='text'
@@ -114,7 +114,7 @@ export const SignupForm = ({ callbackUrl }: { callbackUrl?: string }) => {
             </div>
           </div>
           <div className='mt-3 grid gap-2'>
-            <Label htmlFor='city'>Ville</Label>
+            <Label htmlFor='city'>{tAuth('city')}</Label>
             <Input
               id='city'
               type='text'
@@ -123,7 +123,7 @@ export const SignupForm = ({ callbackUrl }: { callbackUrl?: string }) => {
             />
           </div>
           <div className='mt-3 grid gap-2'>
-            <Label htmlFor='country'>Pays</Label>
+            <Label htmlFor='country'>{tAuth('country')}</Label>
             <Input
               id='country'
               type='text'
@@ -132,16 +132,12 @@ export const SignupForm = ({ callbackUrl }: { callbackUrl?: string }) => {
             />
           </div>
           <Button type='submit' className='w-full' disabled={isPending}>
-            {isPending ? <Loader2 className='animate-spin' /> : 'Sign up'}
+            {isPending ? <Loader2 className='animate-spin' /> : tAuth('signUp')}
           </Button>
           <CardFooter className='mt-4 text-center text-sm'>
-            Have you already an account?{' '}
-            <Link
-              prefetch
-              href={`/auth?callbackUrl=${callbackUrl}`}
-              className='text-blue-500'
-            >
-              Signin
+            {tAuth('alreadyHaveAccount')}
+            <Link href={`/auth/signup?callbackUrl=${callbackUrl}`}>
+              {tAuth('signIn')}
             </Link>
           </CardFooter>
         </CardContent>

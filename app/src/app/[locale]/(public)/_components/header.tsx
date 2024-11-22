@@ -4,20 +4,14 @@ import { logoutMutation } from '@/actions/auth.action';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
+  DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Label } from '@/components/ui/label';
-import { useSession } from '@/hooks/useSession';
-import { cn } from '@/lib/utils';
-import { DropdownMenu } from '@/components/ui/dropdown-menu';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
-import { LogOut, Menu, ShieldCheck, User, X } from 'lucide-react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { DetailsProfileForm } from './details-profile-form';
 import {
   Sheet,
   SheetContent,
@@ -26,52 +20,61 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import { useSession } from '@/hooks/useSession';
+import { cn } from '@/lib/utils';
+import { useScopedI18n } from '@/locales/client';
+import { LogOut, Menu, ShieldCheck, User, X } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { DetailsProfileForm } from './details-profile-form';
+import { LanguagePicker } from './languages-picker';
 import { ReservationRecap } from './reservation-recap';
-import { ScrollArea } from '@/components/ui/scroll-area';
-
-const navigationItems = [
-  {
-    title: 'Accueil',
-    href: '/',
-  },
-  {
-    title: 'À propos',
-    href: '/about',
-  },
-  {
-    title: 'Réservations',
-    href: '/properties',
-  },
-  {
-    title: 'Gallerie',
-    href: '/pictures',
-  },
-  {
-    title: 'Contact',
-    href: '/contact',
-    mobile_only: true,
-  },
-  {
-    title: 'Connexion',
-    href: '/login',
-    mobile_only: true,
-  },
-  {
-    title: "S'inscrire",
-    href: '/signup',
-    mobile_only: true,
-  },
-];
-
-const desktopItems = navigationItems.filter((item) => !item.mobile_only);
 
 export const Header = () => {
+  const tHeader = useScopedI18n('header');
+
+  const navigationItems = [
+    {
+      title: tHeader('home'),
+      href: '/',
+    },
+    {
+      title: tHeader('about'),
+      href: '/about',
+    },
+    {
+      title: tHeader('reservations'),
+      href: '/properties',
+    },
+    {
+      title: tHeader('gallery'),
+      href: '/pictures',
+    },
+    {
+      title: tHeader('contact'),
+      href: '/contact',
+      mobile_only: true,
+    },
+    {
+      title: tHeader('login'),
+      href: '/login',
+      mobile_only: true,
+    },
+    {
+      title: tHeader('signup'),
+      href: '/signup',
+      mobile_only: true,
+    },
+  ];
+
+  const desktopItems = navigationItems.filter((item) => !item.mobile_only);
+
   const [isOpen, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
 
   const pathname = usePathname();
-
   const { data, isFetching } = useSession();
 
   useEffect(() => {
@@ -101,7 +104,7 @@ export const Header = () => {
     >
       <div className='container relative mx-auto flex h-20 items-center justify-between px-4'>
         <Link href='/' className='text-xl font-semibold text-white'>
-          Refuges des hauts
+          {tHeader('siteTitle')}
         </Link>
 
         {/* Desktop Navigation */}
@@ -129,15 +132,15 @@ export const Header = () => {
               variant='ghost'
               className='hidden text-white/90 hover:bg-white/10 hover:text-white md:inline-flex'
             >
-              Contact
+              {tHeader('contact')}
             </Button>
           </Link>
           <div className='hidden h-6 border-r border-white/20 md:inline-block'></div>
-          <div className='hidden gap-2 lg:flex'>
+          <div className='hidden gap-2 lg:flex lg:items-center'>
             {data && !isFetching && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Avatar className='cursor-pointer'>
+                  <Avatar className='h-8 w-8 cursor-pointer'>
                     {data.image && <AvatarImage src={data.image} />}
                     <AvatarFallback>
                       {data.username && data.username[0].toUpperCase()}
@@ -149,28 +152,24 @@ export const Header = () => {
                     <SheetTrigger asChild className='w-full'>
                       <Label className='flex h-7 cursor-pointer items-center gap-2 pl-1 hover:bg-slate-100'>
                         <User className='h-5 w-5' />
-                        Profil
+                        {tHeader('profile')}
                       </Label>
                     </SheetTrigger>
                     <SheetContent>
                       <ScrollArea className='h-full w-full overflow-hidden'>
                         <SheetHeader>
-                          <SheetTitle>Modifier votre profil</SheetTitle>
+                          <SheetTitle>{tHeader('editProfile')}</SheetTitle>
                           <SheetDescription>
-                            Modifiez vos informations personnelles et vos
-                            informations d&apos;adresse.
+                            {tHeader('editProfileDescription')}
                           </SheetDescription>
                         </SheetHeader>
                         <DetailsProfileForm
                           forceClose={() => setSheetOpen(false)}
                         />
                         <div>
-                          <SheetTitle>
-                            Récapitulatif de vos réservations
-                          </SheetTitle>
+                          <SheetTitle>{tHeader('reservationRecap')}</SheetTitle>
                           <SheetDescription>
-                            Vous pouvez consulter ici votre récapitulatif de vos
-                            réservations.
+                            {tHeader('reservationRecapDescription')}
                           </SheetDescription>
                           <ReservationRecap />
                         </div>
@@ -182,7 +181,7 @@ export const Header = () => {
                     <Link prefetch href='/admin/products'>
                       <DropdownMenuItem className='cursor-pointer'>
                         <ShieldCheck className='h-6 w-6' />
-                        Admin
+                        {tHeader('admin')}
                       </DropdownMenuItem>
                     </Link>
                   )}
@@ -193,7 +192,7 @@ export const Header = () => {
                   >
                     <LogOut className='h-6 w-6' />
                     <Label className='cursor-pointer bg-white text-slate-900 hover:bg-white/90'>
-                      Logout
+                      {tHeader('logout')}
                     </Label>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -206,12 +205,12 @@ export const Header = () => {
                     variant='ghost'
                     className='text-white/90 hover:bg-white/10 hover:text-white'
                   >
-                    Connexion
+                    {tHeader('login')}
                   </Button>
                 </Link>
                 <Link href='/auth/signup' prefetch>
                   <Button className='bg-white text-slate-900 hover:bg-white/90'>
-                    S&apos;inscrire
+                    {tHeader('signup')}
                   </Button>
                 </Link>
               </div>
@@ -219,6 +218,7 @@ export const Header = () => {
             {isFetching && (
               <div className='h-6 w-6 animate-pulse rounded-full bg-white/10'></div>
             )}
+            <LanguagePicker />
           </div>
 
           <Button
