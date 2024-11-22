@@ -23,7 +23,7 @@ import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { PRODUCTS_QUERY_KEY } from '../../static';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const CreateProductForm = () => {
   const queryClient = useQueryClient();
@@ -74,7 +74,9 @@ export const CreateProductForm = () => {
 
   return (
     <Card>
-      <CardHeader></CardHeader>
+      <CardHeader>
+        <CardTitle>Creer un nouveau produit</CardTitle>
+      </CardHeader>
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
@@ -83,9 +85,9 @@ export const CreateProductForm = () => {
               name='name'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>Nom du Chalet</FormLabel>
                   <FormControl>
-                    <Input placeholder='Product name' {...field} />
+                    <Input placeholder='Nom' {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -97,9 +99,9 @@ export const CreateProductForm = () => {
               name='description'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>Description de votre chalet</FormLabel>
                   <FormControl>
-                    <Textarea placeholder='Product description' {...field} />
+                    <Textarea placeholder='Description' {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -111,7 +113,7 @@ export const CreateProductForm = () => {
               name='price'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Price</FormLabel>
+                  <FormLabel>Prix</FormLabel>
                   <FormControl>
                     <Input
                       onFocus={(e) =>
@@ -134,7 +136,7 @@ export const CreateProductForm = () => {
                 name='room'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Rooms</FormLabel>
+                    <FormLabel>Chambre</FormLabel>
                     <FormControl>
                       <Input
                         onFocus={(e) =>
@@ -156,7 +158,7 @@ export const CreateProductForm = () => {
                 name='bed'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Beds</FormLabel>
+                    <FormLabel>Lits</FormLabel>
                     <FormControl>
                       <Input
                         onFocus={(e) =>
@@ -178,7 +180,7 @@ export const CreateProductForm = () => {
                 name='bath'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Bathrooms</FormLabel>
+                    <FormLabel>Salle de bain</FormLabel>
                     <FormControl>
                       <Input
                         onFocus={(e) =>
@@ -200,7 +202,7 @@ export const CreateProductForm = () => {
                 name='maxPerson'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Max Persons</FormLabel>
+                    <FormLabel>Personnes maximum</FormLabel>
                     <FormControl>
                       <Input
                         onFocus={(e) =>
@@ -223,10 +225,10 @@ export const CreateProductForm = () => {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Amenities</FormLabel>
+                  <FormLabel>Equipements dans le chalet</FormLabel>
                   <FormControl>
                     <MultiSelect
-                      placeholder='Select amenities'
+                      placeholder='Selectionnez les équipements'
                       options={
                         amenities?.map((amenity) => ({
                           label: amenity.name,
@@ -245,7 +247,7 @@ export const CreateProductForm = () => {
               {isPending ? (
                 <Loader2 className='animate-spin' />
               ) : (
-                'Create Product'
+                'Creer le produit'
               )}
             </Button>
           </form>

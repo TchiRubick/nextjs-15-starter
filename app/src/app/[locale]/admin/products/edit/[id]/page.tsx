@@ -30,7 +30,7 @@ const EditProduct = async ({ params }: { params: Promise<{ id: number }> }) => {
   };
 
   return (
-    <div>
+    <div className='w-full px-2 py-2'>
       <PicturesSection
         id={id}
         urls={product?.images.map((i) => i.image.url) || []}

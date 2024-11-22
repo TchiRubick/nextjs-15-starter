@@ -33,7 +33,7 @@ const columns = (
   },
   {
     accessorKey: 'name',
-    header: 'Name',
+    header: 'Nom',
   },
   {
     accessorKey: 'action',

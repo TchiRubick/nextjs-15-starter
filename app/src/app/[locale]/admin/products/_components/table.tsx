@@ -18,11 +18,11 @@ const columns: ColumnDef<ProductSelect>[] = [
   },
   {
     accessorKey: 'name',
-    header: 'Name',
+    header: 'Nom',
   },
   {
     accessorKey: 'price',
-    header: 'Price',
+    header: 'Prix',
     cell: ({ row }) => (
       <div className='flex items-center gap-2'>
         <span>{row.getValue('price')}</span>

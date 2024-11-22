@@ -14,22 +14,22 @@ import Link from 'next/link';
 
 const items = [
   {
-    title: 'Store',
+    title: 'Magasin',
     url: '/',
     icon: Store,
   },
   {
-    title: 'Booking',
+    title: 'Réservations',
     url: '/admin/schedules',
     icon: CalendarRange,
   },
   {
-    title: 'Products',
+    title: 'Chalets',
     url: '/admin/products',
     icon: Target,
   },
   {
-    title: 'Amenities',
+    title: 'Equipements',
     url: '/admin/amenities',
     icon: WashingMachine,
   },
