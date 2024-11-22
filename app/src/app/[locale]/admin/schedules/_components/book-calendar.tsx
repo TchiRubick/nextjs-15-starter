@@ -165,7 +165,7 @@ export const BookCalendar = () => {
 
   return (
     <>
-      <Card className='mx-auto mt-20 w-full max-w-2xl lg:max-w-4xl'>
+      <Card className='mx-auto mt-20 h-fit w-full max-w-2xl lg:max-w-4xl'>
         <CardHeader
           className={`relative flex flex-row items-center justify-between space-y-0 pb-4 ${isSticky ? 'sticky top-16 z-20 bg-slate-50' : ''}`}
         >

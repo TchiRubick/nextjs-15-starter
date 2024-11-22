@@ -70,6 +70,11 @@ export const Table = () => {
   });
 
   return (
-    <DataTable columns={columns} data={data ?? []} isLoading={isFetching} />
+    <DataTable
+      columns={columns}
+      data={data ?? []}
+      isLoading={isFetching}
+      title='Products'
+    />
   );
 };

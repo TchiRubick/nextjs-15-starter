@@ -1,12 +1,15 @@
-import { Header } from './_components/header';
+import { SidebarProvider } from '@/components/ui/sidebar';
+import { AppSidebar } from './_components/app-sidebar';
 
 export const unstable_noStore = true;
 
 export default function Template({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <Header />
-      {children}
+      <SidebarProvider defaultOpen={false}>
+        <AppSidebar />
+        {children}
+      </SidebarProvider>
     </>
   );
 }

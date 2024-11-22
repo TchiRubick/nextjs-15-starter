@@ -7,9 +7,8 @@ export default async function AdminPage() {
   await adminGuard();
 
   return (
-    <div>
-      <div className='flex items-center justify-between py-4'>
-        <h2 className='text-2xl font-bold text-slate-100'>Products</h2>
+    <div className='w-full px-2'>
+      <div className='flex items-center justify-end py-4'>
         <Link href='/admin/products/create' prefetch>
           <Button className='bg-slate-100 text-slate-900 hover:bg-slate-200 hover:text-slate-900'>
             Create Product
