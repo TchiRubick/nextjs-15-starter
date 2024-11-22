@@ -1,7 +1,9 @@
+'use client';
 import { Card, CardContent } from '@/components/ui/card';
-import { getScopedI18n } from '@/locales/server';
+import { useScopedI18n } from '@/locales/client';
+import { motion } from 'framer-motion';
 import { ArrowUpCircle, MapPin, Plane, Train, Utensils } from 'lucide-react';
-import { Location } from './location';
+import Image from 'next/image';
 
 const locations = {
   nearby: [{ name: "Acropark au Ballon d'Alsace", distance: 14 }],
@@ -26,11 +28,14 @@ const locations = {
   ],
 };
 
-export async function NearbyPlaces() {
-  const tNearbyPlaces = await getScopedI18n('nearbyPlaces');
+export function NearbyPlaces() {
+  const tNearbyPlaces = useScopedI18n('nearbyPlaces');
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}>
       <div className='mx-auto my-10 w-full max-w-4xl'>
         <div className='flex flex-col items-center gap-4'>
           <h3 className='mx-auto text-3xl font-semibold tracking-tight text-foreground md:text-7xl'>
@@ -146,10 +151,14 @@ export async function NearbyPlaces() {
             </p>
           </CardContent>
         </Card>
-        <div className='mx-auto my-10 w-full max-w-2xl'>
-          <Location />
+        <div className='mx-auto my-10 w-full max-w-2xl h-full'>
+          <div className="grid grid-cols-2 gap-8">
+            <Image src='/465530959.jpg' className='rounded-md aspect-square object-cover' alt='Nearby places' width={500} height={800} />
+            <Image src='/276286339.jpg' className='rounded-md row-span-2 object-cover h-full' alt='Nearby places' width={800} height={1000} />
+            <Image src='/465530248.jpg' className='rounded-md aspect-square object-cover' alt='Nearby places' width={500} height={800} />
+          </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
