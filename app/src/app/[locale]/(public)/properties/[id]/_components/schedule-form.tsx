@@ -104,40 +104,38 @@ export const ScheduleForm = ({
         <SheetContent>
           <SheetHeader>
             <SheetTitle>{tScheduleForm('drawerTitle')}</SheetTitle>
-            <SheetDescription>{tScheduleForm('drawerDescription')}</SheetDescription>
+            <SheetDescription>
+              {tScheduleForm('drawerDescription')}
+            </SheetDescription>
           </SheetHeader>
-            <div className='flex flex-row items-center'>
-              <Label htmlFor='nom' className='text-right'>
-                Nom:
-              </Label>
-              <h1 className='font-bold'>Chalet</h1>
-            </div>
-            <div>
-              <Label htmlFor='prixtotal' >
-                Prix total de vos séjour:
-              </Label>
-              <h1>150 EUR</h1>
-            </div>
-            <div className='flex flex-col gap-y-2'>
-              <Label htmlFor='date'>
-              {tScheduleForm('dateRangeLabel')}
-              </Label>
-              <Controller
-                name='date_range'
-                control={control}
-                render={({ field }) => (
-                  <DatePicker
-                    value={field.value}
-                    onChange={field.onChange}
-                    range
-                    className=''
-                    minDate={new Date()}
-                    inputClass=' w-full  text-emerald-950 h-12 w-full  border-2 cursor-pointer pl-8 placeholder:text-slate-500 focus:ring-2 focus:ring-primary rounded-md'
-                  />
-                )}
-              />
-            </div>
-          
+          <div className='flex flex-row items-center'>
+            <Label htmlFor='nom' className='text-right'>
+              Nom:
+            </Label>
+            <h1 className='font-bold'>Chalet</h1>
+          </div>
+          <div>
+            <Label htmlFor='prixtotal'>Prix total de vos séjour:</Label>
+            <h1>150 EUR</h1>
+          </div>
+          <div className='flex flex-col gap-y-2'>
+            <Label htmlFor='date'>{tScheduleForm('dateRangeLabel')}</Label>
+            <Controller
+              name='date_range'
+              control={control}
+              render={({ field }) => (
+                <DatePicker
+                  value={field.value}
+                  onChange={field.onChange}
+                  range
+                  className=''
+                  minDate={new Date()}
+                  inputClass=' w-full  text-emerald-950 h-12 w-full  border-2 cursor-pointer pl-8 placeholder:text-slate-500 focus:ring-2 focus:ring-primary rounded-md'
+                />
+              )}
+            />
+          </div>
+
           <SheetFooter className='mt-3 flex flex-col'>
             <Button
               type='submit'
@@ -146,10 +144,10 @@ export const ScheduleForm = ({
               className='w-full'
             >
               {isPending ? (
-                  <Loader2 className='animated-spin' />
-                ) : (
-                  tScheduleForm('saveButton')
-                )}
+                <Loader2 className='animated-spin' />
+              ) : (
+                tScheduleForm('saveButton')
+              )}
             </Button>
           </SheetFooter>
           <SheetClose asChild className='mt-3'>
