@@ -16,8 +16,8 @@ import { z } from 'zod';
 export const LOCAL_STORAGE_KEY = 'property-filter';
 
 const filterSchema = z.object({
-  min_price: z.coerce.number(),
-  max_price: z.coerce.number(),
+  min_price: z.coerce.number().min(0).optional(),
+  max_price: z.coerce.number().min(0).optional(),
   date_range: z.tuple([z.instanceof(DateObject), z.instanceof(DateObject)]),
 });
 
@@ -27,10 +27,10 @@ export const Filter = ({
   defaultValues,
 }: {
   defaultValues: {
-    min_price: number;
-    max_price: number;
-    check_in: Date;
-    check_out: Date;
+    min_price?: number;
+    max_price?: number;
+    check_in?: string;
+    check_out?: string;
   };
 }) => {
   const pathname = usePathname();
@@ -41,8 +41,12 @@ export const Filter = ({
     min_price: defaultValues.min_price,
     max_price: defaultValues.max_price,
     date_range: [
-      new DateObject(defaultValues.check_in),
-      new DateObject(defaultValues.check_out),
+      defaultValues.check_in
+        ? new DateObject(new Date(defaultValues.check_in))
+        : new DateObject(),
+      defaultValues.check_out
+        ? new DateObject(new Date(defaultValues.check_out))
+        : new DateObject().add(1, 'day'),
     ] as [DateObject, DateObject],
   };
 
@@ -50,8 +54,7 @@ export const Filter = ({
     register,
     handleSubmit,
     control,
-    setError,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm({
     defaultValues: formDefaultValue,
     mode: 'onChange',
@@ -59,19 +62,15 @@ export const Filter = ({
   });
 
   const onSubmit = (data: FilterSchema) => {
-    if (Number(data.min_price) > Number(data.max_price)) {
-      setError('min_price', {
-        type: 'manual',
-        message: tFilter('minPriceError'),
-      });
-      return;
-    }
-
     const newParams = qs.stringify({
-      min_price: data.min_price,
-      max_price: data.max_price,
-      check_in: data.date_range[0].format('YYYY-MM-DD'),
-      check_out: data.date_range[1].format('YYYY-MM-DD'),
+      ...(data.min_price ? { min_price: data.min_price } : {}),
+      ...(data.max_price ? { max_price: data.max_price } : {}),
+      ...(data.date_range[0]
+        ? { check_in: data.date_range[0].format('YYYY-MM-DD') }
+        : {}),
+      ...(data.date_range[1]
+        ? { check_out: data.date_range[1].format('YYYY-MM-DD') }
+        : {}),
     });
 
     router.push(`${pathname}?${newParams}`, {
@@ -103,8 +102,8 @@ export const Filter = ({
                 type='number'
                 placeholder={tFilter('minPlaceholder')}
                 {...register('min_price', {
-                  required: tFilter('minPriceRequired'),
-                  min: 0,
+                  // required: tFilter('minPriceRequired'),
+                  // min: 0,
                 })}
               />
             </div>
@@ -117,8 +116,8 @@ export const Filter = ({
                 type='number'
                 placeholder={tFilter('maxPlaceholder')}
                 {...register('max_price', {
-                  required: tFilter('maxPriceRequired'),
-                  min: 0,
+                  // required: tFilter('maxPriceRequired'),
+                  // min: 0,
                 })}
               />
             </div>
@@ -142,6 +141,8 @@ export const Filter = ({
               <DatePicker
                 value={field.value}
                 onChange={field.onChange}
+                minDate={new Date()}
+                format='DD-MM-YYYY'
                 range
                 className='green rmdp-mobile'
                 inputClass='h-12 border-0 bg-white/30 cursor-pointer pl-8 text-white placeholder:text-slate-400 focus:ring-2 focus:ring-primary rounded-md'
@@ -155,6 +156,7 @@ export const Filter = ({
           type='submit'
           size='lg'
           className='h-12 w-full min-w-[140px] border-foreground/20 bg-slate-100 text-primary/90 transition-all hover:translate-y-[-2px] hover:bg-slate-200 hover:shadow-lg active:translate-y-0 sm:w-full lg:w-[48px]'
+          disabled={!isDirty}
         >
           <Search className='mr-2 h-4 w-4' />
           {tFilter('searchButton')}

@@ -120,7 +120,7 @@ const PropertyDetails = async ({
           <div className='lg:col-span-1'>
             <Card className='sticky top-24 p-6'>
               <div className='space-y-4'>
-                <ScheduleForm id={propertyId} formValues={formValues} />
+                <ScheduleForm property={property} formValues={formValues} />
                 <Separator />
                 <Link href='/contact'>
                   <Button variant='outline' className='w-full' size='lg'>

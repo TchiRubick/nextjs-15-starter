@@ -47,6 +47,14 @@ export default {
     dateRangeLabel: 'Fechas de tu estancia',
     saveButton: 'Guardar',
     cancelButton: 'Cancelar',
+    confirmMessage:
+      'Acabas de reservar tu estancia. \nNos pondremos en contacto contigo para la confirmación. \nPuedes consultar el progreso desde tu perfil',
+    failedMessage:
+      'Fechas no disponibles. Por favor, elija otra fecha o otro chalet.',
+    recap: 'Resumen',
+    number: 'Número del chalet',
+    name: 'Nombre del chalet',
+    ttc: 'Precio total de tu estancia',
   },
   propertyDetails: {
     noAvailability: 'No se encontró disponibilidad',
@@ -327,6 +335,10 @@ export default {
     maxPersons: '{count} persona(s) máx',
     checkInTime: 'Check-in a partir de las 3 PM',
     nightlyRate: 'Por noche: {price} Euros',
+    reservationLabelValidated: 'Reserva del {start} al {end}',
+    reservationLabelPending: 'Reserva pendiente para {start} al {end}',
+    reservationLabelRejected: 'Reserva rechazada',
+    unavailable: 'Indisponible para estas fechas',
   },
   propertyFeatures: {
     beds: 'Cama(s)',

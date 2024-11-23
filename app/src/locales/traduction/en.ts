@@ -47,6 +47,14 @@ export default {
     dateRangeLabel: 'Your Stay Dates',
     saveButton: 'Save',
     cancelButton: 'Cancel',
+    confirmMessage:
+      'You have just booked your stay. \nWe will contact you for confirmation. \nYou can check the progress from your profile',
+    failedMessage:
+      'Dates not available. Please choose another date or another chalet.',
+    recap: 'Recap',
+    number: 'Chalet Number',
+    name: 'Chalet Name',
+    ttc: 'Total Price of Your Stay',
   },
   propertyDetails: {
     noAvailability: 'No availability found',
@@ -322,6 +330,10 @@ export default {
     maxPersons: '{count} person(s) max',
     checkInTime: 'Check-in from 3 PM',
     nightlyRate: 'Nightly: {price} Euros',
+    reservationLabelValidated: 'Booked from {start} to {end}',
+    reservationLabelPending: 'Reservation pending for {start} to {end}',
+    reservationLabelRejected: 'Reservation rejected',
+    unavailable: 'Unavailable for these dates',
   },
   propertyFeatures: {
     beds: 'Bed(s)',

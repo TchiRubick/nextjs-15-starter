@@ -27,6 +27,7 @@ import {
   createSchedule,
   getProductAvailability,
 } from '@packages/db/models/schedule';
+import { addDays, format } from 'date-fns';
 import { z } from 'zod';
 // ============================================================================
 // Product Retrieval Actions
@@ -65,10 +66,10 @@ export const getProductQuery = async (id: number) => {
  * @returns An array of products that match the filter criteria or an empty array if an error occurs.
  */
 const schemasSearchInput = z.object({
-  check_in: z.date(),
-  check_out: z.date(),
-  min_price: z.number(),
-  max_price: z.number(),
+  check_in: z.string().default(format(new Date(), 'yyyy-MM-dd')),
+  check_out: z.string().default(format(addDays(new Date(), 1), 'yyyy-MM-dd')),
+  min_price: z.number().min(0).optional(),
+  max_price: z.number().min(0).optional(),
 });
 
 export const getFilteredPropertiesQuery = async (

@@ -162,7 +162,8 @@ export function Features() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1 }}>
+      transition={{ duration: 1 }}
+    >
       <div className='mx-auto my-10 w-full max-w-4xl'>
         <div className='flex flex-col items-center gap-4'>
           <h3 className='mx-auto text-3xl font-semibold tracking-tight text-foreground md:text-7xl'>
@@ -186,16 +187,18 @@ export function Features() {
                         <button
                           key={index}
                           onClick={() => setActiveIndex(index)}
-                          className={`flex w-full items-center gap-3 rounded-lg p-4 transition-all duration-200 ${activeIndex === index
-                            ? 'scale-105 bg-primary text-primary-foreground shadow-lg'
-                            : 'hover:bg-muted'
-                            }`}
+                          className={`flex w-full items-center gap-3 rounded-lg p-4 transition-all duration-200 ${
+                            activeIndex === index
+                              ? 'scale-105 bg-primary text-primary-foreground shadow-lg'
+                              : 'hover:bg-muted'
+                          }`}
                         >
                           <div
-                            className={`${activeIndex === index
-                              ? 'text-primary-foreground'
-                              : 'text-primary'
-                              }`}
+                            className={`${
+                              activeIndex === index
+                                ? 'text-primary-foreground'
+                                : 'text-primary'
+                            }`}
                           >
                             {category.icon}
                           </div>

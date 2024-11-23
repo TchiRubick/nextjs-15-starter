@@ -1,19 +1,22 @@
 'use client';
 
-import { scheduleProductMutation } from '@/actions/product.action';
+import {
+  getProductQuery,
+  scheduleProductMutation,
+} from '@/actions/product.action';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
-import { useSession } from '@/hooks/useSession';
-import { useMutationAction } from '@packages/fetch-action/index';
 import { toast } from '@/hooks/use-toast';
-import { format } from 'date-fns';
-import { Calendar, Loader2 } from 'lucide-react';
+import { useSession } from '@/hooks/useSession';
+import { useScopedI18n } from '@/locales/client';
+import { useMutationAction } from '@packages/fetch-action/index';
+import { eachDayOfInterval, format } from 'date-fns';
+import { Calendar, EuroIcon, Loader2 } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import qs from 'query-string';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import DatePicker, { DateObject } from 'react-multi-date-picker';
-import { useScopedI18n } from '@/locales/client';
 
 import {
   Sheet,
@@ -28,13 +31,13 @@ import {
 
 export const ScheduleForm = ({
   formValues,
-  id,
+  property,
 }: {
   formValues: {
     check_in: Date;
     check_out: Date;
   };
-  id: number;
+  property: NonNullable<Awaited<ReturnType<typeof getProductQuery>>>;
 }) => {
   const { data: session, isFetching } = useSession();
 
@@ -54,35 +57,37 @@ export const ScheduleForm = ({
       onSuccess() {
         setisSheetOpen(false);
         toast({
-          title: 'date de séjour modifier avec succès',
+          title: tScheduleForm('confirmMessage'),
         });
       },
 
       onError: () => {
         toast({
           variant: 'destructive',
-          title: 'modification à échouer',
+          title: tScheduleForm('failedMessage'),
           description: error?.message,
         });
       },
     }
   );
 
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit, watch } = useForm({
     defaultValues: formDefaultValue,
   });
+
+  const dateRange = watch('date_range');
 
   const onSubmit = async (data: { date_range: [DateObject, DateObject] }) => {
     const startDate = data.date_range[0].format('YYYY-MM-DD');
     const endDate = data.date_range[1].format('YYYY-MM-DD');
 
-    await mutateAsync(id, new Date(startDate), new Date(endDate));
+    await mutateAsync(property.id, new Date(startDate), new Date(endDate));
   };
 
   const handleOpenChange = (open: boolean) => {
     if (!session) {
       redirect(
-        `/auth?callbackUrl=/properties/${id}?${qs.stringify({
+        `/auth?callbackUrl=/properties/${property.id}?${qs.stringify({
           check_in: format(formValues.check_in, 'yyyy-MM-dd'),
           check_out: format(formValues.check_out, 'yyyy-MM-dd'),
         })}`
@@ -91,6 +96,15 @@ export const ScheduleForm = ({
 
     setisSheetOpen(open);
   };
+
+  const totalPrice = useMemo(() => {
+    const startDate = new Date(dateRange[0].format('YYYY-MM-DD'));
+    const endDate = new Date(dateRange[1].format('YYYY-MM-DD'));
+
+    const intervals = eachDayOfInterval({ start: startDate, end: endDate });
+
+    return property.price * intervals.length;
+  }, [dateRange, property.price]);
 
   return (
     <div>
@@ -108,15 +122,22 @@ export const ScheduleForm = ({
               {tScheduleForm('drawerDescription')}
             </SheetDescription>
           </SheetHeader>
-          <div className='flex flex-row items-center'>
-            <Label htmlFor='nom' className='text-right'>
-              Nom:
-            </Label>
-            <h1 className='font-bold'>Chalet</h1>
-          </div>
-          <div>
-            <Label htmlFor='prixtotal'>Prix total de vos séjour:</Label>
-            <h1>150 EUR</h1>
+          <div className='py-4'>
+            <h3 className='text-lg font-semibold'>{tScheduleForm('recap')}</h3>
+            <div className='flex flex-row items-center gap-2'>
+              <Label className='text-right'>{tScheduleForm('number')}:</Label>
+              <span className='text-sm font-semibold'>{property.id}</span>
+            </div>
+            <div className='flex flex-row items-center gap-2'>
+              <Label className='text-right'>{tScheduleForm('name')}:</Label>
+              <span className='text-sm font-semibold'>{property.name}</span>
+            </div>
+            <div className='flex flex-row items-center gap-2'>
+              <Label>{tScheduleForm('ttc')}:</Label>
+              <span className='flex items-center text-sm font-semibold'>
+                {totalPrice} <EuroIcon className='h-4 w-4' />
+              </span>
+            </div>
           </div>
           <div className='flex flex-col gap-y-2'>
             <Label htmlFor='date'>{tScheduleForm('dateRangeLabel')}</Label>
@@ -128,7 +149,7 @@ export const ScheduleForm = ({
                   value={field.value}
                   onChange={field.onChange}
                   range
-                  className=''
+                  format='DD-MM-YYYY'
                   minDate={new Date()}
                   inputClass=' w-full  text-emerald-950 h-12 w-full  border-2 cursor-pointer pl-8 placeholder:text-slate-500 focus:ring-2 focus:ring-primary rounded-md'
                 />

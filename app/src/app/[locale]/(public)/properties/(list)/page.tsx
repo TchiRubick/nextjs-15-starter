@@ -7,17 +7,17 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import { TODAY, TOMORROW } from '@/lib/date';
 import { stringToNumber } from '@/lib/number';
 import { getScopedI18n } from '@/locales/server';
+import { ScheduleSelect } from '@packages/db/models/schedule';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@radix-ui/react-tooltip';
-import { format } from 'date-fns';
-import { Bath, Bed, House, User } from 'lucide-react';
+import { addDays, format } from 'date-fns';
+import { Bath, Bed, House, TriangleAlert, User } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import qs from 'query-string';
@@ -37,24 +37,40 @@ export default async function Properties({
   const tProperties = await getScopedI18n('properties');
 
   const payload = {
-    min_price:
-      stringToNumber(param.min_price) > 0
-        ? stringToNumber(param.min_price)
-        : 30,
-    max_price:
-      stringToNumber(param.max_price) > 0
-        ? stringToNumber(param.max_price)
-        : 100,
-    check_in: param.check_in ? new Date(param.check_in) : TODAY,
-    check_out: param.check_out ? new Date(param.check_out) : TOMORROW,
+    min_price: stringToNumber(param.min_price),
+    max_price: stringToNumber(param.max_price),
+    check_in: param.check_in ?? format(new Date(), 'yyyy-MM-dd'),
+    check_out: param.check_out ?? format(addDays(new Date(), 1), 'yyyy-MM-dd'),
   };
 
   const properties = await getFilteredPropertiesQuery(payload);
 
   const scheduleParams = qs.stringify({
-    check_in: format(payload.check_in, 'yyyy-MM-dd'),
-    check_out: format(payload.check_out, 'yyyy-MM-dd'),
+    ...(payload.check_in ? { check_in: payload.check_in } : {}),
+    ...(payload.check_out ? { check_out: payload.check_out } : {}),
   });
+
+  const reservationLabel = (s: ScheduleSelect) => {
+    switch (s.status) {
+      case 'validated':
+        return tProperties('reservationLabelValidated', {
+          start: format(s.startDate, 'dd/MM/yyyy'),
+          end: format(s.endDate, 'dd/MM/yyyy'),
+        });
+
+      case 'refused':
+        return tProperties('reservationLabelRejected');
+
+      case 'pending':
+        return tProperties('reservationLabelPending', {
+          start: format(s.startDate, 'dd/MM/yyyy'),
+          end: format(s.endDate, 'dd/MM/yyyy'),
+        });
+
+      default:
+        break;
+    }
+  };
 
   return (
     <div className='container mx-auto mt-16 flex flex-col gap-8 text-center'>
@@ -89,8 +105,27 @@ export default async function Properties({
             >
               <Card className='h-full overflow-hidden border-none bg-white shadow-md transition-shadow hover:shadow-xl'>
                 <CardHeader className='relative p-0'>
-                  <CardTitle>
-                    <Carousel className='w-full'>
+                  {product.schedules.length > 0 && (
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger className='absolute bottom-2 left-2 z-20 flex items-center justify-center rounded-full bg-red-300 p-1 px-2 py-2 text-xs font-medium text-slate-600 transition-colors hover:bg-red-200 hover:text-slate-700 data-[state=open]:bg-red-200 data-[state=open]:text-slate-700'>
+                          <TriangleAlert className='h-4 w-4' />{' '}
+                          {tProperties('unavailable')}
+                        </TooltipTrigger>
+                        <TooltipContent className='z-50 rounded-lg border border-red-300 bg-red-100 p-2 text-sm text-slate-600 shadow-lg shadow-black/5 outline-none data-[entering]:animate-in data-[exiting]:animate-out data-[entering]:fade-in-0 data-[exiting]:fade-out-0 data-[entering]:zoom-in-95 data-[exiting]:zoom-out-95 data-[placement=bottom]:slide-in-from-top-2 data-[placement=left]:slide-in-from-right-2 data-[placement=right]:slide-in-from-left-2 data-[placement=top]:slide-in-from-bottom-2'>
+                          <div className='rounded-lg p-2 text-sm'>
+                            {product.schedules.map((schedule) => (
+                              <div key={schedule.id}>
+                                {reservationLabel(schedule)}
+                              </div>
+                            ))}
+                          </div>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  )}
+                  <CardTitle className='relative'>
+                    <Carousel className='z-auto w-full'>
                       <CarouselContent>
                         {product.images.map((image) => (
                           <CarouselItem key={image.id}>

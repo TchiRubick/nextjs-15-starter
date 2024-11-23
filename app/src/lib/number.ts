@@ -1,5 +1,5 @@
 export const stringToNumber = (str: string | undefined) => {
-  if (str === undefined) return 0;
+  if (str === undefined) return undefined;
 
   const num = Number(str);
 
