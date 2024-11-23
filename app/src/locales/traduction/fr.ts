@@ -128,19 +128,55 @@ export default {
     signIn: 'Connexion',
   },
   about: {
-    title: '9,8 pour un séjour à deux',
+    title: 'À propos de nous',
+    subtitle: 'Bienvenue à ',
     description:
-      "Situé à Bussang, à moins de 37 km du lac de Gérardmer et à 46 km de la gare de Belfort, le Refuges des Hauts propose un hébergement avec un accès skis aux pieds. Vous bénéficierez gratuitement d'une connexion Wi-Fi et d'un parking privé. Situé à 40 km du lac Longemer, ce chalet dispose d'un casino et d'un jardin. Il propose des chambres familiales et une aire de pique-nique.",
-    clientConfirmation:
-      'Les clients confirment que la description et les photos reflètent fidèlement la réalité.',
-    features: {
-      view: "Offrant une vue sur la montagne, ce chalet comprend une terrasse, un coin salon, une télévision par satellite à écran plat, une cuisine entièrement équipée avec un lave-vaisselle et un micro-ondes ainsi qu'une salle de bains privative pourvue d'une douche et d'un sèche-cheveux. Un grille-pain, un réfrigérateur, des plaques de cuisson, une machine à café et une bouilloire sont également fournis. Le linge de lit et les serviettes sont fournis.",
-      summerUsage:
-        'En été, vous pourrez utiliser le barbecue et dîner sur le balcon privé.',
-      bikeRental:
-        'Un service de location de vélos est assuré sur place pour vous permettre de partir à la découverte des environs. Vous pourrez pratiquer le ski et le vélo dans les environs. Un service de location de matériel de ski, un point de vente de forfaits de ski et un local à skis sont également disponibles sur place.',
-      nearestAirport:
-        "L'aéroport le plus proche, celui de Mulhouse-Fribourg, est situé à 75 km.",
+      ', votre destination de choix pour des locations de chalets authentiques dans la région des Vosges. Notre mission est de fournir des refuges confortables et chaleureux pour les voyageurs qui cherchent à découvrir la beauté naturelle des montagnes des Vosges.',
+    story:
+      "Refuges des Hauts a été fondé avec l'objectif de partager le charme et le caractère de la région des Vosges avec les visiteurs du monde entier. Notre équipe est passionnée par la fourniture d'un service exceptionnel et la garantie d'un séjour mémorable dans nos chalets.",
+    mission:
+      'Nous sommes fiers de notre engagement envers la durabilité et la responsabilité environnementale. Nous croyons en la promotion des communautés locales et la préservation de la beauté naturelle de la région des Vosges.',
+    team: "Notre équipe est dédiée à la fourniture d'un environnement chaleureux et accueillant, où les hôtes peuvent se détendre et profiter de la beauté de la région des Vosges. Nous vous invitons à découvrir le charme et le caractère de nos chalets et à devenir une partie de l'expérience des Vosges.",
+    descriptionChalet:
+      "Nos chalets sont soigneusement sélectionnés pour offrir le parfait mélange de confort, d'authenticité et de beauté naturelle. Chaque chalet est décoré de manière unique et équipé de toutes les commodités dont vous avez besoin pour vous sentir chez vous. Des cheminées confortables aux vues imprenables sur les montagnes, nos chalets sont la base parfaite pour votre aventure dans les Vosges.",
+    values: {
+      valueTitle: 'Au Refuges des Hauts, nous valorisons :',
+      value1: {
+        title: 'Authenticité : ',
+        description:
+          'Nous croyons en la préservation du charme et du caractère de la région des Vosges.',
+      },
+      value2: {
+        title: 'Qualité : ',
+        description:
+          'Nous accordons une priorité absolue à la qualité dans tous les aspects de nos chalets.',
+      },
+      value3: {
+        title: 'Fiabilité : ',
+        description:
+          "Nous sommes dévoués à la fourniture d'un service exceptionnel et à la garantie d'un séjour mémorable pour nos hôtes.",
+      },
+      value4: {
+        title: 'Relaxation : ',
+        description:
+          'Nous offrons un environnement chaleureux et accueillant, où les hôtes peuvent se détendre et profiter de la beauté de la région des Vosges.',
+      },
+      value5: {
+        title: 'Confort : ',
+        description:
+          'Nos chalets sont conçus pour offrir un environnement confortable et relaxant, tout en offrant des vues imprenables sur les montagnes et le paysage environnant.',
+      },
+      value6: {
+        title: 'Durabilité : ',
+        description:
+          'Nous sommes fiers de notre engagement envers la durabilité et la responsabilité environnementale. Nous croyons en la promotion des communautés locales et la préservation de la beauté naturelle de la région des Vosges.',
+      },
+    },
+    contact: {
+      contactDescription:
+        "Nous sommes toujours heureux de recevoir vos questions ou vos commentaires. Que vous ayez une question ou besoin d'assistance, notre personnel sympathique et compétent est là pour vous aider.",
+      help: "Si vous avez des questions ou des commentaires sur Refuges des Hauts, nous serions ravis de les entendre. N'hésitez pas à ",
+      contactButton: 'Nous contacter',
     },
   },
   hero: {

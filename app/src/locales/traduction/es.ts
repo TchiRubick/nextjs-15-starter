@@ -84,19 +84,55 @@ export default {
     signIn: 'Iniciar sesión',
   },
   about: {
-    title: '9.8 para una estancia para dos',
+    title: 'Sobre nosotras',
+    subtitle: 'Bienvenido a ',
     description:
-      'Ubicado en Bussang, a menos de 37 km del lago Gérardmer y a 46 km de la estación de tren de Belfort, Refuges des Hauts ofrece alojamiento con acceso directo a las pistas de esquí. Disfrutarás de Wi-Fi gratuito y estacionamiento privado. Ubicado a 40 km del lago Longemer, este chalet tiene un casino y un jardín. Ofrece habitaciones familiares y un área de picnic.',
-    clientConfirmation:
-      'Los clientes confirman que la descripción y las fotos reflejan con precisión la realidad.',
-    features: {
-      view: 'Ofreciendo una vista a la montaña, este chalet incluye una terraza, una sala de estar, un televisor de pantalla plana por satélite, una cocina totalmente equipada con lavavajillas y microondas, así como un baño privado con ducha y secador de pelo. También se proporcionan una tostadora, un refrigerador, placas de cocina, una cafetera y una tetera. Se incluyen sábanas y toallas.',
-      summerUsage:
-        'En verano, puedes usar la barbacoa y cenar en el balcón privado.',
-      bikeRental:
-        'Un servicio de alquiler de bicicletas está disponible en el lugar para ayudarte a explorar los alrededores. Puedes esquiar y andar en bicicleta en la zona. También hay un servicio de alquiler de equipos de esquí, un punto de venta de pases de esquí y una sala de almacenamiento de esquí disponibles en el lugar.',
-      nearestAirport:
-        'El aeropuerto más cercano, Mulhouse-Friburgo, se encuentra a 75 km de distancia.',
+      ', tu destino premium para alquileres auténticos de chalets en la región de Vosges. Nuestra misión es proporcionar refugios acogedores y cómodos para los viajeros que busquen experimentar la belleza natural de las montañas de Vosges.',
+    story:
+      'Refuges des Hauts fue fundada con el objetivo de compartir el encanto y la personalidad de la región de Vosges con visitantes de todo el mundo. Nuestro equipo está apasionado por proporcionar servicio excepcional y asegurar que cada huésped tenga una estancia memorable en nuestras chalets.',
+    mission:
+      'Nos esfuerzamos por nuestro compromiso con la sostenibilidad y la responsabilidad ambiental. Creemos en apoyar a las comunidades locales y preservar la belleza natural de la región de Vosges.',
+    team: 'Nuestro equipo está dedicado a proporcionar un ambiente cálido y acogedor, donde los huéspedes pueden disfrutar de la relajación y disfrutar de la belleza de la región de Vosges. Invitamos a que disfruten de la personalidad y el encanto de nuestras chalets y se conviertan en parte de la experiencia de Vosges.',
+    descriptionChalet:
+      'Nuestras chalets están seleccionadas cuidadosamente para proporcionar el perfecto mezcla de confort, autenticidad y belleza natural. Cada chalet es decorado únicamente y equipado con todas las amenities que necesitas para sentirte a casa. Desde las paredes cómicas al increíbles vistas de montañas, nuestras chalets son la base perfecta para tu aventura en Vosges.',
+    values: {
+      valueTitle: 'En Refuges des Hauts valoramos:',
+      value1: {
+        title: 'Autenticidad: ',
+        description:
+          'Creemos en preservar el encanto y la personalidad de la región de Vosges.',
+      },
+      value2: {
+        title: 'Calidad: ',
+        description:
+          'Priorizamos la calidad en cada aspecto de nuestras chalets.',
+      },
+      value3: {
+        title: 'Fiabilidad: ',
+        description:
+          'Estamos comprometidos con proporcionar servicio excepcional y asegurar una estancia memorable para nuestros huéspedes.',
+      },
+      value4: {
+        title: 'Relajación: ',
+        description:
+          'Ofrecemos un ambiente cálido y acogedor, donde los huéspedes pueden disfrutar de la relajación y disfrutar de la belleza de la región de Vosges.',
+      },
+      value5: {
+        title: 'Confort: ',
+        description:
+          'Nuestras chalets están diseñadas para proporcionar un ambiente cómodo y relajante, ofreciendo vistas impresionantes de las montañas y el paisaje circundante.',
+      },
+      value6: {
+        title: 'Sostenibilidad: ',
+        description:
+          'Nos esfuerzamos por nuestro compromiso con la sostenibilidad y la responsabilidad ambiental. Creemos en apoyar a las comunidades locales y preservar la belleza natural de la región de Vosges.',
+      },
+    },
+    contact: {
+      contactDescription:
+        'Siento siempre la atención de nuestros huéspedes. Si tienes alguna pregunta o necesitas ayuda, nuestro personal y equipo amigables y conocidos están aquí para ayudarte.',
+      help: 'Si tienes alguna pregunta o comentario sobre Refuges des Hauts, nos encantaría escuchar de ti. Por favor, no dudes en ',
+      contactButton: 'Contactar con nosotros',
     },
   },
   hero: {
