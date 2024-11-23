@@ -83,19 +83,54 @@ export default {
     signIn: 'Signin',
   },
   about: {
-    title: '9.8 for a stay for two',
+    title: 'About Us',
+    subtitle: 'Welcome to ',
     description:
-      'Located in Bussang, less than 37 km from Lake Gérardmer and 46 km from Belfort train station, Refuges des Hauts offers accommodation with ski-to-door access. You will benefit from free Wi-Fi and private parking. Located 40 km from Lake Longemer, this chalet has a casino and a garden. It offers family rooms and a picnic area.',
-    clientConfirmation:
-      'Clients confirm that the description and photos accurately reflect reality.',
-    features: {
-      view: 'Offering a mountain view, this chalet includes a terrace, a seating area, a flat-screen satellite TV, a fully equipped kitchen with a dishwasher and a microwave, as well as a private bathroom with a shower and a hairdryer. A toaster, a refrigerator, cooking plates, a coffee machine, and a kettle are also provided. Bed linen and towels are included.',
-      summerUsage:
-        'In summer, you can use the barbecue and dine on the private balcony.',
-      bikeRental:
-        'A bike rental service is available on site to help you explore the surroundings. You can ski and bike in the area. A ski equipment rental service, a ski pass sales point, and a ski storage room are also available on site.',
-      nearestAirport:
-        'The nearest airport, Mulhouse-Fribourg, is located 75 km away.',
+      ', your premier destination for authentic chalet rentals in the Vosges region. Our mission is to provide comfortable and cozy refuges for travelers seeking to experience the natural beauty of the Vosges mountains.',
+    story:
+      'Refuges des Hauts was founded with the goal of sharing the charm and character of the Vosges region with visitors from around the world. Our team is passionate about providing exceptional service and ensuring that every guest has a memorable stay in our chalets.',
+    mission:
+      'We take pride in our commitment to sustainability and environmental responsibility. We believe in supporting local communities and preserving the natural beauty of the Vosges region.',
+    team: 'Our team is dedicated to providing a warm and welcoming environment, where guests can unwind and enjoy the beauty of the Vosges region. We invite you to experience the charm and character of our chalets and become a part of the Vosges experience.',
+    descriptionChalet:
+      'Our chalets are carefully selected to provide the perfect blend of comfort, authenticity, and natural beauty. Each chalet is uniquely decorated and equipped with all the amenities you need to feel at home. From cozy fireplaces to stunning mountain views, our chalets are the perfect base for your Vosges adventure.',
+    values: {
+      valueTitle: 'At Refuges des Hauts, we value:',
+      value1: {
+        title: 'Authenticity: ',
+        description:
+          'We believe in preserving the charm and character of the Vosges region.',
+      },
+      value2: {
+        title: 'Quality: ',
+        description: 'We prioritize quality in every aspect of our chalets.',
+      },
+      value3: {
+        title: 'Reliability: ',
+        description:
+          'We are committed to providing exceptional service and ensuring a memorable stay for our guests.',
+      },
+      value4: {
+        title: 'Relaxation: ',
+        description:
+          'We offer a warm and welcoming environment, where guests can unwind and enjoy the beauty of the Vosges region.',
+      },
+      value5: {
+        title: 'Comfort: ',
+        description:
+          'Our chalets are designed to provide a comfortable and relaxing environment, while offering breathtaking views of the mountains and the surrounding landscape.',
+      },
+      value6: {
+        title: 'Sustainability: ',
+        description:
+          'We take pride in our commitment to sustainability and environmental responsibility. We believe in supporting local communities and preserving the natural beauty of the Vosges region.',
+      },
+    },
+    contact: {
+      contactDescription:
+        'We are always happy to hear from our guests. Whether you have a question or need assistance, our friendly and knowledgeable staff are here to help.',
+      help: "If you have any questions or comments about Refuges des Hauts, we would love to hear from you. Please don't hesitate to ",
+      contactButton: 'Contact us',
     },
   },
   hero: {
