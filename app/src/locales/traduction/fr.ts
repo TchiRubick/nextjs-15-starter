@@ -115,7 +115,7 @@ export default {
     email: 'Email',
     subject: 'Objet',
     message: 'Message',
-    bookMeetingButton: 'Réserver la réunion',
+    bookMeetingButton: 'Envoyer',
   },
   auth: {
     login: 'Connexion',

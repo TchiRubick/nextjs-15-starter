@@ -314,7 +314,7 @@ export default {
     email: 'Correo electrónico',
     subject: 'Asunto',
     message: 'Mensaje',
-    bookMeetingButton: 'Reservar la reunión',
+    bookMeetingButton: 'Enviar',
   },
   forgotPassword: {
     title: 'Restablecer tu contraseña',

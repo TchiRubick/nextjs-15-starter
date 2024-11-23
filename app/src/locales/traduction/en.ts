@@ -310,7 +310,7 @@ export default {
     email: 'Email',
     subject: 'Subject',
     message: 'Message',
-    bookMeetingButton: 'Book the meeting',
+    bookMeetingButton: 'Send',
   },
   forgotPassword: {
     title: 'Reset Your Password',
