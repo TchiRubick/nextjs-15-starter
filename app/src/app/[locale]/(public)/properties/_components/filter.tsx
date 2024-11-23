@@ -83,7 +83,7 @@ export const Filter = ({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='mx-auto rounded-xl bg-emerald-950 p-6 shadow-xl'
+      className='mx-4 rounded-xl bg-emerald-950 p-6 shadow-xl sm:mx-auto'
     >
       <div className='flex flex-wrap items-end gap-6'>
         {/* Price Range */}
@@ -101,10 +101,7 @@ export const Filter = ({
                 className='h-12 border-0 bg-white/30 pl-8 text-white placeholder:text-slate-400 focus:ring-2 focus:ring-primary'
                 type='number'
                 placeholder={tFilter('minPlaceholder')}
-                {...register('min_price', {
-                  // required: tFilter('minPriceRequired'),
-                  // min: 0,
-                })}
+                {...register('min_price', {})}
               />
             </div>
             <div className='relative flex-1'>
@@ -115,10 +112,7 @@ export const Filter = ({
                 className='h-12 border-0 bg-white/30 pl-8 text-white placeholder:text-slate-400 focus:ring-2 focus:ring-primary'
                 type='number'
                 placeholder={tFilter('maxPlaceholder')}
-                {...register('max_price', {
-                  // required: tFilter('maxPriceRequired'),
-                  // min: 0,
-                })}
+                {...register('max_price', {})}
               />
             </div>
           </div>
@@ -130,7 +124,7 @@ export const Filter = ({
         </div>
 
         {/* Date Range */}
-        <div>
+        <div className='w-full'>
           <Label className='mb-2 block text-sm font-medium text-white/80'>
             {tFilter('dateRangeLabel')}
           </Label>
@@ -144,8 +138,8 @@ export const Filter = ({
                 minDate={new Date()}
                 format='DD-MM-YYYY'
                 range
-                className='green rmdp-mobile'
-                inputClass='h-12 border-0 bg-white/30 cursor-pointer pl-8 text-white placeholder:text-slate-400 focus:ring-2 focus:ring-primary rounded-md'
+                className='green w-full! date-full-width'
+                inputClass='w-full! h-12 border-0 bg-white/30 cursor-pointer pl-8 text-white placeholder:text-slate-400 focus:ring-2 focus:ring-primary rounded-md'
               />
             )}
           />

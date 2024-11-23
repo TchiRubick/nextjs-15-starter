@@ -127,7 +127,7 @@ export const Testimonials = () => {
                 target='_blank'
               >
                 <Image
-                  src='/Booking.com_logo.svg'
+                  src='/icons/Booking.com_logo.svg'
                   alt='booking'
                   width={100}
                   height={100}

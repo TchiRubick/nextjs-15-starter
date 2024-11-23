@@ -134,9 +134,12 @@ export const SignupForm = ({ callbackUrl }: { callbackUrl?: string }) => {
           <Button type='submit' className='w-full' disabled={isPending}>
             {isPending ? <Loader2 className='animate-spin' /> : tAuth('signUp')}
           </Button>
-          <CardFooter className='mt-4 text-center text-sm'>
+          <CardFooter className='mt-4 gap-1 text-center text-sm'>
             {tAuth('alreadyHaveAccount')}
-            <Link href={`/auth/signup?callbackUrl=${callbackUrl}`}>
+            <Link
+              href={`/auth?callbackUrl=${callbackUrl}`}
+              className='underline'
+            >
               {tAuth('signIn')}
             </Link>
           </CardFooter>

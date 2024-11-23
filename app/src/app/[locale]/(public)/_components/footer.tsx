@@ -1,37 +1,41 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 export const Footer = () => {
   const navigationItems = [
     {
-      title: 'Home',
-      href: '/',
-      description: '',
-    },
-    {
-      title: 'Product',
-      description: 'Managing a small business today is already tough.',
+      title: 'A propos',
+      href: '/about',
       items: [
         {
-          title: 'Reports',
-          href: '/reports',
+          title: "Conditions d'utilisation",
+          href: '/terms-of-service',
         },
         {
-          title: 'Statistics',
-          href: '/statistics',
+          title: 'Politique de confidentialité',
+          href: '/privacy-policy',
         },
         {
-          title: 'Dashboards',
-          href: '/dashboards',
+          title: 'Map',
+          href: '/map',
+        },
+      ],
+    },
+    {
+      title: 'Chalets',
+      items: [
+        {
+          title: 'Haute qualité',
+          href: '/properties?min_price=200&max_price=500',
         },
         {
-          title: 'Recordings',
-          href: '/recordings',
+          title: 'Special couples',
+          href: '/properties?min_price=30&max_price=50',
         },
       ],
     },
     {
       title: 'Company',
-      description: 'Managing a small business today is already tough.',
       items: [
         {
           title: 'About us',
@@ -60,23 +64,31 @@ export const Footer = () => {
           <div className='flex flex-col items-start gap-8'>
             <div className='flex flex-col gap-2'>
               <h2 className='font-regular max-w-xl text-left text-3xl tracking-tighter md:text-5xl'>
-                TWBlocks™
+                Refuges des hauts
               </h2>
               <p className='max-w-lg text-left text-lg leading-relaxed tracking-tight text-background/75'>
-                Managing a small business today is already tough.
+                La destination de refuges confortables à Bussang, proche des
+                pistes de ski de Larcenaire.
               </p>
             </div>
             <div className='flex flex-row gap-20'>
               <div className='flex max-w-lg flex-col text-left text-sm leading-relaxed tracking-tight text-background/75'>
                 <p>Rue des Balcons de Bussang</p>
                 <p>88540 Bussang</p>
-                <p>France</p>
+                <p className='flex items-center gap-1'>
+                  <Image
+                    src='/flags/fr.svg'
+                    className='h-4 w-4'
+                    alt='fr'
+                    width={8}
+                    height={8}
+                  />{' '}
+                  France
+                </p>
               </div>
               <div className='flex max-w-lg flex-col text-left text-sm leading-relaxed tracking-tight text-background/75'>
-                <Link href='/terms-of-service'>
-                  conditions d&apos;utilisation
-                </Link>
-                <Link href='/privacy-policy'>Politique de confidentialité</Link>
+                <p>+33 6 00 00 00 00</p>
+                <p>info@refugesdeshauts.fr</p>
               </div>
             </div>
           </div>

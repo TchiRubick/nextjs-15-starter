@@ -103,7 +103,7 @@ export default async function Properties({
               key={product.id}
               className='group block w-full transition-transform hover:-translate-y-1'
             >
-              <Card className='h-full overflow-hidden border-none bg-white shadow-md transition-shadow hover:shadow-xl'>
+              <Card className='mx-4 h-full overflow-hidden border-none bg-white shadow-md transition-shadow hover:shadow-xl sm:mx-0'>
                 <CardHeader className='relative p-0'>
                   {product.schedules.length > 0 && (
                     <TooltipProvider>

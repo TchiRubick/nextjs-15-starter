@@ -21,25 +21,31 @@ export async function PropertyFeatures({
       <div className='flex flex-col items-center rounded-lg bg-muted p-4'>
         <Bed className='mb-2 h-6 w-6' />
         <span className='text-sm'>
-          {bed ?? '-'} {tPropertyFeatures('beds')}
+          {bed ?? '-'}{' '}
+          <span className='hidden sm:inline'>{tPropertyFeatures('beds')}</span>
         </span>
       </div>
       <div className='flex flex-col items-center rounded-lg bg-muted p-4'>
         <Bath className='mb-2 h-6 w-6' />
         <span className='text-sm'>
-          {bath ?? '-'} {tPropertyFeatures('baths')}
+          {bath ?? '-'}{' '}
+          <span className='hidden sm:inline'>{tPropertyFeatures('baths')}</span>
         </span>
       </div>
       <div className='flex flex-col items-center rounded-lg bg-muted p-4'>
         <Users className='mb-2 h-6 w-6' />
         <span className='text-sm'>
-          {tPropertyFeatures('fits', { count: maxPerson ?? 0 })}
+          <span className='sm:hidden'>{maxPerson ?? '-'}</span>
+          <span className='hidden sm:inline'>
+            {tPropertyFeatures('fits', { count: maxPerson ?? '-' })}
+          </span>
         </span>
       </div>
       <div className='flex flex-col items-center rounded-lg bg-muted p-4'>
         <Home className='mb-2 h-6 w-6' />
         <span className='text-sm'>
-          {room ?? '-'} {tPropertyFeatures('rooms')}
+          {room ?? '-'}{' '}
+          <span className='hidden sm:inline'>{tPropertyFeatures('rooms')}</span>
         </span>
       </div>
     </div>

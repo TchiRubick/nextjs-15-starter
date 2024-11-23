@@ -29,12 +29,12 @@ export function Forgotpassword() {
             <Input id='identifier' placeholder='m@example.com' required />
           </div>
 
-          <Button type='submit' className='w-full'>
+          <Button type='submit' disabled className='w-full'>
             {tForgotPassword('button')}
           </Button>
         </div>
         <div className='mt-4 text-center text-sm'>
-          <Link href='/auth/signup' className='underline'>
+          <Link href='/auth' className='underline'>
             {tForgotPassword('backToSignIn')}
           </Link>
         </div>

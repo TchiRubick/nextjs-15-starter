@@ -1,10 +1,10 @@
 'use server';
 
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { getScopedI18n } from '@/locales/server';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const About = async () => {
   const tAbout = await getScopedI18n('about');
@@ -23,9 +23,9 @@ const About = async () => {
             <Label className='text-lg font-bold'>Refuges des Hauts</Label>
             {tAbout('description')}
           </p>
-          <div className='flex flex-col gap-4 md:flex-row md:gap-10'>
+          <div className='flex flex-col items-center gap-4 md:flex-row md:gap-10'>
             <Image
-              src='/svg/undraw_books_re_8gea.svg'
+              src='/illustration/undraw_books_re_8gea.svg'
               alt='undraw_books_re_8gea'
               width={1000}
               height={1000}
@@ -35,12 +35,12 @@ const About = async () => {
               {tAbout('story')}
             </p>
           </div>
-          <div className='flex flex-col gap-4 md:flex-row md:gap-10'>
+          <div className='flex flex-col items-center gap-4 md:flex-row md:gap-10'>
             <p className='flex items-center text-center text-lg leading-relaxed tracking-tight'>
               {tAbout('mission')}
             </p>
             <Image
-              src='/svg/undraw_step_to_the_sun_nxqq.svg'
+              src='/illustration/undraw_step_to_the_sun_nxqq.svg'
               alt='undraw_books_re_8gea'
               width={1000}
               height={1000}
@@ -54,7 +54,7 @@ const About = async () => {
             <div className='h-1/2 w-full'>
               <Image
                 className='h-96 w-full rounded-xl object-cover object-center'
-                src='/hero-about.jpg'
+                src='/images/123456788.jpg'
                 alt='sr'
                 width={1000}
                 height={900}
@@ -66,7 +66,7 @@ const About = async () => {
               {tAbout('descriptionChalet')}
             </p>
             <Image
-              src='/svg/undraw_dreamer_re_9tua.svg'
+              src='/illustration/undraw_dreamer_re_9tua.svg'
               alt='undraw_books_re_8gea'
               width={1000}
               height={1000}

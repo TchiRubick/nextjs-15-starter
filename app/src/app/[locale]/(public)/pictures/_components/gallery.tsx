@@ -32,7 +32,7 @@ export const Gallery = ({ images }: props) => {
       <div className='font-regular md:font-regular text-center text-2xl md:mb-3 md:mt-5 md:text-3xl lg:ml-24 lg:text-start'>
         <h6>{tGallery('subtitle')}</h6>
       </div>
-      <div className='relative m-auto w-4/6 pb-16 md:m-auto md:w-5/6 md:columns-3 md:gap-1'>
+      <div className='relative m-auto w-full pb-16 sm:w-4/6 md:m-auto md:w-5/6 md:columns-3 md:gap-1'>
         <PhotoProvider>
           {currentImages.map((item, index) => (
             <div className='p-3' key={index}>

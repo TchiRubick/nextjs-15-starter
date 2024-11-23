@@ -45,7 +45,7 @@ export const SigninForm = ({ callbackUrl }: { callbackUrl?: string }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Card>
+      <Card className='mx-4'>
         <CardHeader>
           <CardTitle className='text-2xl'>{tAuth('login')}</CardTitle>
           <CardDescription>{tAuth('loginDescription')}</CardDescription>
@@ -86,9 +86,12 @@ export const SigninForm = ({ callbackUrl }: { callbackUrl?: string }) => {
               )}
             </Button>
           </div>
-          <div className='mt-4 text-center text-sm'>
+          <div className='mt-4 gap-1 text-center text-sm'>
             {tAuth('signUpPrompt')}
-            <Link href={`/auth/signup?callbackUrl=${callbackUrl}`}>
+            <Link
+              href={`/auth/signup?callbackUrl=${callbackUrl}`}
+              className='underline'
+            >
               {tAuth('signUp')}
             </Link>
           </div>

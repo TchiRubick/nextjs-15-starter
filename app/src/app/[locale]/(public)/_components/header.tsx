@@ -59,12 +59,12 @@ export const Header = () => {
     },
     {
       title: tHeader('login'),
-      href: '/login',
+      href: '/auth',
       mobile_only: true,
     },
     {
       title: tHeader('signup'),
-      href: '/signup',
+      href: '/auth/signup',
       mobile_only: true,
     },
   ];
@@ -233,7 +233,7 @@ export const Header = () => {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className='absolute right-0 top-20 w-full bg-slate-900 p-4 lg:hidden'>
+          <div className='absolute right-0 top-20 w-full bg-emerald-950/60 p-4 backdrop-blur-sm lg:hidden'>
             <nav className='flex flex-col gap-4'>
               {navigationItems.map((item) => (
                 <Link

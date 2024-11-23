@@ -28,9 +28,9 @@ export const FAQ = async () => {
               </div>
               <div className='flex flex-col gap-2'>
                 <h4 className='font-regular max-w-xl text-left text-3xl tracking-tighter md:text-5xl'>
-                  {tFAQ('subtitle')}
+                  {tFAQ('title')}
                 </h4>
-                <p className='max-w-xl text-left text-lg leading-relaxed tracking-tight text-muted-foreground lg:max-w-lg'>
+                <p className='max-w-xl text-left text-lg leading-relaxed tracking-tight text-foreground sm:text-muted-foreground lg:max-w-lg'>
                   {tFAQ('subtitle')}
                 </p>
               </div>
@@ -47,9 +47,14 @@ export const FAQ = async () => {
               src='/illustration/undraw_faq_re_31cw.svg'
               width={400}
               height={400}
+              className='hidden sm:block'
             />
           </div>
-          <Accordion type='single' collapsible className='w-full'>
+          <Accordion
+            type='single'
+            collapsible
+            className='border-rounded w-full rounded-xl border border-foreground/20 bg-white p-4 shadow-lg'
+          >
             {Array(9)
               .fill(0)
               .map((_, index) => (

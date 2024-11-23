@@ -124,13 +124,23 @@ html {
   }
 }
 
-.bg-hero {
-  animation: breath 20s linear infinite;
-  will-change: background-size;
-  background: url('/275327112.jpg') center center no-repeat;
-  background-size: 100% auto;
+@media (max-width: 768px) {
+  .bg-hero {
+    background: none;
+    background-size: cover;
+    animation: none;
+  }
 }
-/*
-.bg-testimonials {
-  background: url('/testimonials-background.png') center center no-repeat;
-} */
+
+@media (min-width: 768px) {
+  .bg-hero {
+    animation: breath 20s linear infinite;
+    will-change: background-size;
+    background: url('/images/275327112.jpg') center center no-repeat;
+    background-size: 100% auto;
+  }
+}
+
+.date-full-width {
+  width: 100%;
+}

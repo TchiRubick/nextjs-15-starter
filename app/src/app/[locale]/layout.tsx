@@ -7,16 +7,16 @@ import localFont from 'next/font/local';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { Suspense } from 'react';
 import 'react-multi-date-picker/styles/colors/green.css';
+import '../globals.css';
 import { Loader } from './(public)/_components/loader';
-import './globals.css';
 
 const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
+  src: '../fonts/GeistVF.woff',
   variable: '--font-geist-sans',
   weight: '100 900',
 });
 const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
+  src: '../fonts/GeistMonoVF.woff',
   variable: '--font-geist-mono',
   weight: '100 900',
 });
@@ -26,14 +26,14 @@ export const metadata: Metadata = {
   description:
     'Découvrez nos chalets authentiques dans les Vosges. Location de refuges confortables à Bussang, proche des pistes de ski de Larcenaire. Séjour en montagne parfait pour les familles.',
   keywords:
-    'refuge vosges, location chalet bussang, hébergement montagne vosges, ski larcenaire, vacances montagne',
+    'location chalet vosges, refuge bussang, hébergement ski vosges, vacances montagne vosges, séjour vosges, france montagne, ski, chalet, vosges, bussang, nature, montagne, vacances, séjour',
   authors: [{ name: 'Refuges des Hauts' }],
   creator: 'Refuges des Hauts',
-  metadataBase: new URL('https://refugesdeshauts.fr'),
+  metadataBase: new URL('https://nextjs-15-starter-production.up.railway.app'),
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
-    url: 'https://refugesdeshauts.fr',
+    url: 'https://nextjs-15-starter-production.up.railway.app',
     title: 'Refuges des Hauts | Location de Chalets dans les Vosges',
     description:
       'Découvrez nos chalets authentiques dans les Vosges. Location de refuges confortables à Bussang, proche des pistes de ski de Larcenaire.',
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     images: ['/275327112.jpg'],
   },
   alternates: {
-    canonical: 'https://refugesdeshauts.fr',
+    canonical: 'https://nextjs-15-starter-production.up.railway.app',
   },
   robots: {
     index: true,

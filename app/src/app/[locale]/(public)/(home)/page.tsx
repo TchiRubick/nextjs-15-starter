@@ -16,7 +16,7 @@ export default function Home() {
         <Testimonials />
       </section>
 
-      <section>
+      <section className='hidden sm:block'>
         <Features />
       </section>
 

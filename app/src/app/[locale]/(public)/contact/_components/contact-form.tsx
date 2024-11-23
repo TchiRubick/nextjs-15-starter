@@ -59,10 +59,10 @@ export const ContactForm = () => {
                   {tContact('beautifulModernDescription')}
                 </p>
                 <Link href={`https://wa.me/0347804228`} target={'_blank'}>
-                  <Button className='mt-2 bg-green-500 text-white hover:bg-green-600'>
+                  <Button className='mt-2 w-full bg-green-500 text-white hover:bg-green-600 sm:w-auto'>
                     Whatsapp
                     <Image
-                      src={'/svg/whatsapp-svgrepo-com.svg'}
+                      src={'/illustration/whatsapp-svgrepo-com.svg'}
                       alt={'Whatsapp icon'}
                       width={20}
                       height={20}
@@ -92,7 +92,7 @@ export const ContactForm = () => {
                 <Label htmlFor='message'>{tContact('message')}</Label>
                 <Textarea id='message' />
               </div>
-              <Button className='w-full gap-4'>
+              <Button className='w-full gap-4' disabled>
                 {tContact('bookMeetingButton')}{' '}
                 <MoveRight className='h-4 w-4' />
               </Button>

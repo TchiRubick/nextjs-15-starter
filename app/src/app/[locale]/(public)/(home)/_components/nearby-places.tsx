@@ -38,14 +38,14 @@ export function NearbyPlaces() {
       transition={{ duration: 1 }}
     >
       <div className='mx-auto my-10 w-full max-w-4xl'>
-        <div className='flex flex-col items-center gap-4'>
-          <h3 className='mx-auto text-3xl font-semibold tracking-tight text-foreground md:text-7xl'>
+        <div className='flex flex-col items-center justify-center gap-4'>
+          <h3 className='mb-4 text-center text-5xl font-semibold tracking-tight text-foreground md:text-7xl'>
             {tNearbyPlaces('title')}
           </h3>
         </div>
       </div>
       <div className='flex flex-row items-center justify-center gap-16'>
-        <Card className='mx-auto my-10 w-full max-w-2xl'>
+        <Card className='mx-2 my-10 w-full sm:mx-auto'>
           <CardContent className='grid gap-6 py-8'>
             <div className='space-y-4'>
               <div className='flex items-center gap-2'>
@@ -152,24 +152,24 @@ export function NearbyPlaces() {
             </p>
           </CardContent>
         </Card>
-        <div className='mx-auto my-10 h-full w-full max-w-2xl'>
+        <div className='mx-auto my-10 hidden h-full w-full max-w-2xl sm:block'>
           <div className='grid grid-cols-2 gap-8'>
             <Image
-              src='/465530959.jpg'
+              src='/images/123456788.jpg'
               className='aspect-square rounded-md object-cover'
               alt='Nearby places'
               width={500}
               height={800}
             />
             <Image
-              src='/276286339.jpg'
+              src='/images/276286339.jpg'
               className='row-span-2 h-full rounded-md object-cover'
               alt='Nearby places'
               width={800}
               height={1000}
             />
             <Image
-              src='/465530248.jpg'
+              src='/images/465530248.jpg'
               className='aspect-square rounded-md object-cover'
               alt='Nearby places'
               width={500}

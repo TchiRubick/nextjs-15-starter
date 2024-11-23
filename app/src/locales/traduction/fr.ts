@@ -70,7 +70,8 @@ export default {
     bookingTitle: 'Réservez votre séjour',
     description:
       'Découvrez nos chalets disponibles et trouvez votre havre de paix.',
-    noResults: 'Veuillez modifier vos critères de recherche.',
+    noResults:
+      'Aucun chalets disponibles correspondant à vos critères de recherche.',
     beds: '{count} lit(s)',
     baths: '{count} salle(s) de bain',
     rooms: '{count} chambre(s)',

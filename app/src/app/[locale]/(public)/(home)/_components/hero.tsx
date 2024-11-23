@@ -12,9 +12,8 @@ export const Hero = () => {
   const tHero = useScopedI18n('hero');
 
   return (
-    <div className='bg-hero relative h-screen w-full bg-cover bg-center transition-all duration-1000'>
+    <div className='bg-hero relative h-[36rem] w-full bg-cover bg-center transition-all duration-1000 sm:h-screen'>
       <div className='absolute inset-0 flex items-center justify-center bg-black bg-opacity-50'>
-        {/* -------------------------------------------------------------------------- */}
         <div className='flex items-center gap-8 md:grid-cols-2 lg:gap-12'>
           <motion.div
             variants={fadeIn('right', 0.2)}
@@ -23,8 +22,8 @@ export const Hero = () => {
             viewport={{ once: false, amount: 0.7 }}
             className='relative z-10 mx-auto max-w-6xl px-4'
           >
-            <div className='mb-24 max-w-4xl'>
-              <h1 className='mb-6 mt-20 text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-8xl'>
+            <div className='mb-8 max-w-4xl sm:mb-24'>
+              <h1 className='mb-6 mt-20 text-center text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-8xl'>
                 <span style={{ textShadow: '0 0 2px white' }}>
                   Refuges des{' '}
                 </span>
@@ -63,17 +62,17 @@ export const Hero = () => {
               </div>
               <div
                 style={{ textShadow: '0 0 20px white' }}
-                className='flex flex-wrap items-center justify-center gap-6 text-base text-gray-200 sm:mt-24 sm:text-xl'
+                className='mt-8 flex flex-wrap items-center justify-center gap-6 text-base text-gray-200 sm:mt-24 sm:text-xl'
               >
-                <span className='flex items-center gap-1.5'>
+                <span className='flex items-center sm:gap-1.5'>
                   <Star className='h-4 w-4 text-yellow-400' />
                   {tHero('rating')}
                 </span>
-                <span className='flex items-center gap-1.5'>
+                <span className='flex items-center sm:gap-1.5'>
                   <Snowflake className='h-4 w-4' />
                   {tHero('skiRental')}
                 </span>
-                <span className='flex items-center gap-1.5'>
+                <span className='flex items-center sm:gap-1.5'>
                   <Wifi className='h-4 w-4' />
                   {tHero('freeWifi')}
                 </span>
