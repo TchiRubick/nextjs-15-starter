@@ -366,6 +366,67 @@ export default {
     zipCodePlaceholder: 'Ingresa tu código postal',
     saveButton: 'Guardar',
   },
+  termsOfService: {
+    title: 'Términos de servicio',
+    subtitle:
+      'Lea nuestros términos de servicio para entender las reglas de uso de nuestro sitio web.',
+    description: [
+      {
+        title: 'Uso del sitio',
+        description:
+          'Aceptas el uso del sitio solo para fines legales y de una manera que no viola los derechos de, restringe o impide a cualquier otro uso y disfrute del sitio.',
+      },
+      {
+        title: 'Propiedad intelectual',
+        description:
+          'Todo el contenido de este sitio, incluyendo texto, gráficos, logotipos, iconos, imágenes y software, es la propiedad de Refuges des Hauts o sus proveedores de contenido y está protegida por las leyes de propiedad intelectual internacional.',
+      },
+      {
+        title: 'Limitación de responsabilidad',
+        description:
+          'Refuges des Hauts no será responsable de cualquier daño que surjan del uso o incapacidad de usar el sitio o cualquier contenido o servicios proporcionados por el sitio.',
+      },
+      {
+        title: 'Cambios en los términos de servicio',
+        description:
+          'Podemos revisar estos términos de servicio en cualquier momento modificando esta página. Por favor, revisa esta página regularmente para tomar nota de cualquier cambio que realicemos, ya que son fundamentales para ti.',
+      },
+    ],
+    lastUpdated: 'Última actualización: 12 de noviembre de 2024',
+  },
+  privacyPolicy: {
+    title: 'Política de privacidad',
+    subtitle:
+      'En Refuges des Hauts, nos tomamos muy en serio la privacidad y la seguridad de la información personal de nuestros usuarios. En este sentido, esta política de privacidad tiene como objetivo informar a los usuarios sobre la forma en que se recopila, almacena y utiliza la información personal en nuestro sitio web.',
+    description: [
+      {
+        title: 'Información recopilada',
+        description:
+          'Al utilizar nuestro sitio web, se recopilará información personal como el nombre, la dirección de correo electrónico, la dirección IP y otra información de navegación. Esta información se utiliza únicamente para brindar un mejor servicio a nuestros usuarios y no se compartirá con terceros sin su consentimiento explícito.',
+      },
+      {
+        title: 'Uso de la información',
+        description:
+          'La información recopilada se utiliza para brindar un mejor servicio a nuestros usuarios y mejorar la experiencia en nuestro sitio web. No se compartirá con terceros sin su consentimiento explícito.',
+      },
+      {
+        title: 'Seguridad de la información',
+        description:
+          'Nos comprometemos a proteger la información personal de nuestros usuarios mediante medidas de seguridad adecuadas. Sin embargo, no podemos garantizar la seguridad total de la información, ya que la transmisión de datos a través de Internet puede no ser completamente segura.',
+      },
+      {
+        title: 'Cambios en la política de privacidad',
+        description:
+          'Podemos modificar esta política de privacidad en cualquier momento y sin previo aviso. Cualquier cambio se publicará en esta página y entrará en vigor de inmediato.',
+      },
+      {
+        title: '¿Qué ocurre con mis datos?',
+        description:
+          'Tu información personal se eliminará una vez que hayas completado el proceso de reserva. No podemos recuperar tu información personal.',
+      },
+    ],
+    lastUpdated: 'Última actualización: 12 de noviembre de 2024',
+  },
   languagePicker: {
     en: 'Inglés',
     fr: 'Francés',
