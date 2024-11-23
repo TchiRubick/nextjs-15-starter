@@ -9,6 +9,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { useScopedI18n } from '@/locales/client';
+import { motion } from 'framer-motion';
 import {
   BedDouble,
   Bike,
@@ -158,7 +159,11 @@ export function Features() {
   }, [activeIndex, searchTerm]);
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+    >
       <div className='mx-auto my-10 w-full max-w-4xl'>
         <div className='flex flex-col items-center gap-4'>
           <h3 className='mx-auto text-3xl font-semibold tracking-tight text-foreground md:text-7xl'>
@@ -264,6 +269,6 @@ export function Features() {
           </div>
         </div>
       </TooltipProvider>
-    </div>
+    </motion.div>
   );
 }

@@ -1,8 +1,8 @@
-import { eq } from 'drizzle-orm';
+import { and, eq, gt, lt, or, SQLWrapper } from 'drizzle-orm';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 import { z } from 'zod';
 import { db } from '../..';
-import { Product } from '../schema';
+import { Product, Schedule } from '../schema';
 
 // ============================================================================
 // Schemas
@@ -73,20 +73,36 @@ export const updateProduct = async (id: number, input: UpdateProduct) =>
   db.update(Product).set(input).where(eq(Product.id, id)).returning();
 
 type ProductFilter = {
-  min_price: number;
-  max_price: number;
+  min_price?: number;
+  max_price?: number;
+  check_in?: string;
+  check_out?: string;
 };
 
 export const getProductsByFilter = async (filter: ProductFilter) => {
-  const { min_price, max_price } = filter;
+  const { min_price, max_price, check_in, check_out } = filter;
+
+  const filterProduct: SQLWrapper[] = [];
+  const filterSchedult: SQLWrapper[] = [gt(Schedule.startDate, new Date())];
+
+  if (min_price) {
+    filterProduct.push(gt(Product.price, min_price));
+  }
+
+  if (max_price) {
+    filterProduct.push(lt(Product.price, max_price));
+  }
+
+  if (check_in) {
+    filterSchedult.push(gt(Schedule.endDate, new Date(check_in)));
+  }
+
+  if (check_out) {
+    filterSchedult.push(lt(Schedule.startDate, new Date(check_out)));
+  }
 
   return db.query.Product.findMany({
-    where: (product, { gte, lte, and }) =>
-      and(
-        gte(product.price, min_price),
-        lte(product.price, max_price),
-        eq(product.status, 'published')
-      ),
+    where: and(...filterProduct),
     with: {
       amenities: {
         with: {
@@ -98,6 +114,14 @@ export const getProductsByFilter = async (filter: ProductFilter) => {
           image: true,
         },
       },
+      schedules: {
+        where: and(
+          or(eq(Schedule.status, 'validated'), eq(Schedule.status, 'pending')),
+          ...filterSchedult
+        ),
+        orderBy: (schedule, { asc }) => asc(schedule.startDate),
+      },
     },
+    orderBy: (product, { desc }) => desc(product.price),
   });
 };

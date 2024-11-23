@@ -67,7 +67,9 @@ export const getProductAvailability = async (
       and(
         eq(schedule.productId, id),
         gt(schedule.endDate, start),
-        lt(schedule.startDate, end)
+        lt(schedule.startDate, end),
+        eq(schedule.status, 'validated'),
+        eq(schedule.status, 'pending')
       ),
   });
 

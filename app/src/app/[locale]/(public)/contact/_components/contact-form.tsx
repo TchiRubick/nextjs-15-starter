@@ -18,7 +18,7 @@ export const ContactForm = () => {
   return (
     <div className='w-full py-20 lg:py-40'>
       <div className='container mx-auto max-w-6xl'>
-        <div className='grid gap-10 lg:grid-cols-2'>
+        <div className='grid gap-10 rounded-xl border border-foreground/20 bg-white p-8 lg:grid-cols-2 lg:p-16'>
           <div className='flex flex-col gap-6'>
             <div className='flex flex-col gap-4'>
               <div>
@@ -59,7 +59,8 @@ export const ContactForm = () => {
                   {tContact('beautifulModernDescription')}
                 </p>
                 <Link href={`https://wa.me/0347804228`} target={'_blank'}>
-                  <Button className='mt-2 w-full bg-green-500 text-white hover:bg-green-600'>
+                  <Button className='mt-2 bg-green-500 text-white hover:bg-green-600'>
+                    Whatsapp
                     <Image
                       src={'/svg/whatsapp-svgrepo-com.svg'}
                       alt={'Whatsapp icon'}

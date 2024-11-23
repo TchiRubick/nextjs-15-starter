@@ -8,8 +8,8 @@ export default {
     pending: 'En attente',
     validated: 'Validée',
     canceled: 'Annulée',
-    startDate: 'Débute le',
-    endDate: 'Termine le',
+    startDate: 'Début le',
+    endDate: 'Fin le',
     noReservations: "Vous n'avez pas encore de réservations.",
     bookNow: 'Réserver maintenant',
   },
@@ -17,7 +17,7 @@ export default {
     home: 'Accueil',
     about: 'À propos',
     reservations: 'Réservations',
-    gallery: 'Gallerie',
+    gallery: 'Galerie',
     contact: 'Contact',
     login: 'Connexion',
     signup: "S'inscrire",
@@ -28,7 +28,7 @@ export default {
       "Modifiez vos informations personnelles et vos informations d'adresse.",
     reservationRecap: 'Récapitulatif de vos réservations',
     reservationRecapDescription:
-      'Vous pouvez consulter ici votre récapitulatif de vos réservations.',
+      'Vous pouvez consulter ici le récapitulatif de vos réservations.',
     admin: 'Admin',
     logout: 'Déconnexion',
   },
@@ -50,6 +50,14 @@ export default {
     dateRangeLabel: 'Dates de votre séjour',
     saveButton: 'Enregistrer',
     cancelButton: 'Annuler',
+    confirmMessage:
+      'Vous venez de réserver votre séjour. \nNous vous contacterons pour la confirmation. \nVous pouvez suivre la progression depuis votre profil',
+    failedMessage:
+      'Dates non disponibles. Veuillez choisir une autre date ou un autre chalet.',
+    recap: 'Récapitulatif',
+    number: 'Numéro du chalet',
+    name: 'Nom du chalet',
+    ttc: 'Prix total de votre séjour',
   },
   propertyDetails: {
     noAvailability: 'Aucune disponibilité trouvée',
@@ -59,7 +67,7 @@ export default {
     contact: 'Contact',
   },
   properties: {
-    bookingTitle: 'Réserver votre séjour',
+    bookingTitle: 'Réservez votre séjour',
     description:
       'Découvrez nos chalets disponibles et trouvez votre havre de paix.',
     noResults: 'Veuillez modifier vos critères de recherche.',
@@ -69,6 +77,10 @@ export default {
     maxPersons: '{count} personne(s) max',
     checkInTime: 'Check-in à partir de 15h',
     nightlyRate: 'Nuit: {price} Euros',
+    reservationLabelValidated: 'Réservez du {start} au {end}',
+    reservationLabelPending: 'Réservation en attente pour {start} au {end}',
+    reservationLabelRejected: 'Réservation refusée',
+    unavailable: 'Indisponible pour ces dates',
   },
   gallery: {
     title: 'Chalets d’Exception',
@@ -103,7 +115,7 @@ export default {
     email: 'Email',
     subject: 'Objet',
     message: 'Message',
-    bookMeetingButton: 'Réserver la réunion',
+    bookMeetingButton: 'Envoyer',
   },
   auth: {
     login: 'Connexion',
@@ -309,7 +321,7 @@ export default {
     view: 'Vue',
     activities: 'Activités',
     concertsShows: 'Concerts/Spectacles',
-    bikeTours: 'Visites  vélo',
+    bikeTours: 'Visites à vélo',
     walkingTours: 'Balades à pied',
     skiInOut: 'Accès skis aux pieds',
     skiPassSales: 'Vente de forfaits de ski',
