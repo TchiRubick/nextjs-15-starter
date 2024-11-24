@@ -4,6 +4,7 @@ import { ReactQueryProviders } from '@/providers/react-query-provider';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import Script from 'next/script';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { Suspense } from 'react';
 import 'react-multi-date-picker/styles/colors/green.css';
@@ -95,6 +96,11 @@ export default async function RootLayout({
           </HydrationBoundary>
         </ReactQueryProviders>
       </LangueProvider>
+      <Script
+        strategy='afterInteractive'
+        src='https://cloud.umami.is/script.js'
+        data-website-id='39f403e9-434f-4ab6-8c12-5b282455e7d9'
+      />
     </html>
   );
 }
