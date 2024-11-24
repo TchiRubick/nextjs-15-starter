@@ -52,15 +52,3 @@ jobs:
 
       - name: Run type check
         run: pnpm typecheck
-
-      - name: Run DB migrations
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          MINIO_ACCESS_KEY: ${{ secrets.MINIO_ACCESS_KEY }}
-          MINIO_SECRET_KEY: ${{ secrets.MINIO_SECRET_KEY }}
-          MINIO_BUCKET_NAME: ${{ secrets.MINIO_BUCKET_NAME }}
-          MINIO_REGION: ${{ secrets.MINIO_REGION }}
-          MINIO_DOMAIN: ${{ secrets.MINIO_DOMAIN }}
-          MINIO_SSL: ${{ secrets.MINIO_SSL }}
-          MINIO_PORT: ${{ secrets.MINIO_PORT }}
-        run: pnpm db:migrate
