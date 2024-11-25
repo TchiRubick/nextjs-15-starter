@@ -26,7 +26,7 @@ import { useScopedI18n } from '@/locales/client';
 import { LogOut, Menu, ShieldCheck, User, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { DetailsProfileForm } from './details-profile-form';
 import { LanguagePicker } from './languages-picker';
 import { ReservationRecap } from './reservation-recap';
@@ -74,13 +74,18 @@ export const Header = () => {
   const [isOpen, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
-
-  const mobileDataFilterTab = navigationItems.filter(
-    (tab) => tab.href != '/auth' && tab.href != '/auth/signup'
-  );
-
   const pathname = usePathname();
   const { data, isFetching } = useSession();
+
+  const mobileMenuItems = useMemo(() => {
+    if (data) {
+      return navigationItems.filter(
+        (tab) => tab.href !== '/auth' && tab.href !== '/auth/signup'
+      );
+    }
+    return navigationItems;
+  }, [data, navigationItems]);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -234,12 +239,11 @@ export const Header = () => {
             {isOpen ? <X className='h-5 w-5' /> : <Menu className='h-5 w-5' />}
           </Button>
         </div>
-
         {/* Mobile Menu */}
-        {isOpen && !data && !isFetching && (
+        {isOpen && (
           <div className='absolute right-0 top-20 w-full bg-slate-900 p-4 lg:hidden'>
             <nav className='flex flex-col gap-4'>
-              {navigationItems.map((item) => (
+              {mobileMenuItems.map((item) => (
                 <Link
                   key={item.title}
                   href={item.href}
@@ -251,21 +255,7 @@ export const Header = () => {
             </nav>
           </div>
         )}
-        {isOpen && data && (
-          <div className='absolute right-0 top-20 w-full bg-slate-900 p-4 lg:hidden'>
-            <nav className='flex flex-col gap-4'>
-              {mobileDataFilterTab.map((item) => (
-                <Link
-                  key={item.title}
-                  href={item.href}
-                  className='text-lg text-white/90 hover:text-white'
-                >
-                  {item.title}
-                </Link>
-              ))}
-            </nav>
-          </div>
-        )}
+
       </div>
     </header>
   );
