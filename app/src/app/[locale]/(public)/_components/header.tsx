@@ -76,7 +76,7 @@ export const Header = () => {
   const [sheetOpen, setSheetOpen] = useState(false);
 
   const mobileDataFilterTab = navigationItems.filter(
-    (tab) => tab.href != '/login' && tab.href != '/signup'
+    (tab) => tab.href != '/auth' && tab.href != '/auth/signup'
   );
 
   const pathname = usePathname();
