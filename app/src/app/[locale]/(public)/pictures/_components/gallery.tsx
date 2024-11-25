@@ -24,10 +24,13 @@ export const Gallery = ({ images }: props) => {
   const currentImages = images.slice(0, offset + NUMBER_IMAGE_APPEAR_FIRST);
   return (
     <div>
-      <div className='flex justify-center'>
-        <h1 className='text-4xl font-semibold md:text-6xl md:font-semibold'>
+      <div className='container mx-auto mb-16 mt-16 flex flex-col gap-8 text-center'>
+        <h1 className='mb-4 text-4xl font-semibold tracking-tight text-foreground md:text-7xl'>
           {tGallery('title')}
         </h1>
+        <div className='text-lg text-slate-600'>
+          <h6>{tGallery('subtitle')}</h6>
+        </div>
       </div>
       <div className='font-regular md:font-regular text-center text-2xl md:mb-3 md:mt-5 md:text-3xl lg:ml-24 lg:text-start'>
         <h6>{tGallery('subtitle')}</h6>
