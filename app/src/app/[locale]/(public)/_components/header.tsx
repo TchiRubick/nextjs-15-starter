@@ -75,6 +75,10 @@ export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
 
+  const mobileDataFilterTab = navigationItems.filter(
+    (tab) => tab.href != '/login' && tab.href != '/signup'
+  );
+
   const pathname = usePathname();
   const { data, isFetching } = useSession();
 
@@ -137,7 +141,7 @@ export const Header = () => {
             </Button>
           </Link>
           <div className='hidden h-6 border-r border-white/20 md:inline-block'></div>
-          <div className='hidden gap-2 lg:flex lg:items-center'>
+          <div className='flex items-center gap-2'>
             {data && !isFetching && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -200,7 +204,7 @@ export const Header = () => {
               </DropdownMenu>
             )}
             {!data && !isFetching && (
-              <div>
+              <div className='hidden lg:block'>
                 <Link href='/auth' prefetch>
                   <Button
                     variant='ghost'
@@ -232,10 +236,25 @@ export const Header = () => {
         </div>
 
         {/* Mobile Menu */}
-        {isOpen && (
-          <div className='absolute right-0 top-20 w-full bg-emerald-950/60 p-4 backdrop-blur-sm lg:hidden'>
+        {isOpen && !data && !isFetching && (
+          <div className='absolute right-0 top-20 w-full bg-slate-900 p-4 lg:hidden'>
             <nav className='flex flex-col gap-4'>
               {navigationItems.map((item) => (
+                <Link
+                  key={item.title}
+                  href={item.href}
+                  className='text-lg text-white/90 hover:text-white'
+                >
+                  {item.title}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        )}
+        {isOpen && data && (
+          <div className='absolute right-0 top-20 w-full bg-slate-900 p-4 lg:hidden'>
+            <nav className='flex flex-col gap-4'>
+              {mobileDataFilterTab.map((item) => (
                 <Link
                   key={item.title}
                   href={item.href}
