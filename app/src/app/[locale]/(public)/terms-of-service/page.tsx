@@ -1,4 +1,6 @@
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Metadata } from 'next';
+import { getScopedI18n } from '@/locales/server';
 
 export const metadata: Metadata = {
   title: 'Terms of Service | Refuges des Hauts',
@@ -6,50 +8,40 @@ export const metadata: Metadata = {
     'Read our terms of service to understand the rules of using our website.',
 };
 
-const TermsOfService = () => {
+const TermsOfService = async () => {
+  const [tTermsOfService, tTermsOfServiceDescription] = await Promise.all([
+    getScopedI18n('termsOfService'),
+    getScopedI18n('termsOfService.description'),
+  ]);
   return (
-    <main className='container mx-auto py-20 lg:py-40'>
-      <h1 className='text-3xl font-bold'>Terms of Service</h1>
+    <Card className='mx-auto mt-10 w-5/6 border-none'>
+      <CardHeader>
+        <CardTitle className='font-regular text-center text-xl tracking-tighter md:text-3xl lg:max-w-xl lg:text-5xl xl:text-left'>
+          {tTermsOfService('title')}
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <p className='mt-6'>{tTermsOfService('subtitle')}</p>
 
-      <p className='mt-6'>
-        Welcome to Refuges des Hauts. By accessing our website, you agree to
-        comply with and be bound by the following terms and conditions of use.
-      </p>
-
-      <h2 className='mt-12 text-2xl font-bold'>Use of the Site</h2>
-
-      <p className='mt-6'>
-        You agree to use the site only for lawful purposes and in a way that
-        does not infringe the rights of, restrict, or inhibit anyone else&apos;s
-        use and enjoyment of the site.
-      </p>
-
-      <h2 className='mt-12 text-2xl font-bold'>Intellectual Property</h2>
-
-      <p className='mt-6'>
-        All content on this site, including text, graphics, logos, icons,
-        images, and software, is the property of Refuges des Hauts or its
-        content suppliers and is protected by international copyright laws.
-      </p>
-
-      <h2 className='mt-12 text-2xl font-bold'>Limitation of Liability</h2>
-
-      <p className='mt-6'>
-        Refuges des Hauts will not be liable for any damages arising from the
-        use of or inability to use the site or any content or services provided
-        through the site.
-      </p>
-
-      <h2 className='mt-12 text-2xl font-bold'>Changes to the Terms</h2>
-
-      <p className='mt-6'>
-        We may revise these terms of service at any time by amending this page.
-        Please check this page from time to time to take notice of any changes
-        we made, as they are binding on you.
-      </p>
-
-      <p className='mt-12'>Last updated: 2024-11-12</p>
-    </main>
+        {Array(4)
+          .fill(0)
+          .map((_, index) => (
+            <div key={index} className='mt-6'>
+              <h2 className='mt-12 text-2xl font-bold'>
+                {tTermsOfServiceDescription(
+                  `${index}.title` as keyof typeof tTermsOfServiceDescription
+                )}
+              </h2>
+              <p className='mt-6'>
+                {tTermsOfServiceDescription(
+                  `${index}.description` as keyof typeof tTermsOfServiceDescription
+                )}
+              </p>
+            </div>
+          ))}
+        <p className='mt-12'>{tTermsOfService('lastUpdated')}</p>
+      </CardContent>
+    </Card>
   );
 };
 

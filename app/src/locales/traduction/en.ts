@@ -361,6 +361,62 @@ export default {
     zipCodePlaceholder: 'Enter your zip code',
     saveButton: 'Save',
   },
+  termsOfService: {
+    title: 'Terms of Service',
+    subtitle:
+      'Read our terms of service to understand the rules of using our website.',
+    description: [
+      {
+        title: 'Use of the Site',
+        description:
+          'You agree to use the site only for lawful purposes and in a way that does not infringe the rights of, restrict, or inhibit anyone else’s use and enjoyment of the site.',
+      },
+      {
+        title: 'Intellectual Property',
+        description:
+          'All content on this site, including text, graphics, logos, icons, images, and software, is the property of Refuges des Hauts or its content suppliers and is protected by international copyright laws.',
+      },
+      {
+        title: 'Limitation of Liability',
+        description:
+          'Refuges des Hauts will not be liable for any damages arising from the use of or inability to use the site or any content or services provided through the site.',
+      },
+      {
+        title: 'Changes to the Terms',
+        description:
+          'We may revise these terms of service at any time by amending this page. Please check this page from time to time to take notice of any changes we made, as they are binding on you.',
+      },
+    ],
+    lastUpdated: 'Last updated: 2024-11-12',
+  },
+  privacyPolicy: {
+    title: 'Privacy Policy',
+    subtitle:
+      'At Refuges des Hauts, we take your privacy seriously and are committed to protecting your personal information. In this sense, this privacy policy aims to inform you about the way we collect, store, and use your personal information on our website.',
+    description: [
+      {
+        title: 'Information collected',
+        description:
+          'When you use our website, we collect personal information such as your name, email address, IP address, and other navigational information. This information is used solely for providing you with a better service and does not get shared with third parties without your consent.',
+      },
+      {
+        title: 'Use of information',
+        description:
+          'The information collected is used to provide you with a better service and improve your experience on our website. It is not shared with third parties without your consent.',
+      },
+      {
+        title: 'Information Security',
+        description:
+          'We take the security of your personal information seriously and take appropriate measures to protect it. However, we cannot guarantee the security of all information, as the transmission of data through the Internet may not be fully secure.',
+      },
+      {
+        title: 'Changes in the privacy policy',
+        description:
+          'We may modify this privacy policy at any time and without prior notice. Any changes will be posted on this page and take effect immediately.',
+      },
+    ],
+    lastUpdated: 'Last updated: 12 November 2024',
+  },
   languagePicker: {
     en: 'English',
     fr: 'French',

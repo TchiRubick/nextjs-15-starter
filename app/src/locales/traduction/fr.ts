@@ -372,6 +372,62 @@ export default {
     zipCodePlaceholder: 'Entrez votre code postal',
     saveButton: 'Enregistrer',
   },
+  termsOfService: {
+    title: "Conditions générales d'utilisation",
+    subtitle:
+      "Consultez nos conditions générales d'utilisation pour comprendre les règles d'utilisation de notre site web.",
+    description: [
+      {
+        title: 'Utilisation du site',
+        description:
+          'Vous acceptez d’utiliser le site uniquement à des fins légales et dans un cadre qui ne viole pas les droits de toute personne, y compris la restriction ou l’interdiction de toute utilisation et d’y accéder.',
+      },
+      {
+        title: 'Propriété Intellectuelle',
+        description:
+          'Tout le contenu de ce site, y compris le texte, les graphiques, les logos, les icônes, les images et les logiciels, est la propriété de Refuges des Hauts ou de ses fournisseurs de contenu et est protégé par les lois sur la propriété intellectuelle internationale.',
+      },
+      {
+        title: 'Responsabilité de Refuges des Hauts',
+        description:
+          'Refuges des Hauts ne sera pas tenu responsable des dommages causés par l’utilisation ou l’incapacité à utiliser le site ou par tout contenu ou services fournis par le site.',
+      },
+      {
+        title: "Modifications des conditions générales d'utilisation",
+        description:
+          "Nous pouvons modifier ces conditions générales d'utilisation à tout moment en modifiant cette page. Veuillez vérifier cette page régulièrement pour prendre connaissance des modifications que nous avons apportées, car elles sont fondamentales pour vous.",
+      },
+    ],
+    lastUpdated: 'Dernière mise à jour : 12 novembre 2024',
+  },
+  privacyPolicy: {
+    title: 'Politique de confidentialité',
+    subtitle:
+      'Chez Refuges des Hauts, nous prenons votre vie privée au sérieux et nous engageons à protéger vos informations personnelles. En ce sens, cette politique de confidentialité vise à vous informer sur la manière dont nous collectons, stockons et utilisons vos informations personnelles sur notre site Web.',
+    description: [
+      {
+        title: 'Informations collectées',
+        description:
+          " En utilisant notre site Web, nous collectons des informations personnelles telles que le nom, l'adresse e-mail, l'adresse IP et d'autres informations de navigation. Cette information est utilisée uniquement pour vous fournir un meilleur service et ne sera pas partagée avec des tiers sans votre consentement.",
+      },
+      {
+        title: 'Utilisation des informations',
+        description:
+          ' Les informations collectées sont utilisées pour vous fournir un meilleur service et améliorer votre expérience sur notre site Web. Elles ne seront pas partagées avec des tiers sans votre consentement.',
+      },
+      {
+        title: "Sécurité de l'information",
+        description:
+          "Nous nous engageons à protéger vos informations personnelles grâce à des mesures de sécurité adéquates. Cependant, nous ne pouvons pas garantir la sécurité totale de l'information, car la transmission de données via Internet ne peut pas être entièrement sécurisée.",
+      },
+      {
+        title: 'Modifications de la politique de confidentialité',
+        description:
+          'Nous pouvons modifier cette politique de confidentialité à tout moment et sans préavis. Tout changement sera publié sur cette page et entrera en vigueur immédiatement.',
+      },
+    ],
+    lastUpdated: 'Dernière mise à jour : 12 novembre 2024',
+  },
   languagePicker: {
     en: 'Anglais',
     fr: 'Français',
