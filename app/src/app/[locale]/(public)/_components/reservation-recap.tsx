@@ -37,7 +37,7 @@ export const ReservationRecap = () => {
   };
 
   return (
-    <div className='flex flex-col gap-2'>
+    <div className='mt-4 flex flex-col gap-2'>
       {schedules && schedules.length > 0 ? (
         <div className='flex flex-col gap-2'>
           {schedules?.map((schedule) => (
@@ -52,11 +52,11 @@ export const ReservationRecap = () => {
                       <Badge
                         className={`${
                           schedule.status === 'pending'
-                            ? 'bg-yellow-500'
+                            ? 'animate-pulse bg-yellow-500'
                             : schedule.status === 'validated'
                               ? 'bg-green-500'
                               : 'bg-red-500'
-                        } mt-2 h-4 w-4 animate-pulse cursor-pointer items-center rounded-full p-1`}
+                        } h-4 w-fit cursor-pointer items-center rounded-full p-1`}
                       >
                         {schedule.id}
                       </Badge>
@@ -84,7 +84,7 @@ export const ReservationRecap = () => {
                     {format(schedule.startDate, 'd MMM, yyyy')}
                   </Label>
                 </p>
-                <p className='mt-2 text-muted-foreground'>
+                <p className='mt-1 text-muted-foreground'>
                   {tReservationRecap('endDate')}
                   <Label className='ml-1 font-bold text-primary'>
                     {format(schedule.endDate, 'd MMM, yyyy')}
@@ -93,7 +93,7 @@ export const ReservationRecap = () => {
                 <Separator />
               </div>
               <X
-                className='flex h-4 w-4 cursor-pointer items-center justify-center text-muted-foreground'
+                className={`flex h-4 w-4 cursor-pointer items-center justify-center text-muted-foreground ${schedule.status === 'validated' ? 'hidden' : 'block'} `}
                 onClick={() => handleDeleteSchedule(schedule.id)}
               />
             </div>
