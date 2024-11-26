@@ -109,14 +109,17 @@ export const ScheduleForm = ({
 
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
 
-  const handleDateChange = (dates: Object[]) => {
-    if (Array.isArray(dates) && dates.length === 2) {
+  const handleDateChange = (dates: DateObject[]) => {
+    if (
+      Array.isArray(dates) &&
+      dates.length === 2 &&
+      dates[0].dayOfYear != dates[1].dayOfYear
+    ) {
       setIsSaveDisabled(false);
     } else {
       setIsSaveDisabled(true);
     }
   };
-
 
   return (
     <div>
@@ -154,28 +157,23 @@ export const ScheduleForm = ({
           <div className='flex flex-col gap-y-2'>
             <Label htmlFor='date'>{tScheduleForm('dateRangeLabel')}</Label>
             <Controller
-              name="date_range"
+              name='date_range'
               control={control}
               render={({ field }) => (
                 <DatePicker
                   value={field.value}
                   onChange={(dates) => {
                     handleDateChange(dates);
-                    if (Array.isArray(dates) && dates.length === 2) {
-                      field.onChange(dates);
-                    } else {
-                      toast({
-                        variant: 'destructive',
-                        title: 'Sélection invalide',
-                        description: 'Vous devez sélectionner exactement deux dates.',
-                      });
-                    }
                   }}
                   range
-                  format="DD-MM-YYYY"
+                  format='DD-MM-YYYY'
                   minDate={new Date()}
-                  className="green"
-                  inputClass="w-full text-emerald-950 h-12 w-full border-2 cursor-pointer pl-8 placeholder:text-slate-500 focus:ring-2 focus:ring-primary rounded-md"
+                  className={isSaveDisabled ? 'red' : 'green'}
+                  inputClass={
+                    isSaveDisabled
+                      ? 'w-full text-emerald-950 h-12 w-full border-2 cursor-pointer pl-8 placeholder:text-slate-500 focus:ring-2 focus:ring-primary rounded-md border-red-500'
+                      : 'w-full text-emerald-950 h-12 w-full border-2 cursor-pointer pl-8 placeholder:text-slate-500 focus:ring-2 focus:ring-primary rounded-md'
+                  }
                 />
               )}
             />
