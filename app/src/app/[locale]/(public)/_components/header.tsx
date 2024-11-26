@@ -86,7 +86,6 @@ export const Header = () => {
     return navigationItems;
   }, [data, navigationItems]);
 
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -255,7 +254,6 @@ export const Header = () => {
             </nav>
           </div>
         )}
-
       </div>
     </header>
   );
