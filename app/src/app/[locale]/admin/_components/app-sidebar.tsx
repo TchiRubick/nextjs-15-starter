@@ -24,7 +24,7 @@ const items = [
     icon: CalendarRange,
   },
   {
-    title: 'Chalets',
+    title: 'Mes chalets',
     url: '/admin/products',
     icon: Target,
   },

@@ -278,6 +278,7 @@ export const BookCalendar = () => {
                 )}
                 <Button
                   variant='destructive'
+                  className={`${selectedAvailability.status === 'refused' ? 'hidden' : 'flex'}`}
                   onClick={() =>
                     handleStatusChange(selectedAvailability.id, 'refused')
                   }

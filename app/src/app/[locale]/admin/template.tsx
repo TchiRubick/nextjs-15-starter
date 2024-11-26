@@ -6,7 +6,7 @@ export const unstable_noStore = true;
 export default function Template({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <SidebarProvider defaultOpen={false}>
+      <SidebarProvider>
         <AppSidebar />
         {children}
       </SidebarProvider>
