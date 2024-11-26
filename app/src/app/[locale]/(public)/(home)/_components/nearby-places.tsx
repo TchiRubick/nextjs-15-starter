@@ -44,9 +44,9 @@ export function NearbyPlaces() {
           </h3>
         </div>
       </div>
-      <div className='flex flex-row items-center justify-center gap-16'>
+      <div className='flex flex-row items-center justify-center gap-16 px-6'>
         <Card className='mx-2 my-10 w-full sm:mx-auto'>
-          <CardContent className='grid gap-6 py-8'>
+          <CardContent className='grid gap-6 py-8 sm:grid-cols-2 lg:grid-cols-1'>
             <div className='space-y-4'>
               <div className='flex items-center gap-2'>
                 <MapPin className='h-5 w-5' />
@@ -152,7 +152,7 @@ export function NearbyPlaces() {
             </p>
           </CardContent>
         </Card>
-        <div className='mx-auto my-10 hidden h-full w-full max-w-2xl sm:block'>
+        <div className='mx-auto my-10 hidden h-full w-full max-w-2xl sm:hidden lg:block'>
           <div className='grid grid-cols-2 gap-8'>
             <Image
               src='/images/123456788.jpg'

@@ -126,8 +126,8 @@ const About = async () => {
               </Link>{' '}
             </p>
           </div>
+          <Location />
         </CardContent>
-        <Location />
       </Card>
     </main>
   );
