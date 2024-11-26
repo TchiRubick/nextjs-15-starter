@@ -24,6 +24,7 @@ import { useSession } from '@/hooks/useSession';
 import { cn } from '@/lib/utils';
 import { useScopedI18n } from '@/locales/client';
 import { LogOut, Menu, ShieldCheck, User, X } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
@@ -113,7 +114,7 @@ export const Header = () => {
     >
       <div className='container relative mx-auto flex h-20 items-center justify-between px-4'>
         <Link href='/' className='text-xl font-semibold text-white'>
-          {tHeader('siteTitle')}
+          <Image src='/logo.svg' alt='logo' width={250} height={250} />
         </Link>
 
         {/* Desktop Navigation */}

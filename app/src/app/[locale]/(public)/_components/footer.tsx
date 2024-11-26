@@ -64,7 +64,7 @@ export const Footer = () => {
           <div className='flex flex-col items-start gap-8'>
             <div className='flex flex-col gap-2'>
               <h2 className='font-regular max-w-xl text-left text-3xl tracking-tighter md:text-5xl'>
-                Refuges des hauts
+                <Image src='/logo.svg' alt='logo' width={400} height={400} />
               </h2>
               <p className='max-w-lg text-left text-lg leading-relaxed tracking-tight text-background/75'>
                 La destination de refuges confortables à Bussang, proche des
