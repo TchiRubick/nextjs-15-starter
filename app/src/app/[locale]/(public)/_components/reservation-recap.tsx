@@ -16,8 +16,10 @@ import { useSession } from '@/hooks/useSession';
 import { useScopedI18n } from '@/locales/client';
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
-import { MoveRight } from 'lucide-react';
+import { MoveRight, X } from 'lucide-react';
 import Link from 'next/link';
+import { useMutationAction } from '@packages/fetch-action/index';
+import { deleteScheduleByUserIdMutation } from '@/actions/schedule.action';
 
 export const ReservationRecap = () => {
   const tReservationRecap = useScopedI18n('reservationRecap');
@@ -27,17 +29,23 @@ export const ReservationRecap = () => {
     queryKey: [SCHEDULES_QUERY_KEY, userId],
     queryFn: async () => await getScheduleByUserIdQuery(userId),
   });
+  const { mutateAsync } = useMutationAction(deleteScheduleByUserIdMutation);
+
+  const handleDeleteSchedule = async (scheduleId: number) => {
+    await mutateAsync(scheduleId);
+    window.location.reload();
+  };
 
   return (
     <div className='flex flex-col gap-2'>
       {schedules && schedules.length > 0 ? (
         <div className='flex flex-col gap-2'>
           {schedules?.map((schedule) => (
-            <div key={schedule.id}>
-              <div>
+            <div key={schedule.id} className='flex justify-between gap-2 pr-4'>
+              <div className='w-full'>
                 <TooltipProvider>
                   <Tooltip>
-                    <Label className='text-muted-foreground'>
+                    <Label className='mr-1 text-muted-foreground'>
                       {tReservationRecap('reservationNumber')}:
                     </Label>
                     <TooltipTrigger asChild>
@@ -48,7 +56,7 @@ export const ReservationRecap = () => {
                             : schedule.status === 'validated'
                               ? 'bg-green-500'
                               : 'bg-red-500'
-                        } mt-2 h-4 w-4 cursor-pointer items-center rounded-full p-1`}
+                        } mt-2 h-4 w-4 animate-pulse cursor-pointer items-center rounded-full p-1`}
                       >
                         {schedule.id}
                       </Badge>
@@ -72,18 +80,22 @@ export const ReservationRecap = () => {
                 </TooltipProvider>
                 <p className='text-muted-foreground'>
                   {tReservationRecap('startDate')}
-                  <Label className='font-bold text-primary'>
+                  <Label className='ml-1 font-bold text-primary'>
                     {format(schedule.startDate, 'd MMM, yyyy')}
                   </Label>
                 </p>
                 <p className='mt-2 text-muted-foreground'>
                   {tReservationRecap('endDate')}
-                  <Label className='font-bold text-primary'>
+                  <Label className='ml-1 font-bold text-primary'>
                     {format(schedule.endDate, 'd MMM, yyyy')}
                   </Label>
                 </p>
+                <Separator />
               </div>
-              <Separator />
+              <X
+                className='flex h-4 w-4 cursor-pointer items-center justify-center text-muted-foreground'
+                onClick={() => handleDeleteSchedule(schedule.id)}
+              />
             </div>
           ))}
         </div>
