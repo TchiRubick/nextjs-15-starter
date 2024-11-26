@@ -5,6 +5,7 @@ import { Label } from '@/components/ui/label';
 import { getScopedI18n } from '@/locales/server';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Location } from '../(home)/_components/location';
 
 const About = async () => {
   const tAbout = await getScopedI18n('about');
@@ -125,6 +126,7 @@ const About = async () => {
               </Link>{' '}
             </p>
           </div>
+          <Location />
         </CardContent>
       </Card>
     </main>

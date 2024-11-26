@@ -15,7 +15,7 @@ export const Location = () => (
         zoom: 15,
       }}
       style={{
-        width: 650,
+        width: '100%',
         height: 800,
         borderRadius: 10,
         boxShadow: '0 0 1px #000000',
