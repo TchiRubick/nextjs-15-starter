@@ -107,6 +107,20 @@ export const ScheduleForm = ({
     return property.price * intervals.length;
   }, [dateRange, property.price]);
 
+  const [isSaveDisabled, setIsSaveDisabled] = useState(true);
+
+  const handleDateChange = (dates: DateObject[]) => {
+    if (
+      Array.isArray(dates) &&
+      dates.length === 2 &&
+      dates[0].dayOfYear != dates[1].dayOfYear
+    ) {
+      setIsSaveDisabled(false);
+    } else {
+      setIsSaveDisabled(true);
+    }
+  };
+
   return (
     <div>
       <Sheet onOpenChange={handleOpenChange} open={isSheetOpen}>
@@ -148,22 +162,27 @@ export const ScheduleForm = ({
               render={({ field }) => (
                 <DatePicker
                   value={field.value}
-                  onChange={field.onChange}
+                  onChange={(dates) => {
+                    handleDateChange(dates);
+                  }}
                   range
                   format='DD-MM-YYYY'
                   minDate={new Date()}
-                  className='green'
-                  inputClass=' w-full  text-emerald-950 h-12 w-full  border-2 cursor-pointer pl-8 placeholder:text-slate-500 focus:ring-2 focus:ring-primary rounded-md'
+                  className={isSaveDisabled ? 'red' : 'green'}
+                  inputClass={
+                    isSaveDisabled
+                      ? 'w-full text-emerald-950 h-12 w-full border-2 cursor-pointer pl-8 placeholder:text-slate-500 focus:ring-2 focus:ring-primary rounded-md border-red-500'
+                      : 'w-full text-emerald-950 h-12 w-full border-2 cursor-pointer pl-8 placeholder:text-slate-500 focus:ring-2 focus:ring-primary rounded-md'
+                  }
                 />
               )}
             />
           </div>
-
           <SheetFooter className='mt-3 flex flex-col'>
             <Button
               type='submit'
               onClick={handleSubmit(onSubmit)}
-              disabled={isPending}
+              disabled={isPending || isSaveDisabled}
               className='w-full'
             >
               {isPending ? (

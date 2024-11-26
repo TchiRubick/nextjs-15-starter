@@ -8,9 +8,9 @@ import Script from 'next/script';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { Suspense } from 'react';
 import 'react-multi-date-picker/styles/colors/green.css';
+import 'react-multi-date-picker/styles/colors/red.css';
 import '../globals.css';
 import { Loader } from './(public)/_components/loader';
-
 const geistSans = localFont({
   src: '../fonts/GeistVF.woff',
   variable: '--font-geist-sans',
