@@ -75,7 +75,7 @@ export const ScheduleForm = ({
     defaultValues: formDefaultValue,
   });
 
-  const dateRange = watch('date_range');
+  const dateRange = watch('date_range', formDefaultValue.date_range);
 
   const onSubmit = async (data: { date_range: [DateObject, DateObject] }) => {
     const startDate = data.date_range[0].format('YYYY-MM-DD');
@@ -98,8 +98,9 @@ export const ScheduleForm = ({
   };
 
   const totalPrice = useMemo(() => {
-    const startDate = new Date(dateRange[0].format('YYYY-MM-DD'));
-    const endDate = new Date(dateRange[1].format('YYYY-MM-DD'));
+    const [start, end] = dateRange;
+    const startDate = new Date(start.format('YYYY-MM-DD'));
+    const endDate = new Date((end ?? start).format('YYYY-MM-DD'));
 
     const intervals = eachDayOfInterval({ start: startDate, end: endDate });
 
@@ -151,6 +152,7 @@ export const ScheduleForm = ({
                   range
                   format='DD-MM-YYYY'
                   minDate={new Date()}
+                  className='green'
                   inputClass=' w-full  text-emerald-950 h-12 w-full  border-2 cursor-pointer pl-8 placeholder:text-slate-500 focus:ring-2 focus:ring-primary rounded-md'
                 />
               )}

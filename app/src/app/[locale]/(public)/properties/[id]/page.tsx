@@ -105,7 +105,7 @@ const PropertyDetails = async ({
                 {tPropertyDetails('amenitiesTitle')}
               </h2>
               <div className='grid grid-cols-2 gap-4 md:grid-cols-3'>
-                {property.amenities.map((amenity) => (
+                {property.amenities.sort((a, b) => a.amenity.name.localeCompare(b.amenity.name)).map((amenity) => (
                   <div
                     key={amenity.id}
                     className='flex items-center rounded-lg bg-muted p-3'
