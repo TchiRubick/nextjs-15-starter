@@ -26,7 +26,7 @@ import { useScopedI18n } from '@/locales/client';
 import { LogOut, Menu, ShieldCheck, User, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { DetailsProfileForm } from './details-profile-form';
 import { LanguagePicker } from './languages-picker';
 import { ReservationRecap } from './reservation-recap';
@@ -74,9 +74,18 @@ export const Header = () => {
   const [isOpen, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
-
   const pathname = usePathname();
   const { data, isFetching } = useSession();
+
+  const mobileMenuItems = useMemo(() => {
+    if (data) {
+      return navigationItems.filter(
+        (tab) => tab.href !== '/auth' && tab.href !== '/auth/signup'
+      );
+    }
+    return navigationItems;
+  }, [data, navigationItems]);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -137,7 +146,7 @@ export const Header = () => {
             </Button>
           </Link>
           <div className='hidden h-6 border-r border-white/20 md:inline-block'></div>
-          <div className='hidden gap-2 lg:flex lg:items-center'>
+          <div className='flex items-center gap-2'>
             {data && !isFetching && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -200,7 +209,7 @@ export const Header = () => {
               </DropdownMenu>
             )}
             {!data && !isFetching && (
-              <div>
+              <div className='hidden lg:block'>
                 <Link href='/auth' prefetch>
                   <Button
                     variant='ghost'
@@ -230,12 +239,11 @@ export const Header = () => {
             {isOpen ? <X className='h-5 w-5' /> : <Menu className='h-5 w-5' />}
           </Button>
         </div>
-
         {/* Mobile Menu */}
         {isOpen && (
-          <div className='absolute right-0 top-20 w-full bg-emerald-950/60 p-4 backdrop-blur-sm lg:hidden'>
+          <div className='absolute right-0 top-20 w-full bg-slate-900 p-4 lg:hidden'>
             <nav className='flex flex-col gap-4'>
-              {navigationItems.map((item) => (
+              {mobileMenuItems.map((item) => (
                 <Link
                   key={item.title}
                   href={item.href}
@@ -247,6 +255,7 @@ export const Header = () => {
             </nav>
           </div>
         )}
+
       </div>
     </header>
   );
