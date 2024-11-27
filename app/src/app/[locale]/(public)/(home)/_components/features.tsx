@@ -176,13 +176,13 @@ export function Features() {
           <div className='mx-auto max-w-7xl'>
             <div className='flex flex-col gap-8 lg:flex-row'>
               {/* Left Panel - Categories */}
-              <Card className='lg:w-1/3'>
-                <CardContent className='p-6'>
+              <Card className="lg:w-1/3 max-h-[calc(100vh-20px)] overflow-auto">
+              <CardContent className='p-6'>
                   <h2 className='mb-6 text-2xl font-bold'>
                     {tFeatures('categories')}
                   </h2>
-                  <ScrollArea className='h-[600px] pr-4'>
-                    <div className='space-y-2'>
+                  <ScrollArea className="h-[500px] lg:h-[500px]">
+                  <div className='space-y-2'>
                       {amenities.map((category, index) => (
                         <button
                           key={index}
@@ -238,8 +238,8 @@ export function Features() {
                     </div>
                   </div>
 
-                  <ScrollArea className='h-[600px]'>
-                    <div className='grid gap-3 pr-4'>
+                  <ScrollArea className="h-[500px] lg:h-[500px]">
+                  <div className='grid gap-3 pr-4'>
                       {filteredItems.map((item, i) => (
                         <div
                           key={i}
