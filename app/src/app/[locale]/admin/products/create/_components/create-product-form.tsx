@@ -59,7 +59,8 @@ export const CreateProductForm = () => {
       name: '',
       description: '',
       price: 0,
-      room: 1,
+      area: 0,
+      room: 0,
       bed: 0,
       bath: 0,
       maxPerson: 0,
@@ -107,30 +108,51 @@ export const CreateProductForm = () => {
                 </FormItem>
               )}
             />
-
-            <FormField
-              control={form.control}
-              name='price'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Prix</FormLabel>
-                  <FormControl>
-                    <Input
-                      onFocus={(e) =>
-                        e.target.value === '0' && (e.target.value = '')
-                      }
-                      type='number'
-                      placeholder='0'
-                      {...field}
-                      onChange={(e) => field.onChange(Number(e.target.value))}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
             <div className='grid grid-cols-2 gap-4'>
+              <FormField
+                control={form.control}
+                name='price'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Prix</FormLabel>
+                    <FormControl>
+                      <Input
+                        onFocus={(e) =>
+                          e.target.value === '0' && (e.target.value = '')
+                        }
+                        type='number'
+                        placeholder='0'
+                        {...field}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name='area'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Superficie</FormLabel>
+                    <FormControl>
+                      <Input
+                        onFocus={(e) =>
+                          e.target.value === '0' && (e.target.value = '')
+                        }
+                        type='number'
+                        min={1}
+                        placeholder='0'
+                        value={field.value ?? ''}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name='room'

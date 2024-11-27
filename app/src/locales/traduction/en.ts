@@ -327,6 +327,7 @@ export default {
     beds: '{count} bed(s)',
     baths: '{count} bath(s)',
     rooms: '{count} room(s)',
+    area: ' Area: {count} m²',
     maxPersons: '{count} person(s) max',
     checkInTime: 'Check-in from 3 PM',
     nightlyRate: 'Nightly: {price} Euros',
@@ -340,6 +341,7 @@ export default {
     baths: 'Bath(s)',
     fits: 'Fits {count} person(s)',
     rooms: 'Room(s)',
+    area: 'Chalet area',
   },
   detailsProfile: {
     successTitle: 'Success',

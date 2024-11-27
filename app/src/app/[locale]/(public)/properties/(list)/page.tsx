@@ -17,7 +17,7 @@ import {
   TooltipTrigger,
 } from '@radix-ui/react-tooltip';
 import { addDays, format } from 'date-fns';
-import { Bath, Bed, House, TriangleAlert, User } from 'lucide-react';
+import { AreaChart, Bath, Bed, House, TriangleAlert, User } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import qs from 'query-string';
@@ -170,7 +170,7 @@ export default async function Properties({
                       </div>
                     </div>
 
-                    <div className='grid grid-cols-4 gap-2 border-t border-slate-100 py-4'>
+                    <div className='grid grid-cols-5 gap-2 border-t border-slate-100 py-4'>
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger className='flex flex-col items-center gap-1'>
@@ -218,6 +218,20 @@ export default async function Properties({
                           <TooltipContent>
                             {tProperties('maxPersons', {
                               count: product.maxPerson,
+                            })}
+                          </TooltipContent>
+                        </Tooltip>
+
+                        <Tooltip>
+                          <TooltipTrigger className='flex flex-col items-center gap-1'>
+                            <AreaChart className='h-4 w-4 text-slate-600' />
+                            <span className='text-sm font-medium'>
+                              {product.area ?? '-'}
+                            </span>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            {tProperties('area', {
+                              count: product.area ?? '-',
                             })}
                           </TooltipContent>
                         </Tooltip>

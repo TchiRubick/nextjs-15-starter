@@ -75,6 +75,7 @@ export default {
     beds: '{count} lit(s)',
     baths: '{count} salle(s) de bain',
     rooms: '{count} chambre(s)',
+    area: 'Superficie: {count} m²',
     maxPersons: '{count} personne(s) max',
     checkInTime: 'Check-in à partir de 15h',
     nightlyRate: 'Nuit: {price} Euros',
@@ -351,6 +352,7 @@ export default {
     baths: 'Salle(s) de bain',
     fits: 'Convient à {count} personne(s)',
     rooms: 'Chambre(s)',
+    area: 'Superficie du chalet  ',
   },
   detailsProfile: {
     successTitle: 'Succès',

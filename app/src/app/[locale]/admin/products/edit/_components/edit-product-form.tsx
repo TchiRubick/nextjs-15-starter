@@ -38,6 +38,7 @@ interface Props {
     description: string;
     price: number;
     room: number;
+    area: number;
     bed: number;
     bath: number;
     maxPerson: number;
@@ -45,6 +46,15 @@ interface Props {
     amenities: string[];
   };
 }
+
+const inputs = [
+  { label: 'Pix', name: 'price', type: 'number' },
+  { label: 'Chambre', name: 'room', type: 'number' },
+  { label: 'Lit', name: 'bed', type: 'number' },
+  { label: 'Salle de bain', name: 'bath', type: 'number' },
+  { label: 'Nombre de personnes maximum', name: 'maxPerson', type: 'number' },
+  { label: 'Superficie en m²', name: 'area', type: 'number' },
+] as const;
 
 export const EditProductForm = ({ product, productId }: Props) => {
   const { register, handleSubmit, control } = useForm<Props['product']>({
@@ -101,27 +111,13 @@ export const EditProductForm = ({ product, productId }: Props) => {
               Nom du chalet
               <Input {...register('name')} type='text' />
             </Label>
-            <div className='mt-4 flex flex-col gap-5 md:grid md:grid-cols-5'>
-              <Label className='flex flex-col gap-2 text-base'>
-                Pix
-                <Input {...register('price')} type='number' />
-              </Label>
-              <Label className='flex flex-col gap-2 text-base'>
-                Chambre
-                <Input {...register('room')} type='number' />
-              </Label>
-              <Label className='flex flex-col gap-2 text-base'>
-                Lit
-                <Input {...register('bed')} type='number' />
-              </Label>
-              <Label className='flex flex-col gap-2 text-base'>
-                Salle de bain
-                <Input {...register('bath')} type='number' />
-              </Label>
-              <Label className='flex flex-col gap-2 text-base'>
-                Nombre de personnes maximum
-                <Input {...register('maxPerson')} type='number' />
-              </Label>
+            <div className='mt-4 flex flex-col gap-5 md:grid md:grid-cols-3'>
+              {inputs.map(({ label, name, type }) => (
+                <Label key={name} className='flex flex-col gap-2 text-base'>
+                  {label}
+                  <Input {...register(name)} type={type} />
+                </Label>
+              ))}
             </div>
             <Label className='mt-4 flex flex-col gap-2 text-base'>
               Description

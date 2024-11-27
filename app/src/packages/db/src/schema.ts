@@ -69,6 +69,7 @@ export const Product = pgTable('product', (t) => ({
   status: ProductStatus().default('draft'),
   // Accommodation details
   bed: t.integer('bed'),
+  area: t.integer('area'),
   bath: t.integer('bath'),
   maxPerson: t.integer('max_person'),
   room: t.integer('room').notNull(),
