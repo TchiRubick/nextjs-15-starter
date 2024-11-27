@@ -83,7 +83,7 @@ export const ImageUploader = ({ id }: { id: number }) => {
           (totalSize.value >= 5 && totalSize.suffix === 'mb') || isPending
         }
       >
-        {isPending ? <Loader2 className='animated-spin' /> : 'Enregistrer'}
+        {isPending ? <Loader2 className='animate-spin' /> : 'Enregistrer'}
       </Button>
     </form>
   );

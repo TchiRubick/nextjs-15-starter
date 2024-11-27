@@ -33,13 +33,27 @@ export function ImageGallery({ images }: ImageGalleryProps) {
 
   return (
     <div className='relative mb-8 h-[60vh] w-full overflow-hidden rounded-2xl'>
-      <Image
-        src={images[currentImageIndex].image.url}
-        alt={`Property image ${currentImageIndex + 1}`}
-        fill
-        className='object-cover'
-      />
-      <div className='absolute inset-0 bg-black/20' />
+      <div
+        className='flex h-full w-full transform transition-transform duration-500'
+        style={{
+          transform: `translateX(-${currentImageIndex * 100}%)`,
+        }}
+      >
+        {images.map((image, index) => (
+          <div
+            key={image.imageId}
+            className='relative h-full w-full flex-shrink-0'
+          >
+            <Image
+              src={image.image.url}
+              alt={`Property image ${index + 1}`}
+              fill
+              className='object-cover'
+            />
+            <div className='absolute inset-0 bg-black/20' />
+          </div>
+        ))}
+      </div>
       <Button
         variant='secondary'
         size='icon'

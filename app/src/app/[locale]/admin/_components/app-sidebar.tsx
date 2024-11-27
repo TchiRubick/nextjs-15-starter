@@ -9,7 +9,13 @@ import {
   SidebarMenuItem,
   SidebarTrigger,
 } from '@/components/ui/sidebar';
-import { Store, CalendarRange, Target, WashingMachine } from 'lucide-react';
+import {
+  Store,
+  CalendarRange,
+  WashingMachine,
+  House,
+  HousePlus,
+} from 'lucide-react';
 import Link from 'next/link';
 
 const items = [
@@ -26,7 +32,12 @@ const items = [
   {
     title: 'Mes chalets',
     url: '/admin/products',
-    icon: Target,
+    icon: House,
+  },
+  {
+    title: 'Creer un chalet',
+    url: '/admin/products/create',
+    icon: HousePlus,
   },
   {
     title: 'Equipements',

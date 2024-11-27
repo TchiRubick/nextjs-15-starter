@@ -43,7 +43,7 @@ const columns = (
         <DialogTrigger asChild>
           <Button variant='ghost' className='z-50 bg-none' disabled={isPending}>
             {isPending ? (
-              <Loader2 className='animated-spin' />
+              <Loader2 className='animate-spin' />
             ) : (
               <Trash2 className='h-4 w-4' color='red' />
             )}

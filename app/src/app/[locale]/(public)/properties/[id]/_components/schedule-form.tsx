@@ -179,7 +179,7 @@ export const ScheduleForm = ({
               className='w-full'
             >
               {isPending ? (
-                <Loader2 className='animated-spin' />
+                <Loader2 className='animate-spin' />
               ) : (
                 tScheduleForm('saveButton')
               )}
