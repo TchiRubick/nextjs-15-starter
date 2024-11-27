@@ -1,6 +1,7 @@
 'use server';
 
 import {
+  deleteSchedule,
   getScheduleByUserId,
   getSchedules,
   ScheduleStatus,
@@ -29,4 +30,10 @@ export const getScheduleByUserIdQuery = async (userId: string) => {
     console.error(error);
     return [];
   }
+};
+
+export const deleteScheduleByUserIdMutation = async (scheduleId: number) => {
+  const schedules = await deleteSchedule(scheduleId);
+
+  return schedules;
 };
