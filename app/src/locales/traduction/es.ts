@@ -332,6 +332,7 @@ export default {
     beds: '{count} cama(s)',
     baths: '{count} baño(s)',
     rooms: '{count} habitación(es)',
+    area: 'Zona: {count} m²',
     maxPersons: '{count} persona(s) máx',
     checkInTime: 'Check-in a partir de las 3 PM',
     nightlyRate: 'Por noche: {price} Euros',
@@ -345,6 +346,7 @@ export default {
     baths: 'Baño(s)',
     fits: 'Acomoda a {count} persona(s)',
     rooms: 'Habitación(es)',
+    area: 'Zona',
   },
   detailsProfile: {
     successTitle: 'Éxito',

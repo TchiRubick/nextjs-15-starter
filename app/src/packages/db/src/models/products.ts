@@ -12,6 +12,7 @@ export const zInsertProduct = createInsertSchema(Product, {
   description: z.string().min(1, 'Description is required'),
   price: z.number().positive('Price must be greater than 0'),
   status: z.enum(['draft', 'published']).default('draft'),
+  area: z.number().int().min(0).default(2),
   bed: z.number().int().min(0).default(0),
   bath: z.number().int().min(0).default(0),
   maxPerson: z.number().int().min(0).default(0),

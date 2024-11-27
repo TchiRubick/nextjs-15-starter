@@ -46,59 +46,50 @@ export const PicturesSection = ({ id, urls }: Props) => {
   };
 
   return (
-    <div className='mx-auto mt-4 flex h-[500px] w-[1000px] md:px-0'>
+    <section className='mx-auto mt-4 flex w-5/6 md:px-0'>
       <AspectRatio
-        className='h-[500px] items-center rounded-md shadow-md'
+        className='relative rounded-md shadow-md'
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        ratio={22 / 9}
       >
-        <div className='relative h-full w-full'>
-          {isHovered && (
-            <div className='absolute inset-0 z-10 mb-3 flex items-end justify-center gap-2'>
+        {isHovered && (
+          <div className='absolute inset-0 z-10 mb-3 flex items-end justify-center gap-2'>
+            <Button
+              variant='secondary'
+              className='z-50 cursor-pointer rounded-full'
+              onClick={handlePrev}
+            >
+              <ArrowLeft />
+            </Button>
+            <Button
+              variant='secondary'
+              className='z-50 cursor-pointer rounded-full'
+              onClick={handleNext}
+            >
+              <ArrowRight />
+            </Button>
+            <div className='absolute inset-0 z-10 ml-1 mt-1 flex h-fit w-fit items-start'>
               <Button
-                variant='secondary'
-                className='z-50 cursor-pointer rounded-full'
-                onClick={handlePrev}
+                variant='destructive'
+                className='z-50'
+                onClick={() => handleRemove()}
               >
-                <ArrowLeft />
+                {isPending ? <Loader2 className='animated-spin' /> : <Trash2 />}
               </Button>
-              <Button
-                variant='secondary'
-                className='z-50 cursor-pointer rounded-full'
-                onClick={handleNext}
-              >
-                <ArrowRight />
-              </Button>
-              <div className='absolute inset-0 z-10 ml-1 mt-1 flex h-fit w-fit items-start'>
-                <Button
-                  variant='destructive'
-                  className='z-50'
-                  onClick={() => handleRemove()}
-                >
-                  {isPending ? (
-                    <Loader2 className='animated-spin' />
-                  ) : (
-                    <Trash2 />
-                  )}
-                </Button>
-              </div>
             </div>
-          )}
-          <Image
-            src={selectedImage || '/no-picture.jpg'}
-            alt='Selected Image'
-            fill={true}
-            className='m-auto max-h-full max-w-full rounded-md shadow-md transition-opacity duration-75'
-            onLoad={(event) => {
-              const target = event.target as HTMLImageElement;
-              target.classList.remove('opacity-0');
-            }}
-          />
-        </div>
+          </div>
+        )}
+        <Image
+          src={selectedImage || '/no-picture.jpg'}
+          alt='Selected Image'
+          fill={true}
+          className='h-full max-w-full rounded-md shadow-md'
+        />
       </AspectRatio>
 
-      <ScrollArea className='h-[500px] overflow-hidden rounded-md shadow-inner'>
-        <div className='flex h-fit w-fit flex-col space-y-4 p-4'>
+      <ScrollArea className='h-3/6 overflow-hidden rounded-md shadow-inner'>
+        <div className='flex h-[500px] w-fit flex-col space-y-4 p-4'>
           {urls.map((image, index) => (
             <figure key={index} className='shrink-0'>
               <div className='rounded-md'>
@@ -106,16 +97,12 @@ export const PicturesSection = ({ id, urls }: Props) => {
                   <Image
                     src={image}
                     alt={'Image ' + (index + 1)}
-                    className='aspect-square h-fit w-fit cursor-pointer object-cover opacity-0 transition-opacity duration-100'
+                    className='ttransition aspect-square h-fit w-fit cursor-pointer rounded-md object-cover delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110'
                     width={200}
                     height={200}
                     onClick={() => {
                       setSelectedImage(image);
                       setSelectedImageIndex(index);
-                    }}
-                    onLoad={(event) => {
-                      const target = event.target as HTMLImageElement;
-                      target.classList.remove('opacity-0');
                     }}
                   />
                 </div>
@@ -129,6 +116,6 @@ export const PicturesSection = ({ id, urls }: Props) => {
           className='scrollbar-thumb scrollbar-track'
         />
       </ScrollArea>
-    </div>
+    </section>
   );
 };

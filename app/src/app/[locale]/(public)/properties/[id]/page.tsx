@@ -89,6 +89,7 @@ const PropertyDetails = async ({
               bath={property.bath}
               maxPerson={property.maxPerson}
               room={property.room}
+              area={property.area}
             />
 
             <div className='mb-8'>

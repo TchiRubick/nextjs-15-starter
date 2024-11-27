@@ -24,6 +24,7 @@ const EditProduct = async ({ params }: { params: Promise<{ id: number }> }) => {
     room: product?.room ?? 1,
     bed: product?.bed ?? 0,
     bath: product?.bath ?? 0,
+    area: product?.area ?? 0,
     maxPerson: product?.maxPerson ?? 0,
     amenities: product?.amenities.map((a) => String(a.amenityId)) ?? [],
     status: product?.status ?? 'draft',
