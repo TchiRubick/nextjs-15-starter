@@ -2,21 +2,17 @@
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { useSession } from '@/hooks/useSession';
 import { useScopedI18n } from '@/locales/client';
-import { Check, MoveRight } from 'lucide-react';
+import { Check } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Mail } from 'lucide-react';
 
 export const ContactForm = () => {
-  const { data } = useSession();
   const tContact = useScopedI18n('contact');
 
   return (
-    <div className='w-full py-20 lg:py-40'>
+    <div className='w-full py-10 lg:py-10'>
       <div className='container mx-auto max-w-6xl'>
         <div className='grid gap-10 rounded-xl border border-foreground/20 bg-white p-8 lg:grid-cols-2 lg:p-16'>
           <div className='flex flex-col gap-6'>
@@ -58,45 +54,37 @@ export const ContactForm = () => {
                 <p className='text-sm text-muted-foreground'>
                   {tContact('beautifulModernDescription')}
                 </p>
-                <Link href={`https://wa.me/0347804228`} target={'_blank'}>
-                  <Button className='mt-2 w-full bg-green-500 text-white hover:bg-green-600 sm:w-auto'>
-                    Whatsapp
-                    <Image
-                      src={'/illustration/whatsapp-svgrepo-com.svg'}
-                      alt={'Whatsapp icon'}
-                      width={20}
-                      height={20}
-                    />
-                  </Button>
-                </Link>
+                <div className='flex flex-col sm:flex-row sm:space-x-3'>
+                  <Link href={`https://wa.me/0347804228`} target={'_blank'}>
+                    <Button className='mt-2 w-full bg-green-500 text-white hover:bg-green-600 sm:w-auto'>
+                      Whatsapp
+                      <Image
+                        src={'/illustration/whatsapp-svgrepo-com.svg'}
+                        alt={'Whatsapp icon'}
+                        width={20}
+                        height={20}
+                      />
+                    </Button>
+                  </Link>
+                  <Link href='mailto:andersonsuiriex@gmail.com' target='_blank'>
+                    <Button className='mt-2 w-full text-white sm:w-32'>
+                      email
+                      <Mail />
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
 
           <div className='flex w-full items-center justify-center bg-white'>
-            <div className='flex w-full flex-col gap-4 rounded-md p-8 md:border'>
-              <p>{tContact('bookMeeting')}</p>
-              <div className='grid w-full items-center gap-1'>
-                <Label htmlFor='name'>{tContact('name')}</Label>
-                <Input id='name' type='text' defaultValue={data?.username} />
-              </div>
-              <div className='grid w-full items-center gap-1'>
-                <Label htmlFor='email'>{tContact('email')}</Label>
-                <Input id='email' type='email' defaultValue={data?.email} />
-              </div>
-              <div className='grid w-full items-center gap-1'>
-                <Label htmlFor='object'>{tContact('subject')}</Label>
-                <Input id='object' type='text' />
-              </div>
-              <div className='grid w-full items-center gap-1'>
-                <Label htmlFor='message'>{tContact('message')}</Label>
-                <Textarea id='message' />
-              </div>
-              <Button className='w-full gap-4' disabled>
-                {tContact('bookMeetingButton')}{' '}
-                <MoveRight className='h-4 w-4' />
-              </Button>
-            </div>
+            <Image
+              src={'/illustration/contactus.svg'}
+              alt={'Whatsapp icon'}
+              width={800}
+              height={800}
+              className='hidden lg:block'
+            />
           </div>
         </div>
       </div>
