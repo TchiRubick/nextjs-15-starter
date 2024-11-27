@@ -31,7 +31,7 @@ export type AmenitySelect = z.infer<typeof zSelectAmenity>;
 // ============================================================================
 export const getAmenities = async () =>
   db.query.Amenity.findMany({
-    orderBy: (amenity, { asc }) => asc(amenity.name),
+    orderBy: (amenity, { asc }) => asc(amenity.id),
   });
 
 export const createAmenity = async (input: InsertAmenity) =>

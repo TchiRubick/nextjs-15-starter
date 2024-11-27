@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { getSize } from '@/lib/file';
 import { useMutationAction } from '@packages/fetch-action/index';
-import { Loader2, Plus } from 'lucide-react';
+import { ImagePlus, Loader2 } from 'lucide-react';
 import Image from 'next/image';
 import { ChangeEventHandler, useMemo, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
@@ -82,7 +82,7 @@ export const ImageUploaderModal = ({ id }: { id: number }) => {
           variant='secondary'
           className='border-2 border-dashed border-slate-900/55'
         >
-          <Plus />
+          <ImagePlus />
         </Button>
       </DialogTrigger>
       <DialogContent className='flex flex-col items-center justify-center'>
@@ -130,7 +130,7 @@ export const ImageUploaderModal = ({ id }: { id: number }) => {
               (totalSize.value >= 5 && totalSize.suffix === 'mb') || isPending
             }
           >
-            {isPending ? <Loader2 className='animated-spin' /> : 'Enregistrer'}
+            {isPending ? <Loader2 className='animate-spin' /> : 'Enregistrer'}
           </Button>
         </form>
       </DialogContent>

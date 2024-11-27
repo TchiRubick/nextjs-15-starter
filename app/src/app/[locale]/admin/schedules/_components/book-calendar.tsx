@@ -23,6 +23,7 @@ import {
   Clock,
   Mail,
   PhoneCall,
+  User,
   X,
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -263,6 +264,10 @@ export const BookCalendar = () => {
                     <PhoneCall className='h-4 w-4' />
                     {selectedAvailability.user.phone}
                   </Link>
+                </p>
+                <p className='flex gap-2 text-sm text-gray-600'>
+                  <User className='h-4 w-4' />
+                  {selectedAvailability.user.username}
                 </p>
               </div>
               <div className='flex items-center gap-2 border-t pt-2'>

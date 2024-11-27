@@ -181,11 +181,7 @@ export const EditProductForm = ({ product, productId }: Props) => {
           </CardContent>
           <CardFooter>
             <Button type='submit' disabled={isPending}>
-              {isPending ? (
-                <Loader2 className='animated-spin' />
-              ) : (
-                'Enregistrer'
-              )}
+              {isPending ? <Loader2 className='animate-spin' /> : 'Enregistrer'}
             </Button>
           </CardFooter>
         </Card>

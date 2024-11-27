@@ -53,7 +53,7 @@ export const PicturesSection = ({ id, urls }: Props) => {
         onMouseLeave={handleMouseLeave}
       >
         <div className='relative h-full w-full'>
-          {isHovered && (
+          {isHovered && selectedImage && (
             <div className='absolute inset-0 z-10 mb-3 flex items-end justify-center gap-2'>
               <Button
                 variant='secondary'
@@ -76,7 +76,7 @@ export const PicturesSection = ({ id, urls }: Props) => {
                   onClick={() => handleRemove()}
                 >
                   {isPending ? (
-                    <Loader2 className='animated-spin' />
+                    <Loader2 className='animate-spin' />
                   ) : (
                     <Trash2 />
                   )}
@@ -85,14 +85,10 @@ export const PicturesSection = ({ id, urls }: Props) => {
             </div>
           )}
           <Image
-            src={selectedImage || '/no-picture.jpg'}
+            src={selectedImage || '/illustration/undraw_uploading_re_okvh.svg'}
             alt='Selected Image'
             fill={true}
-            className='m-auto max-h-full max-w-full rounded-md shadow-md transition-opacity duration-75'
-            onLoad={(event) => {
-              const target = event.target as HTMLImageElement;
-              target.classList.remove('opacity-0');
-            }}
+            className='m-auto max-h-full max-w-full rounded-md shadow-md'
           />
         </div>
       </AspectRatio>
