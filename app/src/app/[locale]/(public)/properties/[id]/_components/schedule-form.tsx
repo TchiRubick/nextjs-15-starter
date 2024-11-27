@@ -14,7 +14,7 @@ import { eachDayOfInterval, format } from 'date-fns';
 import { Calendar, EuroIcon, Loader2 } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import qs from 'query-string';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import DatePicker, { DateObject } from 'react-multi-date-picker';
 
@@ -42,6 +42,7 @@ export const ScheduleForm = ({
   const { data: session, isFetching } = useSession();
 
   const [isSheetOpen, setisSheetOpen] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
   const tScheduleForm = useScopedI18n('scheduleForm');
 
   const formDefaultValue = {
@@ -71,18 +72,9 @@ export const ScheduleForm = ({
     }
   );
 
-  const { control, handleSubmit, watch } = useForm({
+  const { control, handleSubmit, setValue } = useForm({
     defaultValues: formDefaultValue,
   });
-
-  const dateRange = watch('date_range', formDefaultValue.date_range);
-
-  const onSubmit = async (data: { date_range: [DateObject, DateObject] }) => {
-    const startDate = data.date_range[0].format('YYYY-MM-DD');
-    const endDate = data.date_range[1].format('YYYY-MM-DD');
-
-    await mutateAsync(property.id, new Date(startDate), new Date(endDate));
-  };
 
   const handleOpenChange = (open: boolean) => {
     if (!session) {
@@ -97,28 +89,29 @@ export const ScheduleForm = ({
     setisSheetOpen(open);
   };
 
-  const totalPrice = useMemo(() => {
-    const [start, end] = dateRange;
-    const startDate = new Date(start.format('YYYY-MM-DD'));
-    const endDate = new Date((end ?? start).format('YYYY-MM-DD'));
-
-    const intervals = eachDayOfInterval({ start: startDate, end: endDate });
-
-    return property.price * intervals.length;
-  }, [dateRange, property.price]);
-
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
 
   const handleDateChange = (dates: DateObject[]) => {
-    if (
-      Array.isArray(dates) &&
-      dates.length === 2 &&
-      dates[0].dayOfYear != dates[1].dayOfYear
-    ) {
+    if (Array.isArray(dates) && dates.length === 2) {
+      setValue('date_range', [dates[0], dates[1]] as [DateObject, DateObject], {
+        shouldValidate: true,
+      });
       setIsSaveDisabled(false);
+
+      const startDate = new Date(dates[0].format('YYYY-MM-DD'));
+      const endDate = new Date(dates[1].format('YYYY-MM-DD'));
+      const intervals = eachDayOfInterval({ start: startDate, end: endDate });
+      setTotalPrice(property.price * (intervals.length - 1));
     } else {
       setIsSaveDisabled(true);
+      setTotalPrice(0);
     }
+  };
+
+  const onSubmit = async (data: { date_range: [DateObject, DateObject] }) => {
+    const startDate = data.date_range[0].format('YYYY-MM-DD');
+    const endDate = data.date_range[1].format('YYYY-MM-DD');
+    await mutateAsync(property.id, new Date(startDate), new Date(endDate));
   };
 
   return (
