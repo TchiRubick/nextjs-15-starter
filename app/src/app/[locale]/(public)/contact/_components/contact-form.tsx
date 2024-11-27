@@ -67,8 +67,8 @@ export const ContactForm = () => {
                     </Button>
                   </Link>
                   <Link href='mailto:andersonsuiriex@gmail.com' target='_blank'>
-                    <Button className='mt-2 w-full text-white sm:w-32'>
-                      email
+                    <Button className='mt-2 w-full text-white sm:w-fit'>
+                      {tContact('email')}
                       <Mail />
                     </Button>
                   </Link>
