@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 
-const NUMBER_IMAGE_APPEAR_FIRST = 5;
+const NUMBER_IMAGE_APPEAR_FIRST = 15;
 
 type props = {
   images: ImageSelect[];
