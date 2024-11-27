@@ -346,7 +346,7 @@ export default {
     baths: 'Baño(s)',
     fits: 'Acomoda a {count} persona(s)',
     rooms: 'Habitación(es)',
-    area: 'Zona de chalets',
+    area: 'Zona',
   },
   detailsProfile: {
     successTitle: 'Éxito',
