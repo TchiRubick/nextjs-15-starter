@@ -93,7 +93,7 @@ export const Table = () => {
       columns={columns(onRemove, isPending)}
       data={data ?? []}
       isLoading={isFetching}
-      title='Amenities'
+      title='Liste des équipements'
     />
   );
 };

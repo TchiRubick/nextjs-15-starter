@@ -74,7 +74,7 @@ export const Table = () => {
       columns={columns}
       data={data ?? []}
       isLoading={isFetching}
-      title='Products'
+      title='Liste des chalets'
     />
   );
 };
